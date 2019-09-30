@@ -1,2 +1,1 @@
-# Platformer-game
-Platformer game for development subject at CITM University
+# Project_Art_Of_Fighting
