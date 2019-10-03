@@ -7,5 +7,5 @@ Platformed game created by two students from Barcelona
 The player can go a few seconds back to the past.
 
 ## Team
-Pablo Galve: https://github.com/pablogalve
-Bernat Casañas: https://github.com/BernatCasanas
+* Pablo Galve: https://github.com/pablogalve
+* Bernat Casañas: https://github.com/BernatCasanas
