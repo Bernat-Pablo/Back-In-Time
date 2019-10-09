@@ -32,34 +32,46 @@ void j1Map::Draw()
 		return;
 
 	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
-	MapLayer* layer = data.layers.start->data; // for now we just use the first layer and tileset
-	TileSet* tileset = data.tilesets.start->data;
+	p2List_item<MapLayer*>* item;
+	TileSet tileset;
+	uint* gids;
+	int i = 0;
+	int x = 0, y = 0;
 
+	for (item = data.layers.start; item != NULL; item=item->next) {
+		gids = item->data->data;
+		for (gids=item->data->data; gids[++i] != NULL; i++) {
+
+			SDL_Rect rect = tileset.GetTileRect(gids[i]);
+			App->render->Blit(tileset.texture, x, y, &rect);
+
+			x += tileset.tile_width;
+
+			if (x == tileset.num_tiles_width * tileset.tile_width) {
+				x = 0;
+				y += tileset.tile_height;
+			}
+		}
+		x = 0;
+		y = 0;
+	}
+
+	
 	// TODO 10(old): Complete the draw function
-}
-
-iPoint j1Map::MapToWorld(int x, int y) const
-{
-	iPoint ret(0,0);
-	// TODO 8(old): Create a method that translates x,y coordinates from map positions to world positions
-
-	// TODO 1: Add isometric map to world coordinates
-	return ret;
-}
-
-
-iPoint j1Map::WorldToMap(int x, int y) const
-{
-	iPoint ret(0,0);
-	// TODO 2: Add orthographic world to map coordinates
-
-	// TODO 3: Add the case for isometric maps to WorldToMap
-	return ret;
 }
 
 SDL_Rect TileSet::GetTileRect(int id) const
 {
 	SDL_Rect rect = {0, 0, 0, 0};
+	int y_in_tiles = (id / num_tiles_width) + 1;
+	int x_in_tiles = id - (y_in_tiles * num_tiles_width);
+	int x_in_pixels = x_in_tiles*tile_width;
+	int y_in_pixels = y_in_tiles*tile_height;
+	rect.x = x_in_pixels;
+	rect.y = y_in_pixels;
+	rect.w = 16;
+	rect.h = 16;
+
 	// TODO 7(old): Create a method that receives a tile id and returns it's Rect
 	return rect;
 }
@@ -331,7 +343,7 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 		int i = 0;
 		for(pugi::xml_node tile = layer_data.child("tile"); tile; tile = tile.next_sibling("tile"))
 		{
-			layer->data[i++] = tile.attribute("gid").as_int(0);
+			layer->data[i++] = tile.attribute("gid").as_int();
 		}
 	}
 
