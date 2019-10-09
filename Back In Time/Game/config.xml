@@ -2,12 +2,12 @@
 
 <config>
   <app>
-    <title>Game Development Testbed</title>
-    <organization>UPC</organization>
+    <title>Turn Back Time</title>
+    <organization>Bernat i Pablo</organization>
   </app>
 	
   <renderer>
-    <vsync value="false"/>
+    <vsync value="true"/>
   </renderer>
 
   <window>
