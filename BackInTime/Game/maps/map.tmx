@@ -50795,7 +50795,7 @@
    <tile gid="1980"/>
    <tile gid="1980"/>
    <tile gid="2070"/>
-   <tile gid="1723"/>
+   <tile gid="2067"/>
    <tile/>
    <tile/>
    <tile/>
@@ -51145,7 +51145,7 @@
    <tile gid="2070"/>
    <tile gid="2066"/>
    <tile gid="2066"/>
-   <tile gid="1723"/>
+   <tile gid="2067"/>
    <tile/>
    <tile/>
    <tile/>
@@ -51846,7 +51846,7 @@
    <tile gid="2066"/>
    <tile gid="2066"/>
    <tile gid="2066"/>
-   <tile gid="2066"/>
+   <tile gid="2069"/>
    <tile gid="1980"/>
    <tile/>
    <tile/>
@@ -52197,7 +52197,7 @@
    <tile gid="2066"/>
    <tile gid="2066"/>
    <tile gid="2066"/>
-   <tile gid="2066"/>
+   <tile gid="2069"/>
    <tile gid="1980"/>
    <tile gid="1980"/>
    <tile gid="1980"/>
@@ -94539,7 +94539,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="11" name="Colliders" width="350" height="30">
+ <layer id="11" name="Colliders" width="350" height="30" visible="0">
   <data>
    <tile/>
    <tile/>

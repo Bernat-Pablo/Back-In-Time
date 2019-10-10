@@ -16,8 +16,8 @@ public:
 	j1Character() {};
 	~j1Character() {};
 
-private:
-
+public:
+	
 };
 
 

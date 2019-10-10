@@ -89,8 +89,10 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="j1Animation.h" />
     <ClInclude Include="j1Character.h" />
     <ClInclude Include="j1Map.h" />
+    <ClInclude Include="j1RectSprites.h" />
     <ClInclude Include="j1Scene.h" />
     <ClInclude Include="p2DynArray.h" />
     <ClInclude Include="j1Audio.h" />

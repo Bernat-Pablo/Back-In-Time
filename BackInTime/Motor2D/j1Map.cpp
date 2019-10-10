@@ -32,25 +32,38 @@ void j1Map::Draw()
 		return;
 
 	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
-	
-	MapLayer* layer = data.layers.start->data;
+	lay = data.layers.start;
+	MapLayer* layer = lay->data;
 	TileSet* tileset = data.tilesets.start->data;
 
-	int x = 0, y = 0;
-	for (int i = 0; i < layer->height; i++) {
 
-		for (int j = 0; j < layer->width; j++) {
+	for (int l = 0; l < data.layers.count(); l++) {
+		int x = 0, y = 0;
+		for (int i = 0; i < layer->height; i++) {
 
-			int n = layer->Get(j, i);
-			if (layer->data[n] != 0) {
-				App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
+			for (int j = 0; j < layer->width; j++) {
+
+				int n = layer->Get(j, i);
+				if (layer->data[n] != 0) {
+					App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
+				}
+				x += data.tile_width;
+
 			}
-			x += data.tile_width;
-
+			x = 0;
+			y += data.tile_height;
+			}
+		if (lay->next != nullptr) {
+			if (lay->next->data->name != "Colliders") {
+				lay = lay->next;
+				layer = lay->data;
+			}
+			else {
+				l++;
+			}
 		}
-		x = 0;
-		y += data.tile_height;
-	}
+		}
+
 	
 	
 	// TODO 10(old): Complete the draw function
