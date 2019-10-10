@@ -32,45 +32,44 @@ void j1Map::Draw()
 		return;
 
 	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
-	p2List_item<MapLayer*>* item;
-	TileSet tileset;
-	uint* gids;
-	int i = 0;
-	int x = 0, y = 0;
-
-	for (item = data.layers.start; item != NULL; item=item->next) {
-		gids = item->data->data;
-		for (gids=item->data->data; gids[++i] != NULL; i++) {
-
-			SDL_Rect rect = tileset.GetTileRect(gids[i]);
-			App->render->Blit(tileset.texture, x, y, &rect);
-
-			x += tileset.tile_width;
-
-			if (x == tileset.num_tiles_width * tileset.tile_width) {
-				x = 0;
-				y += tileset.tile_height;
+	p2List_item<MapLayer*>* item_layer = data.layers.start;
+	while (item_layer != NULL) {
+		MapLayer* l = item_layer->data;
+		item_layer = item_layer->next;
+		for (int i = 0; i < l->width; i++) {
+			for(int j=0;i<l->height;j++){
+				if (l->data[l->Get(i, j)] != 0) {
+					l->Get(i, j);
+					SDL_Texture* texture = data.tilesets.start->data->texture;
+					iPoint position = PosConverter(i, j);
+					SDL_Rect* section = &data.tilesets.start->data->GetTileRect(l->data[l->Get(i, j)]);
+					App->render->Blit(texture, position.x, position.y, section);
+				}
 			}
 		}
-		x = 0;
-		y = 0;
 	}
 
 	
 	// TODO 10(old): Complete the draw function
 }
 
+iPoint j1Map::PosConverter(int x, int y) {
+	iPoint ret;
+
+	ret.x = x * data.tile_width;
+	ret.y = y * data.tile_height;
+
+	return ret;
+}
+
 SDL_Rect TileSet::GetTileRect(int id) const
 {
 	SDL_Rect rect = {0, 0, 0, 0};
-	int y_in_tiles = (id / num_tiles_width) + 1;
-	int x_in_tiles = id - (y_in_tiles * num_tiles_width);
-	int x_in_pixels = x_in_tiles*tile_width;
-	int y_in_pixels = y_in_tiles*tile_height;
-	rect.x = x_in_pixels;
-	rect.y = y_in_pixels;
-	rect.w = 16;
-	rect.h = 16;
+	uint gid = id - firstgid;
+	rect.x = margin + ((rect.w + spacing)*(gid %num_tiles_width));
+	rect.y = margin + ((rect.h + spacing)*(gid / num_tiles_height));
+	rect.w = tile_width;
+	rect.h = tile_height;
 
 	// TODO 7(old): Create a method that receives a tile id and returns it's Rect
 	return rect;
@@ -343,7 +342,12 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 		int i = 0;
 		for(pugi::xml_node tile = layer_data.child("tile"); tile; tile = tile.next_sibling("tile"))
 		{
-			layer->data[i++] = tile.attribute("gid").as_int();
+			if (tile.attribute("gid").as_int() == NULL) {
+				layer->data[i++] = 0;
+			}
+			else {
+				layer->data[i++] = tile.attribute("gid").as_int();
+			}
 		}
 	}
 

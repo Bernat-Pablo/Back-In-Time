@@ -25,7 +25,7 @@ struct MapLayer
 	// TODO 6 (old): Short function to get the value of x,y
 	inline uint Get(int x, int y) const {
 
-		return 0;
+		return x + y * width;
 	}
 };
 
@@ -91,6 +91,7 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
+	iPoint PosConverter(int x, int y);
 
 private:
 
@@ -98,6 +99,7 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
+
 
 public:
 
