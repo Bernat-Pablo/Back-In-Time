@@ -34,7 +34,6 @@ void j1Map::Draw()
 	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
 	
 	MapLayer* layer = data.layers.start->data;
-	//p2List <MapLayer*> layer = data.layers;
 	TileSet* tileset = data.tilesets.start->data;
 
 	int x = 0, y = 0;
@@ -52,7 +51,7 @@ void j1Map::Draw()
 		x = 0;
 		y += data.tile_height;
 	}
-
+	
 	
 	// TODO 10(old): Complete the draw function
 }
