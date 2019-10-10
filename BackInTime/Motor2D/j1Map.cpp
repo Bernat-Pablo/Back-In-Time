@@ -32,26 +32,26 @@ void j1Map::Draw()
 		return;
 
 	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
-	p2List_item<MapLayer*>* item_layer = data.layers.start;
 	
-	while (item_layer != NULL) {
-		MapLayer* l = item_layer->data;
-		item_layer = item_layer->next;
-		for (int i = 0; i < l->width; i++) {
-			for(int j=0;j<l->height;j++){
-				if (l->data[l->Get(i, j)] != 0) {
-					l->Get(i, j);
-					SDL_Texture* texture = data.tilesets.start->data->texture;
-					iPoint position = PosConverter(i, j);
-					SDL_Rect* section = &data.tilesets.start->data->GetTileRect(l->data[l->Get(i, j)]);
-					App->render->Blit(texture, position.x, position.y, section);
-				}
+	MapLayer* layer = data.layers.start->data;
+	//p2List <MapLayer*> layer = data.layers;
+	TileSet* tileset = data.tilesets.start->data;
+
+	int x = 0, y = 0;
+	for (int i = 0; i < layer->height; i++) {
+
+		for (int j = 0; j < layer->width; j++) {
+
+			int n = layer->Get(j, i);
+			if (layer->data[n] != 0) {
+				App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
 			}
+			x += data.tile_width;
 
 		}
+		x = 0;
+		y += data.tile_height;
 	}
-
-	for(int layer_counter=0;layer_counter<)
 
 	
 	// TODO 10(old): Complete the draw function
@@ -66,14 +66,14 @@ iPoint j1Map::PosConverter(int x, int y) {
 	return ret;
 }
 
-SDL_Rect TileSet::GetTileRect(int id) const
+SDL_Rect j1Map::GetTileRect(TileSet* tileset,int id) 
 {
-	SDL_Rect rect = {0, 0, 0, 0};
-	uint gid = id - firstgid;
-	rect.x = margin + ((rect.w + spacing)*(gid %num_tiles_width));
-	rect.y = margin + ((rect.h + spacing)*(gid / num_tiles_height));
-	rect.w = tile_width;
-	rect.h = tile_height;
+	int num = id;
+	int x = (num - tileset->firstgid) % tileset->num_tiles_width;
+	int y = (num - tileset->firstgid) / tileset->num_tiles_width;
+	int width = x * data.tile_width + x * tileset->margin;
+	int height = y * data.tile_height + y * tileset->spacing;
+	SDL_Rect rect = { width,height,tileset->tile_width,tileset->tile_height };
 
 	// TODO 7(old): Create a method that receives a tile id and returns it's Rect
 	return rect;

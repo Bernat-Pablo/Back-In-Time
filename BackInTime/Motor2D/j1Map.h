@@ -32,7 +32,7 @@ struct MapLayer
 // ----------------------------------------------------
 struct TileSet
 {
-	SDL_Rect GetTileRect(int id) const;
+
 
 	p2SString			name;
 	int					firstgid;
@@ -92,6 +92,8 @@ public:
 	bool Load(const char* path);
 
 	iPoint PosConverter(int x, int y);
+	SDL_Rect GetTileRect(TileSet* tileset, int id);
+
 
 private:
 
