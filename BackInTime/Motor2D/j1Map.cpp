@@ -33,11 +33,12 @@ void j1Map::Draw()
 
 	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
 	p2List_item<MapLayer*>* item_layer = data.layers.start;
+	
 	while (item_layer != NULL) {
 		MapLayer* l = item_layer->data;
 		item_layer = item_layer->next;
 		for (int i = 0; i < l->width; i++) {
-			for(int j=0;i<l->height;j++){
+			for(int j=0;j<l->height;j++){
 				if (l->data[l->Get(i, j)] != 0) {
 					l->Get(i, j);
 					SDL_Texture* texture = data.tilesets.start->data->texture;
@@ -46,8 +47,11 @@ void j1Map::Draw()
 					App->render->Blit(texture, position.x, position.y, section);
 				}
 			}
+
 		}
 	}
+
+	for(int layer_counter=0;layer_counter<)
 
 	
 	// TODO 10(old): Complete the draw function
