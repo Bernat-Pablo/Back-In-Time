@@ -10,7 +10,7 @@
 
 
 
-class j1Character : public j1Module
+class j1Character
 {
 public:
 	j1Character() {};
