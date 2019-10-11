@@ -29,6 +29,8 @@ public:
 	Animation run;
 	Animation throw_rock;
 	Animation walk_atack;
+	Animation atack1;
+	Animation atack2;
 
 
 };
