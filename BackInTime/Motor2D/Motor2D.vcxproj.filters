@@ -36,6 +36,11 @@
     </ClCompile>
     <ClCompile Include="j1Collision.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
+    <ClCompile Include="j1Player.cpp">
+      <Filter>Desenvolupament  ========\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Wot.cpp">
+      <Filter>Desenvolupament  ========\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +106,11 @@
     </ClInclude>
     <ClInclude Include="j1Collision.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
+    <ClInclude Include="j1Player.h">
+      <Filter>Desenvolupament  ========\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Wot.h">
+      <Filter>Desenvolupament  ========\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
