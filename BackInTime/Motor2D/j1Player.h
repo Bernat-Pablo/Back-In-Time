@@ -16,11 +16,13 @@ struct Mix_Chunk;
 class j1Player : public j1Module
 {
 public:
-	j1Player();
-	~j1Player();
+	j1Player() {};
+	~j1Player() {};
 
-private:
+	bool Update();
 
+public:
+	Animation* currentAnimation = nullptr;
 };
 
 #endif // !_PLAYER_
