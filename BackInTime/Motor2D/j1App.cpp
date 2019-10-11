@@ -12,6 +12,7 @@
 #include "j1Scene.h"
 #include "j1Map.h"
 #include "j1App.h"
+#include "j1Collision.h"
 
 
 // Constructor

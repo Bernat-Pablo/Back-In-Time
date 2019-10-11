@@ -12,21 +12,20 @@ enum COLLIDER_TYPE
 	COLLIDER_TERRAIN,
 };
 
-class ModuleCollision : public j1Module
+class j1Collision : public j1Module
 {
 public:
-	ModuleCollision();
-	~ModuleCollision();
-
-
+	j1Collision();
+	~j1Collision();
 
 	bool CleanUp() override;
 
-	void DebugDraw(); //Draw colliders on debug mode
-
+	void ActivateDebug(); //Activates/Deactivates debug mode
+	bool isDebugActive(); //Returns true if debug = true
+	
 private:
-	bool colliders[10][10];
-	bool debug = false; //If true, we draw colliders
+	//bool colliders[10][10];	
+	bool debug; //If true, we draw colliders
 };
 
 #endif // __ModuleCollision_H__

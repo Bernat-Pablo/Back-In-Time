@@ -4,6 +4,7 @@
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Map.h"
+#include "j1Collision.h"
 #include <math.h>
 
 j1Map::j1Map() : j1Module(), map_loaded(false)
@@ -53,13 +54,20 @@ void j1Map::Draw()
 			y += data.tile_height;
 			}
 		if (lay->next != nullptr) {
-			if (lay->next->data->name != "Colliders") {
+			if (App->collision->isDebugActive() == true) //Debug is active. We draw colliders on screen
+			{
 				lay = lay->next;
 				layer = lay->data;
-			}
-			else {
-				l++;
-			}
+			}else //Normal game. Debug is not active
+			{
+				if (lay->next->data->name != "Colliders") {
+					lay = lay->next;
+					layer = lay->data;
+				}
+				else {
+					l++;
+				}
+			}			
 		}
 	}
 }
