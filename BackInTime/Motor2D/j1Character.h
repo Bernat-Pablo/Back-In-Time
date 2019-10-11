@@ -20,6 +20,17 @@ public:
 
 public:
 	
+	//BASIC MOVES
+	Animation idle;
+	Animation walk;
+	Animation death;
+	Animation hurt;
+	Animation jump;
+	Animation run;
+	Animation throw_rock;
+	Animation walk_atack;
+
+
 };
 
 
