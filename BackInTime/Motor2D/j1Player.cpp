@@ -15,5 +15,5 @@ bool j1Player::Update() {
 	if (App->input->GetKey(SDL_SCANCODE_D)==KEY_REPEAT) {
 
 	}
-
+	return true;
 }
