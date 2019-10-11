@@ -31,7 +31,6 @@ void j1Map::Draw()
 	if(map_loaded == false)
 		return;
 
-	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
 	lay = data.layers.start;
 	MapLayer* layer = lay->data;
 	TileSet* tileset = data.tilesets.start->data;
@@ -62,11 +61,7 @@ void j1Map::Draw()
 				l++;
 			}
 		}
-		}
-
-	
-	
-	// TODO 10(old): Complete the draw function
+	}
 }
 
 iPoint j1Map::PosConverter(int x, int y) {
@@ -87,7 +82,6 @@ SDL_Rect j1Map::GetTileRect(TileSet* tileset,int id)
 	int height = y * data.tile_height + y * tileset->spacing;
 	SDL_Rect rect = { width,height,tileset->tile_width,tileset->tile_height };
 
-	// TODO 7(old): Create a method that receives a tile id and returns it's Rect
 	return rect;
 }
 
