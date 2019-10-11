@@ -15,6 +15,8 @@ class j1Character
 public:
 	j1Character() {};
 	~j1Character() {};
+	virtual bool Start()=0;
+	virtual bool CleanUp()=0;
 
 public:
 	
