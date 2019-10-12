@@ -102,7 +102,6 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
-	
 
 public:
 
@@ -114,7 +113,7 @@ private:
 	p2SString			folder;
 	bool				map_loaded;
 
-	bool debug; //If true, we draw colliders
+	bool debug; //If true, we draw debug objects (colliders)
 
 	p2List_item<MapLayer*>* lay = nullptr;
 };

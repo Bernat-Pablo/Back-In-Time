@@ -57,11 +57,11 @@ void j1Map::Draw()
 			y += data.tile_height;
 			}
 		if (lay->next != nullptr) {
-			if (debug == true) //Debug is active. We draw colliders on screen
+			if (debug == true) // We draw everything on screen if debug==true
 			{
 				lay = lay->next;
 				layer = lay->data;
-			}else //Normal game. Debug is not active
+			}else //Normal game. We don't draw debug objects
 			{
 				if (lay->next->data->name != "Colliders") {
 					lay = lay->next;

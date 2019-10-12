@@ -21,7 +21,6 @@ public:
 	bool CleanUp() override;
 
 	
-	
 private:
 	//bool colliders[10][10];	
 	

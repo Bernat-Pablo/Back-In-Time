@@ -16,13 +16,6 @@ j1Collision::~j1Collision()
 
 }
 
-
-/*bool ModuleCollision::Update()
-{
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
-		DebugDraw();
-}*/
-
 bool j1Collision::CleanUp()
 {
 
