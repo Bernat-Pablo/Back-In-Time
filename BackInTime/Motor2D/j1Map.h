@@ -93,6 +93,8 @@ public:
 	iPoint PosConverter(int x, int y);
 	SDL_Rect GetTileRect(TileSet* tileset, int id);
 
+	//Activates/Deactivates debug mode
+	void ActivateDebug(); 
 
 private:
 
@@ -100,17 +102,19 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
-
+	
 
 public:
 
 	MapData data;
-
+	
 private:
 
 	pugi::xml_document	map_file;
 	p2SString			folder;
 	bool				map_loaded;
+
+	bool debug; //If true, we draw colliders
 
 	p2List_item<MapLayer*>* lay = nullptr;
 };

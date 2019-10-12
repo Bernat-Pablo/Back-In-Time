@@ -20,12 +20,11 @@ public:
 
 	bool CleanUp() override;
 
-	void ActivateDebug(); //Activates/Deactivates debug mode
-	bool isDebugActive(); //Returns true if debug = true
+	
 	
 private:
 	//bool colliders[10][10];	
-	bool debug; //If true, we draw colliders
+	
 };
 
 #endif // __ModuleCollision_H__

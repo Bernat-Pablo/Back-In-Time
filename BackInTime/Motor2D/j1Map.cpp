@@ -7,9 +7,12 @@
 #include "j1Collision.h"
 #include <math.h>
 
+
+
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
 	name.create("map");
+	debug = false;
 }
 
 // Destructor
@@ -54,7 +57,7 @@ void j1Map::Draw()
 			y += data.tile_height;
 			}
 		if (lay->next != nullptr) {
-			if (App->collision->isDebugActive() == true) //Debug is active. We draw colliders on screen
+			if (debug == true) //Debug is active. We draw colliders on screen
 			{
 				lay = lay->next;
 				layer = lay->data;
@@ -370,4 +373,12 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	}
 
 	return ret;
+}
+
+void j1Map::ActivateDebug()
+{
+	if (debug == true)
+		debug = false;
+	else if (debug == false)
+		debug = true;
 }
