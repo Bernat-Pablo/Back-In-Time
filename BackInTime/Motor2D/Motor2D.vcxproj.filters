@@ -117,4 +117,12 @@
       <Filter>Files</Filter>
     </Xml>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Game\maps\map.tmx">
+      <Filter>Files</Filter>
+    </None>
+    <None Include="..\Game\maps\map2.tmx">
+      <Filter>Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
