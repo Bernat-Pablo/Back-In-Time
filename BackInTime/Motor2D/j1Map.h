@@ -6,6 +6,7 @@
 #include "p2Point.h"
 #include "j1Module.h"
 
+struct SDL_Texture;
 // ----------------------------------------------------
 struct MapLayer
 {

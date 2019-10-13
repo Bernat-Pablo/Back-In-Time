@@ -30,14 +30,11 @@
     <ClCompile Include="j1Window.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="j1Player.cpp">
-      <Filter>Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="j1Wot.cpp">
-      <Filter>Characters</Filter>
-    </ClCompile>
     <ClCompile Include="j1Scene.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Player.cpp">
+      <Filter>Characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,9 +53,6 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1Audio.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="j1Character.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1Collision.h">
@@ -85,14 +79,11 @@
     <ClInclude Include="j1Window.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="j1Player.h">
-      <Filter>Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="j1Wot.h">
-      <Filter>Characters</Filter>
-    </ClInclude>
     <ClInclude Include="j1Scene.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Player.h">
+      <Filter>Characters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
