@@ -45,26 +45,41 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
-	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-		App->LoadGame("save_game.xml");
-
-	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
-		App->SaveGame("save_game.xml");
-
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->render->camera.y += 1;
+		App->render->camera.y += 10;
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->render->camera.y -= 1;
+		App->render->camera.y -= 10;
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x += 1;
+		App->render->camera.x += 10;
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x -= 1;
+		App->render->camera.x -= 10;
 
+	//Start from level 1
+	//if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+
+	//Start from level 2
+	//if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN)
+
+	//Start from the beginning of the current level
+	//if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+
+	//Save the current state
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+		App->SaveGame("save_game.xml");
+
+	//Load the previous state (even across levels)
+	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+		App->LoadGame("save_game.xml");
+
+	//Activate debug mode
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
-		App->map->ActivateDebug(); //We change debug state from true->false or false->true
+		App->map->ActivateDebug(); 
+
+	//Activate God mode
+	//if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 
 	App->map->Draw();
 

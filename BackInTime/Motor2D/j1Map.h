@@ -12,6 +12,8 @@ struct MapLayer
 	p2SString	name;
 	int			width;
 	int			height;
+	float		x;
+	float		y;
 	uint*		data;
 
 	MapLayer() : data(NULL)
@@ -28,7 +30,23 @@ struct MapLayer
 	}
 };
 
-// ----------------------------------------------------
+struct ObjectsData
+{
+	uint16_t	name;
+	int			x;
+	int			y;
+	uint		width;
+	uint		height;
+
+};
+
+struct ObjectsGroup
+{
+	p2SString				name;
+	p2List<ObjectsData*>	objects;
+	~ObjectsGroup();
+};
+
 struct TileSet
 {
 
@@ -58,14 +76,15 @@ enum MapTypes
 // ----------------------------------------------------
 struct MapData
 {
-	int					width;
-	int					height;
-	int					tile_width;
-	int					tile_height;
-	SDL_Color			background_color;
-	MapTypes			type;
-	p2List<TileSet*>	tilesets;
-	p2List<MapLayer*>	layers;
+	int						width;
+	int						height;
+	int						tile_width;
+	int						tile_height;
+	SDL_Color				background_color;
+	MapTypes				type;
+	p2List<TileSet*>		tilesets;
+	p2List<MapLayer*>		layers;
+	p2List<ObjectsGroup*>	objLayers;
 };
 
 // ----------------------------------------------------
@@ -95,14 +114,15 @@ public:
 
 	//Activates/Deactivates debug mode
 	void ActivateDebug(); 
-
+	void DebugDraw();
 private:
 
 	bool LoadMap();
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
-
+	bool LoadObjectLayers(pugi::xml_node& node, ObjectsGroup* group);
+	
 public:
 
 	MapData data;

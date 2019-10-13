@@ -12,7 +12,7 @@
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
 	name.create("map");
-	debug = false;
+	debug = true;
 }
 
 // Destructor
@@ -51,27 +51,40 @@ void j1Map::Draw()
 					App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
 				}
 				x += data.tile_width;
-
 			}
 			x = 0;
 			y += data.tile_height;
 			}
-		if (lay->next != nullptr) {
-			if (debug == true) // We draw everything on screen if debug==true
+		if (lay->next != nullptr) 
+		{
+			if (lay->next->data->name != "Collider") 
 			{
 				lay = lay->next;
 				layer = lay->data;
-			}else //Normal game. We don't draw debug objects
+			}
+			else 
 			{
-				if (lay->next->data->name != "Colliders") {
-					lay = lay->next;
-					layer = lay->data;
-				}
-				else {
-					l++;
-				}
-			}			
+				l++;
+			}
+					
 		}
+	}
+	DebugDraw();
+}
+
+void j1Map::DebugDraw()
+{
+	if (debug)
+	{
+		SDL_Rect col;
+		for (p2List_item<ObjectsGroup*>* obj = App->map->data.objLayers.start; obj; obj = obj->next)
+			if (obj->data->name == ("Colliders"))
+				for (p2List_item<ObjectsData*>* objdata = obj->data->objects.start; objdata; objdata = objdata->next)
+					if (objdata->data->name == 1)
+					{
+						col.h = objdata->data->height, col.w = objdata->data->width, col.x = objdata->data->x, col.y = objdata->data->y;
+						App->render->DrawQuad(col, 0, 0, 255, 50);
+					}	
 	}
 }
 
@@ -180,6 +193,18 @@ bool j1Map::Load(const char* file_name)
 			data.layers.add(lay);
 	}
 
+	pugi::xml_node group;
+	for (group = map_file.child("map").child("objectgroup"); group && ret; group = group.next_sibling("objectgroup"))
+	{
+		ObjectsGroup* set = new ObjectsGroup();
+
+		if (ret == true)
+		{
+			ret = LoadObjectLayers(group, set);
+		}
+		data.objLayers.add(set);
+	}
+
 	if(ret == true)
 	{
 		LOG("Successfully parsed map XML file: %s", file_name);
@@ -209,6 +234,28 @@ bool j1Map::Load(const char* file_name)
 	}
 
 	map_loaded = ret;
+
+	return ret;
+}
+
+bool j1Map::LoadObjectLayers(pugi::xml_node& node, ObjectsGroup* group)
+{
+	bool ret = true;
+
+	group->name = node.attribute("name").as_string();
+
+	for (pugi::xml_node& obj = node.child("object"); obj && ret; obj = obj.next_sibling("object"))
+	{
+		ObjectsData* data = new ObjectsData;
+
+		data->height = obj.attribute("height").as_uint();
+		data->width = obj.attribute("width").as_uint();
+		data->x = obj.attribute("x").as_uint();
+		data->y = obj.attribute("y").as_uint();
+		data->name = obj.attribute("name").as_uint();
+
+		group->objects.add(data);
+	}
 
 	return ret;
 }

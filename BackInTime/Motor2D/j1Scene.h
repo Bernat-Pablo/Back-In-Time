@@ -32,6 +32,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	float fade_time;
 private:
 };
 
