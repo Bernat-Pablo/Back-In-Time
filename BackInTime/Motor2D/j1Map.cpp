@@ -80,11 +80,33 @@ void j1Map::DebugDraw()
 		for (p2List_item<ObjectsGroup*>* obj = App->map->data.objLayers.start; obj; obj = obj->next)
 			if (obj->data->name == ("Colliders"))
 				for (p2List_item<ObjectsData*>* objdata = obj->data->objects.start; objdata; objdata = objdata->next)
+				{ 
 					if (objdata->data->name == 1) //Terrain colliders
 					{
 						col.h = objdata->data->height, col.w = objdata->data->width, col.x = objdata->data->x, col.y = objdata->data->y;
-						App->render->DrawQuad(col, 0, 0, 255, 50);
-					}	
+						App->render->DrawQuad(col, 0, 0, 255, 100);
+					}
+					if (objdata->data->name == 2) //Die colliders
+					{
+						col.h = objdata->data->height, col.w = objdata->data->width, col.x = objdata->data->x, col.y = objdata->data->y;
+						App->render->DrawQuad(col, 255, 0, 0, 100);
+					}
+					if (objdata->data->name == 3) //Trap colliders
+					{
+						col.h = objdata->data->height, col.w = objdata->data->width, col.x = objdata->data->x, col.y = objdata->data->y;
+						App->render->DrawQuad(col, 255, 170, 0, 100);
+					}
+					if (objdata->data->name == 4) //Activate trap
+					{
+						col.h = objdata->data->height, col.w = objdata->data->width, col.x = objdata->data->x, col.y = objdata->data->y;
+						App->render->DrawQuad(col, 255, 50, 0, 100);
+					}
+					if (objdata->data->name == 5) //Change scene
+					{
+						col.h = objdata->data->height, col.w = objdata->data->width, col.x = objdata->data->x, col.y = objdata->data->y;
+						App->render->DrawQuad(col, 0, 0, 255, 100);
+					}
+				}
 	}
 }
 
