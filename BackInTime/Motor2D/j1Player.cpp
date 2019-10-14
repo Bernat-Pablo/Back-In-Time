@@ -55,12 +55,30 @@ bool j1Player::Update(float dt) {
 	current_animation = &idle;
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		x += 2;
+		x += velocity;
 		current_animation = &walk;
+		moving_right = true;
+	}
+	else if ((App->input->GetKey(SDL_SCANCODE_D) != true) && moving_right == true) {
+		velocity = velocity - decrease_vel;
+		x += velocity;
+		if (velocity <= 0) {
+			moving_right = false;
+			velocity = 2.0f;
+		}
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		x -= 2;
+		x -= velocity;
 		current_animation = &walk;
+	}
+	else if ((App->input->GetKey(SDL_SCANCODE_A) != true) && moving_left == true) { //not working
+		int velocity_negative = -velocity;
+		velocity = velocity_negative + decrease_vel;
+		x -= velocity;
+		if (velocity <= 0) {
+			moving_right = false;
+			velocity = 2.0f;
+		}
 	}
 
 	RectSprites r = current_animation->GetCurrentFrame();

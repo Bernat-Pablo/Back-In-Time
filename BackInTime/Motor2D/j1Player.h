@@ -33,8 +33,11 @@ public:
 public:
 
 	int health = 3;
-	int x = 32;  // 2 blocks * 16 each one
-	int y = 406; // 27 blocks * 16 each one - height pj
+	float x = 32.0f;  // 2 blocks * 16 each one
+	float y = 406.0f; // 27 blocks * 16 each one - height pj
+
+	float decrease_vel = 0.3f;
+	float velocity = 2.0f;
 
 	bool moving_right = false;
 	bool moving_left = false;
