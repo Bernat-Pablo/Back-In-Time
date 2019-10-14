@@ -70,16 +70,18 @@ bool j1Player::Update(float dt) {
 	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		x -= velocity;
 		current_animation = &walk;
+		moving_left = true;
 	}
 	else if ((App->input->GetKey(SDL_SCANCODE_A) != true) && moving_left == true) { //not working
-		int velocity_negative = -velocity;
-		velocity = velocity_negative + decrease_vel;
+		velocity = velocity - decrease_vel;
 		x -= velocity;
 		if (velocity <= 0) {
-			moving_right = false;
+			moving_left = false;
 			velocity = 2.0f;
 		}
 	}
+	//y += gravity;
+
 
 	RectSprites r = current_animation->GetCurrentFrame();
 

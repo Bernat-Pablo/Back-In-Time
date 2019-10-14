@@ -36,8 +36,9 @@ public:
 	float x = 32.0f;  // 2 blocks * 16 each one
 	float y = 406.0f; // 27 blocks * 16 each one - height pj
 
-	float decrease_vel = 0.3f;
+	float decrease_vel = 0.1f;
 	float velocity = 2.0f;
+	float gravity = 3.0f;
 
 	bool moving_right = false;
 	bool moving_left = false;
