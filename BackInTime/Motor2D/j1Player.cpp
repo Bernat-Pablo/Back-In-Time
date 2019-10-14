@@ -26,7 +26,7 @@ j1Player::j1Player() : j1Module(){
 	walk.PushBack({ 128,28,17,26 });
 	walk.PushBack({ 160,27,17,27 });
 	
-	walk.speed = 0.8f;
+	walk.speed = 0.2f;
 
 	//JUMP
 	jump.PushBack({ 0,58,17,26 });
@@ -38,7 +38,7 @@ j1Player::j1Player() : j1Module(){
 	jump.PushBack({ 189,60,22,24 });
 	jump.PushBack({ 223,58,18,26 });
 
-	jump.speed = 1.0f;
+	jump.speed = 0.2f;
 
 }
 
@@ -53,6 +53,15 @@ bool j1Player::Start(){
 bool j1Player::Update(float dt) {
 
 	current_animation = &idle;
+
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+		x += 2;
+		current_animation = &walk;
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+		x -= 2;
+		current_animation = &walk;
+	}
 
 	RectSprites r = current_animation->GetCurrentFrame();
 

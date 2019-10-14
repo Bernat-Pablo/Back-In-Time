@@ -35,6 +35,9 @@ public:
 	int health = 3;
 	int x = 32;  // 2 blocks * 16 each one
 	int y = 406; // 27 blocks * 16 each one - height pj
+
+	bool moving_right = false;
+	bool moving_left = false;
 	
 
 };
