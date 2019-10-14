@@ -40,6 +40,16 @@ j1Player::j1Player() : j1Module(){
 
 	jump.speed = 0.2f;
 
+	//RUN
+	run.PushBack({ 0,141,19,25 });
+	run.PushBack({ 33,141,18,25 });
+	run.PushBack({ 64,141,19,26 });
+	run.PushBack({ 96,141,19,25 });
+	run.PushBack({ 129,141,18,25 });
+	run.PushBack({ 161,141,18,28 });
+
+	run.speed = 0.15f;
+
 }
 
 bool j1Player::Start(){
@@ -58,6 +68,10 @@ bool j1Player::Update(float dt) {
 		x += velocity;
 		current_animation = &walk;
 		moving_right = true;
+		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+			x += run_velocity;
+			current_animation = &run;
+		}
 	}
 	else if ((App->input->GetKey(SDL_SCANCODE_D) != true) && moving_right == true) {
 		velocity = velocity - decrease_vel;
@@ -71,6 +85,10 @@ bool j1Player::Update(float dt) {
 		x -= velocity;
 		current_animation = &walk;
 		moving_left = true;
+		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+			x -= run_velocity;
+			current_animation = &run;
+		}
 	}
 	else if ((App->input->GetKey(SDL_SCANCODE_A) != true) && moving_left == true) { //not working
 		velocity = velocity - decrease_vel;

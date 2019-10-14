@@ -38,6 +38,7 @@ public:
 
 	float decrease_vel = 0.1f;
 	float velocity = 2.0f;
+	float run_velocity = 2.05f;
 	float gravity = 3.0f;
 
 	bool moving_right = false;
