@@ -14,7 +14,7 @@ public:
 	j1Player();
 	~j1Player() {};
 
-	bool Awake(pugi::xml_node& config);
+	bool Start();
 	bool Update(float dt);
 
 public:
@@ -33,8 +33,8 @@ public:
 public:
 
 	int health = 3;
-	int x = 48;  // 3 blocks * 16 each one
-	int y = 432; // 27 blocks * 16 each one 
+	int x = 32;  // 2 blocks * 16 each one
+	int y = 406; // 27 blocks * 16 each one - height pj
 	
 
 };

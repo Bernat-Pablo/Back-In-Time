@@ -11,12 +11,12 @@
 j1Player::j1Player() : j1Module(){
 
 	//IDLE
-	idle.PushBack({ 0,0,17,26 });
+	idle.PushBack({ 0,0,17,27 });
 	idle.PushBack({ 32,0,17,27 });
-	idle.PushBack({ 63,0,18,28 });
-	idle.PushBack({ 94,0,19,26 });
+	idle.PushBack({ 64,0,19,27 });
+	idle.PushBack({ 96,0,21,27 });
 
-	idle.speed = 0.8f;
+	idle.speed = 0.2f;
 
 	//WALK
 	walk.PushBack({ 0,27,17,25 });
@@ -38,11 +38,11 @@ j1Player::j1Player() : j1Module(){
 	jump.PushBack({ 189,60,22,24 });
 	jump.PushBack({ 223,58,18,26 });
 
-	jump.speed = 0.8f;
+	jump.speed = 1.0f;
 
 }
 
-bool j1Player::Awake(pugi::xml_node& config){
+bool j1Player::Start(){
 
 	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
 	
