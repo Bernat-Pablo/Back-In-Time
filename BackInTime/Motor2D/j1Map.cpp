@@ -104,7 +104,7 @@ void j1Map::DebugDraw()
 					if (objdata->data->name == 5) //Change scene
 					{
 						col.h = objdata->data->height, col.w = objdata->data->width, col.x = objdata->data->x, col.y = objdata->data->y;
-						App->render->DrawQuad(col, 0, 0, 255, 100);
+						App->render->DrawQuad(col, 0, 255, 255, 100);
 					}
 				}
 	}
