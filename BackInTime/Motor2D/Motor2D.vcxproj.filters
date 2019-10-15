@@ -36,6 +36,9 @@
     <ClCompile Include="j1Player.cpp">
       <Filter>Characters</Filter>
     </ClCompile>
+    <ClCompile Include="Globals.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -85,6 +88,9 @@
     <ClInclude Include="j1Player.h">
       <Filter>Characters</Filter>
     </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">
@@ -98,6 +104,9 @@
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{7c56e46a-c471-43f4-ad52-bd5e1e81b836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{77153b74-c453-495e-920b-eba40a79f180}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -4,12 +4,37 @@
 #define MAX_COLLIDERS 50
 
 #include "j1Module.h"
+#include "SDL/include/SDL.h"
 
 enum COLLIDER_TYPE
 {
 	COLLIDER_PLAYER,
-	COLLIDER_WALL,
-	COLLIDER_TERRAIN,
+	COLLIDER_WALL, //Solid objects
+};
+
+struct Collider
+{
+	SDL_Rect rect;
+	COLLIDER_TYPE type;
+	j1Module* callback = nullptr;
+
+	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback = nullptr) :
+		rect(rectangle),
+		type(type),
+		callback(callback)
+	{}
+
+	void SetPos(int x, int y)
+	{
+		rect.x = x;
+		rect.y = y;
+	}
+	void SetSize(int w, int h)
+	{
+		rect.w = w;
+		rect.h = h;
+	}
+	bool CheckCollision(const SDL_Rect& r) const;
 };
 
 class j1Collision : public j1Module
@@ -20,9 +45,11 @@ public:
 
 	bool CleanUp() override;
 
+	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
 	
 private:
-	//bool colliders[10][10];	
+	Collider* colliders[MAX_COLLIDERS];
+	bool matrix[MAX_COLLIDERS][MAX_COLLIDERS];	
 	
 };
 
