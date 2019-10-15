@@ -5,17 +5,21 @@
 
 #include "j1Module.h"
 #include "SDL/include/SDL.h"
+#include "p2Log.h"
 
 enum COLLIDER_TYPE
 {
 	COLLIDER_PLAYER,
 	COLLIDER_WALL, //Solid objects
+
+	COLLIDER_MAX
 };
 
 struct Collider
 {
 	SDL_Rect rect;
 	COLLIDER_TYPE type;
+	bool to_delete = false;
 	j1Module* callback = nullptr;
 
 	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback = nullptr) :
@@ -43,13 +47,14 @@ public:
 	j1Collision();
 	~j1Collision();
 
+	bool PreUpdate() override;
 	bool CleanUp() override;
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
 	
 private:
 	Collider* colliders[MAX_COLLIDERS];
-	bool matrix[MAX_COLLIDERS][MAX_COLLIDERS];	
+	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	
 };
 

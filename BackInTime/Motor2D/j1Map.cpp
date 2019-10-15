@@ -84,7 +84,7 @@ void j1Map::DebugDraw()
 					if (objdata->data->name == 1) //Terrain colliders
 					{
 						col.h = objdata->data->height, col.w = objdata->data->width, col.x = objdata->data->x, col.y = objdata->data->y;
-						App->render->DrawQuad(col, 0, 0, 255, 100);
+						//collider_wall = App->collision->AddCollider({col.x,col.y}, COLLIDER_WALL,(j1Module*)App->map);
 					}
 					if (objdata->data->name == 2) //Die colliders
 					{
@@ -450,4 +450,12 @@ void j1Map::ActivateDebug()
 		debug = false;
 	else if (debug == false)
 		debug = true;
+}
+
+void j1Map::MapCollidersCleanUp()
+{
+	if (collider_wall != nullptr)
+	{
+		collider_wall->to_delete = true;
+	}
 }

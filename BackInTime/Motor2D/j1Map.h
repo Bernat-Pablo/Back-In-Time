@@ -110,6 +110,8 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
+	void MapCollidersCleanUp();
+
 	iPoint PosConverter(int x, int y);
 	SDL_Rect GetTileRect(TileSet* tileset, int id);
 
@@ -127,6 +129,8 @@ private:
 public:
 
 	MapData data;
+
+	Collider* collider_wall = nullptr;
 	
 private:
 
