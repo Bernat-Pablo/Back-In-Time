@@ -73,7 +73,7 @@ void j1Map::Draw()
 }
 
 void j1Map::DebugDraw()
-{
+{/*
 	if (debug)
 	{
 		SDL_Rect col;
@@ -107,7 +107,7 @@ void j1Map::DebugDraw()
 						App->render->DrawQuad(col, 0, 255, 255, 100);
 					}
 				}
-	}
+	}*/
 }
 
 iPoint j1Map::PosConverter(int x, int y) {
@@ -214,17 +214,18 @@ bool j1Map::Load(const char* file_name)
 		if(ret == true)
 			data.layers.add(lay);
 	}
-
-	pugi::xml_node group;
-	for (group = map_file.child("map").child("objectgroup"); group && ret; group = group.next_sibling("objectgroup"))
+	
+	//Load objectgroup info
+	pugi::xml_node objectgroup;
+	for(objectgroup = map_file.child("map").child("objectgroup"); objectgroup && ret; objectgroup = objectgroup.next_sibling("objectgroup"))
 	{
-		ObjectsGroup* set = new ObjectsGroup();
+		ObjectGroup* set = new ObjectGroup();
 
-		if (ret == true)
+		if(ret == true)
 		{
-			ret = LoadObjectLayers(group, set);
+			ret = LoadObjectGroup(objectgroup, set);
 		}
-		data.objLayers.add(set);
+		data.objectgroup.add(set);
 	}
 
 	if(ret == true)
@@ -253,6 +254,15 @@ bool j1Map::Load(const char* file_name)
 			LOG("tile width: %d tile height: %d", l->width, l->height);
 			item_layer = item_layer->next;
 		}
+
+		p2List_item<ObjectGroup*>* item_object = data.objectgroup.start;
+		while(item_object != NULL)
+		{
+			ObjectGroup* o = item_object->data;
+			LOG("ObjectGroup ----");
+			LOG("name: %s", o->name.GetString());
+			item_object = item_object->next;
+		}
 	}
 
 	map_loaded = ret;
@@ -260,27 +270,7 @@ bool j1Map::Load(const char* file_name)
 	return ret;
 }
 
-bool j1Map::LoadObjectLayers(pugi::xml_node& node, ObjectsGroup* group)
-{
-	bool ret = true;
 
-	group->name = node.attribute("name").as_string();
-
-	for (pugi::xml_node& obj = node.child("object"); obj && ret; obj = obj.next_sibling("object"))
-	{
-		ObjectsData* data = new ObjectsData;
-
-		data->height = obj.attribute("height").as_uint();
-		data->width = obj.attribute("width").as_uint();
-		data->x = obj.attribute("x").as_uint();
-		data->y = obj.attribute("y").as_uint();
-		data->name = obj.attribute("name").as_uint();
-
-		group->objects.add(data);
-	}
-
-	return ret;
-}
 
 // Load map general properties
 bool j1Map::LoadMap()
@@ -444,6 +434,41 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	return ret;
 }
 
+bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup) 
+{
+	bool ret = true;
+	pugi::xml_node object = node.child("object");
+	SDL_Rect rect = { 0,0,0,0 };
+	objectgroup->name = node.attribute("name").as_string();
+
+	int i = 0;
+	p2SString name;
+
+	if (object == NULL)
+	{
+		LOG("Error loading object group");
+		ret = false;
+	}
+	else
+	{
+		objectgroup->object = new SDL_Rect[MAX_COLLIDERS];
+
+		while (object != NULL)
+		{
+			objectgroup->object[i].x = object.attribute("x").as_int();
+			objectgroup->object[i].y = object.attribute("y").as_int();
+			objectgroup->object[i].w = object.attribute("width").as_int();
+			objectgroup->object[i].h = object.attribute("height").as_int();
+			
+			p2SString name(object.attribute("name").as_string());
+
+			if (name == "1")
+				App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL);
+		}
+	}
+	return ret;
+}
+
 void j1Map::ActivateDebug()
 {
 	if (debug == true)
@@ -454,8 +479,5 @@ void j1Map::ActivateDebug()
 
 void j1Map::MapCollidersCleanUp()
 {
-	if (collider_wall != nullptr)
-	{
-		collider_wall->to_delete = true;
-	}
+	
 }
