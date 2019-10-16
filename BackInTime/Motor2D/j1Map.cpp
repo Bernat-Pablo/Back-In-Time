@@ -461,9 +461,15 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 			objectgroup->object[i].h = object.attribute("height").as_int();
 			
 			p2SString name(object.attribute("name").as_string());
+			
+			LOG("Name: ", name);
 
-			if (name == "1")
+			if (name == "Collider")
 				App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL);
+
+			object = object.next_sibling("object");
+
+			i++;
 		}
 	}
 	return ret;

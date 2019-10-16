@@ -50,7 +50,7 @@ struct TileSet
 
 struct ObjectGroup
 {
-	p2SString name = " ";
+	p2SString name;
 	SDL_Rect* object;
 };
 
