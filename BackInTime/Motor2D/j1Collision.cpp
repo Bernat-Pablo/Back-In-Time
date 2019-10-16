@@ -7,12 +7,22 @@ j1Collision::j1Collision()
 {	
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
+
+	
 }
 
 //Destructor
 j1Collision::~j1Collision()
 {
 
+}
+
+bool j1Collision::Start()
+{
+	for (int i = 0; i < MAX_COLLIDERS; i++)
+		colliders[i] = nullptr;
+
+	return true;
 }
 
 bool j1Collision::PreUpdate()

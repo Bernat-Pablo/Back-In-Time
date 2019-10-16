@@ -1,7 +1,7 @@
 #ifndef __ModuleCollision_H__
 #define __ModuleCollision_H__
 
-#define MAX_COLLIDERS 500000
+#define MAX_COLLIDERS 100
 
 #include "j1Module.h"
 #include "SDL/include/SDL.h"
@@ -47,6 +47,7 @@ public:
 	j1Collision();
 	~j1Collision();
 
+	bool Start() override;
 	bool PreUpdate() override;
 	bool CleanUp() override;
 

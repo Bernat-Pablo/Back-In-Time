@@ -217,16 +217,16 @@ bool j1Map::Load(const char* file_name)
 	
 	//Load objectgroup info
 	pugi::xml_node objectgroup;
-	for(objectgroup = map_file.child("map").child("objectgroup"); objectgroup && ret; objectgroup = objectgroup.next_sibling("objectgroup"))
-	{
-		ObjectGroup* set = new ObjectGroup();
+	objectgroup = map_file.child("map").child("objectgroup");
+	
+	ObjectGroup* set = new ObjectGroup();
 
-		if(ret == true)
-		{
-			ret = LoadObjectGroup(objectgroup, set);
-		}
-		data.objectgroup.add(set);
+	if(ret == true)
+	{
+		ret = LoadObjectGroup(objectgroup, set);
 	}
+	data.objectgroup.add(set);
+	
 
 	if(ret == true)
 	{
@@ -464,7 +464,7 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 			
 			LOG("Name: ", name);
 
-			if (name == "Collider")
+			if (name == "1")
 				App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL);
 
 			object = object.next_sibling("object");
