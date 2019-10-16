@@ -46,7 +46,7 @@ bool j1Collision::PreUpdate()
 		// skip empty colliders
 		if (colliders[i] == nullptr)
 			continue;
-
+		
 		c1 = colliders[i];
 
 		// avoid checking collisions already checked
@@ -55,17 +55,16 @@ bool j1Collision::PreUpdate()
 			// skip empty colliders
 			if (colliders[k] == nullptr)
 				continue;
+				c2 = colliders[k];
 
-			c2 = colliders[k];
+				if (c1->CheckCollision(c2->rect) == true)
+				{
+					if (matrix[c1->type][c2->type] && c1->callback)
+						c1->callback->OnCollision(c1, c2);
 
-			if (c1->CheckCollision(c2->rect) == true)
-			{
-				if (matrix[c1->type][c2->type] && c1->callback)
-					c1->callback->OnCollision(c1, c2);
-
-				if (matrix[c2->type][c1->type] && c2->callback)
-					c2->callback->OnCollision(c2, c1);
-			}
+					if (matrix[c2->type][c1->type] && c2->callback)
+						c2->callback->OnCollision(c2, c1);
+				}	
 		}
 	}
 

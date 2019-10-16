@@ -23,10 +23,14 @@ struct Collider
 	j1Module* callback = nullptr;
 
 	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback = nullptr) :
-		rect(rectangle),
 		type(type),
 		callback(callback)
-	{}
+	{
+		rect.x = rectangle.x;
+		rect.y = rectangle.y;
+		rect.w = rectangle.w;
+		rect.h = rectangle.h;
+	}
 
 	void SetPos(int x, int y)
 	{

@@ -216,16 +216,16 @@ bool j1Map::Load(const char* file_name)
 	}
 	
 	//Load objectgroup info
-	pugi::xml_node objectgroup;
-	objectgroup = map_file.child("map").child("objectgroup");
+	pugi::xml_node node_object;
+	node_object = map_file.child("map").child("objectgroup").child("object");
 	
-	ObjectGroup* set = new ObjectGroup();
+	ObjectGroup* objectgroup = new ObjectGroup();
 
 	if(ret == true)
 	{
-		ret = LoadObjectGroup(objectgroup, set);
+		ret = LoadObjectGroup(node_object, objectgroup);
 	}
-	data.objectgroup.add(set);
+	data.objectgroup.add(objectgroup);
 	
 
 	if(ret == true)
@@ -437,14 +437,13 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup) 
 {
 	bool ret = true;
-	pugi::xml_node object = node.child("object");
 	SDL_Rect rect = { 0,0,0,0 };
 	objectgroup->name = node.attribute("name").as_string();
 
 	int i = 0;
 	p2SString name;
 
-	if (object == NULL)
+	if (node == NULL)
 	{
 		LOG("Error loading object group");
 		ret = false;
@@ -453,21 +452,21 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 	{
 		objectgroup->object = new SDL_Rect[MAX_COLLIDERS];
 
-		while (object != NULL)
+		while (node != NULL)
 		{
-			objectgroup->object[i].x = object.attribute("x").as_int();
-			objectgroup->object[i].y = object.attribute("y").as_int();
-			objectgroup->object[i].w = object.attribute("width").as_int();
-			objectgroup->object[i].h = object.attribute("height").as_int();
+			objectgroup->object[i].x = node.attribute("x").as_int();
+			objectgroup->object[i].y = node.attribute("y").as_int();
+			objectgroup->object[i].w = node.attribute("width").as_int();
+			objectgroup->object[i].h = node.attribute("height").as_int();
 			
-			p2SString name(object.attribute("name").as_string());
+			p2SString name(node.attribute("name").as_string());
 			
-			LOG("Name: ", name);
+			LOG("Name: ", name.GetString());
 
 			if (name == "1")
-				App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL);
+				App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL,App->map);
 
-			object = object.next_sibling("object");
+			node = node.next_sibling("object");
 
 			i++;
 		}
