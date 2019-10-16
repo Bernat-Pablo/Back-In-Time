@@ -73,7 +73,7 @@ void j1Map::Draw()
 }
 
 void j1Map::DebugDraw()
-{/*
+{
 	if (debug)
 	{
 		SDL_Rect col;
@@ -84,7 +84,7 @@ void j1Map::DebugDraw()
 					if (objdata->data->name == 1) //Terrain colliders
 					{
 						col.h = objdata->data->height, col.w = objdata->data->width, col.x = objdata->data->x, col.y = objdata->data->y;
-						//collider_wall = App->collision->AddCollider({col.x,col.y}, COLLIDER_WALL,(j1Module*)App->map);
+						App->render->DrawQuad(col, 0, 0, 255, 100);
 					}
 					if (objdata->data->name == 2) //Die colliders
 					{
@@ -107,7 +107,7 @@ void j1Map::DebugDraw()
 						App->render->DrawQuad(col, 0, 255, 255, 100);
 					}
 				}
-	}*/
+	}
 }
 
 iPoint j1Map::PosConverter(int x, int y) {
@@ -214,19 +214,18 @@ bool j1Map::Load(const char* file_name)
 		if(ret == true)
 			data.layers.add(lay);
 	}
-	
-	//Load objectgroup info
-	pugi::xml_node node_object;
-	node_object = map_file.child("map").child("objectgroup").child("object");
-	
-	ObjectGroup* objectgroup = new ObjectGroup();
 
-	if(ret == true)
+	pugi::xml_node group;
+	for (group = map_file.child("map").child("objectgroup"); group && ret; group = group.next_sibling("objectgroup"))
 	{
-		ret = LoadObjectGroup(node_object, objectgroup);
+		ObjectsGroup* set = new ObjectsGroup();
+
+		if (ret == true)
+		{
+			ret = LoadObjectLayers(group, set);
+		}
+		data.objLayers.add(set);
 	}
-	data.objectgroup.add(objectgroup);
-	
 
 	if(ret == true)
 	{
@@ -254,15 +253,6 @@ bool j1Map::Load(const char* file_name)
 			LOG("tile width: %d tile height: %d", l->width, l->height);
 			item_layer = item_layer->next;
 		}
-
-		p2List_item<ObjectGroup*>* item_object = data.objectgroup.start;
-		while(item_object != NULL)
-		{
-			ObjectGroup* o = item_object->data;
-			LOG("ObjectGroup ----");
-			LOG("name: %s", o->name.GetString());
-			item_object = item_object->next;
-		}
 	}
 
 	map_loaded = ret;
@@ -270,7 +260,27 @@ bool j1Map::Load(const char* file_name)
 	return ret;
 }
 
+bool j1Map::LoadObjectLayers(pugi::xml_node& node, ObjectsGroup* group)
+{
+	bool ret = true;
 
+	group->name = node.attribute("name").as_string();
+
+	for (pugi::xml_node& obj = node.child("object"); obj && ret; obj = obj.next_sibling("object"))
+	{
+		ObjectsData* data = new ObjectsData;
+
+		data->height = obj.attribute("height").as_uint();
+		data->width = obj.attribute("width").as_uint();
+		data->x = obj.attribute("x").as_uint();
+		data->y = obj.attribute("y").as_uint();
+		data->name = obj.attribute("name").as_uint();
+
+		group->objects.add(data);
+	}
+
+	return ret;
+}
 
 // Load map general properties
 bool j1Map::LoadMap()
@@ -434,55 +444,10 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	return ret;
 }
 
-bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup) 
-{
-	bool ret = true;
-	SDL_Rect rect = { 0,0,0,0 };
-	objectgroup->name = node.attribute("name").as_string();
-
-	int i = 0;
-	p2SString name;
-
-	if (node == NULL)
-	{
-		LOG("Error loading object group");
-		ret = false;
-	}
-	else
-	{
-		objectgroup->object = new SDL_Rect[MAX_COLLIDERS];
-
-		while (node != NULL)
-		{
-			objectgroup->object[i].x = node.attribute("x").as_int();
-			objectgroup->object[i].y = node.attribute("y").as_int();
-			objectgroup->object[i].w = node.attribute("width").as_int();
-			objectgroup->object[i].h = node.attribute("height").as_int();
-			
-			p2SString name(node.attribute("name").as_string());
-			
-			LOG("Name: ", name.GetString());
-
-			if (name == "1")
-				App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL,App->map);
-
-			node = node.next_sibling("object");
-
-			i++;
-		}
-	}
-	return ret;
-}
-
 void j1Map::ActivateDebug()
 {
 	if (debug == true)
 		debug = false;
 	else if (debug == false)
 		debug = true;
-}
-
-void j1Map::MapCollidersCleanUp()
-{
-	
 }

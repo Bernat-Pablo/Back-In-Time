@@ -60,7 +60,6 @@ bool j1Player::Start(){
 	return true;
 }
 
-
 bool j1Player::Update(float dt) {
 
 	current_animation = &idle;
@@ -99,7 +98,7 @@ bool j1Player::Update(float dt) {
 			velocity = 2.0f;
 		}
 	}
-	y += gravity;
+	//y += gravity;
 
 
 	RectSprites r = current_animation->GetCurrentFrame();

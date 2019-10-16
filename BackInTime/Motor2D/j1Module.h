@@ -6,10 +6,9 @@
 #ifndef __j1MODULE_H__
 #define __j1MODULE_H__
 
-
 #include "p2SString.h"
 #include "PugiXml\src\pugixml.hpp"
-struct Collider;
+
 class j1App;
 
 class j1Module
@@ -68,10 +67,6 @@ public:
 	virtual bool Save(pugi::xml_node&) const
 	{
 		return true;
-	}
-	virtual void OnCollision(Collider* c1, Collider* c2) 
-	{
-	
 	}
 
 public:

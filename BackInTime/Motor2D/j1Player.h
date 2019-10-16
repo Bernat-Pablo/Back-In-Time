@@ -34,8 +34,7 @@ public:
 
 	int health = 3;
 	float x = 32.0f;  // 2 blocks * 16 each one
-	//float y = 406.0f; // 27 blocks * 16 each one - height pj
-	float y = 350.0f;
+	float y = 406.0f; // 27 blocks * 16 each one - height pj
 
 	float decrease_vel = 0.1f;
 	float velocity = 2.0f;
