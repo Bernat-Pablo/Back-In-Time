@@ -5,6 +5,7 @@
 #include "j1Textures.h"
 #include "j1Map.h"
 #include "j1Collision.h"
+#include "j1Window.h"
 #include <math.h>
 
 
@@ -12,7 +13,6 @@
 j1Map::j1Map() : j1Module(), map_loaded(false)
 {
 	name.create("map");
-	debug = true;
 }
 
 // Destructor
@@ -24,7 +24,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Map Parser");
 	bool ret = true;
-
+	App->collision->AddCollider({ 0,0,1,1000 }, COLLIDER_WALL);
 	folder.create(config.child("folder").child_value());
 
 	return ret;
@@ -119,6 +119,15 @@ bool j1Map::CleanUp()
 	}
 	data.layers.clear();
 
+	p2List_item<ObjectGroup*>* item3;
+	item3 = data.objectgroup.start;
+	while (item3 != NULL)
+	{
+		RELEASE(item3->data);
+		item3 = item3->next;
+	}
+	data.objectgroup.clear();
+
 	// Clean up the pugui tree
 	map_file.reset();
 
@@ -176,16 +185,17 @@ bool j1Map::Load(const char* file_name)
 			data.layers.add(lay);
 	}
 
+	//Load objectgroup info
 	pugi::xml_node group;
 	for (group = map_file.child("map").child("objectgroup"); group && ret; group = group.next_sibling("objectgroup"))
 	{
-		ObjectsGroup* set = new ObjectsGroup();
+		ObjectGroup* set = new ObjectGroup();
 
 		if (ret == true)
 		{
-			ret = LoadObjectLayers(group, set);
+			ret = LoadObjectGroup(group, set);
 		}
-		data.objLayers.add(set);
+		data.objectgroup.add(set);
 	}
 
 	if(ret == true)
@@ -214,6 +224,16 @@ bool j1Map::Load(const char* file_name)
 			LOG("tile width: %d tile height: %d", l->width, l->height);
 			item_layer = item_layer->next;
 		}
+
+		p2List_item<ObjectGroup*>* item_object = data.objectgroup.start;
+
+		while (item_object != NULL)
+		{
+			ObjectGroup* o = item_object->data;
+			LOG("ObjectGroup ----");
+			LOG("name: %s", o->name.GetString());
+			item_object = item_object->next;
+		}
 	}
 
 	map_loaded = ret;
@@ -221,23 +241,41 @@ bool j1Map::Load(const char* file_name)
 	return ret;
 }
 
-bool j1Map::LoadObjectLayers(pugi::xml_node& node, ObjectsGroup* group)
+bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 {
 	bool ret = true;
+	pugi::xml_node object = node.child("object");
+	SDL_Rect rect = { 0,0,0,0 };
+	objectgroup->name = node.attribute("name").as_string();
+	uint i = 0u;
 
-	group->name = node.attribute("name").as_string();
-
-	for (pugi::xml_node& obj = node.child("object"); obj && ret; obj = obj.next_sibling("object"))
+	if (object == NULL)
 	{
-		ObjectsData* data = new ObjectsData;
+		LOG("Error loading object group");
+		ret = false;
+	}else
+	{
+		objectgroup->object = new SDL_Rect[MAX_COLLIDERS];
 
-		data->height = obj.attribute("height").as_uint();
-		data->width = obj.attribute("width").as_uint();
-		data->x = obj.attribute("x").as_uint();
-		data->y = obj.attribute("y").as_uint();
-		data->name = obj.attribute("name").as_uint();
+		while (object != NULL)
+		{
+			objectgroup->object[i].x = object.attribute("x").as_int();
+			objectgroup->object[i].y = object.attribute("y").as_int();
+			objectgroup->object[i].w = object.attribute("width").as_int();
+			objectgroup->object[i].h = object.attribute("height").as_int();
 
-		group->objects.add(data);
+			p2SString name(object.attribute("name").as_string());
+
+			if (name == "1")
+				App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL);
+
+			object = object.next_sibling("object");
+
+			LOG("Collider %i", i);
+			LOG("Collider x: %i y: %i", objectgroup->object[i].x, objectgroup->object[i].y);
+			LOG("Collider w: %i h: %i", objectgroup->object[i].w, objectgroup->object[i].h);
+			i++;
+		}
 	}
 
 	return ret;

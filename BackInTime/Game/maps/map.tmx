@@ -94540,8 +94540,8 @@
   </data>
  </layer>
  <objectgroup id="12" name="Colliders">
-  <object id="5" name="1" x="0" y="432.5" width="416" height="48.5"/>
-  <object id="6" name="1" x="0" y="-1.5" width="32.5" height="433"/>
+  <object id="5" name="1" type="Collider" x="0" y="432.5" width="416" height="48.5"/>
+  <object id="6" type="Collider" x="0" y="-1.5" width="32.5" height="433"/>
   <object id="8" name="1" x="319.5" y="417" width="80.5" height="15"/>
   <object id="9" name="1" x="336" y="399.5" width="64" height="17"/>
   <object id="10" name="1" x="368" y="383.5" width="31.5" height="15"/>

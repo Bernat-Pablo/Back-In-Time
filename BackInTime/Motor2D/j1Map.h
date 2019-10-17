@@ -31,23 +31,6 @@ struct MapLayer
 	}
 };
 
-struct ObjectsData
-{
-	uint16_t	name;
-	int			x;
-	int			y;
-	uint		width;
-	uint		height;
-
-};
-
-struct ObjectsGroup
-{
-	p2SString				name;
-	p2List<ObjectsData*>	objects;
-	~ObjectsGroup();
-};
-
 struct TileSet
 {
 
@@ -65,6 +48,12 @@ struct TileSet
 	int					num_tiles_height;
 	int					offset_x;
 	int					offset_y;
+};
+
+struct ObjectGroup {
+	p2SString name = "No name";
+	int size = 0;
+	SDL_Rect* object;
 };
 
 enum MapTypes
@@ -85,7 +74,7 @@ struct MapData
 	MapTypes				type;
 	p2List<TileSet*>		tilesets;
 	p2List<MapLayer*>		layers;
-	p2List<ObjectsGroup*>	objLayers;
+	p2List<ObjectGroup*>	objectgroup;
 };
 
 // ----------------------------------------------------
@@ -119,7 +108,7 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
-	bool LoadObjectLayers(pugi::xml_node& node, ObjectsGroup* group);
+	bool LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup);
 	
 public:
 
@@ -130,8 +119,6 @@ private:
 	pugi::xml_document	map_file;
 	p2SString			folder;
 	bool				map_loaded;
-
-	bool debug; //If true, we draw debug objects (colliders)
 
 	p2List_item<MapLayer*>* lay = nullptr;
 };
