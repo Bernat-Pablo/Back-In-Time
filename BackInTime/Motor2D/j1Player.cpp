@@ -60,15 +60,14 @@ bool j1Player::Awake(pugi::xml_node& config) {
 }
 bool j1Player::Start(){
 
-	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
-	
+	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");	
 
 	return true;
 }
 
 bool j1Player::PreUpdate() 
 {
-
+	collider->SetPos(x, y);
 	return true;
 }
 
@@ -110,7 +109,7 @@ bool j1Player::Update(float dt) {
 			velocity = 2.0f;
 		}
 	}
-	//y += gravity;
+	y += gravity;
 
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
