@@ -73,11 +73,7 @@ bool j1Scene::Update(float dt)
 	//Load the previous state (even across levels)
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		App->LoadGame("save_game.xml");
-
-	//Activate debug mode
-	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
-		App->map->ActivateDebug(); 
-
+	
 	//Activate God mode
 	//if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 

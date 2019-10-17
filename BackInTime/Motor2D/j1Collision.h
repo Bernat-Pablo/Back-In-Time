@@ -9,7 +9,11 @@ enum COLLIDER_TYPE
 {
 	COLLIDER_PLAYER,
 	COLLIDER_WALL,
-	COLLIDER_TERRAIN,
+};
+
+struct Collider
+{
+	SDL_Rect rect;
 };
 
 class j1Collision : public j1Module
@@ -22,7 +26,7 @@ public:
 
 	
 private:
-	//bool colliders[10][10];	
+	
 	
 };
 

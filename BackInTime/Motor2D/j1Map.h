@@ -113,9 +113,6 @@ public:
 	iPoint PosConverter(int x, int y);
 	SDL_Rect GetTileRect(TileSet* tileset, int id);
 
-	//Activates/Deactivates debug mode
-	void ActivateDebug(); 
-	void DebugDraw();
 private:
 
 	bool LoadMap();
