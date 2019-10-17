@@ -99,6 +99,9 @@ Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* 
 		if (colliders[i] == nullptr)
 		{
 			ret = colliders[i] = new Collider(rect, type, callback);
+			if(ret)
+				LOG("Collider added successfully! ");
+
 			break;
 		}
 	}

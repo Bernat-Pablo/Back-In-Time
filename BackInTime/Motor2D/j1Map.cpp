@@ -244,7 +244,49 @@ bool j1Map::Load(const char* file_name)
 bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 {
 	bool ret = true;
+
+		//DEBUGUEAR ESTA FUNCION ENTERA, AQUI ESTA EL ERROR
 	pugi::xml_node object = node.child("object");
+	SDL_Rect rect = { 0,0,0,0 }; 
+	//objectgroup->name = node.attribute("name").as_string();
+	uint i = 0u;
+	uint collidernum = 0; //number of colliders
+	if (object == NULL)
+	{
+		LOG("Error loading object group");
+		ret = false;
+	}else 
+	{
+		objectgroup->object = new SDL_Rect[MAX_COLLIDERS];
+
+		while (object != NULL)
+		{				
+			p2SString name(object.attribute("name").as_string());
+			
+			if(name == "1")
+			{
+				objectgroup->object[i].x = object.attribute("x").as_int();
+				objectgroup->object[i].y = object.attribute("y").as_int();
+				objectgroup->object[i].w = object.attribute("width").as_int();
+				objectgroup->object[i].h = object.attribute("height").as_int();
+
+				App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL);
+
+				LOG("Collider x: %i y: %i", objectgroup->object[i].x, objectgroup->object[i].y);
+				LOG("Collider w: %i h: %i", objectgroup->object[i].w, objectgroup->object[i].h);
+				collidernum++;
+			}
+
+			object = object.next_sibling("object");
+
+			LOG("Collider %i", i);
+			LOG("Total colliders is: %i", collidernum);
+
+			i++;
+		}
+	}
+
+	/*pugi::xml_node object = node.child("object");
 	SDL_Rect rect = { 0,0,0,0 };
 	objectgroup->name = node.attribute("name").as_string();
 	uint i = 0u;
@@ -276,7 +318,7 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 			LOG("Collider w: %i h: %i", objectgroup->object[i].w, objectgroup->object[i].h);
 			i++;
 		}
-	}
+	}*/
 
 	return ret;
 }
