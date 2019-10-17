@@ -7,8 +7,11 @@
 #include "j1Input.h"
 #include "j1Animation.h"
 #include "p2Log.h"
+#include "j1Collision.h"
 
-j1Player::j1Player() : j1Module(){
+j1Player::j1Player() : j1Module()
+{
+	name.create("player");
 
 	//IDLE
 	idle.PushBack({ 0,0,17,27 });
@@ -52,6 +55,14 @@ j1Player::j1Player() : j1Module(){
 
 }
 
+bool j1Player::Awake(pugi::xml_node& config) {
+
+	LOG("Loading Player Data");
+	bool ret = true;
+	current_animation = &idle;
+	//collider = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, (j1Module*)App->player); //a collider to start
+	return ret;
+}
 bool j1Player::Start(){
 
 	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
@@ -108,5 +119,23 @@ bool j1Player::Update(float dt) {
 	return true;
 }
 
+void j1Player::OnCollision(Collider* c1, Collider* c2) {
 
+	switch (c2->type)
+	{
+	case COLLIDER_WALL:
+		//position = lastPosition;
+		velocity = 0;
+		if(y < c2->rect.y)
+		{
+			//state = IDLE;
+			//fall.Reset();
+			gravity = false;
+		}
+		
+		break;
+	default:
+		break;
+	}
+}
 

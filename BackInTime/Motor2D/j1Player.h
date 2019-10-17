@@ -5,8 +5,11 @@
 #include "j1Animation.h"
 #include "j1App.h"
 #include "j1Map.h"
+#include "p2Point.h"
+#include "SDL/include/SDL.h"
 
 struct SDL_Texture;
+struct Collider;
 
 class j1Player : public j1Module
 {
@@ -14,9 +17,10 @@ public:
 	j1Player();
 	~j1Player() {};
 
+	bool Awake(pugi::xml_node&);
 	bool Start();
 	bool Update(float dt);
-
+	void OnCollision(Collider* c1, Collider* c2);
 public:
 
 	Animation idle;
@@ -44,6 +48,7 @@ public:
 	bool moving_right = false;
 	bool moving_left = false;	
 
+	Collider* collider = nullptr;
 };
 
 

@@ -86,7 +86,7 @@ bool j1Collision::PreUpdate()
 bool j1Collision::Update(float dt)
 {
 	bool ret = true;	
-
+	DebugDraw();
 	return ret;
 }
 
@@ -115,4 +115,25 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 		rect.x + rect.w > r.x &&
 		rect.y < r.y + r.h &&
 		rect.h + rect.y > r.y);
+}
+
+void j1Collision::DebugDraw()
+{
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		debug = !debug;
+
+	Uint8 alpha = 80;
+
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		if (colliders[i] == nullptr)
+			continue;
+
+		switch (colliders[i]->type)
+		{
+		case COLLIDER_WALL:
+			App->render->DrawQuad(colliders[i]->rect, 255, 85, 150, alpha);
+			break;
+		}
+	}
 }
