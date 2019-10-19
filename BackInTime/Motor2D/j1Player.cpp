@@ -55,7 +55,9 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	LOG("Loading Player Data");
 	bool ret = true;
 	current_animation = &idle;
-	collider = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, (j1Module*)App->player); //a collider to start
+	position.x = 32;
+	position.y = 350;
+	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, (j1Module*)App->player); //a collider to start
 	return ret;
 }
 bool j1Player::Start(){
@@ -67,7 +69,108 @@ bool j1Player::Start(){
 
 bool j1Player::PreUpdate() 
 {
-	collider->SetPos(x, y);
+	lastPosition = position;
+
+	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN;
+	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
+	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
+	player_input.pressing_D = App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
+	player_input.pressing_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
+	player_input.pressing_lshift = App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT;
+	
+	if(state == IDLE)
+	{
+		if (player_input.pressing_W)
+		{
+			state = JUMP;
+		}else if(player_input.pressing_D)
+		{	
+			state = WALK_FORWARD;
+			
+		}else if (player_input.pressing_A)
+		{
+			state = WALK_BACKWARD;			
+		}else if (player_input.pressing_S)
+		{
+
+		}
+	}
+	else if(state == WALK_FORWARD)
+	{
+		if (!player_input.pressing_D)
+		{
+			state = IDLE;
+		}
+		if (player_input.pressing_space)
+		{
+			state = JUMP;
+		}
+		if (player_input.pressing_lshift)
+		{
+			state = RUN_FORWARD;
+		}
+	}
+	else if(state == WALK_BACKWARD)
+	{
+		if (!player_input.pressing_A)
+		{
+			state = IDLE;
+		}
+		if (player_input.pressing_space)
+		{
+			state = JUMP;
+		}
+		if (player_input.pressing_lshift)
+		{
+			state = RUN_BACKWARD;
+		}
+	}
+	else if(state == RUN_FORWARD)
+	{
+		if (!player_input.pressing_lshift) 
+		{
+			if(player_input.pressing_D)
+			{
+				state = WALK_FORWARD;
+			}
+			else 
+			{
+				state = IDLE;
+			}
+		}
+	}
+	else if(state == RUN_BACKWARD)
+	{
+		if (!player_input.pressing_lshift)
+		{
+			if (player_input.pressing_A)
+			{
+				state = WALK_BACKWARD;
+			}
+			else
+			{
+				state = IDLE;
+			}
+		}
+	}
+	else if(state == JUMP)
+	{
+		if (player_input.pressing_A)
+			position.x -= velocity;
+		else if (player_input.pressing_D)
+			position.x += velocity;
+
+		if (current_animation->Finished())
+		{
+			state = IDLE;
+			jump.Reset();
+		}
+	}
+
+
+	//Change player collider position
+	collider_player->SetPos(position.x, position.y);
+	
 	return true;
 }
 
@@ -76,45 +179,44 @@ bool j1Player::Update(float dt) {
 	current_animation = &idle;
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		x += velocity;
+		position.x += velocity;
 		current_animation = &walk;
 		moving_right = true;
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-			x += run_velocity;
+			position.x += run_velocity;
 			current_animation = &run;
 		}
 	}
 	else if ((App->input->GetKey(SDL_SCANCODE_D) != true) && moving_right == true) {
 		velocity = velocity - decrease_vel;
-		x += velocity;
+		position.x += velocity;
 		if (velocity <= 0) {
 			moving_right = false;
 			velocity = 2.0f;
 		}
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		x -= velocity;
+		position.x -= velocity;
 		current_animation = &walk;
 		moving_left = true;
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-			x -= run_velocity;
+			position.x -= run_velocity;
 			current_animation = &run;
 		}
 	}
 	else if ((App->input->GetKey(SDL_SCANCODE_A) != true) && moving_left == true) { //not working
 		velocity = velocity - decrease_vel;
-		x -= velocity;
+		position.x -= velocity;
 		if (velocity <= 0) {
 			moving_left = false;
 			velocity = 2.0f;
 		}
 	}
-	y += gravity;
-
+	position.y += gravity;
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	App->render->Blit(spritesheet_pj, x, y, &r);
+	App->render->Blit(spritesheet_pj, position.x, position.y, &r);
 
 	return true;
 }
@@ -124,12 +226,11 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	switch (c2->type)
 	{
 	case COLLIDER_WALL:
-		//position = lastPosition;
+		position = lastPosition;
 		velocity = 0;
-		if(y < c2->rect.y)
+		if(position.y < c2->rect.y)
 		{
-			//state = IDLE;
-			//fall.Reset();
+			position.y -= 5;
 			gravity = false;
 		}
 		

@@ -11,6 +11,26 @@
 struct SDL_Texture;
 struct Collider;
 
+struct Player_Input {
+	bool pressing_W;
+	bool pressing_A;
+	bool pressing_S;
+	bool pressing_D;
+	bool pressing_lshift;
+	bool pressing_space;
+};
+
+enum Player_States {
+	IDLE,
+	WALK_FORWARD,
+	WALK_BACKWARD,
+	RUN_FORWARD,
+	RUN_BACKWARD,
+	JUMP,
+	JUMP_FORWARD,
+	JUMP_BACKWARD,
+};
+
 class j1Player : public j1Module
 {
 public:
@@ -36,10 +56,14 @@ public:
 	SDL_Texture* spritesheet_pj = nullptr;
 
 public:
-
+	Player_States state;
+	Player_Input player_input; //Input introduced by the player
 	int health = 3;
-	float x = 32.0f;  // 2 blocks * 16 each one
-	float y = 350.0f; // 27 blocks * 16 each one - height pj
+	
+	// x = 2 blocks * 16 each one
+	// y = 27 blocks * 16 each one - height pj
+	iPoint position;
+	iPoint lastPosition; //Useful for collisions
 
 	float decrease_vel = 0.1f;
 	float velocity = 2.0f;
@@ -49,7 +73,7 @@ public:
 	bool moving_right = false;
 	bool moving_left = false;	
 
-	Collider* collider = nullptr;
+	Collider* collider_player = nullptr;	
 };
 
 
