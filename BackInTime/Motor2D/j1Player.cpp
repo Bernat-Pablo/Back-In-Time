@@ -76,28 +76,29 @@ bool j1Player::PreUpdate()
 	player_input.pressing_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
 	player_input.pressing_lshift = App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT;
 	
-	
-
-	if(state == IDLE)
+	switch(state)
 	{
+	case IDLE:
 		if (player_input.pressing_W)
 		{
 			state = JUMP;
-		}else if(player_input.pressing_D)
-		{	
-			state = WALK_FORWARD;
-			
-		}else if (player_input.pressing_A)
+		}
+		else if (player_input.pressing_D)
 		{
-			state = WALK_BACKWARD;			
-		}else if (player_input.pressing_S)
+			state = WALK_FORWARD;
+
+		}
+		else if (player_input.pressing_A)
+		{
+			state = WALK_BACKWARD;
+		}
+		else if (player_input.pressing_S)
 		{
 
 		}
-	}
-	else if(state == WALK_FORWARD)
-	{
-		if (!player_input.pressing_D)
+		break;
+	case WALK_FORWARD:
+		if (!player_input.pressing_D && moving_right == true)
 		{
 			state = DASH_FORWARD;
 		}
@@ -109,10 +110,9 @@ bool j1Player::PreUpdate()
 		{
 			state = RUN_FORWARD;
 		}
-	}
-	else if(state == WALK_BACKWARD)
-	{
-		if (!player_input.pressing_A)
+		break;
+	case WALK_BACKWARD:
+		if (!player_input.pressing_A && moving_left == true)
 		{
 			state = DASH_BACKWARD;
 		}
@@ -124,23 +124,21 @@ bool j1Player::PreUpdate()
 		{
 			state = RUN_BACKWARD;
 		}
-	}
-	else if(state == RUN_FORWARD)
-	{
-		if (!player_input.pressing_lshift) 
+		break;
+	case RUN_FORWARD:
+		if (!player_input.pressing_lshift)
 		{
-			if(player_input.pressing_D)
+			if (player_input.pressing_D)
 			{
 				state = WALK_FORWARD;
 			}
-			else 
+			else
 			{
 				state = DASH_FORWARD;
 			}
 		}
-	}
-	else if(state == RUN_BACKWARD)
-	{
+		break;
+	case RUN_BACKWARD:
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_A)
@@ -152,46 +150,35 @@ bool j1Player::PreUpdate()
 				state = DASH_BACKWARD;
 			}
 		}
-	}
-	else if(state == JUMP)
-	{
-		if (player_input.pressing_A)
-			position.x -= velocity;
-		else if (player_input.pressing_D)
-			position.x += velocity;
-
+		break;
+	case JUMP:
 		if (current_animation->Finished())
 		{
 			state = IDLE;
 			jump.Reset();
 		}
-	}
-	else if(state == JUMP_FORWARD)
-	{
-	
-	}
-	else if(state == JUMP_BACKWARD)
-	{
-	
-	}
-	else if(state == DASH_FORWARD)
-	{
-		if(current_animation->Finished())
-		{
-			state = IDLE;
-		}
-	}
-	else if(state == DASH_BACKWARD)
-	{
-	if (current_animation->Finished())
-	{
-		state = IDLE;
-	}
+		break;
+	case JUMP_FORWARD:
+
+		break;
+	case JUMP_BACKWARD:
+
+		break;
+	case DASH_FORWARD:
+		//Written on Update()
+		//It changes to IDLE if velocity <= 0
+		break;
+	case DASH_BACKWARD:
+		//Written on Update()
+		//It changes to IDLE if velocity <= 0
+		break;
 	}
 
 	//Change player collider position
 	collider_player->SetPos(position.x, position.y);
+
 	lastPosition = position;
+
 	return true;
 }
 
@@ -230,6 +217,11 @@ bool j1Player::Update(float dt) {
 			break;
 		case JUMP:
 			current_animation = &jump;
+
+			if (player_input.pressing_A)
+				position.x -= velocity;
+			else if (player_input.pressing_D)
+				position.x += velocity;
 			break;
 		case JUMP_FORWARD:
 			current_animation = &jump;
@@ -238,44 +230,29 @@ bool j1Player::Update(float dt) {
 			current_animation = &jump;
 			break;
 		case DASH_FORWARD:
-			current_animation = &idle;
+			current_animation = &walk;
+
+			velocity = velocity - decrease_vel;
+			position.x += velocity;
+			if (velocity <= 0) {
+				moving_right = false;
+				velocity = 2.0f;
+				state = IDLE;
+			}
 			break;
 		case DASH_BACKWARD:
-			current_animation = &idle;
-			break;
-	}
+			current_animation = &walk;
 
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		
-		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-			
-			current_animation = &run;
-		}
-	}
-	else if ((App->input->GetKey(SDL_SCANCODE_D) != true) && moving_right == true) {
-		velocity = velocity - decrease_vel;
-		position.x += velocity;
-		if (velocity <= 0) {
-			moving_right = false;
-			velocity = 2.0f;
-		}
-	}
-	else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		position.x -= velocity;
-		current_animation = &walk;
-		moving_left = true;
-		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-			position.x -= run_velocity;
-			current_animation = &run;
-		}
-	}
-	else if ((App->input->GetKey(SDL_SCANCODE_A) != true) && moving_left == true) { //not working
-		velocity = velocity - decrease_vel;
-		position.x -= velocity;
-		if (velocity <= 0) {
-			moving_left = false;
-			velocity = 2.0f;
-		}
+			//not working
+			velocity = velocity - decrease_vel;
+			position.x -= velocity;
+			if (velocity <= 0)
+			{
+				moving_left = false;
+				velocity = 2.0f;
+				state = IDLE;
+			}
+			break;
 	}
 	position.y += gravity;
 
