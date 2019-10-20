@@ -29,6 +29,8 @@ enum Player_States {
 	JUMP,
 	JUMP_FORWARD,
 	JUMP_BACKWARD,
+	DASH_FORWARD, //Slowly stops the player
+	DASH_BACKWARD,
 };
 
 class j1Player : public j1Module
@@ -70,10 +72,14 @@ public:
 	float run_velocity = 2.05f;
 	float gravity = 3.0f;
 
+	bool can_move_right = true; //for collisions
+	bool can_move_left = true;
 	bool moving_right = false;
 	bool moving_left = false;	
 
-	Collider* collider_player = nullptr;	
+	bool isGrounded = false; //Player is touching the ground
+
+	Collider* collider_player = nullptr;
 };
 
 

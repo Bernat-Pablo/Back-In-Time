@@ -53,7 +53,7 @@ j1Player::j1Player() : j1Module()
 bool j1Player::Awake(pugi::xml_node& config) {
 
 	LOG("Loading Player Data");
-	bool ret = true;
+	bool ret = true;	
 	current_animation = &idle;
 	position.x = 32;
 	position.y = 350;
@@ -69,8 +69,6 @@ bool j1Player::Start(){
 
 bool j1Player::PreUpdate() 
 {
-	lastPosition = position;
-
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
 	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
@@ -78,6 +76,8 @@ bool j1Player::PreUpdate()
 	player_input.pressing_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
 	player_input.pressing_lshift = App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT;
 	
+	
+
 	if(state == IDLE)
 	{
 		if (player_input.pressing_W)
@@ -99,7 +99,7 @@ bool j1Player::PreUpdate()
 	{
 		if (!player_input.pressing_D)
 		{
-			state = IDLE;
+			state = DASH_FORWARD;
 		}
 		if (player_input.pressing_space)
 		{
@@ -114,7 +114,7 @@ bool j1Player::PreUpdate()
 	{
 		if (!player_input.pressing_A)
 		{
-			state = IDLE;
+			state = DASH_BACKWARD;
 		}
 		if (player_input.pressing_space)
 		{
@@ -135,7 +135,7 @@ bool j1Player::PreUpdate()
 			}
 			else 
 			{
-				state = IDLE;
+				state = DASH_FORWARD;
 			}
 		}
 	}
@@ -149,7 +149,7 @@ bool j1Player::PreUpdate()
 			}
 			else
 			{
-				state = IDLE;
+				state = DASH_BACKWARD;
 			}
 		}
 	}
@@ -166,11 +166,32 @@ bool j1Player::PreUpdate()
 			jump.Reset();
 		}
 	}
-
+	else if(state == JUMP_FORWARD)
+	{
+	
+	}
+	else if(state == JUMP_BACKWARD)
+	{
+	
+	}
+	else if(state == DASH_FORWARD)
+	{
+		if(current_animation->Finished())
+		{
+			state = IDLE;
+		}
+	}
+	else if(state == DASH_BACKWARD)
+	{
+	if (current_animation->Finished())
+	{
+		state = IDLE;
+	}
+	}
 
 	//Change player collider position
 	collider_player->SetPos(position.x, position.y);
-	
+	lastPosition = position;
 	return true;
 }
 
@@ -178,12 +199,56 @@ bool j1Player::Update(float dt) {
 
 	current_animation = &idle;
 
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		position.x += velocity;
-		current_animation = &walk;
-		moving_right = true;
-		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+	switch(state)
+	{
+		case IDLE:
+			current_animation = &idle;
+			break;
+		case WALK_FORWARD:
+			current_animation = &walk;
+
+			position.x += velocity;
+			current_animation = &walk;
+			moving_right = true;
+			break;
+		case WALK_BACKWARD:
+			current_animation = &walk;
+
+			position.x -= velocity;
+			current_animation = &walk;
+			moving_left = true;
+			break;
+		case RUN_FORWARD:
+			current_animation = &run;
+
 			position.x += run_velocity;
+			break;
+		case RUN_BACKWARD:
+			current_animation = &run;
+			
+			position.x -= run_velocity;
+			break;
+		case JUMP:
+			current_animation = &jump;
+			break;
+		case JUMP_FORWARD:
+			current_animation = &jump;
+			break;
+		case JUMP_BACKWARD:
+			current_animation = &jump;
+			break;
+		case DASH_FORWARD:
+			current_animation = &idle;
+			break;
+		case DASH_BACKWARD:
+			current_animation = &idle;
+			break;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+		
+		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+			
 			current_animation = &run;
 		}
 	}
@@ -218,6 +283,7 @@ bool j1Player::Update(float dt) {
 
 	App->render->Blit(spritesheet_pj, position.x, position.y, &r);
 
+
 	return true;
 }
 
@@ -228,15 +294,25 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	case COLLIDER_WALL:
 		position = lastPosition;
 		velocity = 0;
-		if(position.y < c2->rect.y)
+		if (position.y < c2->rect.y) //Player is above the ground
 		{
-			position.y -= 5;
+			state = IDLE;
+			can_move_right = true;
+			can_move_left = true;
 			gravity = false;
+			position.y -= 2;
 		}
-		
+		if(position.x < c2->rect.x) //Player is at the left of a wall
+		{
+			can_move_right = false;
+		}
+		if (position.x > c2->rect.x) //Player is at the right of a wall
+		{
+			can_move_left = false;
+		}
+
 		break;
 	default:
 		break;
-	}
+	}	
 }
-

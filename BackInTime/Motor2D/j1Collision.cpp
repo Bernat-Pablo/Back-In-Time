@@ -132,7 +132,7 @@ void j1Collision::DebugDraw()
 		switch (colliders[i]->type)
 		{
 		case COLLIDER_WALL:
-			App->render->DrawQuad(colliders[i]->rect, 255, 85, 150, alpha);
+			App->render->DrawQuad(colliders[i]->rect, 100, 255, 150, alpha);
 			break;
 		case COLLIDER_PLAYER:
 			App->render->DrawQuad(colliders[i]->rect, 0, 153, 0, alpha);
@@ -140,6 +140,7 @@ void j1Collision::DebugDraw()
 		case COLLIDER_DIE:
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
-		}
-	}
+		}		
+		
+	}	
 }
