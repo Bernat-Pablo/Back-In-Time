@@ -43,6 +43,8 @@ public:
 	bool Start();
 	bool PreUpdate();
 	bool Update(float dt);
+	bool CleanUp();
+
 	void OnCollision(Collider* c1, Collider* c2);
 public:
 

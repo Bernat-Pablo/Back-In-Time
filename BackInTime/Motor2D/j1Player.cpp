@@ -57,6 +57,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	current_animation = &idle;
 	position.x = 32;
 	position.y = 350;
+	can_move_left = can_move_right = true;
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, (j1Module*)App->player); //a collider to start
 	return ret;
 }
@@ -69,6 +70,9 @@ bool j1Player::Start(){
 
 bool j1Player::PreUpdate() 
 {
+	can_move_left = true;
+	can_move_right = true;
+
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
 	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
@@ -194,26 +198,32 @@ bool j1Player::Update(float dt) {
 		case WALK_FORWARD:
 			current_animation = &walk;
 
-			position.x += velocity;
+			if(can_move_right)
+				position.x += velocity;
+
 			current_animation = &walk;
 			moving_right = true;
 			break;
 		case WALK_BACKWARD:
 			current_animation = &walk;
 
-			position.x -= velocity;
+			if (can_move_left)
+				position.x -= velocity;
+
 			current_animation = &walk;
 			moving_left = true;
 			break;
 		case RUN_FORWARD:
 			current_animation = &run;
-
-			position.x += run_velocity;
+			
+			if (can_move_right)
+				position.x += run_velocity;
 			break;
 		case RUN_BACKWARD:
 			current_animation = &run;
 			
-			position.x -= run_velocity;
+			if (can_move_left)
+				position.x -= run_velocity;
 			break;
 		case JUMP:
 			current_animation = &jump;
@@ -233,7 +243,8 @@ bool j1Player::Update(float dt) {
 			current_animation = &walk;
 
 			velocity = velocity - decrease_vel;
-			position.x += velocity;
+			if (can_move_right)
+				position.x += velocity;
 			if (velocity <= 0) {
 				moving_right = false;
 				velocity = 2.0f;
@@ -245,6 +256,7 @@ bool j1Player::Update(float dt) {
 
 			//not working
 			velocity = velocity - decrease_vel;
+			if (can_move_left)
 			position.x -= velocity;
 			if (velocity <= 0)
 			{
@@ -264,20 +276,27 @@ bool j1Player::Update(float dt) {
 	return true;
 }
 
+bool j1Player::CleanUp() {
+	collider_player = nullptr;
+	spritesheet_pj = nullptr;
+
+	return true;
+}
+
 void j1Player::OnCollision(Collider* c1, Collider* c2) {
 
 	switch (c2->type)
 	{
 	case COLLIDER_WALL:
 		position = lastPosition;
-		velocity = 0;
+		velocity = 0;		
+
 		if (position.y < c2->rect.y) //Player is above the ground
 		{
 			state = IDLE;
-			can_move_right = true;
-			can_move_left = true;
 			gravity = false;
 			position.y -= 2;
+			isGrounded = true;
 		}
 		if(position.x < c2->rect.x) //Player is at the left of a wall
 		{
@@ -290,6 +309,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 
 		break;
 	default:
+
 		break;
 	}	
 }
+
