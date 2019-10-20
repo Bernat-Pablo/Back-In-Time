@@ -7718,7 +7718,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile gid="127"/>
    <tile gid="128"/>
@@ -18222,7 +18222,7 @@
    <tile gid="1070"/>
    <tile gid="1071"/>
    <tile gid="905"/>
-   <tile gid="906"/>
+   <tile gid="8"/>
    <tile gid="907"/>
    <tile/>
    <tile/>
@@ -49734,7 +49734,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>
@@ -60238,7 +60238,7 @@
    <tile gid="2761"/>
    <tile gid="2762"/>
    <tile/>
-   <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>
@@ -70742,7 +70742,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>
@@ -81246,7 +81246,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>
@@ -91750,7 +91750,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="8"/>
    <tile/>
    <tile/>
    <tile/>
@@ -94540,11 +94540,11 @@
   </data>
  </layer>
  <objectgroup id="12" name="Colliders">
-  <object id="5" name="1" type="Collider" x="0" y="432.5" width="416" height="48.5"/>
-  <object id="6" type="Collider" x="0" y="-1.5" width="32.5" height="433"/>
-  <object id="8" name="1" x="319.5" y="417" width="80.5" height="15"/>
-  <object id="9" name="1" x="336" y="399.5" width="64" height="17"/>
-  <object id="10" name="1" x="368" y="383.5" width="31.5" height="15"/>
+  <object id="5" name="1" x="0" y="432.5" width="416" height="48.5"/>
+  <object id="6" name="1" x="0" y="-1.5" width="12.1667" height="433"/>
+  <object id="8" name="1" x="319.5" y="416.091" width="49.6136" height="16.6591"/>
+  <object id="9" name="1" x="336" y="399.5" width="32.1818" height="17"/>
+  <object id="10" name="1" x="368" y="383.5" width="31.9783" height="49.3597"/>
   <object id="11" name="1" x="415.75" y="448" width="16.25" height="32.25"/>
   <object id="12" name="1" x="832" y="304.5" width="47" height="175"/>
   <object id="13" name="1" x="928" y="352" width="143.5" height="128.5"/>

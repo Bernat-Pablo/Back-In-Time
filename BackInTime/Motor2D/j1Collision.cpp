@@ -122,8 +122,6 @@ void j1Collision::DebugDraw()
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		debug = !debug;
 
-	Uint8 alpha = 80;
-
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		if (colliders[i] == nullptr)
@@ -132,13 +130,22 @@ void j1Collision::DebugDraw()
 		switch (colliders[i]->type)
 		{
 		case COLLIDER_WALL:
-			App->render->DrawQuad(colliders[i]->rect, 100, 255, 150, alpha);
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, 50);
 			break;
 		case COLLIDER_PLAYER:
-			App->render->DrawQuad(colliders[i]->rect, 0, 153, 0, alpha);
+			App->render->DrawQuad(colliders[i]->rect, 0, 153, 0, 80);
 			break;
 		case COLLIDER_DIE:
-			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, 80);
+			break;
+		case COLLIDER_TRAP:
+			App->render->DrawQuad(colliders[i]->rect, 211, 84, 0, 150);
+			break;
+		case COLLIDER_ACTIVATE_TRAP:
+			App->render->DrawQuad(colliders[i]->rect, 247, 220, 111, 50);
+			break;
+		case COLLIDER_DOOR:
+			App->render->DrawQuad(colliders[i]->rect, 93, 109, 126, 150);
 			break;
 		}		
 		
