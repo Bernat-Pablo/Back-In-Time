@@ -55,8 +55,9 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	LOG("Loading Player Data");
 	bool ret = true;	
 	current_animation = &idle;
-	position.x = 32;
-	position.y = 350;
+	gravity = true;
+	position.x = initial_x;
+	position.y = initial_y;
 	can_move_left = can_move_right = true;
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, (j1Module*)App->player); //a collider to start
 	return ret;
@@ -306,13 +307,12 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		{
 		case COLLIDER_WALL:
 			position = lastPosition;
-			velocity = 0;
 
-			if (position.y < c2->rect.y + 300) //Player is above the ground
+			if (position.y < c2->rect.y) //Player is above the ground
 			{
 				can_move_right = true;
 				can_move_left = true;
-				position.y -= 2.5;
+				position.y -= 1.0f;
 				isGrounded = true;
 			}
 			if (position.x < c2->rect.x) //Player is at the left of a wall

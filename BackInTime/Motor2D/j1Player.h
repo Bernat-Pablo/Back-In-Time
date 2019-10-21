@@ -65,14 +65,10 @@ public:
 	int health = 3;
 
 
-	float initial_x = 32.0f;
-	float initial_y = 350.0f;
-	float x = initial_x;  // 2 blocks * 16 each one
-	float y = initial_y; // 27 blocks * 16 each one - height pj
-	
-	iPoint position;
-	iPoint lastPosition; //Useful for collisions
-
+	float initial_x = 32.0f; // 2 blocks * 16 each one
+	float initial_y = 400.0f; // 27 blocks * 16 each one - height pj	
+	iPoint position; //Use position.x and position.y
+	iPoint lastPosition; 
 
 	float decrease_vel = 0.1f;
 	float velocity = 2.0f;
