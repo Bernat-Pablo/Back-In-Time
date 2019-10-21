@@ -70,10 +70,21 @@ bool j1Player::Start(){
 
 bool j1Player::PreUpdate() 
 {
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		if (godMode == true)
+		{
+			godMode = false;
+			gravity = true;
+		}			
+		else if (godMode == false)
+			godMode = true;
+	}
+
 	can_move_left = true;
 	can_move_right = true;
 
-	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN;
+	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
 	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
 	player_input.pressing_D = App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
@@ -266,7 +277,15 @@ bool j1Player::Update(float dt) {
 			}
 			break;
 	}
-	position.y += gravity;
+	if(godMode == false)
+		position.y += gravity;
+	else if(godMode == true)
+	{
+		if (player_input.pressing_W)
+			position.y -= velocity;
+		if (player_input.pressing_S)
+			position.y += velocity;
+	}
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
@@ -285,32 +304,35 @@ bool j1Player::CleanUp() {
 
 void j1Player::OnCollision(Collider* c1, Collider* c2) {
 
-	switch (c2->type)
+	if(godMode == false)
 	{
-	case COLLIDER_WALL:
-		position = lastPosition;
-		velocity = 0;		
-
-		if (position.y < c2->rect.y) //Player is above the ground
+		switch (c2->type)
 		{
-			state = IDLE;
-			gravity = false;
-			position.y -= 2;
-			isGrounded = true;
-		}
-		if(position.x < c2->rect.x) //Player is at the left of a wall
-		{
-			can_move_right = false;
-		}
-		if (position.x > c2->rect.x) //Player is at the right of a wall
-		{
-			can_move_left = false;
-		}
+		case COLLIDER_WALL:
+			position = lastPosition;
+			velocity = 0;
 
-		break;
-	default:
+			if (position.y < c2->rect.y) //Player is above the ground
+			{
+				state = IDLE;
+				gravity = false;
+				position.y -= 2;
+				isGrounded = true;
+			}
+			if (position.x < c2->rect.x) //Player is at the left of a wall
+			{
+				can_move_right = false;
+			}
+			if (position.x > c2->rect.x) //Player is at the right of a wall
+			{
+				can_move_left = false;
+			}
 
-		break;
+			break;
+		default:
+
+			break;
+		}
 	}	
 }
 
