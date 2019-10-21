@@ -94,7 +94,7 @@ bool j1Player::PreUpdate()
 	switch(state)
 	{
 	case IDLE:
-		if (player_input.pressing_W)
+		if (player_input.pressing_space)
 		{
 			state = JUMP;
 		}
@@ -197,10 +197,8 @@ bool j1Player::PreUpdate()
 	return true;
 }
 
-bool j1Player::Update(float dt) {
-
-	current_animation = &idle;
-
+bool j1Player::Update(float dt) 
+{
 	switch(state)
 	{
 		case IDLE:
@@ -209,10 +207,9 @@ bool j1Player::Update(float dt) {
 		case WALK_FORWARD:
 			current_animation = &walk;
 
-			if(can_move_right)
+			//if(can_move_right)
 				position.x += velocity;
 
-			current_animation = &walk;
 			moving_right = true;
 			break;
 		case WALK_BACKWARD:
@@ -221,7 +218,6 @@ bool j1Player::Update(float dt) {
 			if (can_move_left)
 				position.x -= velocity;
 
-			current_animation = &walk;
 			moving_left = true;
 			break;
 		case RUN_FORWARD:
@@ -312,20 +308,20 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			position = lastPosition;
 			velocity = 0;
 
-			if (position.y < c2->rect.y) //Player is above the ground
+			if (position.y < c2->rect.y + 300) //Player is above the ground
 			{
-				state = IDLE;
-				gravity = false;
-				position.y -= 2;
+				can_move_right = true;
+				can_move_left = true;
+				position.y -= 2.5;
 				isGrounded = true;
 			}
 			if (position.x < c2->rect.x) //Player is at the left of a wall
 			{
-				can_move_right = false;
+				//can_move_right = false;
 			}
 			if (position.x > c2->rect.x) //Player is at the right of a wall
 			{
-				can_move_left = false;
+				//can_move_left = false;
 			}
 
 			break;
