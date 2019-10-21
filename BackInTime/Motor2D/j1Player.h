@@ -76,7 +76,7 @@ public:
 
 	bool can_move_right = true; //for collisions
 	bool can_move_left = true;
-	bool moving_right = false;
+	bool moving_right = false; //for slide
 	bool moving_left = false;	
 
 	bool isGrounded = false; //Player is touching the ground
