@@ -80,7 +80,7 @@ public:
 	bool moving_left = false;	
 
 	bool isGrounded = false; //Player is touching the ground
-	bool godMode = true;
+	bool godMode = false;
 
 	Collider* collider_player = nullptr;
 };

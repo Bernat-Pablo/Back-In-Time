@@ -122,32 +122,34 @@ void j1Collision::DebugDraw()
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		debug = !debug;
 
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	if(debug == true)
 	{
-		if (colliders[i] == nullptr)
-			continue;
-
-		switch (colliders[i]->type)
+		for (int i = 0; i < MAX_COLLIDERS; ++i)
 		{
-		case COLLIDER_WALL:
-			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, 50);
-			break;
-		case COLLIDER_PLAYER:
-			App->render->DrawQuad(colliders[i]->rect, 0, 153, 0, 80);
-			break;
-		case COLLIDER_DIE:
-			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, 80);
-			break;
-		case COLLIDER_TRAP:
-			App->render->DrawQuad(colliders[i]->rect, 211, 84, 0, 150);
-			break;
-		case COLLIDER_ACTIVATE_TRAP:
-			App->render->DrawQuad(colliders[i]->rect, 247, 220, 111, 50);
-			break;
-		case COLLIDER_DOOR:
-			App->render->DrawQuad(colliders[i]->rect, 93, 109, 126, 150);
-			break;
-		}		
-		
+			if (colliders[i] == nullptr)
+				continue;
+
+			switch (colliders[i]->type)
+			{
+			case COLLIDER_WALL:
+				App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, 50);
+				break;
+			case COLLIDER_PLAYER:
+				App->render->DrawQuad(colliders[i]->rect, 0, 153, 0, 80);
+				break;
+			case COLLIDER_DIE:
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, 80);
+				break;
+			case COLLIDER_TRAP:
+				App->render->DrawQuad(colliders[i]->rect, 211, 84, 0, 150);
+				break;
+			case COLLIDER_ACTIVATE_TRAP:
+				App->render->DrawQuad(colliders[i]->rect, 247, 220, 111, 50);
+				break;
+			case COLLIDER_DOOR:
+				App->render->DrawQuad(colliders[i]->rect, 93, 109, 126, 150);
+				break;
+			}
+		}
 	}	
 }
