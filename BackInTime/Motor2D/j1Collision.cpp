@@ -86,7 +86,7 @@ bool j1Collision::PreUpdate()
 bool j1Collision::Update(float dt)
 {
 	bool ret = true;	
-
+	DebugDraw();
 	return ret;
 }
 
@@ -115,4 +115,41 @@ bool Collider::CheckCollision(const SDL_Rect& r) const
 		rect.x + rect.w > r.x &&
 		rect.y < r.y + r.h &&
 		rect.h + rect.y > r.y);
+}
+
+void j1Collision::DebugDraw()
+{
+	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		debug = !debug;
+
+	if(debug == true)
+	{
+		for (int i = 0; i < MAX_COLLIDERS; ++i)
+		{
+			if (colliders[i] == nullptr)
+				continue;
+
+			switch (colliders[i]->type)
+			{
+			case COLLIDER_WALL:
+				App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, 50);
+				break;
+			case COLLIDER_PLAYER:
+				App->render->DrawQuad(colliders[i]->rect, 0, 153, 0, 80);
+				break;
+			case COLLIDER_DIE:
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, 80);
+				break;
+			case COLLIDER_TRAP:
+				App->render->DrawQuad(colliders[i]->rect, 211, 84, 0, 150);
+				break;
+			case COLLIDER_ACTIVATE_TRAP:
+				App->render->DrawQuad(colliders[i]->rect, 247, 220, 111, 50);
+				break;
+			case COLLIDER_DOOR:
+				App->render->DrawQuad(colliders[i]->rect, 93, 109, 126, 150);
+				break;
+			}
+		}
+	}	
 }

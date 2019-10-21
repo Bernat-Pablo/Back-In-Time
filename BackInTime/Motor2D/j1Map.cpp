@@ -263,19 +263,28 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 		{				
 			p2SString name(object.attribute("name").as_string());
 			
-			if(name == "1")
+			if(name == "1" || name == "2" || name == "3" || name == "4" || name == "5")
 			{
 				objectgroup->object[i].x = object.attribute("x").as_int();
 				objectgroup->object[i].y = object.attribute("y").as_int();
 				objectgroup->object[i].w = object.attribute("width").as_int();
 				objectgroup->object[i].h = object.attribute("height").as_int();
 
-				App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL);
+				if(name == "1")
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL);
+				if(name == "2")
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DIE);
+				if (name == "3")
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_TRAP);
+				if (name == "4")
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_ACTIVATE_TRAP);
+				if (name == "5")
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR);
 
 				LOG("Collider x: %i y: %i", objectgroup->object[i].x, objectgroup->object[i].y);
 				LOG("Collider w: %i h: %i", objectgroup->object[i].w, objectgroup->object[i].h);
 				collidernum++;
-			}
+			}			
 
 			object = object.next_sibling("object");
 
