@@ -36,9 +36,6 @@
     <ClCompile Include="j1Player.cpp">
       <Filter>Characters</Filter>
     </ClCompile>
-    <ClCompile Include="j1Map2.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -87,9 +84,6 @@
     </ClInclude>
     <ClInclude Include="j1Player.h">
       <Filter>Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="j1Map2.h">
-      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
