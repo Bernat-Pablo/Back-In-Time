@@ -318,11 +318,13 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			if (position.x < c2->rect.x) //Player is at the left of a wall
 			{
 				position.x -= velocity;
+				position.y -= 1.0f;
 			}
 			if (position.x  >= (c2->rect.x + c2->rect.w - velocity*2.0f) && moving_left == true) //Player is at the right of a wall
 			{
 				//position.x += velocity*2;
-				position.x += 5;
+				position.x += velocity;
+				position.y -= 1.0f;
 			}
 
 			break;
