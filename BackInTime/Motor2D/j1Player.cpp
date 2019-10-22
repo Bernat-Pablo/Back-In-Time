@@ -92,7 +92,7 @@ bool j1Player::PreUpdate()
 	switch(state)
 	{
 	case IDLE:
-		if (player_input.pressing_space&&in_air==false)
+		if (player_input.pressing_space&&in_air==false) //fix
 		{
 			jump_vel = 5.0f; //magic numbers. change
 			state = JUMP;
@@ -260,8 +260,10 @@ bool j1Player::Update(float dt)
 				jump_vel -= decrease_vel;
 				position.y -= jump_vel;
 			}
-			else state = IDLE;
+			else {
+				
 
+			}
 			break;
 		case JUMP_FORWARD:
 			current_animation = &jump;
