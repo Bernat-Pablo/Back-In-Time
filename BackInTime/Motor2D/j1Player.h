@@ -72,15 +72,18 @@ public:
 
 	float decrease_vel = 0.2f;
 	float velocity = 2.0f;
-	float run_velocity = 2.05f;
-	float gravity = 9.8f;
+	float run_velocity = 2.5f;
+	float gravity = 0.2;
+	float jump_vel = 5.0f;
 
 	bool moving_right = false; //for slide
 	bool moving_left = false;	
+	bool in_air = false;
 
 	bool godMode = false;
 
 	Collider* collider_player = nullptr;
+
 };
 
 
