@@ -104,10 +104,6 @@ bool j1Player::PreUpdate()
 		{
 			state = WALK_BACKWARD;
 		}
-		else if (player_input.pressing_S)
-		{
-
-		}
 		break;
 	case WALK_FORWARD:
 		if (!player_input.pressing_D && moving_right == true)
@@ -116,7 +112,7 @@ bool j1Player::PreUpdate()
 		}
 		if (player_input.pressing_space)
 		{
-			state = JUMP;
+			state = JUMP_FORWARD;
 		}
 		if (player_input.pressing_lshift)
 		{
@@ -130,7 +126,7 @@ bool j1Player::PreUpdate()
 		}
 		if (player_input.pressing_space)
 		{
-			state = JUMP;
+			state = JUMP_BACKWARD;
 		}
 		if (player_input.pressing_lshift)
 		{
@@ -149,6 +145,9 @@ bool j1Player::PreUpdate()
 				state = DASH_FORWARD;
 			}
 		}
+		else if (player_input.pressing_A && player_input.pressing_lshift) {
+			state = RUN_BACKWARD;
+		}
 		break;
 	case RUN_BACKWARD:
 		if (!player_input.pressing_lshift)
@@ -162,27 +161,50 @@ bool j1Player::PreUpdate()
 				state = DASH_BACKWARD;
 			}
 		}
+		else if (player_input.pressing_D && player_input.pressing_lshift) {
+			state = RUN_FORWARD;
+		}
 		break;
 	case JUMP:
-		if (current_animation->Finished())
+		if (player_input.pressing_D) {
+			state = JUMP_FORWARD;
+		}
+		else if (player_input.pressing_A) {
+			state = JUMP_BACKWARD;
+		}
+		else if (current_animation->Finished())
 		{
 			state = IDLE;
 			jump.Reset();
 		}
 		break;
 	case JUMP_FORWARD:
-
+		if (!player_input.pressing_D) {
+			state = JUMP;
+		}
 		break;
 	case JUMP_BACKWARD:
-
+		if (!player_input.pressing_A) {
+			state = JUMP;
+		}
 		break;
 	case DASH_FORWARD:
-		//Written on Update()
-		//It changes to IDLE if velocity <= 0
+		if (player_input.pressing_A) {
+			state = WALK_BACKWARD;
+			velocity = 2.0f;
+			if (player_input.pressing_lshift) {
+				state = RUN_BACKWARD;
+			}
+		}
 		break;
 	case DASH_BACKWARD:
-		//Written on Update()
-		//It changes to IDLE if velocity <= 0
+		if (player_input.pressing_D) {
+			state = WALK_FORWARD;
+			velocity = 2.0f;
+			if (player_input.pressing_lshift) {
+				state = RUN_FORWARD;
+			}
+		}
 		break;
 	}
 
@@ -242,7 +264,7 @@ bool j1Player::Update(float dt)
 		case DASH_FORWARD:
 			current_animation = &walk;
 
-			velocity = velocity - decrease_vel;
+			velocity -= decrease_vel;
 			
 			position.x += velocity;
 
@@ -257,7 +279,6 @@ bool j1Player::Update(float dt)
 
 			//not working
 			velocity = velocity - decrease_vel;
-			
 			position.x -= velocity;
 			if (velocity <= 0)
 			{

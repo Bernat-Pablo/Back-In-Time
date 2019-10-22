@@ -70,7 +70,7 @@ public:
 	iPoint position; //Use position.x and position.y
 	iPoint lastPosition; 
 
-	float decrease_vel = 0.1f;
+	float decrease_vel = 0.2f;
 	float velocity = 2.0f;
 	float run_velocity = 2.05f;
 	float gravity = 9.8f;
