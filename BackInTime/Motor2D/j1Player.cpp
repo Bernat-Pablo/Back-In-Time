@@ -301,22 +301,21 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		case COLLIDER_WALL:
 			position = lastPosition;
 			
-			if (position.y < c2->rect.y) //Player is above the ground
+			if (position.y < c2->rect.y && position.x > c2->rect.x && position.x < c2->rect.x + c2->rect.w) //Player is above the ground
 			{
 				position.y -= gravity;
 			}
 			if (position.x < c2->rect.x) //Player is at the left of a wall
 			{
+				state = IDLE; //We avoid the dash
 				position.x -= velocity;
-				if (position.y > c2->rect.y) //If player is grounded, we neutralize gravity force
-					position.y -= gravity;
+				position.y -= gravity;
 			}
 			if(position.x > c2->rect.x + c2->rect.w - 10) //Player is at the right of a wall
 			{
 				state = IDLE; //We avoid the dash
 				position.x += velocity;
-				if (position.y > c2->rect.y) //If player is grounded, we neutralize gravity force
-					position.y -= gravity;
+				position.y -= gravity;
 			}
 
 			break;
