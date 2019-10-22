@@ -73,14 +73,11 @@ public:
 	float decrease_vel = 0.1f;
 	float velocity = 2.0f;
 	float run_velocity = 2.05f;
-	float gravity = 2.0f;
+	float gravity = 9.8f;
 
-	bool can_move_right = true; //for collisions
-	bool can_move_left = true;
 	bool moving_right = false; //for slide
 	bool moving_left = false;	
 
-	bool isGrounded = false; //Player is touching the ground
 	bool godMode = false;
 
 	Collider* collider_player = nullptr;

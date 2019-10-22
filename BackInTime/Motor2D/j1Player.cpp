@@ -58,7 +58,6 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	gravity = true;
 	position.x = initial_x;
 	position.y = initial_y;
-	can_move_left = can_move_right = true;
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, (j1Module*)App->player); //a collider to start
 	return ret;
 }
@@ -81,10 +80,7 @@ bool j1Player::PreUpdate()
 		else if (godMode == false)
 			godMode = true;
 	}
-
-	can_move_left = true;
-	can_move_right = true;
-
+	
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
 	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
@@ -208,30 +204,26 @@ bool j1Player::Update(float dt)
 		case WALK_FORWARD:
 			current_animation = &walk;
 
-			//if(can_move_right)
-				position.x += velocity;
+			position.x += velocity;
 
 			moving_right = true;
 			break;
 		case WALK_BACKWARD:
 			current_animation = &walk;
 
-			if (can_move_left)
-				position.x -= velocity;
+			position.x -= velocity;
 
 			moving_left = true;
 			break;
 		case RUN_FORWARD:
 			current_animation = &run;
 			
-			if (can_move_right)
-				position.x += run_velocity;
+			position.x += run_velocity;
 			break;
 		case RUN_BACKWARD:
 			current_animation = &run;
 			
-			if (can_move_left)
-				position.x -= run_velocity;
+			position.x -= run_velocity;
 			break;
 		case JUMP:
 			current_animation = &jump;
@@ -251,8 +243,9 @@ bool j1Player::Update(float dt)
 			current_animation = &walk;
 
 			velocity = velocity - decrease_vel;
-			if (can_move_right)
-				position.x += velocity;
+			
+			position.x += velocity;
+
 			if (velocity <= 0) {
 				moving_right = false;
 				velocity = 2.0f;
@@ -264,7 +257,7 @@ bool j1Player::Update(float dt)
 
 			//not working
 			velocity = velocity - decrease_vel;
-			if (can_move_left)
+			
 			position.x -= velocity;
 			if (velocity <= 0)
 			{
@@ -307,24 +300,23 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		{
 		case COLLIDER_WALL:
 			position = lastPosition;
-
+			
 			if (position.y < c2->rect.y) //Player is above the ground
 			{
-				can_move_right = true;
-				can_move_left = true;
-				position.y -= 1.0f;
-				isGrounded = true;
+				position.y -= gravity;
 			}
 			if (position.x < c2->rect.x) //Player is at the left of a wall
 			{
 				position.x -= velocity;
-				position.y -= 1.0f;
+				if (position.y > c2->rect.y) //If player is grounded, we neutralize gravity force
+					position.y -= gravity;
 			}
-			if (position.x  >= (c2->rect.x + c2->rect.w - velocity*2.0f) && moving_left == true) //Player is at the right of a wall
+			if(position.x > c2->rect.x + c2->rect.w - 10) //Player is at the right of a wall
 			{
-				//position.x += velocity*2;
+				state = IDLE; //We avoid the dash
 				position.x += velocity;
-				position.y -= 1.0f;
+				if (position.y > c2->rect.y) //If player is grounded, we neutralize gravity force
+					position.y -= gravity;
 			}
 
 			break;
