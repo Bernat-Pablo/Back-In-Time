@@ -53,12 +53,12 @@ void j1Map::Draw()
 		int x = 0, y = 0;
 		for (int i = 0; i < layer->height; i++) {
 
-			for (int j = 0; j < layer->width && finish_printing==false; j++) {
+			for (int j = 0; j < layer->width && finish_printing == false; j++) {
 
 				int n = layer->Get(j, i);
-				if (layer->data[n] != 0) {
+				if (layer->data[n] != 0 && x>=App->player->position.x - node.attribute("value").as_int() * 16) {
 					if (lay->data->name == "Subterreno4 P" || lay->data->name == "Subterreno3 P") {
-						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]),0.9f);
+						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
 					}
 					else
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
