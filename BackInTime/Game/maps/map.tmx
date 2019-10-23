@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="350" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="133">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="350" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="135">
  <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16" tilecount="4816" columns="86">
   <image source="Basic_Tiles_Only.png" width="1376" height="896"/>
  </tileset>
@@ -7390,7 +7390,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="12"/>
    <tile/>
    <tile/>
    <tile/>
@@ -7740,7 +7740,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1153"/>
+   <tile gid="12"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8090,7 +8090,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1239"/>
+   <tile gid="12"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8440,7 +8440,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1325"/>
+   <tile gid="12"/>
    <tile/>
    <tile/>
    <tile/>
@@ -8790,8 +8790,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="12"/>
+   <tile gid="12"/>
    <tile/>
    <tile/>
    <tile/>
@@ -10507,7 +10507,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="8" name="Subterreno3 P" width="350" height="30" visible="0">
+ <layer id="8" name="Subterreno3 P" width="350" height="30">
   <data>
    <tile gid="3"/>
    <tile gid="4"/>
@@ -21011,7 +21011,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="9" name="Subterreno2" width="350" height="30" visible="0">
+ <layer id="9" name="Subterreno2" width="350" height="30">
   <data>
    <tile gid="173"/>
    <tile gid="173"/>
@@ -31515,7 +31515,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="6" name="SubTerreno1" width="350" height="30" visible="0">
+ <layer id="6" name="SubTerreno1" width="350" height="30">
   <data>
    <tile/>
    <tile/>
@@ -42019,7 +42019,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="1" name="Terreno" width="350" height="30" visible="0">
+ <layer id="1" name="Terreno" width="350" height="30">
   <data>
    <tile gid="1"/>
    <tile gid="1"/>
@@ -50807,8 +50807,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="94"/>
    <tile gid="1979"/>
-   <tile gid="1980"/>
    <tile gid="1980"/>
    <tile gid="1980"/>
    <tile gid="1980"/>
@@ -51157,8 +51157,8 @@
    <tile/>
    <tile gid="1979"/>
    <tile gid="1980"/>
+   <tile gid="1980"/>
    <tile gid="2070"/>
-   <tile gid="2244"/>
    <tile gid="2066"/>
    <tile gid="2066"/>
    <tile gid="2066"/>
@@ -52523,7 +52523,7 @@
    <tile gid="690"/>
   </data>
  </layer>
- <layer id="2" name="PreTerreno1" width="350" height="30" visible="0">
+ <layer id="2" name="PreTerreno1" width="350" height="30">
   <data>
    <tile/>
    <tile/>
@@ -63027,7 +63027,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="3" name="Preterreno2" width="350" height="30" visible="0">
+ <layer id="3" name="Preterreno2" width="350" height="30">
   <data>
    <tile/>
    <tile/>
@@ -73531,7 +73531,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="4" name="Preterreno3" width="350" height="30" visible="0">
+ <layer id="4" name="Preterreno3" width="350" height="30">
   <data>
    <tile/>
    <tile/>
@@ -94539,13 +94539,13 @@
    <tile/>
   </data>
  </layer>
- <objectgroup id="12" name="Colliders" visible="0">
+ <objectgroup id="12" name="Colliders">
   <object id="5" name="1" x="0" y="432.5" width="416" height="48.5"/>
   <object id="6" name="1" x="0" y="-1.5" width="12.1667" height="456"/>
-  <object id="8" name="1" x="319.5" y="416.091" width="49.6136" height="16.6591"/>
+  <object id="8" name="1" x="319.5" y="416.091" width="39.2803" height="16.6591"/>
   <object id="9" name="1" x="336" y="399.5" width="32.1818" height="17"/>
   <object id="10" name="1" x="368" y="383.5" width="31.9783" height="49.3597"/>
-  <object id="11" name="1" x="415.75" y="448" width="16.25" height="32.25"/>
+  <object id="11" name="1" x="415.75" y="448" width="16.25" height="17.9167"/>
   <object id="12" name="1" x="832" y="304.5" width="47" height="175"/>
   <object id="13" name="1" x="928" y="352" width="143.5" height="128.5"/>
   <object id="14" name="1" x="1104.5" y="335.5" width="47.5" height="32"/>
@@ -94565,11 +94565,10 @@
   <object id="29" name="1" x="3328" y="79.5" width="66" height="16.5"/>
   <object id="30" name="1" x="3359.5" y="64.5" width="33.5" height="15"/>
   <object id="31" name="1" x="2528" y="319" width="368.5" height="160.5"/>
-  <object id="32" name="1" x="576.5" y="400.5" width="255.5" height="79.5"/>
-  <object id="35" name="1" x="431.75" y="464.5" width="144.75" height="15.5"/>
-  <object id="36" name="1" x="480" y="447.75" width="96" height="17"/>
-  <object id="37" name="1" x="511.75" y="431.75" width="65" height="16.25"/>
-  <object id="38" name="1" x="544.25" y="416" width="32.75" height="15.5"/>
+  <object id="35" name="1" x="431.75" y="464.5" width="50.0833" height="15.5"/>
+  <object id="36" name="1" x="480" y="447.75" width="33.6667" height="17"/>
+  <object id="37" name="1" x="511.75" y="431.75" width="35.3333" height="16.25"/>
+  <object id="38" name="1" x="544.25" y="416" width="52.0833" height="15.5"/>
   <object id="39" name="1" x="1887.67" y="320" width="32.3333" height="160"/>
   <object id="40" name="1" x="1919.33" y="336" width="31.6667" height="144.333"/>
   <object id="41" name="1" x="1951" y="352.667" width="31.3333" height="129"/>
@@ -94652,5 +94651,6 @@
   <object id="126" name="4" x="4449" y="339" width="47" height="21"/>
   <object id="127" name="4" x="4511.33" y="339.667" width="49.5" height="20"/>
   <object id="132" name="1" x="3600.25" y="0.75" width="31.5" height="47"/>
+  <object id="134" name="1" x="592.542" y="400.333" width="239.75" height="15.5"/>
  </objectgroup>
 </map>

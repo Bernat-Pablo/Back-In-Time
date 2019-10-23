@@ -82,6 +82,9 @@ public:
 	bool moving_left = false;	
 	bool in_air = false;
 
+	bool collider_at_right = false; //player can't go to the right
+	bool collider_at_left = false;
+
 	bool godMode = false;
 
 	Collider* collider_player = nullptr;
