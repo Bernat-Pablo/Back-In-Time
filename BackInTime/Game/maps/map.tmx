@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="350" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="135">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="350" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="137">
  <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16" tilecount="4816" columns="86">
   <image source="Basic_Tiles_Only.png" width="1376" height="896"/>
  </tileset>
@@ -94540,13 +94540,11 @@
   </data>
  </layer>
  <objectgroup id="12" name="Colliders">
-  <object id="5" name="1" x="0" y="432.5" width="416" height="48.5"/>
-  <object id="6" name="1" x="0" y="-1.5" width="12.1667" height="456"/>
+  <object id="5" name="1" x="20.3333" y="432.5" width="395.667" height="48.5"/>
   <object id="8" name="1" x="319.5" y="416.091" width="39.2803" height="16.6591"/>
   <object id="9" name="1" x="336" y="399.5" width="32.1818" height="17"/>
   <object id="10" name="1" x="368" y="383.5" width="31.9783" height="49.3597"/>
   <object id="11" name="1" x="415.75" y="448" width="16.25" height="17.9167"/>
-  <object id="12" name="1" x="832" y="304.5" width="47" height="175"/>
   <object id="13" name="1" x="928" y="352" width="143.5" height="128.5"/>
   <object id="14" name="1" x="1104.5" y="335.5" width="47.5" height="32"/>
   <object id="15" name="1" x="1200.5" y="303.5" width="47" height="32"/>
@@ -94652,5 +94650,7 @@
   <object id="127" name="4" x="4511.33" y="339.667" width="49.5" height="20"/>
   <object id="132" name="1" x="3600.25" y="0.75" width="31.5" height="47"/>
   <object id="134" name="1" x="592.542" y="400.333" width="239.75" height="15.5"/>
+  <object id="135" name="1" x="0" y="335.333" width="20.3333" height="130.333"/>
+  <object id="136" name="1" x="832.667" y="304" width="47.3333" height="158.333"/>
  </objectgroup>
 </map>
