@@ -8,6 +8,7 @@
 #include "j1Animation.h"
 #include "p2Log.h"
 #include "j1Collision.h"
+#include "j1Map.h"
 
 j1Player::j1Player() : j1Module()
 {
@@ -56,10 +57,13 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	LOG("Loading Player Data");
 	bool ret = true;	
 	current_animation = &idle;
+	int camera_collider_w = 40+current_animation->GetCurrentRect().w*2;
+	int camera_collider_h = 5;
 	gravity = true;
 	position.x = initial_x;
 	position.y = initial_y;
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, (j1Module*)App->player); //a collider to start
+	camera_toRight = App->collision->AddCollider({ position.x + 50,position.y - 20,camera_collider_h,camera_collider_w }, COLLIDER_CAMERA, (j1Module*)App->player);
 	return ret;
 }
 bool j1Player::Start(){

@@ -84,6 +84,11 @@ public:
 
 	Collider* collider_player = nullptr;
 
+	Collider* camera_toRight = nullptr;
+	Collider* camera_toLeft = nullptr;
+	Collider* camera_toUp = nullptr;
+	Collider* camera_toDown = nullptr;
+
 };
 
 

@@ -149,7 +149,11 @@ void j1Collision::DebugDraw()
 			case COLLIDER_DOOR:
 				App->render->DrawQuad(colliders[i]->rect, 93, 109, 126, 150);
 				break;
+			case COLLIDER_CAMERA:
+				App->render->DrawQuad(colliders[i]->rect, 20, 109, 126, 150);
+				break;
 			}
+			
 		}
 	}	
 }
