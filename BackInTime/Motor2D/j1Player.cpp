@@ -175,8 +175,12 @@ bool j1Player::PreUpdate()
 		
 		break;
 	case RUN_FORWARD:
-		moving_right = true;
-		moving_left = false;
+		//Bug warning
+		//moving_right and moving_left is changed on Update() depending on colliders
+		//If that code is uncommented, player will go through near colliders using the dash, causing a bug
+		
+		//moving_right = true;
+		//moving_left = false;
 		jump_vel = 6.5f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
@@ -192,8 +196,12 @@ bool j1Player::PreUpdate()
 			state = JUMP_FORWARD;
 		break;
 	case RUN_BACKWARD:
-		moving_right = false;
-		moving_left = true;
+		//Bug warning
+		//moving_right and moving_left is changed on Update() depending on colliders
+		//If that code is uncommented, player will go through near colliders using the dash, causing a bug
+
+		//moving_right = false;
+		//moving_left = true;
 		jump_vel = 6.5f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
@@ -291,14 +299,27 @@ bool j1Player::Update(float dt)
 			current_animation = &run;
 			if (collider_at_right == false)
 			{
+				moving_right = true;
+				moving_left = false;
 				position.x += run_velocity;
+			}
+			else if (collider_at_right == true)
+			{
+				moving_left = false;
+				moving_right = false;
 			}
 			break;
 		case RUN_BACKWARD:
 			current_animation = &run;
 			if (collider_at_left == false)
 			{
+				moving_left = true;
+				moving_right = false;
 				position.x -= run_velocity;
+			}else if(collider_at_left == true)
+			{
+				moving_left = false;
+				moving_right = false;
 			}
 			break;
 		case JUMP:
@@ -367,6 +388,7 @@ bool j1Player::Update(float dt)
 			current_animation = &walk;
 
 			velocity -= decrease_vel;
+
 			if(collider_at_left == false)
 				position.x -= velocity;
 

@@ -94539,12 +94539,12 @@
    <tile/>
   </data>
  </layer>
- <objectgroup id="12" name="Colliders" visible="0">
+ <objectgroup id="12" name="Colliders">
   <object id="5" name="1" x="20.3333" y="432.5" width="395.667" height="48.5"/>
   <object id="8" name="1" x="319.5" y="416.091" width="39.2803" height="16.6591"/>
   <object id="9" name="1" x="336" y="399.5" width="32.1818" height="17"/>
   <object id="10" name="1" x="368" y="383.5" width="31.9783" height="49.3597"/>
-  <object id="11" name="1" x="415.75" y="448" width="16.25" height="17.9167"/>
+  <object id="11" name="1" x="415.75" y="448" width="16.25" height="22.2803"/>
   <object id="13" name="1" x="928" y="352" width="143.5" height="128.5"/>
   <object id="14" name="1" x="1104.5" y="335.5" width="47.5" height="32"/>
   <object id="15" name="1" x="1200.5" y="303.5" width="47" height="32"/>
@@ -94563,7 +94563,7 @@
   <object id="29" name="1" x="3328" y="79.5" width="66" height="16.5"/>
   <object id="30" name="1" x="3359.5" y="64.5" width="33.5" height="15"/>
   <object id="31" name="1" x="2528" y="319" width="368.5" height="160.5"/>
-  <object id="35" name="1" x="431.75" y="464.5" width="50.0833" height="15.5"/>
+  <object id="35" name="1" x="424.659" y="464.5" width="57.1742" height="15.5"/>
   <object id="36" name="1" x="480" y="447.75" width="33.6667" height="17"/>
   <object id="37" name="1" x="511.75" y="431.75" width="35.3333" height="16.25"/>
   <object id="38" name="1" x="544.25" y="416" width="52.0833" height="15.5"/>
