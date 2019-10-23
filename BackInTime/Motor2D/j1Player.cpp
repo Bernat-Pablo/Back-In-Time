@@ -31,12 +31,12 @@ j1Player::j1Player() : j1Module()
 	walk.PushBack({ 160,27,17,27 }, speed);	
 
 	//JUMP UP
-	speed = 0.2f;
+	speed = 0.1f;
 	jump_up.PushBack({ 0,58,17,26 }, speed);
 	jump_up.PushBack({ 30,60,20,24 }, speed);
 	jump_up.PushBack({ 61,60,22,24 }, speed);
 	jump_up.PushBack({ 96,55,17,29 }, speed);
-	jump_up.loop = false;
+	jump_up.loop = true;
 	
 	//JUMP DOWN
 	jump_down.PushBack({ 127,54,18,27 }, speed);
@@ -103,10 +103,13 @@ bool j1Player::PreUpdate()
 	switch (state)
 	{
 	case IDLE:
-		if (player_input.pressing_space) //fix
+		moving_right = false;
+		moving_left = false;
+		if (player_input.pressing_space && in_air==false) //fix
 		{
 			jump_vel = 6.5f; //magic numbers. change
 			state = JUMP;
+			in_air = true;
 		}
 		else if (player_input.pressing_D)
 		{
@@ -122,6 +125,8 @@ bool j1Player::PreUpdate()
 		break;
 	case WALK_FORWARD:
 		jump_vel = 6.5f; //magic numbers. change
+		moving_right = true;
+		moving_left = false;
 		if (!player_input.pressing_D && moving_right == true)
 		{
 			state = DASH_FORWARD;
@@ -130,7 +135,7 @@ bool j1Player::PreUpdate()
 		{
 			state = IDLE;
 		}
-		if (player_input.pressing_space)
+		if (player_input.pressing_space && in_air == false)
 		{
 			state = JUMP_FORWARD;
 		}
@@ -147,6 +152,8 @@ bool j1Player::PreUpdate()
 			
 		break;
 	case WALK_BACKWARD:
+		moving_right = false;
+		moving_left = true;
 		jump_vel = 6.5f; //magic numbers. change
 		if (!player_input.pressing_A && moving_left == true)
 		{
@@ -156,7 +163,7 @@ bool j1Player::PreUpdate()
 		{
 			state = IDLE;
 		}
-		if (player_input.pressing_space)
+		if (player_input.pressing_space && in_air == false)
 		{
 			state = JUMP_BACKWARD;
 		}
@@ -166,7 +173,8 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case RUN_FORWARD:
-
+		moving_right = true;
+		moving_left = false;
 		jump_vel = 6.5f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
@@ -184,7 +192,8 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case RUN_BACKWARD:
-
+		moving_right = false;
+		moving_left = true;
 		jump_vel = 6.5f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
@@ -202,32 +211,31 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case JUMP:
-		if (in_air == false){
-			if (player_input.pressing_D) {
-				state = JUMP_FORWARD;
-			}
-			else if (player_input.pressing_A) {
-				state = JUMP_BACKWARD;
-			}
-			else if (current_animation->Finished())
-			{
-				state = IDLE;
-				jump_up.Reset();
-			}
+		if (player_input.pressing_D) {
+			state = JUMP_FORWARD;
 		}
+		else if (player_input.pressing_A) {
+			state = JUMP_BACKWARD;
+		}
+		
 		break;
 	case JUMP_FORWARD:
-
+		moving_right = true;
+		moving_left = false;
 		if (!player_input.pressing_D) {
 			state = JUMP;
 		}
 		break;
 	case JUMP_BACKWARD:
+		moving_right = false;
+		moving_left = true;
 		if (!player_input.pressing_A) {
 			state = JUMP;
 		}
 		break;
 	case DASH_FORWARD:
+		moving_right = false;
+		moving_left = false;
 		if (player_input.pressing_A) {
 			state = WALK_BACKWARD;
 			velocity = 2.0f;
@@ -237,6 +245,8 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case DASH_BACKWARD:
+		moving_right = false;
+		moving_left = false;
 		if (player_input.pressing_D) {
 			state = WALK_FORWARD;
 			velocity = 2.0f;
@@ -299,35 +309,52 @@ bool j1Player::Update(float dt)
 			}
 			break;
 		case JUMP:
-			current_animation = &jump_up;
-			in_air = true;
-			if (jump_vel >= 0) {
+			if (jump_vel > 0) {
+				current_animation = &jump_up;
 				jump_vel -= decrease_vel;
 				position.y -= jump_vel;
 			}
-			else current_animation = &jump_down;
+			else {
+				current_animation = &jump_down;
+				if (in_air == false) {
+					state = IDLE;
+				}
+			}
 			break;
 		case JUMP_FORWARD:
 			current_animation = &jump_up;
-			in_air = true;
 			if (jump_vel >= 0) {
+				in_air = true;
 				jump_vel -= decrease_vel;
 				position.y -= jump_vel;
-				if(collider_at_right == false)
-					position.x += velocity;
 			}
-			else current_animation = &jump_down;
+			else {
+				current_animation = &jump_down;
+				if (in_air == false) {
+					state = WALK_FORWARD;
+					moving_right = true;
+				}
+			}
+			if (collider_at_right == false)
+				position.x += velocity;
+
 			break;
 		case JUMP_BACKWARD:
 			current_animation = &jump_up;
-			in_air = true;
 			if (jump_vel >= 0) {
+				in_air = true;
 				jump_vel -= decrease_vel;
 				position.y -= jump_vel;
-				if(collider_at_left == false)
-					position.x -= velocity;
 			}
-			else current_animation = &jump_down;
+			else {
+				current_animation = &jump_down;
+				if (in_air == false) {
+					state = WALK_BACKWARD;
+					moving_left = true;
+				}
+			}
+			if (collider_at_right == false)
+				position.x -= velocity;
 			break;
 		case DASH_FORWARD:
 			current_animation = &walk;
@@ -393,11 +420,14 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		switch (c2->type)
 		{
 		case COLLIDER_WALL:			
-			if (position.y < c2->rect.y ) //Player is above the ground
+			if (position.y <
+				c2->rect.y ) //Player is above the ground
 			{
 				gravity = 0;
 				position.y -= fall_velocity;
 				in_air = false;
+				jump_down.Reset();
+				jump_up.Reset();
 			}
 			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 			{
@@ -420,6 +450,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			}
 			else
 				collider_at_left = false;
+
+
 
 			break;
 		default:

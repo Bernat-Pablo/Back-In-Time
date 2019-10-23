@@ -34147,12 +34147,12 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="2543"/>
    <tile gid="2544"/>
    <tile gid="2545"/>
    <tile gid="2546"/>
-   <tile gid="1842"/>
+   <tile gid="3"/>
+   <tile gid="3"/>
    <tile gid="1843"/>
    <tile gid="1844"/>
    <tile gid="1845"/>
@@ -34497,11 +34497,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="2629"/>
    <tile gid="2630"/>
    <tile gid="2631"/>
    <tile gid="2632"/>
+   <tile gid="3"/>
    <tile gid="1928"/>
    <tile gid="1929"/>
    <tile gid="1930"/>
@@ -34847,11 +34847,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="2715"/>
    <tile gid="2716"/>
    <tile gid="2717"/>
    <tile gid="2718"/>
+   <tile gid="2013"/>
    <tile gid="2014"/>
    <tile gid="2015"/>
    <tile gid="2016"/>
@@ -35197,11 +35197,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="2801"/>
    <tile gid="2802"/>
    <tile gid="2803"/>
    <tile gid="2804"/>
+   <tile gid="2099"/>
    <tile gid="2100"/>
    <tile gid="2101"/>
    <tile gid="2102"/>
@@ -35547,11 +35547,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="2887"/>
    <tile gid="2888"/>
    <tile gid="2889"/>
    <tile gid="2890"/>
+   <tile gid="2185"/>
    <tile gid="2186"/>
    <tile gid="2187"/>
    <tile gid="2188"/>
@@ -35897,11 +35897,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="2973"/>
    <tile gid="2974"/>
    <tile gid="2975"/>
    <tile gid="2976"/>
+   <tile gid="2271"/>
    <tile gid="2272"/>
    <tile gid="2273"/>
    <tile gid="2274"/>
@@ -36247,10 +36247,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
    <tile gid="3059"/>
    <tile gid="3060"/>
    <tile gid="3061"/>
+   <tile gid="3062"/>
    <tile gid="3062"/>
    <tile gid="2358"/>
    <tile gid="2359"/>
@@ -94539,7 +94539,7 @@
    <tile/>
   </data>
  </layer>
- <objectgroup id="12" name="Colliders">
+ <objectgroup id="12" name="Colliders" visible="0">
   <object id="5" name="1" x="20.3333" y="432.5" width="395.667" height="48.5"/>
   <object id="8" name="1" x="319.5" y="416.091" width="39.2803" height="16.6591"/>
   <object id="9" name="1" x="336" y="399.5" width="32.1818" height="17"/>
