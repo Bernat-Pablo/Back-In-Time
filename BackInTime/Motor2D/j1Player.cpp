@@ -56,7 +56,6 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	LOG("Loading Player Data");
 	bool ret = true;	
 	current_animation = &idle;
-	gravity = true;
 	position.x = initial_x;
 	position.y = initial_y;
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, (j1Module*)App->player); //a collider to start
@@ -76,7 +75,7 @@ bool j1Player::PreUpdate()
 		if (godMode == true)
 		{
 			godMode = false;
-			gravity = true;
+			position.y -= gravity;
 		}			
 		else if (godMode == false)
 			godMode = true;
@@ -92,9 +91,9 @@ bool j1Player::PreUpdate()
 	switch(state)
 	{
 	case IDLE:
-		if (player_input.pressing_space&&in_air==false) //fix
+		if (player_input.pressing_space && in_air==false ) //fix
 		{
-			jump_vel = 5.0f; //magic numbers. change
+			jump_vel = 8.0f; //magic numbers. change
 			state = JUMP;
 		}
 		else if (player_input.pressing_D)
@@ -108,7 +107,7 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case WALK_FORWARD:
-		jump_vel = 5.0f; //magic numbers. change
+		jump_vel = 8.0f; //magic numbers. change
 		if (!player_input.pressing_D && moving_right == true)
 		{
 			state = DASH_FORWARD;
@@ -123,7 +122,7 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case WALK_BACKWARD:
-		jump_vel = 5.0f; //magic numbers. change
+		jump_vel = 8.0f; //magic numbers. change
 		if (!player_input.pressing_A && moving_left == true)
 		{
 			state = DASH_BACKWARD;
@@ -138,7 +137,7 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case RUN_FORWARD:
-		jump_vel = 5.0f; //magic numbers. change
+		jump_vel = 8.0f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_D)
@@ -155,7 +154,7 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case RUN_BACKWARD:
-		jump_vel = 5.0f; //magic numbers. change
+		jump_vel = 8.0f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_A)
@@ -186,12 +185,12 @@ bool j1Player::PreUpdate()
 		break;
 	case JUMP_FORWARD:
 		if (!player_input.pressing_D) {
-			state = JUMP;
+			//state = JUMP;
 		}
 		break;
 	case JUMP_BACKWARD:
 		if (!player_input.pressing_A) {
-			state = JUMP;
+			//state = JUMP;
 		}
 		break;
 	case DASH_FORWARD:
@@ -345,15 +344,18 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		case COLLIDER_WALL:
 			position = lastPosition;
 			
-			if (position.y < c2->rect.y && position.x > c2->rect.x && position.x < c2->rect.x + c2->rect.w) //Player is above the ground
+			if (position.y < c2->rect.y ) //Player is above the ground
 			{
-				position.y -= gravity;
+				position.y -= gravity;				
 			}
 			if (position.x < c2->rect.x) //Player is at the left of a wall
 			{
-				state = IDLE; //We avoid the dash
-				position.x -= velocity;
-				position.y -= gravity;
+				if(position.y < c2->rect.y) //
+				{
+					state = IDLE; //We avoid the dash
+					position.x -= velocity;
+					position.y -= gravity;
+				}				
 			}
 			if(position.x > c2->rect.x + c2->rect.w - 10) //Player is at the right of a wall
 			{
