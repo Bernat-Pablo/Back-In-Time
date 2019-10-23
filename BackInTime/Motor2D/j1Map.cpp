@@ -7,6 +7,7 @@
 #include "j1Collision.h"
 #include "j1Window.h"
 #include <math.h>
+#include "j1Player.h"
 
 
 
@@ -30,7 +31,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	pugi::xml_parse_result result = config_file.load_file("config.xml");
 	if (result == NULL)
 	{
-		LOG("Could not load map xml file %s. pugi error: %s", config_file, result.description());
+		LOG("Could not load map xml file %s. pugi error: %s", result, result.description());
 		ret = false;
 	}
 
@@ -63,7 +64,9 @@ void j1Map::Draw()
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
 				}
 				x += data.tile_width;
-				//if(x>=) .attribute("value").as_int();
+				if (x >= node.attribute("value").as_int() * 16 + App->player->position.x) {
+					j = layer->width;
+				}
 			}
 			x = 0;
 			y += data.tile_height;

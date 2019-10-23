@@ -17,8 +17,7 @@ struct MapLayer
 	float		y;
 	uint*		data;
 
-	MapLayer() : data(NULL)
-	{}
+	MapLayer() : data(NULL){}
 
 	~MapLayer()
 	{
