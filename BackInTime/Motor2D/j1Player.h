@@ -53,7 +53,8 @@ public:
 	Animation run;
 	Animation death;
 	Animation throw_rock;
-	Animation jump;
+	Animation jump_up;
+	Animation jump_down;
 	Animation hurt;
 	Animation* current_animation;
 
