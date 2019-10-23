@@ -62,13 +62,13 @@ public:
 	SDL_Texture* spritesheet_pj = nullptr;
 
 public:
-	Player_States state;
+	Player_States state; //Current player state
 	Player_Input player_input; //Input introduced by the player
-	int health = 3;
+	int lives = 3;
 
 
 	float initial_x = 32.0f; // 2 blocks * 16 each one
-	float initial_y = 400.0f; // 27 blocks * 16 each one - height pj	
+	float initial_y = 400.0f; // 25 blocks * 16 each one - height pj	
 	iPoint position; //Use position.x and position.y
 	iPoint old_position;
 
