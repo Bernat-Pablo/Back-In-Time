@@ -114,14 +114,13 @@ bool j1Player::PreUpdate()
 		else if (player_input.pressing_D)
 		{
 			if (collider_at_right == false)
-			state = WALK_FORWARD;
+				state = WALK_FORWARD;
 		}
 		else if (player_input.pressing_A)
 		{
-			if (collider_at_left == false)
-			{				
+			if (collider_at_left == false)						
 				state = WALK_BACKWARD;
-			}
+			
 		}
 		break;
 	case WALK_FORWARD:		
@@ -133,26 +132,23 @@ bool j1Player::PreUpdate()
 		//moving_left = false;
 		jump_vel = 6.5f; //magic numbers. change
 
-		if (!player_input.pressing_D && moving_right == true)
-		{
+		if (!player_input.pressing_D && moving_right == true)		
 			state = DASH_FORWARD;
-		}
-		if (!player_input.pressing_D && moving_right == false)
-		{
+		
+		if (!player_input.pressing_D && moving_right == false)		
 			state = IDLE;
-		}
-		if (player_input.pressing_space && in_air == false)
-		{
+		
+		if (player_input.pressing_space && in_air == false)		
 			state = JUMP_FORWARD;
-		}
-		if (player_input.pressing_lshift)
-		{
+		
+		if (player_input.pressing_lshift)		
 			state = RUN_FORWARD;
-		}
+		
 		if (player_input.pressing_A)
 		{
 			if (collider_at_right)
 				position.x -= velocity;
+
 			state = WALK_BACKWARD;
 		}
 			
@@ -165,22 +161,18 @@ bool j1Player::PreUpdate()
 		//moving_right = false; 
 		//moving_left = true;
 		jump_vel = 6.5f; //magic numbers. change
-		if (!player_input.pressing_A && moving_left == true)
-		{
+		if (!player_input.pressing_A && moving_left == true)		
 			state = DASH_BACKWARD;
-		}
-		if (!player_input.pressing_A && moving_left == false)
-		{
+		
+		if (!player_input.pressing_A && moving_left == false)		
 			state = IDLE;
-		}
-		if (player_input.pressing_space && in_air == false)
-		{
+		
+		if (player_input.pressing_space && in_air == false)		
 			state = JUMP_BACKWARD;
-		}
-		if (player_input.pressing_lshift)
-		{
+		
+		if (player_input.pressing_lshift)		
 			state = RUN_BACKWARD;
-		}
+		
 		break;
 	case RUN_FORWARD:
 		moving_right = true;
@@ -189,17 +181,15 @@ bool j1Player::PreUpdate()
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_D)
-			{
-				state = WALK_FORWARD;
-			}
-			else
-			{
-				state = DASH_FORWARD;
-			}
+				state = WALK_FORWARD;			
+			else			
+				state = DASH_FORWARD;			
 		}
-		else if (player_input.pressing_A && player_input.pressing_lshift) {
-			state = RUN_BACKWARD;
-		}
+		else if (player_input.pressing_A && player_input.pressing_lshift) 
+			state = RUN_BACKWARD;	
+
+		if (player_input.pressing_space)
+			state = JUMP_FORWARD;
 		break;
 	case RUN_BACKWARD:
 		moving_right = false;
@@ -207,41 +197,35 @@ bool j1Player::PreUpdate()
 		jump_vel = 6.5f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
-			if (player_input.pressing_A)
-			{
-				state = WALK_BACKWARD;
-			}
-			else
-			{
-				state = DASH_BACKWARD;
-			}
+			if (player_input.pressing_A)			
+				state = WALK_BACKWARD;			
+			else			
+				state = DASH_BACKWARD;			
 		}
-		else if (player_input.pressing_D && player_input.pressing_lshift) {
+		else if (player_input.pressing_D && player_input.pressing_lshift) 
 			state = RUN_FORWARD;
-		}
+		
+		if (player_input.pressing_space)
+			state = JUMP_BACKWARD;
 		break;
 	case JUMP:
-		if (player_input.pressing_D) {
-			state = JUMP_FORWARD;
-		}
-		else if (player_input.pressing_A) {
-			state = JUMP_BACKWARD;
-		}
+		if (player_input.pressing_D) 
+			state = JUMP_FORWARD;		
+		else if (player_input.pressing_A) 
+			state = JUMP_BACKWARD;		
 		
 		break;
 	case JUMP_FORWARD:
 		moving_right = true;
 		moving_left = false;
-		if (!player_input.pressing_D) {
-			state = JUMP;
-		}
+		if (!player_input.pressing_D) 
+			state = JUMP;		
 		break;
 	case JUMP_BACKWARD:
 		moving_right = false;
 		moving_left = true;
-		if (!player_input.pressing_A) {
-			state = JUMP;
-		}
+		if (!player_input.pressing_A) 
+			state = JUMP;		
 		break;
 	case DASH_FORWARD:
 		moving_right = false;
@@ -249,9 +233,8 @@ bool j1Player::PreUpdate()
 		if (player_input.pressing_A) {
 			state = WALK_BACKWARD;
 			velocity = 2.0f;
-			if (player_input.pressing_lshift) {
-				state = RUN_BACKWARD;
-			}
+			if (player_input.pressing_lshift) 
+				state = RUN_BACKWARD;			
 		}
 		break;
 	case DASH_BACKWARD:
@@ -260,9 +243,8 @@ bool j1Player::PreUpdate()
 		if (player_input.pressing_D) {
 			state = WALK_FORWARD;
 			velocity = 2.0f;
-			if (player_input.pressing_lshift) {
-				state = RUN_FORWARD;
-			}
+			if (player_input.pressing_lshift) 
+				state = RUN_FORWARD;			
 		}
 		break;
 	}
