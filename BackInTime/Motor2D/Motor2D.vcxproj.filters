@@ -85,6 +85,7 @@
     <ClInclude Include="j1Player.h">
       <Filter>Characters</Filter>
     </ClInclude>
+    <ClInclude Include="MemoryLeaks.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">
