@@ -48,7 +48,11 @@ void j1Map::Draw()
 
 				int n = layer->Get(j, i);
 				if (layer->data[n] != 0) {
-					App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
+					if (lay->data->name == "Subterreno4 P" || lay->data->name == "Subterreno3 P") {
+						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]),0.9f);
+					}
+					else
+						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
 				}
 				x += data.tile_width;
 			}
