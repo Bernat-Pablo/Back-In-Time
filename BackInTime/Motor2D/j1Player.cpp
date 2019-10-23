@@ -113,20 +113,26 @@ bool j1Player::PreUpdate()
 		}
 		else if (player_input.pressing_D)
 		{
+			if (collider_at_right == false)
 			state = WALK_FORWARD;
-
 		}
 		else if (player_input.pressing_A)
 		{
-			if (collider_at_right)
-				position.x -= velocity;
-			state = WALK_BACKWARD;
+			if (collider_at_left == false)
+			{				
+				state = WALK_BACKWARD;
+			}
 		}
 		break;
-	case WALK_FORWARD:
+	case WALK_FORWARD:		
+		//Bug warning
+		//moving_right and moving_left is changed on Update() depending on colliders
+		//If that code is uncommented, player will go through near colliders using the dash, causing a bug
+		
+		//moving_right = true;
+		//moving_left = false;
 		jump_vel = 6.5f; //magic numbers. change
-		moving_right = true;
-		moving_left = false;
+
 		if (!player_input.pressing_D && moving_right == true)
 		{
 			state = DASH_FORWARD;
@@ -152,8 +158,12 @@ bool j1Player::PreUpdate()
 			
 		break;
 	case WALK_BACKWARD:
-		moving_right = false;
-		moving_left = true;
+		//Bug warning
+		//moving_right and moving_left is changed on Update() depending on colliders
+		//If that code is uncommented, player will go through near colliders using the dash, causing a bug
+
+		//moving_right = false; 
+		//moving_left = true;
 		jump_vel = 6.5f; //magic numbers. change
 		if (!player_input.pressing_A && moving_left == true)
 		{
@@ -246,7 +256,7 @@ bool j1Player::PreUpdate()
 		break;
 	case DASH_BACKWARD:
 		moving_right = false;
-		moving_left = false;
+		moving_left = true;
 		if (player_input.pressing_D) {
 			state = WALK_FORWARD;
 			velocity = 2.0f;
@@ -268,7 +278,8 @@ bool j1Player::Update(float dt)
 	switch(state)
 	{
 		case IDLE:
-			current_animation = &idle;
+			current_animation = &idle;			
+
 			break;
 		case WALK_FORWARD:
 			current_animation = &walk;
@@ -285,7 +296,7 @@ bool j1Player::Update(float dt)
 		case WALK_BACKWARD:
 			current_animation = &walk;
 
-			if (collider_at_left == false)
+			if (collider_at_left == false || collider_at_right == true)
 			{
 				position.x -= velocity;
 				moving_left = true;
@@ -353,7 +364,7 @@ bool j1Player::Update(float dt)
 					moving_left = true;
 				}
 			}
-			if (collider_at_right == false)
+			if (collider_at_left == false)
 				position.x -= velocity;
 			break;
 		case DASH_FORWARD:
