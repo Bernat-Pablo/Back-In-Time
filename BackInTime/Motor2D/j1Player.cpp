@@ -203,12 +203,12 @@ bool j1Player::PreUpdate()
 		break;
 	case JUMP_FORWARD:
 		if (!player_input.pressing_D) {
-			//state = JUMP;
+			state = JUMP;
 		}
 		break;
 	case JUMP_BACKWARD:
 		if (!player_input.pressing_A) {
-			//state = JUMP;
+			state = JUMP;
 		}
 		break;
 	case DASH_FORWARD:
@@ -233,8 +233,6 @@ bool j1Player::PreUpdate()
 
 	//Change player collider position
 	collider_player->SetPos(position.x, position.y);
-
-	lastPosition = position;
 
 	return true;
 }
@@ -302,7 +300,8 @@ bool j1Player::Update(float dt)
 			if (jump_vel >= 0) {
 				jump_vel -= decrease_vel;
 				position.y -= jump_vel;
-				position.x += velocity;
+				if(collider_at_right == false)
+					position.x += velocity;
 			}
 			else state = IDLE;
 			break;
@@ -312,7 +311,8 @@ bool j1Player::Update(float dt)
 			if (jump_vel >= 0) {
 				jump_vel -= decrease_vel;
 				position.y -= jump_vel;
-				position.x -= velocity;
+				if(collider_at_left == false)
+					position.x -= velocity;
 			}
 			else state = IDLE;
 			break;
@@ -321,7 +321,8 @@ bool j1Player::Update(float dt)
 
 			velocity -= decrease_vel;
 			
-			position.x += velocity;
+			if(collider_at_right == false)
+				position.x += velocity;
 
 			if (velocity <= 0) {
 				moving_right = false;
@@ -333,7 +334,9 @@ bool j1Player::Update(float dt)
 			current_animation = &walk;
 
 			velocity -= decrease_vel;
-			position.x -= velocity;
+			if(collider_at_left == false)
+				position.x -= velocity;
+
 			if (velocity <= 0)
 			{
 				moving_left = false;
@@ -376,9 +379,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	{
 		switch (c2->type)
 		{
-		case COLLIDER_WALL:
-			position = lastPosition;
-			
+		case COLLIDER_WALL:			
 			if (position.y < c2->rect.y ) //Player is above the ground
 			{
 				gravity = 0;
@@ -388,13 +389,20 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			{
 				if(position.y + 0.7f*collider_player->rect.h > c2->rect.y) //There is a wall
 					collider_at_right = true;
+				else
+					collider_at_right = false;
 			}
 			else
 				collider_at_right = false;
 			
-			if(position.x < c2->rect.x && c2->rect.y < position.y - 20) //Player is at the right of a wall
+			if(position.x < c2->rect.x + c2->rect.w && (state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD)) //Player is at the right of a wall
 			{
-				collider_at_left = true;
+				if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
+				{
+					collider_at_left = true;
+				}					
+				else
+					collider_at_left = false;
 			}
 			else
 				collider_at_left = false;

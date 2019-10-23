@@ -68,7 +68,6 @@ public:
 	float initial_x = 32.0f; // 2 blocks * 16 each one
 	float initial_y = 400.0f; // 27 blocks * 16 each one - height pj	
 	iPoint position; //Use position.x and position.y
-	iPoint lastPosition; 
 
 	float decrease_vel = 0.2f;
 	float velocity = 2.0f;
