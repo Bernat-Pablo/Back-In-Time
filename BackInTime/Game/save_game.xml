@@ -1,9 +1,20 @@
 <!-- Save game for the game -->
 
 <game_state>
-
+  <textures></textures>
+  <audio></audio>
+  <window></window>
+  
   <renderer>
     <camera x="100" y="0"/>
   </renderer>
+  
+  <player>
+    <position x="32", y="400"/>
+    <state state = "IDLE" />
+    <lives lives="3"/>
+  </player>
+  
+  <map map ="1"/>
 
 </game_state>
