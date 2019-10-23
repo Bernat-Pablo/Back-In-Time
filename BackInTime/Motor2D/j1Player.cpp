@@ -57,13 +57,13 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	LOG("Loading Player Data");
 	bool ret = true;	
 	current_animation = &idle;
-	int camera_collider_w = 40+current_animation->GetCurrentRect().w*2;
-	int camera_collider_h = 5;
+	int camera_collider_h = 80;
+	int camera_collider_w = 5;
 	gravity = true;
 	position.x = initial_x;
 	position.y = initial_y;
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, (j1Module*)App->player); //a collider to start
-	camera_toRight = App->collision->AddCollider({ position.x + 50,position.y - 20,camera_collider_h,camera_collider_w }, COLLIDER_CAMERA, (j1Module*)App->player);
+	camera_toRight = App->collision->AddCollider({ position.x + 50,position.y - 30,camera_collider_w,camera_collider_h }, COLLIDER_CAMERA, (j1Module*)App->player); 
 	return ret;
 }
 bool j1Player::Start(){
@@ -98,7 +98,7 @@ bool j1Player::PreUpdate()
 	case IDLE:
 		if (player_input.pressing_space && in_air==false ) //fix
 		{
-			jump_vel = 8.0f; //magic numbers. change
+			jump_vel = 5.0f; //magic numbers. change
 			state = JUMP;
 		}
 		else if (player_input.pressing_D)
@@ -112,7 +112,7 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case WALK_FORWARD:
-		jump_vel = 8.0f; //magic numbers. change
+		jump_vel = 4.0f; //magic numbers. change
 		if (!player_input.pressing_D && moving_right == true)
 		{
 			state = DASH_FORWARD;
@@ -127,7 +127,7 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case WALK_BACKWARD:
-		jump_vel = 8.0f; //magic numbers. change
+		jump_vel = 6.0f; //magic numbers. change
 		if (!player_input.pressing_A && moving_left == true)
 		{
 			state = DASH_BACKWARD;
@@ -142,7 +142,7 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case RUN_FORWARD:
-		jump_vel = 8.0f; //magic numbers. change
+		jump_vel = 6.0f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_D)
@@ -159,7 +159,7 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case RUN_BACKWARD:
-		jump_vel = 8.0f; //magic numbers. change
+		jump_vel = 6.0f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_A)

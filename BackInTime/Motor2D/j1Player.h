@@ -73,8 +73,8 @@ public:
 	float decrease_vel = 0.2f;
 	float velocity = 2.0f;
 	float run_velocity = 2.5f;
-	float gravity = 3.0f;
-	float jump_vel = 8.0f;
+	float gravity = 10.0f;
+	float jump_vel = 5.0f;
 
 	bool moving_right = false; //for slide
 	bool moving_left = false;	
