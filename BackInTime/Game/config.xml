@@ -24,6 +24,7 @@
 
   <map>
     <folder>maps/</folder>
+    <finish_printing value="20"></finish_printing>
   </map>
 
   <scene>

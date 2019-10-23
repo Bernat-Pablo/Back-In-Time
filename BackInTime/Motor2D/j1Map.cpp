@@ -27,6 +27,13 @@ bool j1Map::Awake(pugi::xml_node& config)
 	App->collision->AddCollider({ 0,0,1,1000 }, COLLIDER_WALL);
 	folder.create(config.child("folder").child_value());
 
+	pugi::xml_parse_result result = config_file.load_file("config.xml");
+	if (result == NULL)
+	{
+		LOG("Could not load map xml file %s. pugi error: %s", config_file, result.description());
+		ret = false;
+	}
+
 	return ret;
 }
 
@@ -38,13 +45,14 @@ void j1Map::Draw()
 	lay = data.layers.start;
 	MapLayer* layer = lay->data;
 	TileSet* tileset = data.tilesets.start->data;
-
+	pugi::xml_node node = config_file.child("config").child("map").child("finish_printing");
 
 	for (int l = 0; l < data.layers.count(); l++) {
+		finish_printing = false;
 		int x = 0, y = 0;
 		for (int i = 0; i < layer->height; i++) {
 
-			for (int j = 0; j < layer->width; j++) {
+			for (int j = 0; j < layer->width && finish_printing==false; j++) {
 
 				int n = layer->Get(j, i);
 				if (layer->data[n] != 0) {
@@ -55,6 +63,7 @@ void j1Map::Draw()
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
 				}
 				x += data.tile_width;
+				//if(x>=) .attribute("value").as_int();
 			}
 			x = 0;
 			y += data.tile_height;

@@ -117,8 +117,10 @@ public:
 private:
 
 	pugi::xml_document	map_file;
+	pugi::xml_document	config_file;
 	p2SString			folder;
 	bool				map_loaded;
+	bool				finish_printing;
 
 	p2List_item<MapLayer*>* lay = nullptr;
 };
