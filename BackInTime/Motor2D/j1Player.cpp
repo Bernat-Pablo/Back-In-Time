@@ -75,6 +75,7 @@ bool j1Player::Start(){
 
 bool j1Player::PreUpdate() 
 {
+	//God Mode
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
 		if (godMode == true)
@@ -88,7 +89,7 @@ bool j1Player::PreUpdate()
 			collider_at_right = false;
 		}			
 	}
-	
+		
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
 	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
@@ -111,6 +112,8 @@ bool j1Player::PreUpdate()
 		}
 		else if (player_input.pressing_A)
 		{
+			if (collider_at_right)
+				position.x -= velocity;
 			state = WALK_BACKWARD;
 		}
 		break;
@@ -120,7 +123,7 @@ bool j1Player::PreUpdate()
 		{
 			state = DASH_FORWARD;
 		}
-		else if (!player_input.pressing_D)
+		if (!player_input.pressing_D && moving_right == false)
 		{
 			state = IDLE;
 		}
@@ -132,6 +135,13 @@ bool j1Player::PreUpdate()
 		{
 			state = RUN_FORWARD;
 		}
+		if (player_input.pressing_A)
+		{
+			if (collider_at_right)
+				position.x -= velocity;
+			state = WALK_BACKWARD;
+		}
+			
 		break;
 	case WALK_BACKWARD:
 		jump_vel = 6.5f; //magic numbers. change
@@ -139,7 +149,7 @@ bool j1Player::PreUpdate()
 		{
 			state = DASH_BACKWARD;
 		}
-		else if (!player_input.pressing_A)
+		if (!player_input.pressing_A && moving_left == false)
 		{
 			state = IDLE;
 		}
