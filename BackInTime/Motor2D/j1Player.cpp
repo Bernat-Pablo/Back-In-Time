@@ -567,6 +567,19 @@ void j1Player::SetCameraToInitialCoords()
 }
 
 
-void j1Player::gravityReset() {
-	gravity = 0.1;
+bool j1Player::Save(pugi::xml_node& data) const {
+
+	pugi::xml_node p_position = data.append_child("position");
+
+	p_position.append_attribute("x") = position.x;
+	p_position.append_attribute("y") = position.y;
+	return true;
+}
+
+bool j1Player::Load(pugi::xml_node& data)
+{
+	position.x = data.child("position").attribute("x").as_int();
+	position.y = data.child("position").attribute("y").as_int();
+
+	return true;
 }
