@@ -9,6 +9,7 @@
 #include "p2Log.h"
 #include "j1Collision.h"
 #include "j1Map.h"
+#include "j1Fade.h"
 
 j1Player::j1Player() : j1Module()
 {
@@ -98,8 +99,6 @@ bool j1Player::PreUpdate()
 			collider_at_right = false;
 		}			
 	}
-	if(in_air)
-		gravityReset();
 
 
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
