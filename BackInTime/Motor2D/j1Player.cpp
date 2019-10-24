@@ -60,6 +60,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	LOG("Loading Player Data");
 	bool ret = true;	
 	current_animation = &idle;
+	App->audio->LoadFx("audio/fx/jump.wav");
+	App->audio->LoadFx("audio/fx/walk.wav");
 	int camera_collider_h = 80;
 	int camera_collider_w = 5;
 	gravity = true;
@@ -92,7 +94,9 @@ bool j1Player::PreUpdate()
 			collider_at_right = false;
 		}			
 	}
-		
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air==false)	App->audio->PlayFx(1, 0);
+	if(moving_left || moving_right)	App->audio->PlayFx(2);
+
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
 	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
@@ -324,6 +328,7 @@ bool j1Player::Update(float dt)
 			break;
 		case JUMP:
 			if (jump_vel > 0) {
+				in_air = true;
 				current_animation = &jump_up;
 				jump_vel -= decrease_vel;
 				position.y -= jump_vel;

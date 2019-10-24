@@ -33,6 +33,9 @@ public:
 	bool CleanUp();
 
 	float fade_time;
+
+
+
 private:
 };
 

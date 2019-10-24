@@ -31,6 +31,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	App->map->Load("maps/map.tmx");
+	App->audio->PlayMusic("audio/music/music_sadpiano.ogg");
 	//App->map->Load("iso.tmx");
 	
 	return true;
