@@ -420,7 +420,10 @@ bool j1Player::Update(float dt)
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	App->render->Blit(spritesheet_pj, position.x, position.y, &r);
+	if(moving_left)
+		App->render->Blit(spritesheet_pj, position.x, position.y, &r,1,2);
+	else
+		App->render->Blit(spritesheet_pj, position.x, position.y, &r);
 
 
 	return true;

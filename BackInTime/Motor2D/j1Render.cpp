@@ -123,8 +123,9 @@ void j1Render::ResetViewPort()
 }
 
 // Blit to screen
-bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivot_x, int pivot_y) const
+bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, int FacingPosition, double angle, int pivot_x, int pivot_y) const
 {
+	SDL_RendererFlip facingPos;
 	bool ret = true;
 	uint scale = App->win->GetScale();
 
@@ -154,14 +155,25 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 		pivot.y = pivot_y;
 		p = &pivot;
 	}
-
-	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	switch (FacingPosition)
 	{
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
-		ret = false;
+	case 1:
+		//Looking to right
+		facingPos = SDL_FLIP_NONE;
+		break;
+	case 2:
+		//Looking to left, player2 does NOt rotate over pivot, needs to be fixed
+		facingPos = SDL_FLIP_HORIZONTAL;
+		break;
 	}
 
-	return ret;
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, 0, NULL, facingPos))
+	{
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		return false;
+	}
+
+	return true;
 }
 
 bool j1Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
