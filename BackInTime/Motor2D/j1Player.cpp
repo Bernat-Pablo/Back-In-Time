@@ -98,8 +98,9 @@ bool j1Player::PreUpdate()
 			collider_at_right = false;
 		}			
 	}
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air==false)	App->audio->PlayFx(1, 0);
-	if(moving_left || moving_right)	App->audio->PlayFx(2);
+	if(in_air)
+		gravityReset();
+
 
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
@@ -420,6 +421,10 @@ bool j1Player::Update(float dt)
 	else
 		App->render->Blit(spritesheet_pj, position.x, position.y, &r);
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0);
+	if (moving_left || moving_right)	App->audio->PlayFx(2, 1);
+
+	
 
 	return true;
 }
@@ -437,8 +442,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	{
 		switch (c2->type)
 		{
+		
 		case COLLIDER_WALL:
-			if (position.y < c2->rect.y) //Player is above the ground
+			if (position.y < c2->rect.y) //Player is on the ground
 			{
 				gravity = 0;
 				position.y -= fall_velocity;
@@ -446,9 +452,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 				jump_down.Reset();
 				jump_up.Reset();
 			}
-			if (position.y > c2->rect.y) {
-				in_air = true;
-			}
+			
+
 			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 			{
 				if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
@@ -559,4 +564,9 @@ void j1Player::SetCameraToInitialCoords()
 	
 	App->render->camera.x = 0;
 	App->render->camera.y = -190;
+}
+
+
+void j1Player::gravityReset() {
+	gravity = 0.1;
 }

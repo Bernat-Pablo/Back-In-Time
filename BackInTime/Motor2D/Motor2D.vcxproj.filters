@@ -114,6 +114,9 @@
     <Xml Include="..\Game\save_game.xml">
       <Filter>Files</Filter>
     </Xml>
+    <Xml Include="variables.xml">
+      <Filter>Files</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Game\maps\map.tmx">

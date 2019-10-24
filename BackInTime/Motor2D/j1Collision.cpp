@@ -2,6 +2,7 @@
 #include "j1App.h"
 #include "j1Input.h"
 #include "j1Render.h"
+#include "j1Player.h"
 #include "p2Log.h"
 
 //Constructor
@@ -98,7 +99,9 @@ bool j1Collision::PreUpdate()
 
 				if (matrix[c2->type][c1->type] && c2->callback)
 					c2->callback->OnCollision(c2, c1);
+
 			}
+			
 		}
 	}
 

@@ -119,6 +119,7 @@
   <ItemGroup>
     <Xml Include="..\Game\config.xml" />
     <Xml Include="..\Game\save_game.xml" />
+    <Xml Include="variables.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Game\maps\2map.tmx" />
