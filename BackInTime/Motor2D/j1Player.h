@@ -81,7 +81,7 @@ public:
 
 	float run_velocity = 3.0f;
 	float fall_velocity = 0.0f;
-	float gravity = 6.0f;
+	float gravity = 0.1f;
 	float jump_vel = 6.5f;
 
 	bool moving_right = false; //for slide
@@ -91,6 +91,8 @@ public:
 
 	bool collider_at_right = false; //player can't go to the right
 	bool collider_at_left = false;
+
+	bool is_inAir;
 
 	bool godMode = false;
 

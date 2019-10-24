@@ -1,0 +1,13 @@
+
+
+
+<variables>
+
+  <player>
+    <initial_pos x="200.0" y="400.0"/>
+    <lives value="3"/>
+    <velocities walk="2.0" run="3.0" jump="6.5"/>
+    <negativeVelocities decrease="0.2" gravity="0.1"/>
+  </player>  
+  
+</variables>

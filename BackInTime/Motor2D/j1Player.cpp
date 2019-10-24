@@ -71,8 +71,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 100,20,140 }, COLLIDER_CAMERA, "right",  (j1Module*)App->player );
 	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA,"left", (j1Module*)App->player ); 
-	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,140,20 }, COLLIDER_CAMERA, "up",(j1Module*)App->player);
-	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
+	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,120,20 }, COLLIDER_CAMERA, "up",(j1Module*)App->player);
+	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,120,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 	return ret;
 }
 bool j1Player::Start(){
@@ -98,8 +98,9 @@ bool j1Player::PreUpdate()
 			collider_at_right = false;
 		}			
 	}
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air==false)	App->audio->PlayFx(1, 0);
-	if(moving_left || moving_right)	App->audio->PlayFx(2);
+	if(in_air)
+		gravityReset();
+
 
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
@@ -420,6 +421,10 @@ bool j1Player::Update(float dt)
 	else
 		App->render->Blit(spritesheet_pj, position.x, position.y, &r);
 
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0);
+	if (moving_left || moving_right)	App->audio->PlayFx(2, 1);
+
+	
 
 	return true;
 }
@@ -437,8 +442,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	{
 		switch (c2->type)
 		{
+		
 		case COLLIDER_WALL:
-			if (position.y < c2->rect.y) //Player is above the ground
+			if (position.y < c2->rect.y) //Player is on the ground
 			{
 				gravity = 0;
 				position.y -= fall_velocity;
@@ -446,9 +452,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 				jump_down.Reset();
 				jump_up.Reset();
 			}
-			if (position.y > c2->rect.y) {
-				in_air = true;
-			}
+			
+
 			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 			{
 				if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
@@ -468,7 +473,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 					//Check for bug at jump
 					if (player_input.pressing_space)
 					{
-						//position.x += velocity * 10;
+						position.x += velocity * 10;
 					}
 				}
 				else
@@ -537,7 +542,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		}
 		else if (c2->name == "down") //Collision with camera_toDown
 		{
-			if (c2->rect.y < 430) //Camera is at the bottom limit of the map
+			if (c2->rect.y < 460) //Camera is at the bottom limit of the map
 			{
 				App->render->camera.y -= 2* fall_velocity;
 				//Update the position of the camera colliders
@@ -560,6 +565,7 @@ void j1Player::SetCameraToInitialCoords()
 	App->render->camera.x = 0;
 	App->render->camera.y = -190;
 }
+
 
 bool j1Player::Save(pugi::xml_node& data) const {
 
