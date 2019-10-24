@@ -67,12 +67,12 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	position.x = initial_x;
 	position.y = initial_y;
 
-	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, (j1Module*)App->player); //a collider to start
+	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
 
-	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 50,5,90 }, COLLIDER_CAMERA, (j1Module*)App->player);
-	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 50,5,90 }, COLLIDER_CAMERA, (j1Module*)App->player); 
-	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 50,120,5 }, COLLIDER_CAMERA, (j1Module*)App->player);
-	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 40,120,5 }, COLLIDER_CAMERA, (j1Module*)App->player);
+	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 50,20,90 }, COLLIDER_CAMERA, "right",  (j1Module*)App->player );
+	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 50,20,90 }, COLLIDER_CAMERA,"left", (j1Module*)App->player ); 
+	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 50,120,20 }, COLLIDER_CAMERA, "up",(j1Module*)App->player);
+	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 40,120,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 	return ret;
 }
 bool j1Player::Start(){
@@ -480,21 +480,51 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			//WINNING 
 			break;
 		case COLLIDER_CAMERA:
-			if (c2->callback->name == "camera_toRight")
+			float localVelocity = 0;
+			//We adjust camera velocity to player velocity depending his state
+			if (state == WALK_FORWARD || state == WALK_BACKWARD)
+				localVelocity = velocity;
+			else if (state == RUN_FORWARD || state == RUN_BACKWARD)
+				localVelocity = run_velocity;
+			else
+				localVelocity = velocity;
+
+			if(c2->name == "right") //Collision with camera_toRight
 			{
-				LOG("gdf");
+					App->render->camera.x -= 2* localVelocity;
+					//Update the position of the camera colliders
+					camera_toRight->rect.x += localVelocity;
+					camera_toLeft->rect.x += localVelocity;
+					camera_toUp->rect.x += localVelocity;
+					camera_toDown->rect.x += localVelocity;
+							
 			}
-			else if (c2->callback->name == "camera_toLeft")
+			else if (c2->name == "left") //Collision with camera_toLeft
 			{
-				LOG("gdf");
+				App->render->camera.x += 2* localVelocity;
+				//Update the position of the camera colliders
+				camera_toRight->rect.x -= localVelocity;
+				camera_toLeft->rect.x -= localVelocity;
+				camera_toUp->rect.x -= localVelocity;
+				camera_toDown->rect.x -= localVelocity;
 			}
-			else if (c2->callback->name == "camera_toUp")
+			else if (c2->name == "up") //Collision with camera_toUp
 			{
-				LOG("gdf");
+				App->render->camera.y += 2* localVelocity;
+				//Update the position of the camera colliders
+				camera_toRight->rect.y -= localVelocity;
+				camera_toLeft->rect.y -= localVelocity;
+				camera_toUp->rect.y -= localVelocity;
+				camera_toDown->rect.y -= localVelocity;
 			}
-			else if (c2->callback->name == "camera_toDown")
+			else if (c2->name == "down") //Collision with camera_toDown
 			{
-				LOG("gdf");
+				App->render->camera.y -= 2* localVelocity;
+				//Update the position of the camera colliders
+				camera_toRight->rect.y += localVelocity;
+				camera_toLeft->rect.y += localVelocity;
+				camera_toUp->rect.y += localVelocity;
+				camera_toDown->rect.y += localVelocity;
 			}
 			break;
 		}

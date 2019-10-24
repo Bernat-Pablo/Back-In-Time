@@ -25,7 +25,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Map Parser");
 	bool ret = true;
-	App->collision->AddCollider({ 0,0,1,1000 }, COLLIDER_WALL);
+	App->collision->AddCollider({ 0,0,1,1000 }, COLLIDER_WALL, "map");
 	folder.create(config.child("folder").child_value());
 
 	pugi::xml_parse_result result = config_file.load_file("config.xml");
@@ -261,10 +261,8 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 {
 	bool ret = true;
 
-		//DEBUGUEAR ESTA FUNCION ENTERA, AQUI ESTA EL ERROR
 	pugi::xml_node object = node.child("object");
 	SDL_Rect rect = { 0,0,0,0 }; 
-	//objectgroup->name = node.attribute("name").as_string();
 	uint i = 0u;
 	uint collidernum = 0; //number of colliders
 	if (object == NULL)
@@ -287,18 +285,16 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 				objectgroup->object[i].h = object.attribute("height").as_int();
 
 				if(name == "1")
-					App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL);
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL, "wall");
 				if(name == "2")
-					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DIE);
+					App->collision->AddCollider(objectgroup->object[i],  COLLIDER_DIE, "die");
 				if (name == "3")
-					App->collision->AddCollider(objectgroup->object[i], COLLIDER_TRAP);
+					App->collision->AddCollider(objectgroup->object[i],  COLLIDER_TRAP, "trap");
 				if (name == "4")
-					App->collision->AddCollider(objectgroup->object[i], COLLIDER_ACTIVATE_TRAP);
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_ACTIVATE_TRAP, "activatetrap");
 				if (name == "5")
-					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR);
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door");
 
-				LOG("Collider x: %i y: %i", objectgroup->object[i].x, objectgroup->object[i].y);
-				LOG("Collider w: %i h: %i", objectgroup->object[i].w, objectgroup->object[i].h);
 				collidernum++;
 			}			
 
@@ -311,39 +307,6 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 		}
 	}
 
-	/*pugi::xml_node object = node.child("object");
-	SDL_Rect rect = { 0,0,0,0 };
-	objectgroup->name = node.attribute("name").as_string();
-	uint i = 0u;
-
-	if (object == NULL)
-	{
-		LOG("Error loading object group");
-		ret = false;
-	}else
-	{
-		objectgroup->object = new SDL_Rect[MAX_COLLIDERS];
-
-		while (object != NULL)
-		{
-			objectgroup->object[i].x = object.attribute("x").as_int();
-			objectgroup->object[i].y = object.attribute("y").as_int();
-			objectgroup->object[i].w = object.attribute("width").as_int();
-			objectgroup->object[i].h = object.attribute("height").as_int();
-
-			p2SString name(object.attribute("name").as_string());
-
-			if (name == "1")
-				App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL);
-
-			object = object.next_sibling("object");
-
-			LOG("Collider %i", i);
-			LOG("Collider x: %i y: %i", objectgroup->object[i].x, objectgroup->object[i].y);
-			LOG("Collider w: %i h: %i", objectgroup->object[i].w, objectgroup->object[i].h);
-			i++;
-		}
-	}*/
 
 	return ret;
 }
