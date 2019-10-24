@@ -437,8 +437,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	{
 		switch (c2->type)
 		{
-		case COLLIDER_WALL:			
-			if (position.y < c2->rect.y ) //Player is above the ground
+		case COLLIDER_WALL:
+			if (position.y < c2->rect.y) //Player is above the ground
 			{
 				gravity = 0;
 				position.y -= fall_velocity;
@@ -448,15 +448,15 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			}
 			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 			{
-				if(position.y + 0.7f*collider_player->rect.h > c2->rect.y) //There is a wall
+				if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
 					collider_at_right = true;
 				else
 					collider_at_right = false;
 			}
 			else
 				collider_at_right = false;
-			
-			if(position.x < c2->rect.x + c2->rect.w && (state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD || state == IDLE)) //Player is at the right of a wall
+
+			if (position.x < c2->rect.x + c2->rect.w && (state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD || state == IDLE)) //Player is at the right of a wall
 			{
 				if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
 				{
@@ -467,7 +467,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 					{
 						position.x += velocity * 10;
 					}
-				}					
+				}
 				else
 					collider_at_left = false;
 			}
@@ -477,19 +477,22 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		case COLLIDER_DIE:
 			break;
 		case COLLIDER_DOOR:
-			//Change level
+			//WINNING 
 			break;
 		case COLLIDER_CAMERA:
-			if(c2->callback->name == "camera_toRight")
+			if (c2->callback->name == "camera_toRight")
 			{
 				LOG("gdf");
-			}else if (c2->callback->name == "camera_toLeft")
+			}
+			else if (c2->callback->name == "camera_toLeft")
 			{
 				LOG("gdf");
-			}else if (c2->callback->name == "camera_toUp")
+			}
+			else if (c2->callback->name == "camera_toUp")
 			{
 				LOG("gdf");
-			}else if (c2->callback->name == "camera_toDown")
+			}
+			else if (c2->callback->name == "camera_toDown")
 			{
 				LOG("gdf");
 			}

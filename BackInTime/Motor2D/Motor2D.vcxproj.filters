@@ -36,6 +36,9 @@
     <ClCompile Include="j1Player.cpp">
       <Filter>Characters</Filter>
     </ClCompile>
+    <ClCompile Include="j1Fade.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -86,6 +89,9 @@
       <Filter>Characters</Filter>
     </ClInclude>
     <ClInclude Include="MemoryLeaks.h" />
+    <ClInclude Include="j1Fade.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">
