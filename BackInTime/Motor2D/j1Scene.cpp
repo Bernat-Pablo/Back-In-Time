@@ -8,6 +8,8 @@
 #include "j1Window.h"
 #include "j1Map.h"
 #include "j1Scene.h"
+#include "j1Player.h"
+#include "j1Fade.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -30,8 +32,10 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("maps/map.tmx");
-
+	if(choose_lv==1)
+		App->map->Load("maps/map.tmx");
+	else if (choose_lv==2)
+		App->map->Load("maps/2map.tmx");
 
 	App->audio->PlayMusic("audio/music/music_sadpiano.ogg");
 	//App->map->Load("iso.tmx");
@@ -42,6 +46,18 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
+	//Change to Lv1
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		choose_lv = 1;
+		App->fade->FadeToBlack(App->scene, App->scene);
+	}
+
+	//Change to Lv2
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+		choose_lv = 2;
+		App->fade->FadeToBlack(App->scene, App->scene);
+	}
+
 	return true;
 }
 
@@ -101,6 +117,8 @@ bool j1Scene::PostUpdate()
 bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
+
+	App->map->CleanUp();
 
 	return true;
 }

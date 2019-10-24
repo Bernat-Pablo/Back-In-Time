@@ -1,22 +1,17 @@
-<!-- Save game for the game -->
-
+<?xml version="1.0"?>
 <game_state>
-
-  <textures></textures>
-  <audio></audio>
-  <window></window>
-  
-  <renderer>
-    <camera x="100" y="0"/>
-  </renderer>
-  
-  <player>
-    <position x="32", y="400"/>
-    <state state = "IDLE" />
-    <lives lives="3"/>
-  </player>
-  
-  <map map ="1"/>
-
+	<input />
+	<window />
+	<textures />
+	<audio />
+	<map />
+	<scene />
+	<player>
+		<position x="176" y="408" />
+	</player>
+	<:anonymous />
+	<:anonymous />
+	<renderer>
+		<camera x="-24" y="-180" />
+	</renderer>
 </game_state>
-
