@@ -8,9 +8,7 @@
 	<scene />
 	<player>
 		<position x="497" y="420" />
-	</player>
-	<:anonymous />
-	<:anonymous />
+	</player>   
 	<renderer>
 		<camera x="-492" y="-174" />
 	</renderer>
