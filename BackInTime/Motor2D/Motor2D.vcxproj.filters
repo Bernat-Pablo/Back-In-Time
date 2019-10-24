@@ -113,7 +113,7 @@
     <None Include="..\Game\maps\map.tmx">
       <Filter>Files</Filter>
     </None>
-    <None Include="..\Game\maps\map2.tmx">
+    <None Include="..\Game\maps\2map.tmx">
       <Filter>Files</Filter>
     </None>
   </ItemGroup>
