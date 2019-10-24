@@ -1,33 +1,19 @@
 <!-- Save game for the game -->
 
-<game_state>  
-  <audio/>
-  <collision/>
-  <input/>
+<game_state>
+  <textures></textures>
+  <audio></audio>
+  <window></window>
   
   <renderer>
     <camera x="100" y="0"/>
   </renderer>
   
-  <textures/>
-  <window/>
-
   <player>
-    <position x="32" y="400"/>
+    <position x="32", y="400"/>
     <state state = "IDLE" />
-    <velocity value="0"/>    
     <lives lives="3"/>
-    <in_air value="false"/>   
-    <!-- Save colliders for the camera-->
-    <camera_toRight x="0" y="0"/>
-    <camera_toLeft x="0" y="0"/>
-    <camera_toUp x="0" y="0"/>
-    <camera_toDown x="0" y="0"/>
   </player>
-
-  <scene>
-    <currentMap map="1"/>
-  </scene>
   
   <map map ="1"/>
 

@@ -71,8 +71,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 100,20,140 }, COLLIDER_CAMERA, "right",  (j1Module*)App->player );
 	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA,"left", (j1Module*)App->player ); 
-	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,140,20 }, COLLIDER_CAMERA, "up",(j1Module*)App->player);
-	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
+	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,120,20 }, COLLIDER_CAMERA, "up",(j1Module*)App->player);
+	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,120,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 	return ret;
 }
 bool j1Player::Start(){
@@ -473,7 +473,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 					//Check for bug at jump
 					if (player_input.pressing_space)
 					{
-						//position.x += velocity * 10;
+						position.x += velocity * 10;
 					}
 				}
 				else
@@ -542,7 +542,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		}
 		else if (c2->name == "down") //Collision with camera_toDown
 		{
-			if (c2->rect.y < 430) //Camera is at the bottom limit of the map
+			if (c2->rect.y < 460) //Camera is at the bottom limit of the map
 			{
 				App->render->camera.y -= 2* fall_velocity;
 				//Update the position of the camera colliders
