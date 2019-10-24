@@ -155,7 +155,9 @@ bool j1Player::PreUpdate()
 
 			state = WALK_BACKWARD;
 		}
-			
+		
+		looking_right = true;
+
 		break;
 	case WALK_BACKWARD:
 		//Bug warning
@@ -176,7 +178,9 @@ bool j1Player::PreUpdate()
 		
 		if (player_input.pressing_lshift)		
 			state = RUN_BACKWARD;
-		
+
+		looking_right = false;
+
 		break;
 	case RUN_FORWARD:
 		//Bug warning
@@ -198,6 +202,9 @@ bool j1Player::PreUpdate()
 
 		if (player_input.pressing_space)
 			state = JUMP_FORWARD;
+
+		looking_right = true;
+
 		break;
 	case RUN_BACKWARD:
 		//Bug warning
@@ -219,6 +226,9 @@ bool j1Player::PreUpdate()
 		
 		if (player_input.pressing_space)
 			state = JUMP_BACKWARD;
+
+		looking_right = false;
+
 		break;
 	case JUMP:
 		if (player_input.pressing_D) 
@@ -238,6 +248,9 @@ bool j1Player::PreUpdate()
 		moving_left = true;
 		if (!player_input.pressing_A) 
 			state = JUMP;		
+
+		looking_right = false;
+
 		break;
 	case DASH_FORWARD:
 		moving_right = false;
@@ -248,6 +261,8 @@ bool j1Player::PreUpdate()
 			if (player_input.pressing_lshift) 
 				state = RUN_BACKWARD;			
 		}
+
+
 		break;
 	case DASH_BACKWARD:
 		moving_right = false;
@@ -420,7 +435,7 @@ bool j1Player::Update(float dt)
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	if(moving_left)
+	if(!looking_right)
 		App->render->Blit(spritesheet_pj, position.x, position.y, &r,1,2);
 	else
 		App->render->Blit(spritesheet_pj, position.x, position.y, &r);

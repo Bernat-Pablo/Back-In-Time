@@ -83,6 +83,7 @@ public:
 	bool moving_right = false; //for slide
 	bool moving_left = false;	
 	bool in_air = false;
+	bool looking_right=true;
 
 	bool collider_at_right = false; //player can't go to the right
 	bool collider_at_left = false;
