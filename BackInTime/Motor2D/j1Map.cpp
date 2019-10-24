@@ -46,7 +46,7 @@ void j1Map::Draw()
 	lay = data.layers.start;
 	MapLayer* layer = lay->data;
 	TileSet* tileset = data.tilesets.start->data;
-	pugi::xml_node node = config_file.child("config").child("map").child("finish_printing");
+	pugi::xml_node node = config_file.child("config").child("map");
 
 	for (int l = 0; l < data.layers.count(); l++) {
 		finish_printing = false;
@@ -56,7 +56,7 @@ void j1Map::Draw()
 			for (int j = 0; j < layer->width && finish_printing == false; j++) {
 
 				int n = layer->Get(j, i);
-				if (layer->data[n] != 0 && x>=App->player->position.x - node.attribute("value").as_int() * 16) {
+				if (layer->data[n] != 0 && x>=App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) {
 					if (lay->data->name == "Subterreno4 P" || lay->data->name == "Subterreno3 P") {
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
 					}
@@ -64,7 +64,7 @@ void j1Map::Draw()
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
 				}
 				x += data.tile_width;
-				if (x >= node.attribute("value").as_int() * 16 + App->player->position.x) {
+				if (x >= node.child("finish_printing_right").attribute("value").as_int() * 16 + App->player->position.x) {
 					j = layer->width;
 				}
 			}
