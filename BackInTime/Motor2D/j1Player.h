@@ -47,6 +47,7 @@ public:
 
 	void OnCollision(Collider* c1, Collider* c2);
 	void ability();
+	void SetCameraToInitialCoords();
 public:
 
 	Animation idle;
@@ -96,9 +97,6 @@ public:
 	Collider* camera_toLeft = nullptr;
 	Collider* camera_toUp = nullptr;
 	Collider* camera_toDown = nullptr;
-
 };
-
-
 
 #endif // !_PLAYER_

@@ -433,7 +433,7 @@ bool j1Player::CleanUp() {
 
 void j1Player::OnCollision(Collider* c1, Collider* c2) {
 
-	if(godMode == godMode)
+	if(godMode == false)
 	{
 		switch (c2->type)
 		{
@@ -475,14 +475,21 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 				collider_at_left = false;
 			break;
 		case COLLIDER_DIE:
+			//PLAYER GO BACK TO INITIAL POSITION
+			position.x = initial_x;
+			position.y = initial_y;
+			SetCameraToInitialCoords();
+			
 			break;
 		case COLLIDER_DOOR:
-			//WINNING 
-			break;
-		
+			//TODO
+			//CHANGE SCENE
+			break;		
 		}
 	}
 
+	//It's out of the if(godMode == false) 
+	//because even if it's at godMode, we want the camera to follow the player
 	if(c2->type == COLLIDER_CAMERA)
 	{
 		float localVelocity = 0;
@@ -540,3 +547,13 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	}		
 }
 
+void j1Player::SetCameraToInitialCoords()
+{
+	camera_toRight->SetPos(position.x + 70, position.y - 100);
+	camera_toLeft->SetPos(position.x - 50, position.y - 100);	
+	camera_toDown->SetPos(position.x - 50, position.y - 100);
+	camera_toUp->SetPos(position.x - 50, position.y + 40);
+	
+	App->render->camera.x = 0;
+	App->render->camera.y = -190;
+}

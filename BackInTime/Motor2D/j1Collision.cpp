@@ -10,11 +10,27 @@ j1Collision::j1Collision()
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;
 	
+	//To collide with the ground and walls
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
 	
+	//Colliders to move the camera
 	matrix[COLLIDER_PLAYER][COLLIDER_CAMERA] = true;
 	matrix[COLLIDER_CAMERA][COLLIDER_PLAYER] = true;
+
+	//Colliders to die
+	matrix[COLLIDER_PLAYER][COLLIDER_DIE] = true;
+	matrix[COLLIDER_DIE][COLLIDER_PLAYER] = true;
+
+	//Colliders to change scene
+	matrix[COLLIDER_PLAYER][COLLIDER_DOOR] = true;
+	matrix[COLLIDER_DOOR][COLLIDER_PLAYER] = true;
+
+	//Traps and activations
+	matrix[COLLIDER_PLAYER][COLLIDER_ACTIVATE_TRAP] = true;
+	matrix[COLLIDER_ACTIVATE_TRAP][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_TRAP] = true;
+	matrix[COLLIDER_TRAP][COLLIDER_PLAYER] = true;
 }
 
 //Destructor
