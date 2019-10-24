@@ -101,7 +101,7 @@ bool j1Player::PreUpdate()
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
 	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
 	player_input.pressing_D = App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
-	player_input.pressing_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN;
+	player_input.pressing_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT;
 	player_input.pressing_lshift = App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT;
 	
 	switch (state)
@@ -234,7 +234,7 @@ bool j1Player::PreUpdate()
 		if (player_input.pressing_D) 
 			state = JUMP_FORWARD;		
 		else if (player_input.pressing_A) 
-			state = JUMP_BACKWARD;		
+			state = JUMP_BACKWARD;
 		
 		break;
 	case JUMP_FORWARD:
@@ -458,8 +458,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		switch (c2->type)
 		{
 		case COLLIDER_WALL:			
-			if (position.y <
-				c2->rect.y ) //Player is above the ground
+			if (position.y < c2->rect.y ) //Player is above the ground
 			{
 				gravity = 0;
 				position.y -= fall_velocity;
@@ -477,11 +476,17 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			else
 				collider_at_right = false;
 			
-			if(position.x < c2->rect.x + c2->rect.w && (state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD)) //Player is at the right of a wall
+			if(position.x < c2->rect.x + c2->rect.w && (state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD || state == IDLE)) //Player is at the right of a wall
 			{
 				if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
 				{
 					collider_at_left = true;
+
+					//Check for bug at jump
+					if (player_input.pressing_space)
+					{
+						position.x += velocity * 10;
+					}
 				}					
 				else
 					collider_at_left = false;
@@ -489,7 +494,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			else
 				collider_at_left = false;
 
-
+			
 
 			break;
 		default:
