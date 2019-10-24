@@ -433,7 +433,7 @@ bool j1Player::CleanUp() {
 
 void j1Player::OnCollision(Collider* c1, Collider* c2) {
 
-	if(godMode == false)
+	if(godMode == godMode)
 	{
 		switch (c2->type)
 		{
@@ -479,55 +479,64 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		case COLLIDER_DOOR:
 			//Change level
 			break;
-		case COLLIDER_CAMERA:
-			float localVelocity = 0;
-			//We adjust camera velocity to player velocity depending his state
-			if (state == WALK_FORWARD || state == WALK_BACKWARD)
-				localVelocity = velocity;
-			else if (state == RUN_FORWARD || state == RUN_BACKWARD)
-				localVelocity = run_velocity;
-			else
-				localVelocity = velocity;
+		
+		}
+	}
 
-			if(c2->name == "right") //Collision with camera_toRight
+	if(c2->type == COLLIDER_CAMERA)
+	{
+		float localVelocity = 0;
+		//We adjust camera velocity to player velocity depending his state
+		if (state == WALK_FORWARD || state == WALK_BACKWARD)
+			localVelocity = velocity;
+		else if (state == RUN_FORWARD || state == RUN_BACKWARD)
+			localVelocity = run_velocity;
+		else
+			localVelocity = velocity;
+
+		if (c2->name == "right") //Collision with camera_toRight
+		{
+			App->render->camera.x -= 2 * localVelocity;
+			//Update the position of the camera colliders
+			camera_toRight->rect.x += localVelocity;
+			camera_toLeft->rect.x += localVelocity;
+			camera_toUp->rect.x += localVelocity;
+			camera_toDown->rect.x += localVelocity;
+
+		}
+		else if (c2->name == "left") //Collision with camera_toLeft
+		{
+			if (position.x > 180)
 			{
-					App->render->camera.x -= 2* localVelocity;
-					//Update the position of the camera colliders
-					camera_toRight->rect.x += localVelocity;
-					camera_toLeft->rect.x += localVelocity;
-					camera_toUp->rect.x += localVelocity;
-					camera_toDown->rect.x += localVelocity;
-							
-			}
-			else if (c2->name == "left") //Collision with camera_toLeft
-			{
-				App->render->camera.x += 2* localVelocity;
+				App->render->camera.x += 2 * localVelocity;
 				//Update the position of the camera colliders
 				camera_toRight->rect.x -= localVelocity;
 				camera_toLeft->rect.x -= localVelocity;
 				camera_toUp->rect.x -= localVelocity;
 				camera_toDown->rect.x -= localVelocity;
 			}
-			else if (c2->name == "up") //Collision with camera_toUp
-			{
-				App->render->camera.y += 2* localVelocity;
-				//Update the position of the camera colliders
-				camera_toRight->rect.y -= localVelocity;
-				camera_toLeft->rect.y -= localVelocity;
-				camera_toUp->rect.y -= localVelocity;
-				camera_toDown->rect.y -= localVelocity;
-			}
-			else if (c2->name == "down") //Collision with camera_toDown
-			{
-				App->render->camera.y -= 2* localVelocity;
-				//Update the position of the camera colliders
-				camera_toRight->rect.y += localVelocity;
-				camera_toLeft->rect.y += localVelocity;
-				camera_toUp->rect.y += localVelocity;
-				camera_toDown->rect.y += localVelocity;
-			}
-			break;
 		}
-	}	
+		else if (c2->name == "up") //Collision with camera_toUp
+		{
+			App->render->camera.y += 2 * localVelocity;
+			//Update the position of the camera colliders
+			camera_toRight->rect.y -= localVelocity;
+			camera_toLeft->rect.y -= localVelocity;
+			camera_toUp->rect.y -= localVelocity;
+			camera_toDown->rect.y -= localVelocity;
+		}
+		else if (c2->name == "down") //Collision with camera_toDown
+		{
+			if (c2->rect.y < 460) //Camera is at the bottom limit of the map
+			{
+				App->render->camera.y -= 2* fall_velocity;
+				//Update the position of the camera colliders
+				camera_toRight->rect.y += fall_velocity;
+				camera_toLeft->rect.y += fall_velocity;
+				camera_toUp->rect.y += fall_velocity;
+				camera_toDown->rect.y += fall_velocity;
+			}
+		}
+	}		
 }
 
