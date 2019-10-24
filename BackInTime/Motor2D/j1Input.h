@@ -27,7 +27,6 @@ enum j1KeyState
 
 class j1Input : public j1Module
 {
-
 public:
 
 	j1Input();
