@@ -25,7 +25,7 @@
   <map>
     <folder>maps/</folder>
     <finish_printing_right value="50"></finish_printing_right>
-    <finish_printing_left value="15"></finish_printing_left>
+    <finish_printing_left value="25"></finish_printing_left>
   </map>
 
   <scene>
