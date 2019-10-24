@@ -472,7 +472,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 					//Check for bug at jump
 					if (player_input.pressing_space)
 					{
-						position.x += velocity * 10;
+						
 					}
 				}
 				else
@@ -568,10 +568,26 @@ void j1Player::SetCameraToInitialCoords()
 
 bool j1Player::Save(pugi::xml_node& data) const {
 
-	pugi::xml_node p_position = data.append_child("position");
+	data.child("player");
 
-	p_position.append_attribute("x") = position.x;
-	p_position.append_attribute("y") = position.y;
+	//Player position
+	data.child("player").append_child("position").append_attribute("x") = position.x;
+	data.child("player").child("position").append_attribute("y") = position.y;
+		
+	//Save colliders for the camera
+	data.child("player").append_child("camera_toRight").append_attribute("x") = camera_toRight->rect.x;
+	data.child("player").child("camera_toRight").append_attribute("y") = camera_toRight->rect.y;
+	data.child("player").append_child("camera_toLeft").append_attribute("x") = camera_toLeft->rect.x;
+	data.child("player").child("camera_toLeft").append_attribute("y") = camera_toLeft->rect.y;
+	data.child("player").append_child("camera_toUp").append_attribute("x") = camera_toUp->rect.x;
+	data.child("player").child("camera_toUp").append_attribute("y") = camera_toUp->rect.y;
+	data.child("player").append_child("camera_toDown").append_attribute("x") = camera_toDown->rect.x;
+	data.child("player").child("camera_toDown").append_attribute("y") = camera_toDown->rect.y;
+	
+	//Extra data
+	data.child("player").append_child("lives").append_attribute("value") = lives;
+	data.child("player").append_child("in_air").append_attribute("value") = in_air;
+
 	return true;
 }
 
