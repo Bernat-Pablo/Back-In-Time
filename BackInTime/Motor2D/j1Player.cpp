@@ -128,12 +128,6 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case WALK_FORWARD:		
-		//Bug warning
-		//moving_right and moving_left is changed on Update() depending on colliders
-		//If that code is uncommented, player will go through near colliders using the dash, causing a bug
-		
-		//moving_right = true;
-		//moving_left = false;
 		jump_vel = 6.5f; //magic numbers. change
 
 		if (!player_input.pressing_D && moving_right == true)		
@@ -160,12 +154,6 @@ bool j1Player::PreUpdate()
 
 		break;
 	case WALK_BACKWARD:
-		//Bug warning
-		//moving_right and moving_left is changed on Update() depending on colliders
-		//If that code is uncommented, player will go through near colliders using the dash, causing a bug
-
-		//moving_right = false; 
-		//moving_left = true;
 		jump_vel = 6.5f; //magic numbers. change
 		if (!player_input.pressing_A && moving_left == true)		
 			state = DASH_BACKWARD;
@@ -183,12 +171,6 @@ bool j1Player::PreUpdate()
 
 		break;
 	case RUN_FORWARD:
-		//Bug warning
-		//moving_right and moving_left is changed on Update() depending on colliders
-		//If that code is uncommented, player will go through near colliders using the dash, causing a bug
-		
-		//moving_right = true;
-		//moving_left = false;
 		jump_vel = 6.5f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
@@ -207,12 +189,6 @@ bool j1Player::PreUpdate()
 
 		break;
 	case RUN_BACKWARD:
-		//Bug warning
-		//moving_right and moving_left is changed on Update() depending on colliders
-		//If that code is uncommented, player will go through near colliders using the dash, causing a bug
-
-		//moving_right = false;
-		//moving_left = true;
 		jump_vel = 6.5f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
