@@ -27,11 +27,13 @@ struct Collider
 	bool to_delete = false;
 	COLLIDER_TYPE type;
 	j1Module* callback = nullptr;
+	p2SString name;
 
-	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, j1Module* callback = nullptr) :
+	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, p2SString name, j1Module* callback =  nullptr) :
 		rect(rectangle),
 		type(type),
-		callback(callback)
+		callback(callback),
+		name(name)
 	{}
 
 	void SetPos(int x, int y)
@@ -59,7 +61,7 @@ public:
 
 	void DebugDraw();
 
-	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback = nullptr);
+	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, p2SString name, j1Module* callback = nullptr);
 private:
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];

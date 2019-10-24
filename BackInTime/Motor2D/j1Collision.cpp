@@ -12,6 +12,9 @@ j1Collision::j1Collision()
 	
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
+	
+	matrix[COLLIDER_PLAYER][COLLIDER_CAMERA] = true;
+	matrix[COLLIDER_CAMERA][COLLIDER_PLAYER] = true;
 }
 
 //Destructor
@@ -69,6 +72,9 @@ bool j1Collision::PreUpdate()
 
 			c2 = colliders[k];
 
+			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_CAMERA)
+				LOG("Player collides with camera");
+
 			if (c1->CheckCollision(c2->rect) == true)
 			{
 				if (matrix[c1->type][c2->type] && c1->callback)
@@ -90,7 +96,7 @@ bool j1Collision::Update(float dt)
 	return ret;
 }
 
-Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* callback)
+Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, p2SString name, j1Module* callback )
 {
 	Collider* ret = nullptr;
 
@@ -98,7 +104,7 @@ Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, j1Module* 
 	{
 		if (colliders[i] == nullptr)
 		{
-			ret = colliders[i] = new Collider(rect, type, callback);
+			ret = colliders[i] = new Collider(rect, type, name, callback);
 			if(ret)
 				LOG("Collider added successfully! ");
 

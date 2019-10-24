@@ -30,7 +30,7 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
-	App->map->Load("maps/2map.tmx");
+	App->map->Load("maps/map.tmx");
 
 
 	App->audio->PlayMusic("audio/music/music_sadpiano.ogg");

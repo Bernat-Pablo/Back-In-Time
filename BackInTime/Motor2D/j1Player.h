@@ -46,7 +46,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(Collider* c1, Collider* c2);
-	void hability();
+	void ability();
 public:
 
 	Animation idle;
