@@ -88,9 +88,6 @@ bool j1Collision::PreUpdate()
 
 			c2 = colliders[k];
 
-			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_CAMERA)
-				LOG("Player collides with camera");
-
 			if (c1->CheckCollision(c2->rect) == true)
 			{
 				if (matrix[c1->type][c2->type] && c1->callback)
