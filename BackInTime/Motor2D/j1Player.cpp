@@ -80,6 +80,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 bool j1Player::Start(){
 
 	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");	
+	tick2 = SDL_GetTicks();
 
 	return true;
 }
@@ -101,7 +102,7 @@ bool j1Player::PreUpdate()
 		}			
 	}
 
-
+	ability_able = checkAbility();
 
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
@@ -425,6 +426,9 @@ bool j1Player::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0);
 	if (moving_left || moving_right)	App->audio->PlayFx(2, 1);
 
+	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
+		useAbility();
+	}
 	
 
 	return true;
@@ -611,4 +615,25 @@ bool j1Player::Load(pugi::xml_node& data)
 	lives = data.child("lives").attribute("value").as_int();
 	in_air = data.child("in_air").attribute("value").as_bool();
 	return true;
+}
+
+bool j1Player::checkAbility() {
+	
+	if (tick1 - tick2 >= 1500) {
+		old_position.x = position.x;
+		old_position.y = position.y;
+		tick2 = SDL_GetTicks();
+		ability_able = true;
+	}
+	tick1 = SDL_GetTicks();
+	
+	return ability_able;
+}
+
+void j1Player::useAbility() {
+
+	position.x = old_position.x;
+	position.y = old_position.y;
+	ability_able = false;
+
 }

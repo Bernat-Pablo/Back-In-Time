@@ -46,7 +46,8 @@ public:
 	bool CleanUp();
 
 	void OnCollision(Collider* c1, Collider* c2);
-	void ability();
+	bool checkAbility();
+	void useAbility();
 	void SetCameraToInitialCoords();
 
 	bool Save(pugi::xml_node& data) const;
@@ -81,7 +82,7 @@ public:
 
 	float run_velocity = 3.0f;
 	float fall_velocity = 0.0f;
-	float gravity = 0.1f;
+	float gravity = 0.2f;
 	float jump_vel = 6.5f;
 
 	bool moving_right = false; //for slide
@@ -95,6 +96,10 @@ public:
 	bool is_inAir;
 
 	bool godMode = false;
+
+	bool ability_able = false;
+
+	int tick1 = 0, tick2 = 0;
 
 	Collider* collider_player = nullptr;
 
