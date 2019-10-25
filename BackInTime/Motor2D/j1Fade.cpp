@@ -7,6 +7,7 @@
 #include "j1Input.h"
 #include "p2Log.h"
 #include "j1Scene.h"
+#include "j1Collision.h"
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
@@ -55,9 +56,11 @@ bool j1Fade::Update(float dt)
 
 			moduleOff->Disable();
 			moduleOn->Enable();
+			//ugly but working
 			App->scene->CleanUp();
 			App->scene->Awake();
 			App->scene->Start();
+
 
 
 			//resets player & camera position

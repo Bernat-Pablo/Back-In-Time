@@ -35,7 +35,6 @@ private:
 	SDL_Rect screen;
 
 	pugi::xml_document doc;
-	pugi::xml_node node;
 
 
 };
