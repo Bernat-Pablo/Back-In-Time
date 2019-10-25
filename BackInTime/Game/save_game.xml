@@ -6,7 +6,16 @@
 	<audio />
 	<map />
 	<scene />
-	<player />
+	<player>
+		<player />
+		<position x="104" />
+		<camera_toRight x="270" y="315" />
+		<camera_toLeft x="150" y="315" />
+		<camera_toUp x="150" y="315" />
+		<camera_toDown x="150" />
+		<lives value="3" />
+		<in_air value="false" />
+	</player>
 	<:anonymous />
 	<:anonymous />
 	<renderer>

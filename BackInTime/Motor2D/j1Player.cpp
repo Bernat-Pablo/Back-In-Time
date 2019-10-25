@@ -570,33 +570,33 @@ void j1Player::SetCameraToInitialCoords()
 
 bool j1Player::Save(pugi::xml_node& data) const {
 
-	data.child("player");
+	data.append_child("player");
 
 	//Player position
-	data.child("player").append_child("position").append_attribute("x") = position.x;
-	data.child("player").child("position").append_attribute("y") = position.y;
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").attribute("y") = position.y;
 		
 	//Save colliders for the camera
-	data.child("player").append_child("camera_toRight").append_attribute("x") = camera_toRight->rect.x;
-	data.child("player").child("camera_toRight").append_attribute("y") = camera_toRight->rect.y;
-	data.child("player").append_child("camera_toLeft").append_attribute("x") = camera_toLeft->rect.x;
-	data.child("player").child("camera_toLeft").append_attribute("y") = camera_toLeft->rect.y;
-	data.child("player").append_child("camera_toUp").append_attribute("x") = camera_toUp->rect.x;
-	data.child("player").child("camera_toUp").append_attribute("y") = camera_toUp->rect.y;
-	data.child("player").append_child("camera_toDown").append_attribute("x") = camera_toDown->rect.x;
+	data.append_child("camera_toRight").append_attribute("x") = camera_toRight->rect.x;
+	data.child("camera_toRight").append_attribute("y") = camera_toRight->rect.y;
+	data.append_child("camera_toLeft").append_attribute("x") = camera_toLeft->rect.x;
+	data.child("camera_toLeft").append_attribute("y") = camera_toLeft->rect.y;
+	data.append_child("camera_toUp").append_attribute("x") = camera_toUp->rect.x;
+	data.child("camera_toUp").append_attribute("y") = camera_toUp->rect.y;
+	data.append_child("camera_toDown").append_attribute("x") = camera_toDown->rect.x;
 	data.child("player").child("camera_toDown").append_attribute("y") = camera_toDown->rect.y;
 	
 	//Extra data
-	data.child("player").append_child("lives").append_attribute("value") = lives;
-	data.child("player").append_child("in_air").append_attribute("value") = in_air;
+	data.append_child("lives").append_attribute("value") = lives;
+	data.append_child("in_air").append_attribute("value") = in_air;
 
 	return true;
 }
 
 bool j1Player::Load(pugi::xml_node& data)
 {
+	
 	position.x = data.child("position").attribute("x").as_int();
 	position.y = data.child("position").attribute("y").as_int();
-
 	return true;
 }
