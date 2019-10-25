@@ -55,7 +55,6 @@ bool j1Fade::Update(float dt)
 			Mix_FadeOutMusic(1000);
 			//Enables called module, disables current module
 
-
 			moduleOff->Disable();
 			moduleOn->Enable();
 			//ugly but working
@@ -66,19 +65,14 @@ bool j1Fade::Update(float dt)
 			App->scene->CleanUp(); //Clean up map			
 			App->audio->CleanUp();
 			App->tex->CleanUp();
-			//App->win->CleanUp();
-			//App->input->CleanUp();
 
 			//We load new map	
-			//App->input->Awake(App->GetConfig());
-			//App->win->Awake(App->GetConfig());
 			App->tex->Awake(App->GetConfig());
 			App->audio->Awake(App->GetConfig());
 			App->scene->Awake();
 			App->player->Awake(App->GetConfig());
 			App->player->Start(); //At start we load player spritesheet
-			App->collision->Awake(App->GetConfig());	
-			
+			App->collision->Awake(App->GetConfig());				
 
 			App->scene->Start();
 			//resets player & camera position
