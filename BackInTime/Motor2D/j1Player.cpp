@@ -582,7 +582,7 @@ bool j1Player::Save(pugi::xml_node& data) const {
 	data.append_child("camera_toUp").append_attribute("x") = camera_toUp->rect.x;
 	data.child("camera_toUp").append_attribute("y") = camera_toUp->rect.y;
 	data.append_child("camera_toDown").append_attribute("x") = camera_toDown->rect.x;
-	data.child("player").child("camera_toDown").append_attribute("y") = camera_toDown->rect.y;
+	data.child("camera_toDown").append_attribute("y") = camera_toDown->rect.y;
 	
 	//Extra data
 	data.append_child("lives").append_attribute("value") = lives;
@@ -596,5 +596,19 @@ bool j1Player::Load(pugi::xml_node& data)
 	//Load player position
 	position.x = data.child("position").attribute("x").as_int();
 	position.y = data.child("position").attribute("y").as_int();
+
+	//Load camera positions
+	camera_toRight->rect.x = data.child("camera_toRight").attribute("x").as_int();
+	camera_toRight->rect.y = data.child("camera_toRight").attribute("y").as_int();
+	camera_toLeft->rect.x = data.child("camera_toLeft").attribute("x").as_int();
+	camera_toLeft->rect.y = data.child("camera_toLeft").attribute("y").as_int();
+	camera_toUp->rect.x = data.child("camera_toUp").attribute("x").as_int();
+	camera_toUp->rect.y = data.child("camera_toUp").attribute("y").as_int();
+	camera_toDown->rect.x = data.child("camera_toDown").attribute("x").as_int();
+	camera_toDown->rect.y = data.child("camera_toDown").attribute("y").as_int();
+
+	//Load extra data
+	lives = data.child("lives").attribute("value").as_int();
+	in_air = data.child("in_air").attribute("value").as_bool();
 	return true;
 }
