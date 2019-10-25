@@ -56,7 +56,7 @@ void j1Map::Draw()
 			for (int j = 0; j < layer->width && finish_printing == false; j++) {
 
 				int n = layer->Get(j, i);
-				if (layer->data[n] != 0 && x>=App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) {
+				if (layer->data[n] != 0 && x>=App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16 && y >= App->player->position.y - node.child("finish_printing_up").attribute("value").as_int() * 16) {
 					if (lay->data->name == "Subterreno4 P" || lay->data->name == "Subterreno3 P") {
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
 					}
@@ -70,6 +70,9 @@ void j1Map::Draw()
 			}
 			x = 0;
 			y += data.tile_height;
+			if (y >= node.child("finish_printing_down").attribute("value").as_int() * 16 + App->player->position.y) {
+				i = layer->height;
+			}
 			}
 		if (lay->next != nullptr) 
 		{

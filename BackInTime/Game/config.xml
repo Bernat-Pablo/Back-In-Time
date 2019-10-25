@@ -44,8 +44,10 @@
 
   <map>
     <folder>maps/</folder>
-    <finish_printing_right value="50"></finish_printing_right>
-    <finish_printing_left value="25"></finish_printing_left>
+    <finish_printing_right value="19"></finish_printing_right>
+    <finish_printing_left value="17"></finish_printing_left>
+    <finish_printing_up value="15"></finish_printing_up>
+    <finish_printing_down value="9"></finish_printing_down>
   </map>
 
   <scene>
