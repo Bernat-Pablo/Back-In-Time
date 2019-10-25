@@ -34,6 +34,9 @@ private:
 	Uint32 total_time = 0;
 	SDL_Rect screen;
 
+	pugi::xml_document doc;
+	pugi::xml_node node;
+
 
 };
 

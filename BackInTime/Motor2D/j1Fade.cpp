@@ -13,8 +13,9 @@
 #include "SDL_mixer/include/SDL_mixer.h"
 
 bool j1Fade::Awake(pugi::xml_node& c){
-	int w = c.child("config").child("window").child("resolution").attribute("width").as_int();
-	int h = c.child("config").child("window").child("resolution").attribute("height").as_int();
+	doc.load_file("config.xml");
+	int w = doc.child("config").child("window").child("resolution").attribute("width").as_int();
+	int h = doc.child("config").child("window").child("resolution").attribute("height").as_int();
 	screen = { 0, 0, w , h };
 
 	return true;
