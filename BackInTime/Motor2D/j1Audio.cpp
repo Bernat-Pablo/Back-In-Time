@@ -156,6 +156,19 @@ unsigned int j1Audio::LoadFx(const char* path)
 	return ret;
 }
 
+void j1Audio::unLoadFx(const char* path)
+{
+	
+	//If not null, free all memory
+	if(fx.count() > 0)
+	{
+		LOG("Free audio memory");
+		fx.clear();
+	}
+	else
+		LOG("There are no FX, so no unload will be made");		
+}
+
 // Play WAV
 bool j1Audio::PlayFx(unsigned int id, int repeat)
 {
@@ -171,3 +184,4 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 
 	return ret;
 }
+

@@ -437,14 +437,15 @@ bool j1Player::CleanUp() {
 	spritesheet_pj = nullptr;
 	current_animation = nullptr;
 
+	//Unload colliders for the camera
 	camera_toRight = nullptr;
 	camera_toLeft = nullptr;
 	camera_toUp = nullptr;
 	camera_toDown = nullptr;
 
-	//TODO | Create UnLoadFx() and UnLoadMusic() functions so I can complete the CleanUp()
-	//App->audio->UnLoadFx("audio/fx/jump.wav");
-	//App->audio->UnLoadFx("audio/fx/walk.wav");
+	//Unload audio
+	App->audio->unLoadFx("audio/fx/jump.wav");
+	App->audio->unLoadFx("audio/fx/walk.wav");
 
 	return true;
 }
