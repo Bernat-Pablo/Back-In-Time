@@ -53,6 +53,7 @@ public:
 	void SaveGame(const char* file) const;
 	void GetSaveGames(p2List<p2SString>& list_to_fill) const;
 
+	pugi::xml_node GetConfig();
 private:
 
 	// Load config file
@@ -77,6 +78,7 @@ private:
 	bool LoadGameNow();
 	bool SavegameNow() const;
 
+	
 public:
 
 	// Modules
@@ -106,6 +108,10 @@ private:
 	bool				want_to_load;
 	p2SString			load_game;
 	mutable p2SString	save_game;
+
+	pugi::xml_document	config_file;
+	pugi::xml_node		config;
+	pugi::xml_node		app_config;
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S

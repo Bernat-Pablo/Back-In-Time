@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="350" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="180">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="350" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="181">
  <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16" tilecount="4816" columns="86">
   <image source="Basic_Tiles_Only.png" width="1376" height="896"/>
  </tileset>
@@ -52524,21 +52524,21 @@
   </data>
  </layer>
  <objectgroup id="6" name="Colliders">
-  <object id="1" name="1" x="-2.57592" y="272.485" width="419" height="209"/>
-  <object id="2" name="1" x="-0.242591" y="-0.181567" width="20" height="273.333"/>
-  <object id="3" name="1" x="416.424" y="336.485" width="15.3333" height="146"/>
-  <object id="4" name="1" x="433.091" y="352.485" width="15.3333" height="130.667"/>
-  <object id="5" name="1" x="448.424" y="368.485" width="16" height="114.667"/>
-  <object id="7" name="1" x="512" y="367.818" width="64.4243" height="16.182"/>
-  <object id="8" name="1" x="527.757" y="352.485" width="49.3333" height="15.515"/>
-  <object id="9" name="1" x="607.757" y="352.485" width="18" height="128"/>
-  <object id="10" name="1" x="625.091" y="432.485" width="126.667" height="49.3333"/>
-  <object id="11" name="2" x="569.091" y="460.485" width="50.6667" height="18"/>
+  <object id="1" name="1" x="0" y="272.485" width="416.424" height="207.515"/>
+  <object id="2" name="1" x="-0.242591" y="-0.181567" width="16.2426" height="272.182"/>
+  <object id="3" name="1" x="416.424" y="336.485" width="15.3333" height="143.515"/>
+  <object id="4" name="1" x="432" y="352.054" width="16.312" height="127.946"/>
+  <object id="5" name="1" x="448.312" y="367.792" width="15.7382" height="112.208"/>
+  <object id="7" name="1" x="512" y="367.818" width="64" height="16.182"/>
+  <object id="8" name="1" x="527.757" y="352.485" width="48.243" height="15.515"/>
+  <object id="9" name="1" x="607.757" y="352" width="16.243" height="128"/>
+  <object id="10" name="1" x="625.091" y="432" width="126.909" height="48"/>
+  <object id="11" name="2" x="576" y="464" width="32" height="16"/>
   <object id="12" name="2" x="743.757" y="463.152" width="53.3333" height="16"/>
-  <object id="13" name="1" x="673.091" y="321.818" width="15.3333" height="13.3333"/>
-  <object id="14" name="1" x="689.091" y="304.485" width="16.6667" height="16"/>
-  <object id="15" name="1" x="751.757" y="287.818" width="48.6667" height="16.6667"/>
-  <object id="16" name="1" x="783.757" y="271.818" width="32" height="18"/>
+  <object id="13" name="1" x="672" y="320" width="16" height="16"/>
+  <object id="14" name="1" x="688" y="304" width="16" height="16"/>
+  <object id="15" name="1" x="751.757" y="288" width="48.243" height="16.4847"/>
+  <object id="16" name="1" x="783.757" y="271.818" width="32.243" height="16.182"/>
   <object id="17" name="1" x="831.757" y="255.818" width="16" height="16.6667"/>
   <object id="18" name="1" x="864.424" y="239.818" width="16" height="16.6667"/>
   <object id="19" name="1" x="911.757" y="224.485" width="48.6667" height="15.3333"/>
@@ -52702,5 +52702,6 @@
   <object id="177" name="3" x="2062.42" y="446.485" width="50" height="15.3333"/>
   <object id="178" name="1" x="1.75741" y="132.485" width="255.333" height="13.3333"/>
   <object id="179" name="5" x="5556.42" y="306.485" width="19.5" height="44.5"/>
+  <object id="180" name="1" x="464" y="384" width="112" height="96"/>
  </objectgroup>
 </map>

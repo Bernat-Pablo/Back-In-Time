@@ -48,7 +48,7 @@ bool j1Collision::CleanUp()
 	{
 		if (colliders[i] != nullptr)
 		{
-			delete colliders[i];
+			//delete colliders[i];
 			colliders[i] = nullptr;
 		}
 	}

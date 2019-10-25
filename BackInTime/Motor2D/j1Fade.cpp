@@ -58,10 +58,10 @@ bool j1Fade::Update(float dt)
 			moduleOn->Enable();
 			//ugly but working
 			App->scene->CleanUp();
+			App->collision->CleanUp(); //Delete previous colliders
 			App->scene->Awake();
 			App->scene->Start();
-
-			//we have to delete previous colliders
+			App->player->Awake(App->GetConfig()); //Initialize player position, camera, player_collider...
 
 			//resets player & camera position
 			App->render->camera.x = 0;
@@ -88,7 +88,6 @@ bool j1Fade::Update(float dt)
 	// Finally render the black square with alpha on the screen
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
 	SDL_RenderFillRect(App->render->renderer, &screen);
-
 	return true;
 }
 
