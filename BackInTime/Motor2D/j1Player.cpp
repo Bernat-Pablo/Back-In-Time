@@ -543,7 +543,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		}
 		else if (c2->name == "down") //Collision with camera_toDown
 		{
-			if (c2->rect.y < 460) //Camera is at the bottom limit of the map
+			if (c2->rect.y < 437) //Camera is at the bottom limit of the map
 			{
 				App->render->camera.y -= 2* fall_velocity;
 				//Update the position of the camera colliders
