@@ -123,14 +123,11 @@ bool j1Player::PreUpdate()
 		}
 		else if (player_input.pressing_D)
 		{
-			if (collider_at_right == false)
-				state = WALK_FORWARD;
+			state = WALK_FORWARD;
 		}
 		else if (player_input.pressing_A)
-		{
-			if (collider_at_left == false)						
-				state = WALK_BACKWARD;
-			
+		{					
+			state = WALK_BACKWARD;			
 		}
 		break;
 	case WALK_FORWARD:		
@@ -448,12 +445,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			if (position.y < c2->rect.y) //Player is on the ground
 			{
 				gravity = 0;
-				position.y -= fall_velocity;
+				position.y -= fall_velocity; //We neutrlalize gravity force
 				in_air = false;
-				jump_down.Reset();
-				jump_up.Reset();
-			}
-			
+			}			
 
 			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 			{
@@ -465,20 +459,17 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			else
 				collider_at_right = false;
 
-			if (position.x < c2->rect.x + c2->rect.w && (state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD || state == IDLE)) //Player is at the right of a wall
+			if (position.x < c2->rect.x + c2->rect.w) //Player is at the right of a wall
 			{
-				if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
+				if(state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD || state == IDLE || state == DASH_BACKWARD)
 				{
-					collider_at_left = true;
-
-					//Check for bug at jump
-					if (player_input.pressing_space)
+					if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
 					{
-						
+						collider_at_left = true;
 					}
-				}
-				else
-					collider_at_left = false;
+					else
+						collider_at_left = false;
+				}				
 			}
 			else
 				collider_at_left = false;
@@ -492,7 +483,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			break;
 		case COLLIDER_DOOR:
 			//TODO
-			//CHANGE SCENE
+			//CHANGE SCENE			
 			break;		
 		}
 	}

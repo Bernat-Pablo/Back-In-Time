@@ -94542,7 +94542,7 @@
  <objectgroup id="12" name="Colliders">
   <object id="5" name="1" x="20.3333" y="432" width="395.667" height="48"/>
   <object id="8" name="1" x="320" y="416.091" width="48" height="15.909"/>
-  <object id="9" name="1" x="336" y="400" width="32.1818" height="16"/>
+  <object id="9" name="1" x="336" y="400" width="31.9943" height="16"/>
   <object id="10" name="1" x="368" y="384" width="31.9783" height="48"/>
   <object id="11" name="1" x="416" y="448" width="16" height="32"/>
   <object id="13" name="1" x="928" y="352" width="143.5" height="128.5"/>
@@ -94562,7 +94562,7 @@
   <object id="28" name="1" x="3296" y="96" width="96" height="16"/>
   <object id="29" name="1" x="3328" y="80" width="64" height="16"/>
   <object id="30" name="1" x="3360" y="64" width="32" height="16"/>
-  <object id="31" name="1" x="2528" y="320" width="368.5" height="159.5"/>
+  <object id="31" name="1" x="2528" y="320" width="367.955" height="159.5"/>
   <object id="35" name="1" x="432" y="464" width="48" height="16"/>
   <object id="36" name="1" x="480" y="447.75" width="32" height="32.25"/>
   <object id="37" name="1" x="511.75" y="431.75" width="32.25" height="48.25"/>
@@ -94577,7 +94577,7 @@
   <object id="46" name="1" x="2112.33" y="432.333" width="32" height="48.3333"/>
   <object id="47" name="1" x="2144.67" y="448.333" width="30.6667" height="32.3333"/>
   <object id="48" name="1" x="2175" y="464" width="33" height="16.3337"/>
-  <object id="49" name="1" x="2240" y="464" width="32.6633" height="15.6663"/>
+  <object id="49" name="1" x="2240" y="464" width="32.2997" height="15.6663"/>
   <object id="50" name="1" x="2272" y="448.333" width="31.7917" height="31.6667"/>
   <object id="51" name="1" x="2304" y="431.667" width="32.5417" height="49.6667"/>
   <object id="52" name="1" x="2336.33" y="415.667" width="31.5833" height="65"/>
@@ -94619,7 +94619,7 @@
   <object id="88" name="1" x="4239" y="-0.5" width="96.5" height="240"/>
   <object id="89" name="1" x="4335.5" y="-0.5" width="33" height="255.5"/>
   <object id="90" name="1" x="4175" y="0.5" width="32" height="287"/>
-  <object id="93" name="1" x="4206.5" y="0.5" width="17" height="269.5"/>
+  <object id="93" name="1" x="4206.5" y="0.5" width="17" height="270.833"/>
   <object id="94" name="1" x="4224" y="0" width="16" height="255.5"/>
   <object id="98" name="1" x="3631.5" y="47.5" width="33.5" height="16.5"/>
   <object id="99" name="1" x="3664" y="63.5" width="33" height="16.5"/>
@@ -94650,7 +94650,7 @@
   <object id="132" name="1" x="3600.25" y="0.75" width="31.5" height="47"/>
   <object id="134" name="1" x="592" y="400" width="240.292" height="80"/>
   <object id="135" name="1" x="0" y="301.666" width="20.3333" height="178.334"/>
-  <object id="136" name="1" x="832" y="304" width="48.0003" height="158.333"/>
+  <object id="136" name="1" x="832" y="304" width="48.0003" height="175.788"/>
   <object id="138" name="2" x="876.917" y="448" width="55.5" height="32"/>
  </objectgroup>
 </map>
