@@ -428,8 +428,19 @@ bool j1Player::Update(float dt)
 }
 
 bool j1Player::CleanUp() {
+	LOG("Unloading player\n");
 	collider_player = nullptr;
 	spritesheet_pj = nullptr;
+	current_animation = nullptr;
+
+	camera_toRight = nullptr;
+	camera_toLeft = nullptr;
+	camera_toUp = nullptr;
+	camera_toDown = nullptr;
+
+	//TODO | Create UnLoadFx() and UnLoadMusic() functions so I can complete the CleanUp()
+	//App->audio->UnLoadFx("audio/fx/jump.wav");
+	//App->audio->UnLoadFx("audio/fx/walk.wav");
 
 	return true;
 }
