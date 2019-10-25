@@ -497,10 +497,15 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			SetCameraToInitialCoords();
 			
 			break;
-		case COLLIDER_DOOR:
-			//TODO
-			//CHANGE SCENE			
-			break;		
+		case COLLIDER_DOOR:			
+			//Change scene from 1 to 2
+			if(c2->name == "door1") //We touch the first door, so we go to level 2
+				App->scene->choose_lv = 2;
+			else if (c2->name == "door2") 
+				App->scene->choose_lv = 1;
+
+			App->fade->FadeToBlack(App->scene, App->scene);
+			break;	
 		}
 	}
 

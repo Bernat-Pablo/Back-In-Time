@@ -94572,7 +94572,7 @@
   <object id="41" name="1" x="1952" y="352" width="30.3333" height="128"/>
   <object id="42" name="1" x="1982.33" y="368" width="33.67" height="112"/>
   <object id="43" name="1" x="2016" y="384" width="32.0033" height="96"/>
-  <object id="44" name="1" x="2048.33" y="400" width="31.67" height="80.333"/>
+  <object id="44" name="1" x="2048" y="400" width="32" height="80"/>
   <object id="45" name="1" x="2080" y="416" width="32" height="64"/>
   <object id="46" name="1" x="2112" y="432" width="32" height="48"/>
   <object id="47" name="1" x="2144" y="448" width="32" height="32"/>

@@ -296,7 +296,9 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 				if (name == "4")
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_ACTIVATE_TRAP, "activatetrap");
 				if (name == "5")
-					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door");
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door1");
+				if (name == "6")
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door2");
 
 				collidernum++;
 			}			
