@@ -61,7 +61,7 @@ bool j1Fade::Update(float dt)
 			App->scene->Awake();
 			App->scene->Start();
 
-
+			//we have to delete previous colliders
 
 			//resets player & camera position
 			App->render->camera.x = 0;
