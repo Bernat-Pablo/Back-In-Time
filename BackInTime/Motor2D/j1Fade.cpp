@@ -5,6 +5,8 @@
 #include "j1Player.h"
 #include "j1Audio.h"
 #include "j1Input.h"
+#include "j1Textures.h"
+#include "j1Window.h"
 #include "p2Log.h"
 #include "j1Scene.h"
 #include "j1Collision.h"
@@ -57,12 +59,28 @@ bool j1Fade::Update(float dt)
 			moduleOff->Disable();
 			moduleOn->Enable();
 			//ugly but working
-			App->scene->CleanUp();
+			
+			//We call to Cleanups
 			App->collision->CleanUp(); //Delete previous colliders
-			App->scene->Awake();
-			App->scene->Start();
-			App->player->Awake(App->GetConfig()); //Initialize player position, camera, player_collider...
+			App->player->CleanUp();
+			App->scene->CleanUp(); //Clean up map			
+			App->audio->CleanUp();
+			App->tex->CleanUp();
+			//App->win->CleanUp();
+			//App->input->CleanUp();
 
+			//We load new map	
+			//App->input->Awake(App->GetConfig());
+			//App->win->Awake(App->GetConfig());
+			App->tex->Awake(App->GetConfig());
+			App->audio->Awake(App->GetConfig());
+			App->scene->Awake();
+			App->player->Awake(App->GetConfig());
+			App->player->Start(); //At start we load player spritesheet
+			App->collision->Awake(App->GetConfig());	
+			
+
+			App->scene->Start();
 			//resets player & camera position
 			App->render->camera.x = 0;
 			App->render->camera.y = 0;

@@ -54,6 +54,18 @@ public:
 	void GetSaveGames(p2List<p2SString>& list_to_fill) const;
 
 	pugi::xml_node GetConfig();
+
+	// Modules
+	j1Window* win;
+	j1Input* input;
+	j1Render* render;
+	j1Textures* tex;
+	j1Audio* audio;
+	j1Scene* scene;
+	j1Map* map;
+	j1Collision* collision;
+	j1Player* player;
+	j1Fade* fade;
 private:
 
 	// Load config file
@@ -78,22 +90,6 @@ private:
 	bool LoadGameNow();
 	bool SavegameNow() const;
 
-	
-public:
-
-	// Modules
-	j1Window*			win;
-	j1Input*			input;
-	j1Render*			render;
-	j1Textures*			tex;
-	j1Audio*			audio;
-	j1Scene*			scene;
-	j1Map*				map;
-	j1Collision*		collision;
-	j1Player*			player;
-	j1Fade*				fade;
-
-private:
 
 	p2List<j1Module*>	modules;
 	uint				frames;

@@ -64,7 +64,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	current_animation = &idle;
 	App->audio->LoadFx("audio/fx/jump.wav");
 	App->audio->LoadFx("audio/fx/walk.wav");
-	
+
 	gravity = true;
 	position.x = initial_x;
 	position.y = initial_y;
@@ -77,10 +77,9 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 	return ret;
 }
-bool j1Player::Start(){
-
-	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");	
+bool j1Player::Start(){		
 	tick2 = SDL_GetTicks();
+	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
 
 	return true;
 }
@@ -443,7 +442,7 @@ bool j1Player::CleanUp() {
 	camera_toUp = nullptr;
 	camera_toDown = nullptr;
 
-	//Unload audio
+	//Unload audio	
 	App->audio->unLoadFx("audio/fx/jump.wav");
 	App->audio->unLoadFx("audio/fx/walk.wav");
 
