@@ -73,8 +73,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 100,20,140 }, COLLIDER_CAMERA, "right",  (j1Module*)App->player );
 	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA,"left", (j1Module*)App->player ); 
-	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,120,20 }, COLLIDER_CAMERA, "up",(j1Module*)App->player);
-	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,120,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
+	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,140,20 }, COLLIDER_CAMERA, "up", (j1Module*)App->player);
+	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 	return ret;
 }
 bool j1Player::Start(){
@@ -124,14 +124,11 @@ bool j1Player::PreUpdate()
 		}
 		else if (player_input.pressing_D)
 		{
-			if (collider_at_right == false)
-				state = WALK_FORWARD;
+			state = WALK_FORWARD;
 		}
 		else if (player_input.pressing_A)
-		{
-			if (collider_at_left == false)						
-				state = WALK_BACKWARD;
-			
+		{					
+			state = WALK_BACKWARD;			
 		}
 		break;
 	case WALK_FORWARD:		
@@ -435,8 +432,19 @@ bool j1Player::Update(float dt)
 }
 
 bool j1Player::CleanUp() {
+	LOG("Unloading player\n");
 	collider_player = nullptr;
 	spritesheet_pj = nullptr;
+	current_animation = nullptr;
+
+	camera_toRight = nullptr;
+	camera_toLeft = nullptr;
+	camera_toUp = nullptr;
+	camera_toDown = nullptr;
+
+	//TODO | Create UnLoadFx() and UnLoadMusic() functions so I can complete the CleanUp()
+	//App->audio->UnLoadFx("audio/fx/jump.wav");
+	//App->audio->UnLoadFx("audio/fx/walk.wav");
 
 	return true;
 }
@@ -452,12 +460,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			if (position.y < c2->rect.y) //Player is on the ground
 			{
 				gravity = 0;
-				position.y -= fall_velocity;
+				position.y -= fall_velocity; //We neutrlalize gravity force
 				in_air = false;
-				jump_down.Reset();
-				jump_up.Reset();
-			}
-			
+			}			
 
 			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 			{
@@ -469,20 +474,17 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			else
 				collider_at_right = false;
 
-			if (position.x < c2->rect.x + c2->rect.w && (state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD || state == IDLE)) //Player is at the right of a wall
+			if (position.x < c2->rect.x + c2->rect.w) //Player is at the right of a wall
 			{
-				if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
+				if(state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD || state == IDLE || state == DASH_BACKWARD)
 				{
-					collider_at_left = true;
-
-					//Check for bug at jump
-					if (player_input.pressing_space)
+					if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
 					{
-						
+						collider_at_left = true;
 					}
-				}
-				else
-					collider_at_left = false;
+					else
+						collider_at_left = false;
+				}				
 			}
 			else
 				collider_at_left = false;
@@ -496,7 +498,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			break;
 		case COLLIDER_DOOR:
 			//TODO
-			//CHANGE SCENE
+			//CHANGE SCENE			
 			break;		
 		}
 	}

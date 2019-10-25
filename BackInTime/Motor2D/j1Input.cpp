@@ -136,6 +136,8 @@ bool j1Input::CleanUp()
 {
 	LOG("Quitting SDL event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
+	delete keyboard;
+	keyboard = nullptr;
 	return true;
 }
 
