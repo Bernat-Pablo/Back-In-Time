@@ -48,7 +48,6 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 	bool checkAbility();
 	void useAbility();
-	void SetCameraToInitialCoords();
 
 	bool Save(pugi::xml_node& data) const;
 	bool Load(pugi::xml_node& data);

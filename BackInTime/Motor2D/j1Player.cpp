@@ -490,10 +490,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 				collider_at_left = false;
 			break;
 		case COLLIDER_DIE:
-			//PLAYER GO BACK TO INITIAL POSITION
-			position.x = initial_x;
-			position.y = initial_y;
-			SetCameraToInitialCoords();
+			//Player goes to initial position
+			App->scene->choose_lv = 1;
+			App->fade->FadeToBlack(App->scene, App->scene);
 			
 			break;
 		case COLLIDER_DOOR:			
@@ -566,18 +565,6 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		}
 	}		
 }
-
-void j1Player::SetCameraToInitialCoords()
-{
-	camera_toRight->SetPos(position.x + 70, position.y - 100);
-	camera_toLeft->SetPos(position.x - 50, position.y - 100);	
-	camera_toDown->SetPos(position.x - 50, position.y - 100);
-	camera_toUp->SetPos(position.x - 50, position.y + 40);
-	
-	App->render->camera.x = 0;
-	App->render->camera.y = -190;
-}
-
 
 bool j1Player::Save(pugi::xml_node& data) const {
 	
