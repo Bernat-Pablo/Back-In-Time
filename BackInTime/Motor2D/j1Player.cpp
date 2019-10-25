@@ -569,12 +569,10 @@ void j1Player::SetCameraToInitialCoords()
 
 
 bool j1Player::Save(pugi::xml_node& data) const {
-
-	data.append_child("player");
-
+	
 	//Player position
 	data.append_child("position").append_attribute("x") = position.x;
-	data.child("position").attribute("y") = position.y;
+	data.child("position").append_attribute("y") = position.y;
 		
 	//Save colliders for the camera
 	data.append_child("camera_toRight").append_attribute("x") = camera_toRight->rect.x;
@@ -594,8 +592,8 @@ bool j1Player::Save(pugi::xml_node& data) const {
 }
 
 bool j1Player::Load(pugi::xml_node& data)
-{
-	
+{	
+	//Load player position
 	position.x = data.child("position").attribute("x").as_int();
 	position.y = data.child("position").attribute("y").as_int();
 	return true;
