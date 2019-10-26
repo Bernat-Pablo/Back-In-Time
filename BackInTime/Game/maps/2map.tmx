@@ -52524,18 +52524,18 @@
   </data>
  </layer>
  <objectgroup id="6" name="Colliders">
-  <object id="1" name="1" x="0" y="272" width="416" height="64"/>
+  <object id="1" name="1" x="0" y="272" width="416" height="80"/>
   <object id="2" name="1" x="-0.242591" y="96" width="16.2426" height="176"/>
-  <object id="3" name="1" x="416" y="336" width="16" height="16"/>
-  <object id="4" name="1" x="432" y="352" width="16" height="16"/>
-  <object id="5" name="1" x="448" y="368" width="16" height="16"/>
-  <object id="7" name="1" x="512" y="367.818" width="64" height="16.182"/>
-  <object id="8" name="1" x="527.757" y="352.485" width="48.243" height="15.515"/>
+  <object id="3" name="1" x="416" y="336" width="16" height="32"/>
+  <object id="4" name="1" x="432" y="352" width="16" height="32"/>
+  <object id="5" name="1" x="448" y="368" width="16" height="32"/>
+  <object id="7" name="1" x="512" y="368" width="64" height="16"/>
+  <object id="8" name="1" x="527.757" y="352" width="48.243" height="16"/>
   <object id="9" name="1" x="607.757" y="352" width="16.243" height="128"/>
-  <object id="10" name="1" x="625.091" y="432" width="126.909" height="48"/>
+  <object id="10" name="1" x="624" y="432" width="128" height="48"/>
   <object id="13" name="1" x="672" y="320" width="16" height="16"/>
   <object id="14" name="1" x="688" y="304" width="16" height="16"/>
-  <object id="15" name="1" x="751.757" y="288" width="48.243" height="16.4847"/>
+  <object id="15" name="1" x="752" y="288" width="48" height="16"/>
   <object id="16" name="1" x="783.757" y="271.818" width="32.243" height="16.182"/>
   <object id="17" name="1" x="831.757" y="255.818" width="16" height="16.6667"/>
   <object id="18" name="1" x="864.424" y="239.818" width="15.576" height="16.182"/>
@@ -52550,7 +52550,7 @@
   <object id="27" name="1" x="816" y="416" width="80.4237" height="16"/>
   <object id="28" name="1" x="784" y="432" width="32" height="48"/>
   <object id="29" name="1" x="688" y="352" width="32" height="48"/>
-  <object id="30" name="1" x="720" y="352.485" width="32" height="15.515"/>
+  <object id="30" name="1" x="720" y="352" width="32" height="16"/>
   <object id="31" name="1" x="720" y="368" width="20.6667" height="20"/>
   <object id="32" name="1" x="1136" y="288" width="32" height="191.333"/>
   <object id="33" name="1" x="1136" y="192" width="32" height="48"/>
