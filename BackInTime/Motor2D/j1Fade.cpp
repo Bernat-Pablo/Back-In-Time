@@ -53,10 +53,7 @@ bool j1Fade::Update(float dt)
 		{
 			//Fades music for 1 sec
 			Mix_FadeOutMusic(1000);
-			//Enables called module, disables current module
-
-			moduleOff->Disable();
-			moduleOn->Enable();
+			
 			//ugly but working
 			
 			//We call to Cleanups
@@ -70,11 +67,12 @@ bool j1Fade::Update(float dt)
 			App->tex->Awake(App->GetConfig());
 			App->audio->Awake(App->GetConfig());
 			App->scene->Awake();
+			App->scene->Start();
 			App->player->Awake(App->GetConfig());
 			App->player->Start(); //At start we load player spritesheet
 			App->collision->Awake(App->GetConfig());				
 
-			App->scene->Start();
+			
 			//resets player & camera position
 			App->render->camera.x = 0;
 			App->render->camera.y = 0;

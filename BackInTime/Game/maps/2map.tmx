@@ -52524,11 +52524,11 @@
   </data>
  </layer>
  <objectgroup id="6" name="Colliders">
-  <object id="1" name="1" x="0" y="272.485" width="416.424" height="63.515"/>
+  <object id="1" name="1" x="0" y="272" width="416" height="64"/>
   <object id="2" name="1" x="-0.242591" y="96" width="16.2426" height="176"/>
-  <object id="3" name="1" x="416.424" y="336.485" width="15.3333" height="15.515"/>
-  <object id="4" name="1" x="432" y="352.054" width="16.312" height="15.946"/>
-  <object id="5" name="1" x="448.312" y="367.792" width="15.7382" height="16.208"/>
+  <object id="3" name="1" x="416" y="336" width="16" height="16"/>
+  <object id="4" name="1" x="432" y="352" width="16" height="16"/>
+  <object id="5" name="1" x="448" y="368" width="16" height="16"/>
   <object id="7" name="1" x="512" y="367.818" width="64" height="16.182"/>
   <object id="8" name="1" x="527.757" y="352.485" width="48.243" height="15.515"/>
   <object id="9" name="1" x="607.757" y="352" width="16.243" height="128"/>
