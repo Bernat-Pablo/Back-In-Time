@@ -51,7 +51,6 @@ public:
 
 	bool Save(pugi::xml_node& data) const;
 	bool Load(pugi::xml_node& data);
-public:
 
 	Animation idle;
 	Animation walk;
@@ -64,12 +63,11 @@ public:
 	Animation* current_animation;
 
 	SDL_Texture* spritesheet_pj = nullptr;
+	const char* spritesheet_source;
 
-public:
 	Player_States state; //Current player state
 	Player_Input player_input; //Input introduced by the player
 	int lives = 3;
-
 
 	float initial_x = 200.0f; // 2 blocks * 16 each one
 	float initial_y = 400.0f; // 25 blocks * 16 each one - height pj	
@@ -79,17 +77,17 @@ public:
 	float decrease_vel = 0.2f;
 	float velocity = 2.0f;
 
-	float run_velocity = 3.0f;
-	float fall_velocity = 0.0f;
-	float gravity = 0.2f;
-	float jump_vel = 6.5f;
+	float run_velocity;
+	float fall_velocity;
+	float gravity;
+	float jump_vel;
 
 	bool moving_right = false; //for slide
 	bool moving_left = false;	
 	bool in_air = false;
 	bool looking_right=true;
 
-	bool collider_at_right = false; //player can't go to the right
+	bool collider_at_right = false; //If true, player can't go to the right 
 	bool collider_at_left = false;
 
 	bool is_inAir;

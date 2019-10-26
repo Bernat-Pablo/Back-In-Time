@@ -11,15 +11,19 @@
   </renderer>
 
   <player>
-    <spritesheet source ="spritesheet_pj.png"/>
-    <initialPosition x="200.0" y ="400.0"/>
+    <spritesheet source ="character/spritesheet_pj.png"/>
+    <initialPosition>
+      <map1 x="200" y="400"/>
+      <map2 x="40" y="240"/>
+    </initialPosition>
 
+    <lives value ="3"/>
     <velocity value ="2.0"/>
     <run_velocity value ="3.0"/>
+    <fall_velocity value ="0.0"/>
     <decrease_vel value ="0.2" />
-
-    <gravity value ="6.0"/>
-    <jumpForce value ="6.5"/>
+    <gravity value ="0.2"/>
+    <jump_vel value ="6.5"/>
 
     <!-- Audio and FX -->
     <jumpFX source ="jump.wav"/>
@@ -48,6 +52,7 @@
     <finish_printing_left value="17"></finish_printing_left>
     <finish_printing_up value="15"></finish_printing_up>
     <finish_printing_down value="9"></finish_printing_down>
+
   </map>
 
   <scene>

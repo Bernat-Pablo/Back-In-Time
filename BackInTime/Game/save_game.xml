@@ -7,17 +7,17 @@
 	<map />
 	<scene />
 	<player>
-		<position x="467" y="346" />
-		<camera_toRight x="483" y="307" />
-		<camera_toLeft x="363" y="307" />
-		<camera_toUp x="363" y="307" />
-		<camera_toDown x="363" y="427" />
+		<position x="43" y="246" />
+		<camera_toRight x="270" y="221" />
+		<camera_toLeft x="150" y="221" />
+		<camera_toUp x="150" y="221" />
+		<camera_toDown x="150" y="341" />
 		<lives value="3" />
-		<in_air value="true" />
+		<in_air value="false" />
 	</player>
 	<:anonymous />
 	<:anonymous />
 	<renderer>
-		<camera x="-426" y="-164" />
+		<camera x="0" y="152" />
 	</renderer>
 </game_state>
