@@ -32,7 +32,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	}
 
 	// load support for the JPG and PNG image formats
-	int flags = MIX_INIT_OGG;
+	int flags = MIX_INIT_MP3;
 	int init = Mix_Init(flags);
 
 	if((init & flags) != flags)
@@ -43,7 +43,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	}
 
 	//Initialize SDL_mixer
-	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
 		LOG("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 		active = false;

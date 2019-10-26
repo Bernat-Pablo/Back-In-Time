@@ -46,7 +46,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(Collider* c1, Collider* c2);
-	bool checkAbility();
+	void checkAbility();
 	void useAbility();
 
 	bool Save(pugi::xml_node& data) const;
@@ -72,7 +72,7 @@ public:
 	float initial_x = 200.0f; // 2 blocks * 16 each one
 	float initial_y = 400.0f; // 25 blocks * 16 each one - height pj	
 	iPoint position; //Use position.x and position.y
-	iPoint old_position;
+	iPoint old_position[15];
 
 	float decrease_vel = 0.2f;
 	float velocity = 2.0f;
@@ -94,9 +94,9 @@ public:
 
 	bool godMode = false;
 
-	bool ability_able = false;
-
 	int tick1 = 0, tick2 = 0;
+
+	int iterator = 0;
 
 	Collider* collider_player = nullptr;
 

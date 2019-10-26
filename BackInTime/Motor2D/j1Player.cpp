@@ -129,7 +129,7 @@ bool j1Player::PreUpdate()
 		}			
 	}
 
-	ability_able = checkAbility();
+	checkAbility();
 
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
@@ -451,9 +451,10 @@ bool j1Player::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0);
 	if (moving_left || moving_right)	App->audio->PlayFx(2, 1);
 
-	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
-		useAbility();
-	}
+	//if (ability_able == true) 
+		if(App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			useAbility();
+	
 	
 
 	return true;
@@ -640,23 +641,30 @@ bool j1Player::Load(pugi::xml_node& data)
 	return true;
 }
 
-bool j1Player::checkAbility() {
-	
-	if (tick1 - tick2 >= 1500) {
-		old_position.x = position.x;
-		old_position.y = position.y;
+void j1Player::checkAbility() {
+	if (tick1 - tick2>=100) {
+		if (iterator <= 14) {
+			old_position[iterator].x = App->player->position.x;
+			old_position[iterator].y = App->player->position.y;
+			iterator++;
+		}
+		else {
+			for (int i = 0; i <= 13; i++) {
+				old_position[i].x = old_position[i+1].x;
+				old_position[i].y = old_position[i+1].y;
+			}
+			old_position[14].x = App->player->position.x;
+			old_position[14].y = App->player->position.y;
+		}
 		tick2 = SDL_GetTicks();
-		ability_able = true;
 	}
 	tick1 = SDL_GetTicks();
 	
-	return ability_able;
 }
 
 void j1Player::useAbility() {
 
-	position.x = old_position.x;
-	position.y = old_position.y;
-	ability_able = false;
+	position.x = old_position[0].x;
+	position.y = old_position[0].y;
 
 }
