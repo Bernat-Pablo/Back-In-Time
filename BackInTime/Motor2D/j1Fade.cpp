@@ -62,6 +62,7 @@ bool j1Fade::Update(float dt)
 			App->scene->CleanUp(); //Clean up map			
 			App->audio->CleanUp();
 			App->tex->CleanUp();
+			
 
 			//We load new map	
 			App->tex->Awake(App->GetConfig());
@@ -70,9 +71,8 @@ bool j1Fade::Update(float dt)
 			App->scene->Start();
 			App->player->Awake(App->GetConfig());
 			App->player->Start(); //At start we load player spritesheet
-			App->collision->Awake(App->GetConfig());				
+			App->collision->Awake(App->GetConfig());	
 
-			
 			//resets player & camera position
 			App->render->camera.x = 0;
 			App->render->camera.y = 0;

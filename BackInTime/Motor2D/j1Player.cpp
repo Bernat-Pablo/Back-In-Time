@@ -67,7 +67,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	if(App->scene->choose_lv == 1) //We are on map1
 	{
-		position.x = 200;
+		position.x = config.child("initialPosition").child("map1").attribute("x").as_int();
 		position.y = 400;	
 	}
 	else if (App->scene->choose_lv == 2) //We are on map2
@@ -85,7 +85,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	decrease_vel = config.child("decrease_vel").attribute("value").as_float();
 	lives = config.child("lives").attribute("value").as_int();
 	spritesheet_source = config.child("spritesheet").attribute("source").as_string();*/
-
+	
 	gravity = 0.2f;
 	run_velocity = 3.0f;
 	velocity = 2.0f;
