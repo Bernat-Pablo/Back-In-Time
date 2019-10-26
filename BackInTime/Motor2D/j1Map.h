@@ -100,6 +100,7 @@ public:
 
 	iPoint PosConverter(int x, int y);
 	SDL_Rect GetTileRect(TileSet* tileset, int id);
+	iPoint MapToWorld(int x, int y) const;
 
 private:
 
@@ -108,7 +109,8 @@ private:
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup);
-	
+	TileSet* GetTilesetFromTileId(int id) const;
+
 public:
 
 	MapData data;
