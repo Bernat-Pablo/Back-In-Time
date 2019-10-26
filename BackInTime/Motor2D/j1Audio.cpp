@@ -32,7 +32,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	}
 
 	// load support for the JPG and PNG image formats
-	int flags = MIX_INIT_MP3;
+	int flags = MIX_INIT_OGG;
 	int init = Mix_Init(flags);
 
 	if((init & flags) != flags)
