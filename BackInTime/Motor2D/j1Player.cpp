@@ -61,13 +61,38 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	LOG("Loading Player Data");
 	bool ret = true;	
-	current_animation = &idle;
-	App->audio->LoadFx("audio/fx/jump.wav");
-	App->audio->LoadFx("audio/fx/walk.wav");
+	current_animation = &idle;	
 
 	gravity = true;
-	position.x = initial_x;
-	position.y = initial_y;
+
+	if(App->scene->choose_lv == 1) //We are on map1
+	{
+		position.x = 200;
+		position.y = 400;	
+	}
+	else if (App->scene->choose_lv == 2) //We are on map2
+	{
+		position.x = 40;
+		position.y = 240;
+	}
+
+	//Set initial data of the player
+	/*gravity = config.child("gravity").attribute("value").as_float();
+	run_velocity = config.child("run_velocity").attribute("value").as_float();
+	velocity = config.child("velocity").attribute("value").as_float();
+	fall_velocity = config.child("fall_velocity").attribute("value").as_float();
+	jump_vel = config.child("jump_vel").attribute("value").as_float();
+	decrease_vel = config.child("decrease_vel").attribute("value").as_float();
+	lives = config.child("lives").attribute("value").as_int();
+	spritesheet_source = config.child("spritesheet").attribute("source").as_string();*/
+
+	gravity = 0.2f;
+	run_velocity = 3.0f;
+	velocity = 2.0f;
+	fall_velocity = 0.0f;
+	jump_vel = 6.5f;
+	decrease_vel = 0.2f;
+	lives = 3;
 
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
 
@@ -80,7 +105,10 @@ bool j1Player::Awake(pugi::xml_node& config) {
 bool j1Player::Start(){		
 	tick2 = SDL_GetTicks();
 	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
+	//spritesheet_pj = App->tex->Load(spritesheet_source);
 
+	App->audio->LoadFx("audio/fx/jump.wav");
+	App->audio->LoadFx("audio/fx/walk.wav");
 	return true;
 }
 
@@ -240,8 +268,8 @@ bool j1Player::PreUpdate()
 			if (player_input.pressing_lshift) 
 				state = RUN_BACKWARD;			
 		}
-
-
+		else if (!player_input.pressing_A)
+			state = IDLE;
 		break;
 	case DASH_BACKWARD:
 		moving_right = false;
@@ -251,7 +279,8 @@ bool j1Player::PreUpdate()
 			velocity = 2.0f;
 			if (player_input.pressing_lshift) 
 				state = RUN_FORWARD;			
-		}
+		}else if (!player_input.pressing_D)
+			state = IDLE;
 		break;
 	}
 
