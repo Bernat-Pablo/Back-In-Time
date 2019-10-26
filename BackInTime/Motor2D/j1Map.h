@@ -32,7 +32,7 @@ struct MapLayer
 
 struct TileSet
 {
-
+	//SDL_Rect GetTileRect(int id) const;
 
 	p2SString			name;
 	int					firstgid;
@@ -99,7 +99,6 @@ public:
 	bool Load(const char* path);
 
 	iPoint PosConverter(int x, int y);
-	SDL_Rect GetTileRect(TileSet* tileset, int id);
 	iPoint MapToWorld(int x, int y) const;
 
 private:
@@ -110,10 +109,12 @@ private:
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup);
 	TileSet* GetTilesetFromTileId(int id) const;
+	SDL_Rect GetTileRect(TileSet* tileset, int id);
 
 public:
 
 	MapData data;
+	Collider* culling = nullptr;
 	
 private:
 
