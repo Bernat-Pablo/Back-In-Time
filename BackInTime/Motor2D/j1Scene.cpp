@@ -33,7 +33,7 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	if(choose_lv==1)
-		App->map->Load("maps/map.tmx");
+		App->map->Load("maps/map_1.tmx");
 	else if (choose_lv==2)
 		App->map->Load("maps/2map.tmx");
 
