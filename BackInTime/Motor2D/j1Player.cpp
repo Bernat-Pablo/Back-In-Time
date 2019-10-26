@@ -67,8 +67,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	if(App->scene->choose_lv == 1) //We are on map1
 	{
-		position.x = config.child("initialPosition").child("map1").attribute("x").as_int();
-		position.y = 400;	
+		position.x = 50;
+		position.y = 180;	
 	}
 	else if (App->scene->choose_lv == 2) //We are on map2
 	{
