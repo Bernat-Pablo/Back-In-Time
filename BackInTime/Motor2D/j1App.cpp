@@ -375,5 +375,6 @@ bool j1App::SavegameNow() const
 
 pugi::xml_node j1App::GetConfig()
 {
-	return config_file;
+	//return config_file;
+	return config;
 }
