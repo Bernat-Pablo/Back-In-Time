@@ -104,6 +104,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 }
 bool j1Player::Start(){		
 	tick2 = SDL_GetTicks();
+	tick4 = SDL_GetTicks();
 	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
 	//spritesheet_pj = App->tex->Load(spritesheet_source);
 
@@ -129,7 +130,7 @@ bool j1Player::PreUpdate()
 		}			
 	}
 
-	ability_able = checkAbility();
+	checkAbility();
 
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
@@ -640,23 +641,44 @@ bool j1Player::Load(pugi::xml_node& data)
 	return true;
 }
 
-bool j1Player::checkAbility() {
-	
-	if (tick1 - tick2 >= 1500) {
-		old_position.x = position.x;
-		old_position.y = position.y;
+void j1Player::checkAbility() {
+	if (tick1 - tick2 >= 100) {
+		if (iterator <= 14) {
+			old_position[iterator].x = App->player->position.x;
+			old_position[iterator].y = App->player->position.y;
+			iterator++;
+		}
+		else {
+			for (int i = 0; i <= 13; i++) {
+				old_position[i].x = old_position[i + 1].x;
+				old_position[i].y = old_position[i + 1].y;
+			}
+			old_position[14].x = App->player->position.x;
+			old_position[14].y = App->player->position.y;
+		}
 		tick2 = SDL_GetTicks();
-		ability_able = true;
 	}
 	tick1 = SDL_GetTicks();
-	
-	return ability_able;
+
+	if (tick3 - tick4 >= 4000) {
+		ability_able = true;
+		tick4 = SDL_GetTicks();
+	}
+	tick3 = SDL_GetTicks();
 }
 
 void j1Player::useAbility() {
 
-	position.x = old_position.x;
-	position.y = old_position.y;
-	ability_able = false;
+	position.x = old_position[0].x;
+	position.y = old_position[0].y;
 
+	camera_toRight->SetPos(position.x + 70, position.y - 100);
+	camera_toLeft->SetPos(position.x - 50, position.y - 100);
+	camera_toUp->SetPos(position.x - 50, position.y - 100);
+	camera_toDown->SetPos(position.x - 50, position.y + 20);
+
+	App->render->camera.x = position.x - 200;
+	App->render->camera.y = position.y - 50;
+
+	ability_able = false;
 }
