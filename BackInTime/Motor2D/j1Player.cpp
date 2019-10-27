@@ -567,11 +567,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		}
 		else if (c2->name == "left") //Collision with camera_toLeft
 		{
-			if (position.x > 180)
-			{
-				//Update the position of the camera colliders
-				MoveCameraColliders("x", -localVelocity);
-			}
+			//Update the position of the camera colliders
+			MoveCameraColliders("x", -localVelocity);			
 		}
 		else if (c2->name == "up") //Collision with camera_toUp
 		{
@@ -579,12 +576,10 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			MoveCameraColliders("y", -localVelocity);
 		}
 		else if (c2->name == "down") //Collision with camera_toDown
-		{
-			if (c2->rect.y < App->render->camera.h) //Camera is at the bottom limit of the map
-			{
-				//Update the position of the camera colliders				
-				MoveCameraColliders("y", fall_velocity);
-			}
+		{			
+			//Update the position of the camera colliders				
+			MoveCameraColliders("y", fall_velocity);
+			
 		}
 	}		
 }
@@ -693,6 +688,13 @@ void j1Player::MoveCameraColliders(p2SString direction, float speed)
 
 	if(direction == "x") //Move right or left
 	{
+		if(speed < 0 ) //moving to left
+			if(App->render->camera.x < 0)
+				App->render->camera.x -= 2*speed;
+		if (speed > 0) //moving to right
+			if (App->render->camera.x > App->map->data.width)
+				App->render->camera.x -= 2 * speed;
+
 		camera_toRight->rect.x += speed;
 		camera_toLeft->rect.x += speed;
 		camera_toUp->rect.x += speed;

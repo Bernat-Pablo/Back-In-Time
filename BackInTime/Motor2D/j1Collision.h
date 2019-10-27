@@ -66,7 +66,7 @@ public:
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 private:
 	
-	bool debug = true;
+	bool debug = false;
 };
 
 #endif // __ModuleCollision_H__
