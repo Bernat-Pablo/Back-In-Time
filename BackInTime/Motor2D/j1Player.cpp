@@ -400,7 +400,7 @@ bool j1Player::Update(float dt)
 		case DASH_FORWARD:
 			current_animation = &walk;
 
-			//velocity -= decrease_vel;
+			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
 			
 			if(collider_at_right == false)
 				position.x += velocity;
@@ -414,7 +414,7 @@ bool j1Player::Update(float dt)
 		case DASH_BACKWARD:
 			current_animation = &walk;
 
-			//velocity -= decrease_vel;
+			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
 
 			if(collider_at_left == false)
 				position.x -= velocity;
@@ -457,7 +457,11 @@ bool j1Player::Update(float dt)
 	if (in_air == true) {
 		fall_velocity += gravity;
 		position.y += fall_velocity;
+		LOG("IN AIR");
 	}
+	else
+		LOG("NOT IN AIR");
+
 
 	return true;
 }
@@ -493,7 +497,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			{
 				in_air = false;
 				fall_velocity = 0;
-			}			
+			}
 
 			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 			{
