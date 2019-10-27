@@ -8827,10 +8827,10 @@
    <tile gid="1293"/>
    <tile/>
    <tile/>
-   <tile gid="1291"/>
-   <tile gid="1292"/>
-   <tile gid="1292"/>
-   <tile gid="1293"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile gid="1291"/>
    <tile gid="1292"/>
@@ -8977,10 +8977,10 @@
    <tile gid="1379"/>
    <tile/>
    <tile/>
-   <tile gid="1377"/>
-   <tile gid="1378"/>
-   <tile gid="1378"/>
-   <tile gid="1379"/>
+   <tile gid="1291"/>
+   <tile gid="1292"/>
+   <tile gid="1292"/>
+   <tile gid="1293"/>
    <tile/>
    <tile gid="1377"/>
    <tile gid="1378"/>
@@ -13186,9 +13186,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1558"/>
-   <tile gid="1559"/>
-   <tile gid="1560"/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile gid="1558"/>
    <tile gid="1559"/>
@@ -13336,9 +13336,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1558"/>
+   <tile gid="1559"/>
+   <tile gid="1560"/>
    <tile/>
    <tile/>
    <tile/>
@@ -13554,7 +13554,7 @@
   <object id="31" name="1" x="2080" y="176" width="16" height="16"/>
   <object id="32" name="1" x="1936" y="208" width="64" height="32"/>
   <object id="33" name="1" x="1840" y="208" width="64" height="32"/>
-  <object id="34" name="1" x="1760" y="208" width="64" height="32"/>
+  <object id="34" name="1" x="1760" y="224" width="64" height="16"/>
   <object id="35" name="1" x="2128" y="192" width="272" height="48"/>
   <object id="36" name="6" x="2368" y="128" width="16" height="64"/>
   <object id="37" name="2" x="2000" y="230.5" width="128" height="9.5"/>
