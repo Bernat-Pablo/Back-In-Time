@@ -296,14 +296,14 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 				objectgroup->object[i].x = object.attribute("x").as_int();
 				objectgroup->object[i].y = object.attribute("y").as_int();
 				objectgroup->object[i].w = object.attribute("width").as_int();
-				objectgroup->object[i].h = object.attribute("height").as_int();
+				objectgroup->object[i].h = object.attribute("height").as_int();				
 
 				if(name == "1")
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL, "wall");
 				if(name == "2")
 					App->collision->AddCollider(objectgroup->object[i],  COLLIDER_DIE, "die");
 				if (name == "3")
-					App->collision->AddCollider(objectgroup->object[i],  COLLIDER_TRAP, "trap");
+					App->collision->AddCollider(objectgroup->object[i],  COLLIDER_TRAP, "trap"); //Traps will be used at next assignment
 				if (name == "4")
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_ACTIVATE_TRAP, "activatetrap");
 				if (name == "5")

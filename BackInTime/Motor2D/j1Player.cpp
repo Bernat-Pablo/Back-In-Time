@@ -242,7 +242,7 @@ bool j1Player::PreUpdate()
 	case JUMP:
 		if (player_input.pressing_D) 
 			state = JUMP_FORWARD;		
-		else if (player_input.pressing_A) 
+		if (player_input.pressing_A) 
 			state = JUMP_BACKWARD;
 		
 		break;
@@ -727,38 +727,32 @@ bool j1Player::checkInAir() //Checks if player is in_air or if it's grounded
 	// Calculate collisions
 	Collider* c2;
 
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	// avoid checking collisions already checked
+	for (uint k = 0; k < MAX_COLLIDERS; ++k)
 	{
-		// skip empty colliders		
-		if (App->collision->colliders[i] == nullptr)
+		// skip empty colliders
+		if (App->collision->colliders[k] == nullptr)
 			continue;
 
-		// avoid checking collisions already checked
-		for (uint k = i + 1; k < MAX_COLLIDERS; ++k)
+		c2 = App->collision->colliders[k];
+
+		if(c2->type == COLLIDER_WALL) //We only want to check if player is colliding with a wall
 		{
-			// skip empty colliders
-			if (App->collision->colliders[k] == nullptr)
-				continue;
-
-			c2 = App->collision->colliders[k];
-
-			if(c2->type == COLLIDER_WALL)
+			if (collider_player->CheckCollision(c2->rect) == true) //There is collision between the player and a wall
 			{
-				if (collider_player->CheckCollision(c2->rect) == true) //There is collision with a wall
+				if (position.y + collider_player->rect.h < c2->rect.y)
 				{
-					if (position.y + collider_player->rect.h < c2->rect.y)
-					{
-						continue; //Player is not grounded. Let's check next collider
-					}
-					else
-						return false; //Player is grounded. in_air = false
-
+					continue; //Player is not grounded. Let's check next collider
 				}
 				else 
-					continue; //There is not a collision with a wall, so let's check next collider
-			}	
-		}
+					return false; //Player is grounded. in_air = false
+
+			}
+			else 
+				continue; //There is not a collision with a wall, so let's check next collider
+		}	
 	}
+	
 	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
 }
 
