@@ -484,6 +484,7 @@ bool j1Player::CleanUp() {
 	collider_player = nullptr;
 	spritesheet_pj = nullptr;
 	current_animation = nullptr;
+	delete[] old_position;
 
 	//Unload colliders for the camera
 	camera_toRight = nullptr;
@@ -493,7 +494,6 @@ bool j1Player::CleanUp() {
 
 	//Unload audio	
 	App->audio->unLoadFx("audio/fx/jump.wav");
-	App->audio->unLoadFx("audio/fx/walk.wav");
 
 	return true;
 }
