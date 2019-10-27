@@ -484,7 +484,6 @@ bool j1Player::CleanUp() {
 	collider_player = nullptr;
 	spritesheet_pj = nullptr;
 	current_animation = nullptr;
-	delete[] old_position;
 
 	//Unload colliders for the camera
 	camera_toRight = nullptr;
