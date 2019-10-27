@@ -74,7 +74,10 @@ public:
 	iPoint position; //Use position.x and position.y
 	iPoint old_position[15];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int iterator = 0;
+=======
+>>>>>>> parent of d1b4f36... back in time
 =======
 >>>>>>> parent of d1b4f36... back in time
 
@@ -101,7 +104,11 @@ public:
 	int tick1 = 0, tick2 = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	int tick3 = 0, tick4 = 0;
+=======
+	int iterator = 0;
+>>>>>>> parent of d1b4f36... back in time
 =======
 	int iterator = 0;
 >>>>>>> parent of d1b4f36... back in time

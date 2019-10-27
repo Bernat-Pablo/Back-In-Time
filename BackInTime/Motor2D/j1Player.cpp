@@ -646,7 +646,11 @@ bool j1Player::Load(pugi::xml_node& data)
 
 void j1Player::checkAbility() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (tick1 - tick2 >= 100) {
+=======
+	if (tick1 - tick2>=100) {
+>>>>>>> parent of d1b4f36... back in time
 =======
 	if (tick1 - tick2>=100) {
 >>>>>>> parent of d1b4f36... back in time
@@ -658,8 +662,13 @@ void j1Player::checkAbility() {
 		else {
 			for (int i = 0; i <= 13; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				old_position[i].x = old_position[i + 1].x;
 				old_position[i].y = old_position[i + 1].y;
+=======
+				old_position[i].x = old_position[i+1].x;
+				old_position[i].y = old_position[i+1].y;
+>>>>>>> parent of d1b4f36... back in time
 =======
 				old_position[i].x = old_position[i+1].x;
 				old_position[i].y = old_position[i+1].y;
@@ -680,6 +689,9 @@ void j1Player::checkAbility() {
 	tick3 = SDL_GetTicks();
 =======
 	
+<<<<<<< HEAD
+>>>>>>> parent of d1b4f36... back in time
+=======
 >>>>>>> parent of d1b4f36... back in time
 }
 
@@ -687,6 +699,7 @@ void j1Player::useAbility() {
 
 	position.x = old_position[0].x;
 	position.y = old_position[0].y;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	camera_toRight->SetPos(position.x + 70, position.y - 100);
@@ -699,6 +712,8 @@ void j1Player::useAbility() {
 
 	ability_able = false;
 =======
+=======
+>>>>>>> parent of d1b4f36... back in time
 
 	camera_toRight->SetPos(position.x + 70, position.y - 100);
 	camera_toLeft->SetPos(position.x - 50, position.y - 100);
@@ -707,5 +722,8 @@ void j1Player::useAbility() {
 
 	App->render->camera.x = position.x - 200;
 	App->render->camera.y = position.y - 50;
+<<<<<<< HEAD
+>>>>>>> parent of d1b4f36... back in time
+=======
 >>>>>>> parent of d1b4f36... back in time
 }
