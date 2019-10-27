@@ -143,9 +143,8 @@ bool j1Player::PreUpdate()
 		moving_left = false;
 		if (player_input.pressing_space && in_air==false) //fix
 		{
-			jump_vel = 6.5f; //magic numbers. change
+			jump_vel = 4.0f; //magic numbers. change
 			state = JUMP;
-			in_air = true;
 		}
 		else if (player_input.pressing_D)
 		{
@@ -157,7 +156,7 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case WALK_FORWARD:		
-		jump_vel = 6.5f; //magic numbers. change
+		jump_vel = 4.0f; //magic numbers. change
 
 		if (!player_input.pressing_D && moving_right == true)		
 			state = DASH_FORWARD;
@@ -183,7 +182,7 @@ bool j1Player::PreUpdate()
 
 		break;
 	case WALK_BACKWARD:
-		jump_vel = 6.5f; //magic numbers. change
+		jump_vel = 4.0f; //magic numbers. change
 		if (!player_input.pressing_A && moving_left == true)		
 			state = DASH_BACKWARD;
 		
@@ -200,7 +199,7 @@ bool j1Player::PreUpdate()
 
 		break;
 	case RUN_FORWARD:
-		jump_vel = 6.5f; //magic numbers. change
+		jump_vel = 4.0f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_D)
@@ -218,7 +217,7 @@ bool j1Player::PreUpdate()
 
 		break;
 	case RUN_BACKWARD:
-		jump_vel = 6.5f; //magic numbers. change
+		jump_vel = 4.0f; //magic numbers. change
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_A)			
@@ -290,6 +289,9 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt) 
 {
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update
+
 	switch(state)
 	{
 		case IDLE:
@@ -351,7 +353,7 @@ bool j1Player::Update(float dt)
 			if (jump_vel > 0) {
 				in_air = true;
 				current_animation = &jump_up;
-				jump_vel -= decrease_vel;
+				jump_vel -= fall_velocity;
 				position.y -= jump_vel;
 			}
 			else {
@@ -383,7 +385,7 @@ bool j1Player::Update(float dt)
 			current_animation = &jump_up;
 			if (jump_vel >= 0) {
 				in_air = true;
-				jump_vel -= decrease_vel;
+				jump_vel -= fall_velocity;
 				position.y -= jump_vel;
 			}
 			else {
@@ -433,6 +435,7 @@ bool j1Player::Update(float dt)
 	}		
 	else if(godMode == true)
 	{
+		in_air = false;
 		if (player_input.pressing_W)
 			position.y -= velocity;
 		if (player_input.pressing_S)
@@ -446,13 +449,16 @@ bool j1Player::Update(float dt)
 	else
 		App->render->Blit(spritesheet_pj, position.x, position.y, &r);
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0);
 	if (moving_left || moving_right)	App->audio->PlayFx(2, 1);
 
 	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
 		useAbility();
 	}
 	
+	if (in_air == true) {
+		fall_velocity += gravity;
+		position.y += fall_velocity;
+	}
 
 	return true;
 }
@@ -486,9 +492,8 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		case COLLIDER_WALL:
 			if (position.y < c2->rect.y) //Player is on the ground
 			{
-				gravity = 0;
-				position.y -= fall_velocity; //We neutrlalize gravity force
 				in_air = false;
+				fall_velocity = 0;
 			}			
 
 			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall

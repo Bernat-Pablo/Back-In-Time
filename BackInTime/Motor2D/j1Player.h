@@ -93,8 +93,6 @@ private:
 	bool collider_at_right = false; //If true, player can't go to the right 
 	bool collider_at_left = false;
 
-	bool is_inAir;
-
 	bool godMode = false;
 
 	bool ability_able = false;
