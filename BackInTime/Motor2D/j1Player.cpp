@@ -366,10 +366,10 @@ bool j1Player::Update(float dt)
 			}
 			break;
 		case JUMP_FORWARD:
-			current_animation = &jump_up;
 			if (jump_vel >= 0) {
+				current_animation = &jump_up;
 				in_air = true;
-				jump_vel -= decrease_vel;
+				jump_vel -= fall_velocity;
 				position.y -= jump_vel;
 			}
 			else {
@@ -384,8 +384,8 @@ bool j1Player::Update(float dt)
 
 			break;
 		case JUMP_BACKWARD:
-			current_animation = &jump_up;
 			if (jump_vel >= 0) {
+				current_animation = &jump_up;
 				in_air = true;
 				jump_vel -= fall_velocity;
 				position.y -= jump_vel;
@@ -461,7 +461,11 @@ bool j1Player::Update(float dt)
 	else
 		App->render->Blit(spritesheet_pj, position.x, position.y, &r);
 
-	if (moving_left || moving_right)	App->audio->PlayFx(2, 1);
+	if (player_input.pressing_A == true || player_input.pressing_D == true)
+		walking = true;
+	else walking = false;
+
+	if (walking == true)	App->audio->PlayFx(2, 1);
 
 	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
 		useAbility();
