@@ -51,7 +51,8 @@ public:
 
 	bool Save(pugi::xml_node& data) const;
 	bool Load(pugi::xml_node& data);
-
+	iPoint position; //Use position.x and position.y
+private:
 	Animation idle;
 	Animation walk;
 	Animation run;
@@ -69,9 +70,10 @@ public:
 	Player_Input player_input; //Input introduced by the player
 	int lives = 3;
 
+	p2SString			folder;
 	float initial_x = 200.0f; // 2 blocks * 16 each one
 	float initial_y = 400.0f; // 25 blocks * 16 each one - height pj	
-	iPoint position; //Use position.x and position.y
+	
 	iPoint old_position[15];
 	int iterator = 0;
 

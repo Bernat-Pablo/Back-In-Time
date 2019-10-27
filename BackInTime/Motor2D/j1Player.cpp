@@ -65,6 +65,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	gravity = true;
 
+	folder.create(config.child("folder").child_value());
+
 	if(App->scene->choose_lv == 1) //We are on map1
 	{
 		position.x = 200;
@@ -521,6 +523,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			break;
 		case COLLIDER_DIE:
 			//Player goes to initial position
+			state = IDLE;
 			App->fade->FadeToBlack(App->scene, App->scene);
 			
 			break;
