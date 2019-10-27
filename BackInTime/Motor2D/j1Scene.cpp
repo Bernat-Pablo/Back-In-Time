@@ -37,7 +37,7 @@ bool j1Scene::Start()
 	else if (choose_lv==2)
 		App->map->Load("maps/map_2.tmx");
 
-	//App->audio->PlayMusic("audio/music/music_sadpiano.ogg");
+	App->audio->PlayMusic("audio/music/music.ogg");
 	//App->map->Load("iso.tmx");
 	
 	return true;

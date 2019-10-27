@@ -108,7 +108,7 @@ bool j1Player::Start(){
 	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 
 	App->audio->LoadFx("audio/fx/jump.wav");
-	App->audio->LoadFx("audio/fx/walk.wav");
+	App->audio->LoadFx("audio/fx/walking.wav");
 	return true;
 }
 
@@ -366,10 +366,10 @@ bool j1Player::Update(float dt)
 			}
 			break;
 		case JUMP_FORWARD:
-			current_animation = &jump_up;
 			if (jump_vel >= 0) {
+				current_animation = &jump_up;
 				in_air = true;
-				jump_vel -= decrease_vel;
+				jump_vel -= fall_velocity;
 				position.y -= jump_vel;
 			}
 			else {
@@ -384,8 +384,8 @@ bool j1Player::Update(float dt)
 
 			break;
 		case JUMP_BACKWARD:
-			current_animation = &jump_up;
 			if (jump_vel >= 0) {
+				current_animation = &jump_up;
 				in_air = true;
 				jump_vel -= fall_velocity;
 				position.y -= jump_vel;
@@ -457,11 +457,15 @@ bool j1Player::Update(float dt)
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
 	if(!looking_right)
-		App->render->Blit(spritesheet_pj, position.x, position.y, &r,1,2);
+		App->render->Blit(spritesheet_pj, position.x, position.y, &r,1,2); //looking at left
 	else
-		App->render->Blit(spritesheet_pj, position.x, position.y, &r);
+		App->render->Blit(spritesheet_pj, position.x, position.y, &r); //looking at right
 
-	if (moving_left || moving_right)	App->audio->PlayFx(2, 1);
+	if (player_input.pressing_A == true || player_input.pressing_D == true) //watching if the pj is walkubg
+		walking = true;
+	else walking = false;
+
+	if (walking == true)	App->audio->PlayFx(2, 1); //sound of walking active
 
 	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
 		useAbility();
@@ -671,8 +675,7 @@ void j1Player::useAbility() {
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
 	camera_toDown->SetPos(position.x - 50, position.y + 20);
 
-	App->render->camera.x = position.x - 200;
-	App->render->camera.y = position.y - 50;
+	App->render->camera.x = -position.x;
 
 	ability_able = false;
 }
