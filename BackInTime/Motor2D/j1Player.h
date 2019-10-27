@@ -53,6 +53,8 @@ public:
 	bool Load(pugi::xml_node& data);
 
 	void MoveCameraColliders(p2SString direction, float speed);
+	bool checkInAir();
+
 	iPoint position; //Use position.x and position.y
 private:
 	Animation idle;

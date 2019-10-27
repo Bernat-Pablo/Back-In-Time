@@ -427,13 +427,16 @@ bool j1Player::Update(float dt)
 			}
 			break;
 	}
+
 	if(godMode == false)
 	{
-		if (fall_velocity > 10)
-			in_air = true;
+		in_air = checkInAir();
 
-		fall_velocity += gravity;
-		position.y += fall_velocity;
+		if(in_air == true)
+		{
+			fall_velocity += gravity;
+			position.y += fall_velocity;
+		}		
 	}		
 	else if(godMode == true)
 	{
@@ -455,12 +458,7 @@ bool j1Player::Update(float dt)
 
 	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
 		useAbility();
-	}
-	
-	if (in_air == true) {
-		fall_velocity += gravity;
-		position.y += fall_velocity;
-	}
+	}	
 
 	return true;
 }
@@ -496,7 +494,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			{
 				in_air = false;
 				fall_velocity = 0;
-			}else if(position.y + collider_player->rect.h)
+			}
 
 			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 			{
@@ -602,7 +600,6 @@ bool j1Player::Save(pugi::xml_node& data) const {
 	
 	//Extra data
 	data.append_child("lives").append_attribute("value") = lives;
-	data.append_child("in_air").append_attribute("value") = in_air;
 
 	return true;
 }
@@ -625,7 +622,6 @@ bool j1Player::Load(pugi::xml_node& data)
 
 	//Load extra data
 	lives = data.child("lives").attribute("value").as_int();
-	in_air = data.child("in_air").attribute("value").as_bool();
 	return true;
 }
 
@@ -695,3 +691,42 @@ void j1Player::MoveCameraColliders(p2SString direction, float speed)
 	}
 }
 
+bool j1Player::checkInAir()
+{
+	// Calculate collisions
+	Collider* c2;
+
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		// skip empty colliders		
+		if (App->collision->colliders[i] == nullptr)
+			continue;
+
+		// avoid checking collisions already checked
+		for (uint k = i + 1; k < MAX_COLLIDERS; ++k)
+		{
+			// skip empty colliders
+			if (App->collision->colliders[k] == nullptr)
+				continue;
+
+			c2 = App->collision->colliders[k];
+
+			if(c2->type == COLLIDER_WALL)
+			{
+				if (collider_player->CheckCollision(c2->rect) == true) //There is collision with a wall
+				{
+					if (position.y + collider_player->rect.h < c2->rect.y)
+					{
+						continue; //Player is not grounded. Let's check next collider
+					}
+					else
+						return false; //Player is grounded. in_air = false
+
+				}
+				else 
+					continue; //There is not a collision with a wall, so let's check next collider
+			}	
+		}
+	}
+	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
+}

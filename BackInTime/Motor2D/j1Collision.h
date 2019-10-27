@@ -62,9 +62,10 @@ public:
 	void DebugDraw();
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, p2SString name, j1Module* callback = nullptr);
-private:
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
+private:
+	
 	bool debug = true;
 };
 
