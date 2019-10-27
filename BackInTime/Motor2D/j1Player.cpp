@@ -108,7 +108,7 @@ bool j1Player::Start(){
 	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 
 	App->audio->LoadFx("audio/fx/jump.wav");
-	App->audio->LoadFx("audio/fx/walk.wav");
+	App->audio->LoadFx("audio/fx/walking.wav");
 	return true;
 }
 
@@ -676,7 +676,7 @@ void j1Player::useAbility() {
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
 	camera_toDown->SetPos(position.x - 50, position.y + 20);
 
-	App->render->camera.x = position.x - 200;
+	App->render->camera.x = 100;
 	App->render->camera.y = position.y - 50;
 
 	ability_able = false;
