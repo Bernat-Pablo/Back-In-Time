@@ -64,8 +64,6 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	folder.create(config.child("folder").child_value());
 
-	
-
 	//Set initial data of the player
 	gravity = config.child("gravity").attribute("value").as_float();
 	run_velocity = config.child("run_velocity").attribute("value").as_float();
@@ -84,15 +82,16 @@ bool j1Player::Start(){
 	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
 	//spritesheet_pj = App->tex->Load(spritesheet_source);
 
+	pugi::xml_node config_local = App->GetConfig();
 	if (App->scene->choose_lv == 1) //We are on map1
 	{
-		position.x = 200;
-		position.y = 400;
+		position.x = config_local.child("player").child("initialPosition").child("map1").attribute("x").as_int();
+		position.y = config_local.child("player").child("initialPosition").child("map1").attribute("y").as_int();
 	}
 	else if (App->scene->choose_lv == 2) //We are on map2
 	{
-		position.x = 200;
-		position.y = 240;
+		position.x = config_local.child("player").child("initialPosition").child("map2").attribute("x").as_int();
+		position.y = config_local.child("player").child("initialPosition").child("map2").attribute("y").as_int();
 	}
 
 	state = IDLE;

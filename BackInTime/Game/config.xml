@@ -14,8 +14,8 @@
   <player>
     <spritesheet source ="character/spritesheet_pj.png"/>
     <initialPosition>
-      <map1 x="200" y="400"/>
-      <map2 x="40" y="240"/>
+      <map1 x="80" y="180"/>
+      <map2 x="40" y="53"/>
     </initialPosition>
 
     <lives value ="3"/>
