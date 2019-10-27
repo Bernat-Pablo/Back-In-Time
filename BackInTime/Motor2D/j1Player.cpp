@@ -605,6 +605,10 @@ bool j1Player::Save(pugi::xml_node& data) const {
 	data.append_child("camera_toDown").append_attribute("x") = camera_toDown->rect.x;
 	data.child("camera_toDown").append_attribute("y") = camera_toDown->rect.y;
 	
+	//Save camera position
+	data.append_child("camera").append_attribute("x") = App->render->camera.x;
+	data.child("camera").append_attribute("y") = App->render->camera.y;
+
 	//Extra data
 	data.append_child("lives").append_attribute("value") = lives;
 
@@ -626,6 +630,10 @@ bool j1Player::Load(pugi::xml_node& data)
 	camera_toUp->rect.y = data.child("camera_toUp").attribute("y").as_int();
 	camera_toDown->rect.x = data.child("camera_toDown").attribute("x").as_int();
 	camera_toDown->rect.y = data.child("camera_toDown").attribute("y").as_int();
+
+	//Load camera position
+	App->render->camera.x = data.child("camera").attribute("x").as_int();
+	App->render->camera.y = data.child("camera").attribute("y").as_int();
 
 	//Load extra data
 	lives = data.child("lives").attribute("value").as_int();
