@@ -400,7 +400,7 @@ bool j1Player::Update(float dt)
 		case DASH_FORWARD:
 			current_animation = &walk;
 
-			velocity -= decrease_vel;
+			//velocity -= decrease_vel;
 			
 			if(collider_at_right == false)
 				position.x += velocity;
@@ -414,7 +414,7 @@ bool j1Player::Update(float dt)
 		case DASH_BACKWARD:
 			current_animation = &walk;
 
-			velocity -= decrease_vel;
+			//velocity -= decrease_vel;
 
 			if(collider_at_left == false)
 				position.x -= velocity;
