@@ -67,12 +67,12 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	if(App->scene->choose_lv == 1) //We are on map1
 	{
-		position.x = config.child("initialPosition").child("map1").attribute("x").as_int();
+		position.x = 200;
 		position.y = 400;	
 	}
 	else if (App->scene->choose_lv == 2) //We are on map2
 	{
-		position.x = 40;
+		position.x = 200;
 		position.y = 240;
 	}
 
@@ -521,7 +521,6 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			break;
 		case COLLIDER_DIE:
 			//Player goes to initial position
-			App->scene->choose_lv = 1;
 			App->fade->FadeToBlack(App->scene, App->scene);
 			
 			break;

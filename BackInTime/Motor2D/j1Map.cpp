@@ -280,7 +280,7 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 		{				
 			p2SString name(object.attribute("name").as_string());
 			
-			if(name == "1" || name == "2" || name == "3" || name == "4" || name == "5")
+			if(name == "1" || name == "2" || name == "3" || name == "4" || name == "5" || name == "6")
 			{
 				objectgroup->object[i].x = object.attribute("x").as_int();
 				objectgroup->object[i].y = object.attribute("y").as_int();
