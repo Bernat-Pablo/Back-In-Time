@@ -1,7 +1,7 @@
 #ifndef __ModuleCollision_H__
 #define __ModuleCollision_H__
 
-#define MAX_COLLIDERS 100
+#define MAX_COLLIDERS 250
 
 #include "j1Module.h"
 #include "j1App.h"
@@ -17,7 +17,6 @@ enum COLLIDER_TYPE
 	COLLIDER_ACTIVATE_TRAP,
 	COLLIDER_DOOR,
 	COLLIDER_CAMERA,
-	COLLIDER_CULLING,
 
 	COLLIDER_MAX,
 };
@@ -61,7 +60,6 @@ public:
 	bool CleanUp();
 
 	void DebugDraw();
-	bool CleanBackMapPlayer(int x);
 
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, p2SString name, j1Module* callback = nullptr);
 private:

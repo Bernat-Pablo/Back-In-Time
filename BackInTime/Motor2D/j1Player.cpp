@@ -1,0 +1,662 @@
+#include "j1App.h"
+#include "j1Player.h"
+#include "j1Render.h"
+#include "j1RectSprites.h"
+#include "j1Textures.h"
+#include "j1Audio.h"
+#include "j1Input.h"
+#include "j1Animation.h"
+#include "p2Log.h"
+#include "j1Collision.h"
+#include "j1Map.h"
+#include "j1Scene.h"
+#include "j1Fade.h"
+
+j1Player::j1Player() : j1Module()
+{
+	name.create("player");
+	
+	float speed = 0.2f;
+	//IDLE
+	idle.PushBack({ 0,0,17,27 }, speed);
+	idle.PushBack({ 32,0,17,27 }, speed);
+	idle.PushBack({ 64,0,19,27 }, speed);
+	idle.PushBack({ 96,0,21,27 }, speed);
+
+	//WALK
+	speed = 0.2f;
+	walk.PushBack({ 0,27,17,25 }, speed);
+	walk.PushBack({ 32,27,17,26 }, speed);
+	walk.PushBack({ 64,27,17,27 }, speed);
+	walk.PushBack({ 95,29,18,26 }, speed);
+	walk.PushBack({ 128,28,17,26 }, speed);
+	walk.PushBack({ 160,27,17,27 }, speed);	
+
+	//JUMP UP
+	speed = 0.1f;
+	jump_up.PushBack({ 0,58,17,26 }, speed);
+	jump_up.PushBack({ 30,60,20,24 }, speed);
+	jump_up.PushBack({ 61,60,22,24 }, speed);
+	jump_up.PushBack({ 96,55,17,29 }, speed);
+	jump_up.loop = true;
+	
+	//JUMP DOWN
+	jump_down.PushBack({ 127,54,18,27 }, speed);
+	jump_down.PushBack({ 158,56,20,27 }, speed);
+	jump_down.PushBack({ 189,60,22,24 }, speed);
+	jump_down.PushBack({ 223,58,18,26 }, speed);
+	jump_down.loop = true;
+
+	//RUN
+	speed = 0.15f;
+	run.PushBack({ 0,141,19,25 }, speed);
+	run.PushBack({ 33,141,18,25 }, speed);
+	run.PushBack({ 64,141,19,26 }, speed);
+	run.PushBack({ 96,141,19,25 }, speed);
+	run.PushBack({ 129,141,18,25 }, speed);
+	run.PushBack({ 161,141,18,28 }, speed);
+}
+
+bool j1Player::Awake(pugi::xml_node& config) {
+
+	LOG("Loading Player Data");
+	bool ret = true;	
+	current_animation = &idle;	
+
+	gravity = true;
+
+	if(App->scene->choose_lv == 1) //We are on map1
+	{
+		position.x = config.child("initialPosition").child("map1").attribute("x").as_int();
+		position.y = 400;	
+	}
+	else if (App->scene->choose_lv == 2) //We are on map2
+	{
+		position.x = 40;
+		position.y = 240;
+	}
+
+	//Set initial data of the player
+	/*gravity = config.child("gravity").attribute("value").as_float();
+	run_velocity = config.child("run_velocity").attribute("value").as_float();
+	velocity = config.child("velocity").attribute("value").as_float();
+	fall_velocity = config.child("fall_velocity").attribute("value").as_float();
+	jump_vel = config.child("jump_vel").attribute("value").as_float();
+	decrease_vel = config.child("decrease_vel").attribute("value").as_float();
+	lives = config.child("lives").attribute("value").as_int();
+	spritesheet_source = config.child("spritesheet").attribute("source").as_string();*/
+	
+	gravity = 0.2f;
+	run_velocity = 3.0f;
+	velocity = 2.0f;
+	fall_velocity = 0.0f;
+	jump_vel = 6.5f;
+	decrease_vel = 0.2f;
+	lives = 3;
+
+	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
+
+	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 100,20,140 }, COLLIDER_CAMERA, "right",  (j1Module*)App->player );
+	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA,"left", (j1Module*)App->player ); 
+	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,140,20 }, COLLIDER_CAMERA, "up", (j1Module*)App->player);
+	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
+	return ret;
+}
+bool j1Player::Start(){		
+	tick2 = SDL_GetTicks();
+	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
+	//spritesheet_pj = App->tex->Load(spritesheet_source);
+
+	App->audio->LoadFx("audio/fx/jump.wav");
+	App->audio->LoadFx("audio/fx/walk.wav");
+	return true;
+}
+
+bool j1Player::PreUpdate() 
+{
+	//God Mode
+	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	{
+		if (godMode == true)
+		{
+			godMode = false;
+		}			
+		else if (godMode == false)
+		{
+			godMode = true;
+			collider_at_left = false;
+			collider_at_right = false;
+		}			
+	}
+
+	ability_able = checkAbility();
+
+	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
+	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
+	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
+	player_input.pressing_D = App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
+	player_input.pressing_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT;
+	player_input.pressing_lshift = App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT;
+	
+	switch (state)
+	{
+	case IDLE:
+		moving_right = false;
+		moving_left = false;
+		if (player_input.pressing_space && in_air==false) //fix
+		{
+			jump_vel = 6.5f; //magic numbers. change
+			state = JUMP;
+			in_air = true;
+		}
+		else if (player_input.pressing_D)
+		{
+			state = WALK_FORWARD;
+		}
+		else if (player_input.pressing_A)
+		{					
+			state = WALK_BACKWARD;			
+		}
+		break;
+	case WALK_FORWARD:		
+		jump_vel = 6.5f; //magic numbers. change
+
+		if (!player_input.pressing_D && moving_right == true)		
+			state = DASH_FORWARD;
+		
+		if (!player_input.pressing_D && moving_right == false)		
+			state = IDLE;
+		
+		if (player_input.pressing_space && in_air == false)		
+			state = JUMP_FORWARD;
+		
+		if (player_input.pressing_lshift)		
+			state = RUN_FORWARD;
+		
+		if (player_input.pressing_A)
+		{
+			if (collider_at_right)
+				position.x -= velocity;
+
+			state = WALK_BACKWARD;
+		}
+		
+		looking_right = true;
+
+		break;
+	case WALK_BACKWARD:
+		jump_vel = 6.5f; //magic numbers. change
+		if (!player_input.pressing_A && moving_left == true)		
+			state = DASH_BACKWARD;
+		
+		if (!player_input.pressing_A && moving_left == false)		
+			state = IDLE;
+		
+		if (player_input.pressing_space && in_air == false)		
+			state = JUMP_BACKWARD;
+		
+		if (player_input.pressing_lshift)		
+			state = RUN_BACKWARD;
+
+		looking_right = false;
+
+		break;
+	case RUN_FORWARD:
+		jump_vel = 6.5f; //magic numbers. change
+		if (!player_input.pressing_lshift)
+		{
+			if (player_input.pressing_D)
+				state = WALK_FORWARD;			
+			else			
+				state = DASH_FORWARD;			
+		}
+		else if (player_input.pressing_A && player_input.pressing_lshift) 
+			state = RUN_BACKWARD;	
+
+		if (player_input.pressing_space)
+			state = JUMP_FORWARD;
+
+		looking_right = true;
+
+		break;
+	case RUN_BACKWARD:
+		jump_vel = 6.5f; //magic numbers. change
+		if (!player_input.pressing_lshift)
+		{
+			if (player_input.pressing_A)			
+				state = WALK_BACKWARD;			
+			else			
+				state = DASH_BACKWARD;			
+		}
+		else if (player_input.pressing_D && player_input.pressing_lshift) 
+			state = RUN_FORWARD;
+		
+		if (player_input.pressing_space)
+			state = JUMP_BACKWARD;
+
+		looking_right = false;
+
+		break;
+	case JUMP:
+		if (player_input.pressing_D) 
+			state = JUMP_FORWARD;		
+		else if (player_input.pressing_A) 
+			state = JUMP_BACKWARD;
+		
+		break;
+	case JUMP_FORWARD:
+		moving_right = true;
+		moving_left = false;
+		if (!player_input.pressing_D) 
+			state = JUMP;		
+		break;
+	case JUMP_BACKWARD:
+		moving_right = false;
+		moving_left = true;
+		if (!player_input.pressing_A) 
+			state = JUMP;		
+
+		looking_right = false;
+
+		break;
+	case DASH_FORWARD:
+		moving_right = false;
+		moving_left = false;
+		if (player_input.pressing_A) {
+			state = WALK_BACKWARD;
+			velocity = 2.0f;
+			if (player_input.pressing_lshift) 
+				state = RUN_BACKWARD;			
+		}
+		else if (!player_input.pressing_A)
+			state = IDLE;
+		break;
+	case DASH_BACKWARD:
+		moving_right = false;
+		moving_left = true;
+		if (player_input.pressing_D) {
+			state = WALK_FORWARD;
+			velocity = 2.0f;
+			if (player_input.pressing_lshift) 
+				state = RUN_FORWARD;			
+		}else if (!player_input.pressing_D)
+			state = IDLE;
+		break;
+	}
+
+	//Change player collider position
+	collider_player->SetPos(position.x, position.y);
+
+	return true;
+}
+
+bool j1Player::Update(float dt) 
+{
+	switch(state)
+	{
+		case IDLE:
+			current_animation = &idle;			
+
+			break;
+		case WALK_FORWARD:
+			current_animation = &walk;
+
+			if(collider_at_right == false)
+			{
+				position.x += velocity;
+				moving_right = true;				
+			}
+			else			
+				moving_right = false;
+			
+			break;
+		case WALK_BACKWARD:
+			current_animation = &walk;
+
+			if (collider_at_left == false || collider_at_right == true)
+			{
+				position.x -= velocity;
+				moving_left = true;
+			}
+			else
+				moving_left = false;
+			
+			break;
+		case RUN_FORWARD:
+			current_animation = &run;
+			if (collider_at_right == false)
+			{
+				moving_right = true;
+				moving_left = false;
+				position.x += run_velocity;
+			}
+			else if (collider_at_right == true)
+			{
+				moving_left = false;
+				moving_right = false;
+			}
+			break;
+		case RUN_BACKWARD:
+			current_animation = &run;
+			if (collider_at_left == false)
+			{
+				moving_left = true;
+				moving_right = false;
+				position.x -= run_velocity;
+			}else if(collider_at_left == true)
+			{
+				moving_left = false;
+				moving_right = false;
+			}
+			break;
+		case JUMP:
+			if (jump_vel > 0) {
+				in_air = true;
+				current_animation = &jump_up;
+				jump_vel -= decrease_vel;
+				position.y -= jump_vel;
+			}
+			else {
+				current_animation = &jump_down;
+				if (in_air == false) {
+					state = IDLE;
+				}
+			}
+			break;
+		case JUMP_FORWARD:
+			current_animation = &jump_up;
+			if (jump_vel >= 0) {
+				in_air = true;
+				jump_vel -= decrease_vel;
+				position.y -= jump_vel;
+			}
+			else {
+				current_animation = &jump_down;
+				if (in_air == false) {
+					state = WALK_FORWARD;
+					moving_right = true;
+				}
+			}
+			if (collider_at_right == false)
+				position.x += velocity;
+
+			break;
+		case JUMP_BACKWARD:
+			current_animation = &jump_up;
+			if (jump_vel >= 0) {
+				in_air = true;
+				jump_vel -= decrease_vel;
+				position.y -= jump_vel;
+			}
+			else {
+				current_animation = &jump_down;
+				if (in_air == false) {
+					state = WALK_BACKWARD;
+					moving_left = true;
+				}
+			}
+			if (collider_at_left == false)
+				position.x -= velocity;
+			break;
+		case DASH_FORWARD:
+			current_animation = &walk;
+
+			velocity -= decrease_vel;
+			
+			if(collider_at_right == false)
+				position.x += velocity;
+
+			if (velocity <= 0) {
+				moving_right = false;
+				velocity = 2.0f;
+				state = IDLE;
+			}
+			break;
+		case DASH_BACKWARD:
+			current_animation = &walk;
+
+			velocity -= decrease_vel;
+
+			if(collider_at_left == false)
+				position.x -= velocity;
+
+			if (velocity <= 0)
+			{
+				moving_left = false;
+				velocity = 2.0f;
+				state = IDLE;
+			}
+			break;
+	}
+	if(godMode == false)
+	{
+		fall_velocity += gravity;
+		position.y += fall_velocity;
+	}		
+	else if(godMode == true)
+	{
+		if (player_input.pressing_W)
+			position.y -= velocity;
+		if (player_input.pressing_S)
+			position.y += velocity;
+	}
+
+	SDL_Rect r = current_animation->GetCurrentFrame();
+
+	if(!looking_right)
+		App->render->Blit(spritesheet_pj, position.x, position.y, &r,1,2);
+	else
+		App->render->Blit(spritesheet_pj, position.x, position.y, &r);
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0);
+	if (moving_left || moving_right)	App->audio->PlayFx(2, 1);
+
+	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
+		useAbility();
+	}
+	
+
+	return true;
+}
+
+bool j1Player::CleanUp() {
+	LOG("Unloading player\n");
+	collider_player = nullptr;
+	spritesheet_pj = nullptr;
+	current_animation = nullptr;
+
+	//Unload colliders for the camera
+	camera_toRight = nullptr;
+	camera_toLeft = nullptr;
+	camera_toUp = nullptr;
+	camera_toDown = nullptr;
+
+	//Unload audio	
+	App->audio->unLoadFx("audio/fx/jump.wav");
+	App->audio->unLoadFx("audio/fx/walk.wav");
+
+	return true;
+}
+
+void j1Player::OnCollision(Collider* c1, Collider* c2) {
+
+	if(godMode == false)
+	{
+		switch (c2->type)
+		{
+		
+		case COLLIDER_WALL:
+			if (position.y < c2->rect.y) //Player is on the ground
+			{
+				gravity = 0;
+				position.y -= fall_velocity; //We neutrlalize gravity force
+				in_air = false;
+			}			
+
+			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
+			{
+				if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
+					collider_at_right = true;
+				else
+					collider_at_right = false;
+			}
+			else
+				collider_at_right = false;
+
+			if (position.x < c2->rect.x + c2->rect.w) //Player is at the right of a wall
+			{
+				if(state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD || state == IDLE || state == DASH_BACKWARD)
+				{
+					if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
+					{
+						collider_at_left = true;
+					}
+					else
+						collider_at_left = false;
+				}				
+			}
+			else
+				collider_at_left = false;
+			break;
+		case COLLIDER_DIE:
+			//Player goes to initial position
+			App->scene->choose_lv = 1;
+			App->fade->FadeToBlack(App->scene, App->scene);
+			
+			break;
+		case COLLIDER_DOOR:			
+			//Change scene from 1 to 2
+			if(c2->name == "door1") //We touch the first door, so we go to level 2
+				App->scene->choose_lv = 2;
+			else if (c2->name == "door2") 
+				App->scene->choose_lv = 1;
+
+			App->fade->FadeToBlack(App->scene, App->scene);
+			break;	
+		}
+	}
+
+	//It's out of the if(godMode == false) 
+	//because even if it's at godMode, we want the camera to follow the player
+	if(c2->type == COLLIDER_CAMERA)
+	{
+		float localVelocity = 0;
+		//We adjust camera velocity to player velocity depending his state
+		if (state == WALK_FORWARD || state == WALK_BACKWARD)
+			localVelocity = velocity;
+		else if (state == RUN_FORWARD || state == RUN_BACKWARD)
+			localVelocity = run_velocity;
+		else
+			localVelocity = velocity;
+
+		if (c2->name == "right") //Collision with camera_toRight
+		{
+			App->render->camera.x -= 2 * localVelocity;
+			//Update the position of the camera colliders
+			camera_toRight->rect.x += localVelocity;
+			camera_toLeft->rect.x += localVelocity;
+			camera_toUp->rect.x += localVelocity;
+			camera_toDown->rect.x += localVelocity;
+
+		}
+		else if (c2->name == "left") //Collision with camera_toLeft
+		{
+			if (position.x > 180)
+			{
+				App->render->camera.x += 2 * localVelocity;
+				//Update the position of the camera colliders
+				camera_toRight->rect.x -= localVelocity;
+				camera_toLeft->rect.x -= localVelocity;
+				camera_toUp->rect.x -= localVelocity;
+				camera_toDown->rect.x -= localVelocity;
+			}
+		}
+		else if (c2->name == "up") //Collision with camera_toUp
+		{
+			App->render->camera.y += 2 * localVelocity;
+			//Update the position of the camera colliders
+			camera_toRight->rect.y -= localVelocity;
+			camera_toLeft->rect.y -= localVelocity;
+			camera_toUp->rect.y -= localVelocity;
+			camera_toDown->rect.y -= localVelocity;
+		}
+		else if (c2->name == "down") //Collision with camera_toDown
+		{
+			if (c2->rect.y < 437) //Camera is at the bottom limit of the map
+			{
+				App->render->camera.y -= 2* fall_velocity;
+				//Update the position of the camera colliders
+				camera_toRight->rect.y += fall_velocity;
+				camera_toLeft->rect.y += fall_velocity;
+				camera_toUp->rect.y += fall_velocity;
+				camera_toDown->rect.y += fall_velocity;
+			}
+		}
+	}		
+}
+
+bool j1Player::Save(pugi::xml_node& data) const {
+	
+	//Player position
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").append_attribute("y") = position.y;
+		
+	//Save colliders for the camera
+	data.append_child("camera_toRight").append_attribute("x") = camera_toRight->rect.x;
+	data.child("camera_toRight").append_attribute("y") = camera_toRight->rect.y;
+	data.append_child("camera_toLeft").append_attribute("x") = camera_toLeft->rect.x;
+	data.child("camera_toLeft").append_attribute("y") = camera_toLeft->rect.y;
+	data.append_child("camera_toUp").append_attribute("x") = camera_toUp->rect.x;
+	data.child("camera_toUp").append_attribute("y") = camera_toUp->rect.y;
+	data.append_child("camera_toDown").append_attribute("x") = camera_toDown->rect.x;
+	data.child("camera_toDown").append_attribute("y") = camera_toDown->rect.y;
+	
+	//Extra data
+	data.append_child("lives").append_attribute("value") = lives;
+	data.append_child("in_air").append_attribute("value") = in_air;
+
+	return true;
+}
+
+bool j1Player::Load(pugi::xml_node& data)
+{	
+	//Load player position
+	position.x = data.child("position").attribute("x").as_int();
+	position.y = data.child("position").attribute("y").as_int();
+
+	//Load camera positions
+	camera_toRight->rect.x = data.child("camera_toRight").attribute("x").as_int();
+	camera_toRight->rect.y = data.child("camera_toRight").attribute("y").as_int();
+	camera_toLeft->rect.x = data.child("camera_toLeft").attribute("x").as_int();
+	camera_toLeft->rect.y = data.child("camera_toLeft").attribute("y").as_int();
+	camera_toUp->rect.x = data.child("camera_toUp").attribute("x").as_int();
+	camera_toUp->rect.y = data.child("camera_toUp").attribute("y").as_int();
+	camera_toDown->rect.x = data.child("camera_toDown").attribute("x").as_int();
+	camera_toDown->rect.y = data.child("camera_toDown").attribute("y").as_int();
+
+	//Load extra data
+	lives = data.child("lives").attribute("value").as_int();
+	in_air = data.child("in_air").attribute("value").as_bool();
+	return true;
+}
+
+bool j1Player::checkAbility() {
+	
+	if (tick1 - tick2 >= 1500) {
+		old_position.x = position.x;
+		old_position.y = position.y;
+		tick2 = SDL_GetTicks();
+		ability_able = true;
+	}
+	tick1 = SDL_GetTicks();
+	
+	return ability_able;
+}
+
+void j1Player::useAbility() {
+
+	position.x = old_position.x;
+	position.y = old_position.y;
+	ability_able = false;
+
+}

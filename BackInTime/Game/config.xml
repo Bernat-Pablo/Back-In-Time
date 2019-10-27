@@ -8,13 +8,13 @@
 
   <render>
     <vsync value="true"/>
-    <camera_position x="0" y ="20"/>
+    <camera_position x="0" y ="50"/>
   </render>
 
   <player>
     <spritesheet source ="character/spritesheet_pj.png"/>
     <initialPosition>
-      <map1 x="200" y="240"/>
+      <map1 x="200" y="400"/>
       <map2 x="40" y="240"/>
     </initialPosition>
 
