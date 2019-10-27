@@ -49,7 +49,7 @@ The player can go a few seconds back to the past.
 # Link
 * https://github.com/Bernat-Pablo/Back-In-Time
 
-# MIT
+# License
 MIT License
 
 Copyright (c) 2019 Bernat-Pablo
