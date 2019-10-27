@@ -429,6 +429,9 @@ bool j1Player::Update(float dt)
 	}
 	if(godMode == false)
 	{
+		if (fall_velocity > 10)
+			in_air = true;
+
 		fall_velocity += gravity;
 		position.y += fall_velocity;
 	}		
@@ -557,45 +560,29 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c2->name == "right") //Collision with camera_toRight
 		{
-			App->render->camera.x -= 2 * localVelocity;
 			//Update the position of the camera colliders
-			camera_toRight->rect.x += localVelocity;
-			camera_toLeft->rect.x += localVelocity;
-			camera_toUp->rect.x += localVelocity;
-			camera_toDown->rect.x += localVelocity;
+			MoveCameraColliders("x", localVelocity);
 
 		}
 		else if (c2->name == "left") //Collision with camera_toLeft
 		{
 			if (position.x > 180)
 			{
-				App->render->camera.x += 2 * localVelocity;
 				//Update the position of the camera colliders
-				camera_toRight->rect.x -= localVelocity;
-				camera_toLeft->rect.x -= localVelocity;
-				camera_toUp->rect.x -= localVelocity;
-				camera_toDown->rect.x -= localVelocity;
+				MoveCameraColliders("x", -localVelocity);
 			}
 		}
 		else if (c2->name == "up") //Collision with camera_toUp
 		{
-			App->render->camera.y += 2 * localVelocity;
-			//Update the position of the camera colliders
-			camera_toRight->rect.y -= localVelocity;
-			camera_toLeft->rect.y -= localVelocity;
-			camera_toUp->rect.y -= localVelocity;
-			camera_toDown->rect.y -= localVelocity;
+			//Update the position of the camera colliders			
+			MoveCameraColliders("y", -localVelocity);
 		}
 		else if (c2->name == "down") //Collision with camera_toDown
 		{
-			if (c2->rect.y < 437) //Camera is at the bottom limit of the map
+			if (c2->rect.y < App->render->camera.h) //Camera is at the bottom limit of the map
 			{
-				App->render->camera.y -= 2* fall_velocity;
-				//Update the position of the camera colliders
-				camera_toRight->rect.y += fall_velocity;
-				camera_toLeft->rect.y += fall_velocity;
-				camera_toUp->rect.y += fall_velocity;
-				camera_toDown->rect.y += fall_velocity;
+				//Update the position of the camera colliders				
+				MoveCameraColliders("y", fall_velocity);
 			}
 		}
 	}		
@@ -688,5 +675,27 @@ void j1Player::useAbility() {
 	ability_able = false;
 }
 
+void j1Player::MoveCameraColliders(p2SString direction, float speed)
+{
+	//How to call this function to move camera colliders
 
+	//Move Left: MoveCameraColliders("x", -5.0f);
+	//Move Right: MoveCameraColliders("x", 5.0f);
+	//Move Up: MoveCameraColliders("y", -5.0f);
+	//Move Down: MoveCameraColliders("y", 5.0f);
+
+	if(direction == "x") //Move right or left
+	{
+		camera_toRight->rect.x += speed;
+		camera_toLeft->rect.x += speed;
+		camera_toUp->rect.x += speed;
+		camera_toDown->rect.x += speed;
+	}else if(direction == "y") //Move up or down
+	{
+		camera_toRight->rect.y += speed;
+		camera_toLeft->rect.y += speed;
+		camera_toUp->rect.y += speed;
+		camera_toDown->rect.y += speed;
+	}
+}
 

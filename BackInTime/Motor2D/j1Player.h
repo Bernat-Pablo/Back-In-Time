@@ -51,6 +51,8 @@ public:
 
 	bool Save(pugi::xml_node& data) const;
 	bool Load(pugi::xml_node& data);
+
+	void MoveCameraColliders(p2SString direction, float speed);
 	iPoint position; //Use position.x and position.y
 private:
 	Animation idle;
