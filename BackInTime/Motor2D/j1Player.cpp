@@ -457,15 +457,15 @@ bool j1Player::Update(float dt)
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
 	if(!looking_right)
-		App->render->Blit(spritesheet_pj, position.x, position.y, &r,1,2);
+		App->render->Blit(spritesheet_pj, position.x, position.y, &r,1,2); //looking at left
 	else
-		App->render->Blit(spritesheet_pj, position.x, position.y, &r);
+		App->render->Blit(spritesheet_pj, position.x, position.y, &r); //looking at right
 
-	if (player_input.pressing_A == true || player_input.pressing_D == true)
+	if (player_input.pressing_A == true || player_input.pressing_D == true) //watching if the pj is walkubg
 		walking = true;
 	else walking = false;
 
-	if (walking == true)	App->audio->PlayFx(2, 1);
+	if (walking == true)	App->audio->PlayFx(2, 1); //sound of walking active
 
 	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
 		useAbility();
@@ -680,8 +680,7 @@ void j1Player::useAbility() {
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
 	camera_toDown->SetPos(position.x - 50, position.y + 20);
 
-	App->render->camera.x = 100;
-	App->render->camera.y = position.y - 50;
+	App->render->camera.x = -position.x;
 
 	ability_able = false;
 }
