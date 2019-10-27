@@ -43,6 +43,7 @@ public:
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
 
+	void cameraSetInitialPosition(pugi::xml_node& config);
 public:
 
 	SDL_Renderer*	renderer;

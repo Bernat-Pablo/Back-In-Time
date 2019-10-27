@@ -45,18 +45,13 @@ bool j1Render::Awake(pugi::xml_node& config)
 	}
 	else
 	{
-		camera.w = App->win->screen_surface->w;
-		camera.h = App->win->screen_surface->h;
-		if(App->scene->choose_lv == 1)
+		if(config == NULL)
 		{
-			LOG("config x: %i", config.child("camera_initialPosition").child("map1").attribute("x").as_int());
-			camera.x = config.child("camera_initialPosition").child("map1").attribute("x").as_int();
-			camera.y = config.child("camera_initialPosition").child("map1").attribute("y").as_int();
-		}else if(App->scene->choose_lv == 2)
+			LOG("Render: config is NULL");
+		}else
 		{
-			camera.x = 1000;
-			camera.y = -15000;
-		}
+			cameraSetInitialPosition(config);
+		}		
 	}
 
 	return ret;
@@ -267,4 +262,20 @@ bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, U
 	}
 
 	return ret;
+}
+
+void j1Render::cameraSetInitialPosition(pugi::xml_node& config)
+{
+	camera.w = App->win->screen_surface->w;
+	camera.h = App->win->screen_surface->h;
+	if (App->scene->choose_lv == 1)
+	{		
+		camera.x = config.child("render").child("camera_initialPosition").child("map1").attribute("x").as_int();
+		camera.y = config.child("render").child("camera_initialPosition").child("map1").attribute("y").as_int();
+	}
+	else if (App->scene->choose_lv == 2)
+	{
+		camera.x = config.child("render").child("camera_initialPosition").child("map2").attribute("x").as_int();
+		camera.y = config.child("render").child("camera_initialPosition").child("map2").attribute("y").as_int();
+	}
 }

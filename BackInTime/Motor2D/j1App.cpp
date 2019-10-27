@@ -37,7 +37,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(input);
-	AddModule(win);
+	AddModule(win);	
 	AddModule(tex);
 	AddModule(audio);	
 	AddModule(map);

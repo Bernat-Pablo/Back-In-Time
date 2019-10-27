@@ -69,12 +69,10 @@ bool j1Fade::Update(float dt)
 			App->audio->Awake(App->GetConfig());
 			App->scene->Awake();
 			App->scene->Start();
-			App->player->Start(); //At start we load player spritesheet
+			App->player->Start(); //Set initial player position
 			App->collision->Awake(App->GetConfig());	
-
-			//resets player & camera position
-			App->render->camera.x = 0;
-			App->render->camera.y = 0;
+			App->render->cameraSetInitialPosition(App->GetConfig()); //Set initial camera position
+			
 
 			total_time += total_time;
 			start_time = SDL_GetTicks();
