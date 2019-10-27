@@ -73,7 +73,10 @@ public:
 	float initial_y = 400.0f; // 25 blocks * 16 each one - height pj	
 	iPoint position; //Use position.x and position.y
 	iPoint old_position[15];
+<<<<<<< HEAD
 	int iterator = 0;
+=======
+>>>>>>> parent of d1b4f36... back in time
 
 	float decrease_vel = 0.2f;
 	float velocity = 2.0f;
@@ -95,11 +98,13 @@ public:
 
 	bool godMode = false;
 
-	bool ability_able = false;
-
 	int tick1 = 0, tick2 = 0;
 
+<<<<<<< HEAD
 	int tick3 = 0, tick4 = 0;
+=======
+	int iterator = 0;
+>>>>>>> parent of d1b4f36... back in time
 
 	Collider* collider_player = nullptr;
 

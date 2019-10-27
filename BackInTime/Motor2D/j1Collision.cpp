@@ -133,7 +133,7 @@ Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, p2SString 
 
 bool Collider::CheckCollision(const SDL_Rect& r) const
 {
-	return (rect.x < r.x + r.w &&
+		return (rect.x < r.x + r.w &&
 		rect.x + rect.w > r.x &&
 		rect.y < r.y + r.h &&
 		rect.h + rect.y > r.y);
@@ -174,8 +174,23 @@ void j1Collision::DebugDraw()
 			case COLLIDER_CAMERA:
 				App->render->DrawQuad(colliders[i]->rect, 20, 109, 126, 150);
 				break;
+			case COLLIDER_CULLING:
+				//App->render->DrawQuad(colliders[i]->rect, 20, 109, 126, 150);
+				break;
 			}
 			
 		}
 	}	
+}
+
+bool j1Collision::CleanBackMapPlayer(int x) {
+	for (int k = 0; k < MAX_COLLIDERS; k++) {
+		if (colliders[k] != nullptr) {
+			if (colliders[k]->rect.x <= x) {
+				delete colliders[k];
+				colliders[k] = nullptr;
+			}
+		}
+	}
+	return true;
 }

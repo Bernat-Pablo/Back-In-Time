@@ -48,6 +48,8 @@ void j1Map::Draw()
 	TileSet* tileset = data.tilesets.start->data;
 	pugi::xml_node node = config_file.child("config").child("map");
 
+
+
 	for (int l = 0; l < data.layers.count(); l++) {
 		finish_printing = false;
 		int x = 0, y = 0;
@@ -57,7 +59,7 @@ void j1Map::Draw()
 
 				int n = layer->Get(j, i);
 				if (layer->data[n] != 0 && x>=App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16){
-					if (lay->data->name == "Subterreno4 P" || lay->data->name == "Subterreno3 P") {
+					if (lay->data->name == "Arboles P" || lay->data->name == "Arboles2 P") {
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
 					}
 					else
@@ -99,6 +101,25 @@ iPoint j1Map::PosConverter(int x, int y) {
 	return ret;
 }
 
+TileSet* j1Map::GetTilesetFromTileId(int id) const
+{
+	p2List_item<TileSet*>* item = data.tilesets.start;
+	TileSet* set = item->data;
+
+	while (item)
+	{
+		if (id < item->data->firstgid)
+		{
+			set = item->prev->data;
+			break;
+		}
+		set = item->data;
+		item = item->next;
+	}
+
+	return set;
+}
+
 SDL_Rect j1Map::GetTileRect(TileSet* tileset,int id) 
 {
 	int num = id;
@@ -109,6 +130,28 @@ SDL_Rect j1Map::GetTileRect(TileSet* tileset,int id)
 	SDL_Rect rect = { width,height,tileset->tile_width,tileset->tile_height };
 
 	return rect;
+}
+
+iPoint j1Map::MapToWorld(int x, int y) const {
+	iPoint ret;
+
+	if (data.type == MAPTYPE_ORTHOGONAL)
+	{
+		ret.x = x * data.tile_width;
+		ret.y = y * data.tile_height;
+	}
+	else if (data.type == MAPTYPE_ISOMETRIC)
+	{
+		ret.x = (x - y) * (data.tile_width * 0.5f);
+		ret.y = (x + y) * (data.tile_height * 0.5f);
+	}
+	else
+	{
+		LOG("Unknown map type");
+		ret.x = x; ret.y = y;
+	}
+
+	return ret;
 }
 
 // Called before quitting

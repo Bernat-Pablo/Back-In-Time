@@ -67,8 +67,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	if(App->scene->choose_lv == 1) //We are on map1
 	{
-		position.x = config.child("initialPosition").child("map1").attribute("x").as_int();
-		position.y = 400;	
+		position.x = 50;
+		position.y = 180;	
 	}
 	else if (App->scene->choose_lv == 2) //We are on map2
 	{
@@ -100,6 +100,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA,"left", (j1Module*)App->player ); 
 	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,140,20 }, COLLIDER_CAMERA, "up", (j1Module*)App->player);
 	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
+
+
 	return ret;
 }
 bool j1Player::Start(){		
@@ -452,9 +454,10 @@ bool j1Player::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0);
 	if (moving_left || moving_right)	App->audio->PlayFx(2, 1);
 
-	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
-		useAbility();
-	}
+	//if (ability_able == true) 
+		if(App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			useAbility();
+	
 	
 
 	return true;
@@ -642,7 +645,11 @@ bool j1Player::Load(pugi::xml_node& data)
 }
 
 void j1Player::checkAbility() {
+<<<<<<< HEAD
 	if (tick1 - tick2 >= 100) {
+=======
+	if (tick1 - tick2>=100) {
+>>>>>>> parent of d1b4f36... back in time
 		if (iterator <= 14) {
 			old_position[iterator].x = App->player->position.x;
 			old_position[iterator].y = App->player->position.y;
@@ -650,8 +657,13 @@ void j1Player::checkAbility() {
 		}
 		else {
 			for (int i = 0; i <= 13; i++) {
+<<<<<<< HEAD
 				old_position[i].x = old_position[i + 1].x;
 				old_position[i].y = old_position[i + 1].y;
+=======
+				old_position[i].x = old_position[i+1].x;
+				old_position[i].y = old_position[i+1].y;
+>>>>>>> parent of d1b4f36... back in time
 			}
 			old_position[14].x = App->player->position.x;
 			old_position[14].y = App->player->position.y;
@@ -659,18 +671,23 @@ void j1Player::checkAbility() {
 		tick2 = SDL_GetTicks();
 	}
 	tick1 = SDL_GetTicks();
+<<<<<<< HEAD
 
 	if (tick3 - tick4 >= 4000) {
 		ability_able = true;
 		tick4 = SDL_GetTicks();
 	}
 	tick3 = SDL_GetTicks();
+=======
+	
+>>>>>>> parent of d1b4f36... back in time
 }
 
 void j1Player::useAbility() {
 
 	position.x = old_position[0].x;
 	position.y = old_position[0].y;
+<<<<<<< HEAD
 
 	camera_toRight->SetPos(position.x + 70, position.y - 100);
 	camera_toLeft->SetPos(position.x - 50, position.y - 100);
@@ -681,4 +698,14 @@ void j1Player::useAbility() {
 	App->render->camera.y = position.y - 50;
 
 	ability_able = false;
+=======
+
+	camera_toRight->SetPos(position.x + 70, position.y - 100);
+	camera_toLeft->SetPos(position.x - 50, position.y - 100);
+	camera_toUp->SetPos(position.x - 50, position.y - 100);
+	camera_toDown->SetPos(position.x - 50, position.y + 20);
+
+	App->render->camera.x = position.x - 200;
+	App->render->camera.y = position.y - 50;
+>>>>>>> parent of d1b4f36... back in time
 }

@@ -13,6 +13,8 @@ The player can go a few seconds back to the past.
 * S: Go down (Godmode only)
 * D: Go right
 * Spacebar: Jump
+* Enter: Special Ability
+
 ### Debug
 * F1/F2: Change level
 * F3: Start from the beginning of the current level
