@@ -32,6 +32,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void startfromBeginning();
+
 	float fade_time;
 
 	int choose_lv = 1;

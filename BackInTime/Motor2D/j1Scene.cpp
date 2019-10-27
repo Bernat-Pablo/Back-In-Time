@@ -63,9 +63,7 @@ bool j1Scene::PreUpdate()
 
 // Called each loop iteration
 bool j1Scene::Update(float dt)
-{	
-	pugi::xml_node config = App->GetConfig();
-
+{		
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		App->render->camera.y += 10;
 
@@ -80,23 +78,8 @@ bool j1Scene::Update(float dt)
 	
 	//Start from the beginning of the current level
 	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
-	{
-		if(choose_lv == 1)
-		{
-			App->player->position.x = config.child("player").child("initialPosition").child("map1").attribute("x").as_int();
-			App->player->position.y = config.child("player").child("initialPosition").child("map1").attribute("y").as_int();
-			
-			App->render->camera.x = config.child("render").child("camera_initialPosition").child("map1").attribute("x").as_int();
-			App->render->camera.y = config.child("render").child("camera_initialPosition").child("map1").attribute("y").as_int();
-		}else if(choose_lv == 2)
-		{
-			App->player->position.x = config.child("player").child("initialPosition").child("map2").attribute("x").as_int();
-			App->player->position.y = config.child("player").child("initialPosition").child("map2").attribute("y").as_int();
-
-			App->render->camera.x = config.child("render").child("camera_initialPosition").child("map2").attribute("x").as_int();
-			App->render->camera.y = config.child("render").child("camera_initialPosition").child("map2").attribute("y").as_int();
-		}
-		
+	{		
+		startfromBeginning();
 	}
 
 	//Save the current state
@@ -135,4 +118,26 @@ bool j1Scene::CleanUp()
 	App->map->CleanUp();
 
 	return true;
+}
+
+void j1Scene::startfromBeginning()
+{
+	pugi::xml_node config = App->GetConfig();
+
+	if (choose_lv == 1)
+	{
+		App->player->position.x = config.child("player").child("initialPosition").child("map1").attribute("x").as_int();
+		App->player->position.y = config.child("player").child("initialPosition").child("map1").attribute("y").as_int();
+
+		App->render->camera.x = config.child("render").child("camera_initialPosition").child("map1").attribute("x").as_int();
+		App->render->camera.y = config.child("render").child("camera_initialPosition").child("map1").attribute("y").as_int();
+	}
+	else if (choose_lv == 2)
+	{
+		App->player->position.x = config.child("player").child("initialPosition").child("map2").attribute("x").as_int();
+		App->player->position.y = config.child("player").child("initialPosition").child("map2").attribute("y").as_int();
+
+		App->render->camera.x = config.child("render").child("camera_initialPosition").child("map2").attribute("x").as_int();
+		App->render->camera.y = config.child("render").child("camera_initialPosition").child("map2").attribute("y").as_int();
+	}
 }
