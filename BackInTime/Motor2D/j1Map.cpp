@@ -44,8 +44,8 @@ void j1Map::Draw()
 		return;
 
 	lay = data.layers.start;
-	MapLayer* layer = lay->data;
-	TileSet* tileset = data.tilesets.start->data;
+	layer = lay->data;
+	tileset = data.tilesets.start->data;
 	pugi::xml_node node = config_file.child("config").child("map");
 
 	for (int l = 0; l < data.layers.count(); l++) {
@@ -157,6 +157,8 @@ bool j1Map::CleanUp()
 		item3 = item3->next;
 	}
 	data.objectgroup.clear();
+
+	App->tex->UnLoad(tileset->texture);
 
 	// Clean up the pugui tree
 	map_file.reset();
