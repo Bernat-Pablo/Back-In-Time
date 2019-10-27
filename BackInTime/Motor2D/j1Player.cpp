@@ -73,7 +73,10 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	decrease_vel = config.child("decrease_vel").attribute("value").as_float();
 	lives = config.child("lives").attribute("value").as_int();
 	//spritesheet_source = config.child("spritesheet").attribute("source").as_string();
-	
+
+	doc.load_file("config.xml");
+	node = doc.child("config");
+
 	return ret;
 }
 bool j1Player::Start(){		
@@ -142,7 +145,7 @@ bool j1Player::PreUpdate()
 		moving_left = false;
 		if (player_input.pressing_space && in_air==false) //fix
 		{
-			jump_vel = 4.0f; //magic numbers. change
+			restart_variables(-1, 1);
 			state = JUMP;
 		}
 		else if (player_input.pressing_D)
@@ -155,7 +158,7 @@ bool j1Player::PreUpdate()
 		}
 		break;
 	case WALK_FORWARD:		
-		jump_vel = 4.0f; //magic numbers. change
+		restart_variables(-1, 1);
 
 		if (!player_input.pressing_D && moving_right == true)		
 			state = DASH_FORWARD;
@@ -181,8 +184,8 @@ bool j1Player::PreUpdate()
 
 		break;
 	case WALK_BACKWARD:
-		jump_vel = 4.0f; //magic numbers. change
-		if (!player_input.pressing_A && moving_left == true)		
+		restart_variables(-1, 1);
+		if (!player_input.pressing_A && moving_left == true)
 			state = DASH_BACKWARD;
 		
 		if (!player_input.pressing_A && moving_left == false)		
@@ -198,7 +201,7 @@ bool j1Player::PreUpdate()
 
 		break;
 	case RUN_FORWARD:
-		jump_vel = 4.0f; //magic numbers. change
+		restart_variables(-1, 1);
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_D)
@@ -216,7 +219,7 @@ bool j1Player::PreUpdate()
 
 		break;
 	case RUN_BACKWARD:
-		jump_vel = 4.0f; //magic numbers. change
+		restart_variables(-1, 1);
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_A)			
@@ -260,8 +263,8 @@ bool j1Player::PreUpdate()
 		moving_left = false;
 		if (player_input.pressing_A) {
 			state = WALK_BACKWARD;
-			velocity = 2.0f;
-			if (player_input.pressing_lshift) 
+			restart_variables(1, -1);
+			if (player_input.pressing_lshift)
 				state = RUN_BACKWARD;			
 		}
 		else if (!player_input.pressing_A)
@@ -272,8 +275,8 @@ bool j1Player::PreUpdate()
 		moving_left = true;
 		if (player_input.pressing_D) {
 			state = WALK_FORWARD;
-			velocity = 2.0f;
-			if (player_input.pressing_lshift) 
+			restart_variables(1, -1);
+			if (player_input.pressing_lshift)
 				state = RUN_FORWARD;			
 		}else if (!player_input.pressing_D)
 			state = IDLE;
@@ -400,7 +403,7 @@ bool j1Player::Update(float dt)
 		case DASH_FORWARD:
 			current_animation = &walk;
 
-			//velocity -= decrease_vel;
+			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
 			
 			if(collider_at_right == false)
 				position.x += velocity;
@@ -414,7 +417,7 @@ bool j1Player::Update(float dt)
 		case DASH_BACKWARD:
 			current_animation = &walk;
 
-			//velocity -= decrease_vel;
+			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
 
 			if(collider_at_left == false)
 				position.x -= velocity;
@@ -436,7 +439,12 @@ bool j1Player::Update(float dt)
 		{
 			fall_velocity += gravity;
 			position.y += fall_velocity;
-		}		
+			LOG("IN AIR");
+		}else
+		LOG("NOT IN AIR");	
+		
+	}
+	
 	}		
 	else if(godMode == true)
 	{
@@ -729,4 +737,13 @@ bool j1Player::checkInAir()
 		}
 	}
 	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
+}
+
+void j1Player::restart_variables(int vel, int vel_jump) {
+	if (vel != -1) {
+		velocity = node.child("player").child("velocity").attribute("value").as_float();
+	}
+	if (vel_jump != -1) {
+		jump_vel= node.child("player").child("jump_vel").attribute("value").as_float();
+	}
 }

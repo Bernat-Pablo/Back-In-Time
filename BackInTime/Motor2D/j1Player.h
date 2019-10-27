@@ -51,6 +51,7 @@ public:
 
 	bool Save(pugi::xml_node& data) const;
 	bool Load(pugi::xml_node& data);
+	void restart_variables(int vel, int jump_vel);
 
 	void MoveCameraColliders(p2SString direction, float speed);
 	bool checkInAir();
@@ -110,6 +111,9 @@ private:
 	Collider* camera_toLeft = nullptr;
 	Collider* camera_toUp = nullptr;
 	Collider* camera_toDown = nullptr;
+
+	pugi::xml_document doc;
+	pugi::xml_node node;
 };
 
 #endif // !_PLAYER_

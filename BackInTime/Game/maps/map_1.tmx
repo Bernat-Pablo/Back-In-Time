@@ -10557,6 +10557,6 @@
   <object id="28" name="1" x="0" y="208" width="192" height="32"/>
   <object id="29" name="1" x="112" y="192" width="80" height="16"/>
   <object id="30" name="1" x="160" y="176" width="32" height="16"/>
-  <object id="31" name="6" x="1568" y="160" width="16" height="48"/>
+  <object id="31" name="5" x="1568" y="160" width="16" height="48"/>
  </objectgroup>
 </map>
