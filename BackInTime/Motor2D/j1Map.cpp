@@ -56,13 +56,19 @@ void j1Map::Draw()
 			for (int j = 0; j < layer->width && finish_printing == false; j++) {
 
 				int n = layer->Get(j, i);
-				if (layer->data[n] != 0 && x>=App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16){
-					if (lay->data->name == "Subterreno4 P" || lay->data->name == "Subterreno3 P") {
+				if (lay->data->name == "Arboles P") {
+					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9) {
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
 					}
-					else
-						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
 				}
+				if (lay->data->name == "Arboles2 P") {
+					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9) {
+						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
+					}
+				}
+				else
+					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16))
+						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
 				x += data.tile_width;
 				if (x >= node.child("finish_printing_right").attribute("value").as_int() * 16 + App->player->position.x) {
 					j = layer->width;
