@@ -598,6 +598,9 @@ bool j1Player::Save(pugi::xml_node& data) const {
 	data.append_child("position").append_attribute("x") = position.x;
 	data.child("position").append_attribute("y") = position.y;
 		
+	//Current level
+	data.append_child("level").append_attribute("value") = App->scene->choose_lv;
+
 	//Save colliders for the camera
 	data.append_child("camera_toRight").append_attribute("x") = camera_toRight->rect.x;
 	data.child("camera_toRight").append_attribute("y") = camera_toRight->rect.y;
@@ -620,6 +623,12 @@ bool j1Player::Save(pugi::xml_node& data) const {
 
 bool j1Player::Load(pugi::xml_node& data)
 {	
+	if (App->scene->choose_lv != data.child("level").attribute("value").as_int())
+	{
+		App->scene->choose_lv = data.child("level").attribute("value").as_int();
+		App->fade->FadeToBlack(App->scene, App->scene);
+	}
+
 	//Load player position
 	position.x = data.child("position").attribute("x").as_int();
 	position.y = data.child("position").attribute("y").as_int();
@@ -640,6 +649,9 @@ bool j1Player::Load(pugi::xml_node& data)
 
 	//Load extra data
 	lives = data.child("lives").attribute("value").as_int();
+
+	
+
 	return true;
 }
 
