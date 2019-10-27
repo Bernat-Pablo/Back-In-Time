@@ -61,47 +61,21 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	LOG("Loading Player Data");
 	bool ret = true;	
-	current_animation = &idle;	
-
-	gravity = true;
 
 	folder.create(config.child("folder").child_value());
 
-	if(App->scene->choose_lv == 1) //We are on map1
-	{
-		position.x = 200;
-		position.y = 400;	
-	}
-	else if (App->scene->choose_lv == 2) //We are on map2
-	{
-		position.x = 200;
-		position.y = 240;
-	}
+	
 
 	//Set initial data of the player
-	/*gravity = config.child("gravity").attribute("value").as_float();
+	gravity = config.child("gravity").attribute("value").as_float();
 	run_velocity = config.child("run_velocity").attribute("value").as_float();
 	velocity = config.child("velocity").attribute("value").as_float();
 	fall_velocity = config.child("fall_velocity").attribute("value").as_float();
 	jump_vel = config.child("jump_vel").attribute("value").as_float();
 	decrease_vel = config.child("decrease_vel").attribute("value").as_float();
 	lives = config.child("lives").attribute("value").as_int();
-	spritesheet_source = config.child("spritesheet").attribute("source").as_string();*/
+	//spritesheet_source = config.child("spritesheet").attribute("source").as_string();
 	
-	gravity = 0.2f;
-	run_velocity = 3.0f;
-	velocity = 2.0f;
-	fall_velocity = 0.0f;
-	jump_vel = 6.5f;
-	decrease_vel = 0.2f;
-	lives = 3;
-
-	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
-
-	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 100,20,140 }, COLLIDER_CAMERA, "right",  (j1Module*)App->player );
-	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA,"left", (j1Module*)App->player ); 
-	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,140,20 }, COLLIDER_CAMERA, "up", (j1Module*)App->player);
-	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 	return ret;
 }
 bool j1Player::Start(){		
@@ -109,6 +83,27 @@ bool j1Player::Start(){
 	tick4 = SDL_GetTicks();
 	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
 	//spritesheet_pj = App->tex->Load(spritesheet_source);
+
+	if (App->scene->choose_lv == 1) //We are on map1
+	{
+		position.x = 200;
+		position.y = 400;
+	}
+	else if (App->scene->choose_lv == 2) //We are on map2
+	{
+		position.x = 200;
+		position.y = 240;
+	}
+
+	state = IDLE;
+	current_animation = &idle;
+
+	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
+
+	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 100,20,140 }, COLLIDER_CAMERA, "right", (j1Module*)App->player);
+	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA, "left", (j1Module*)App->player);
+	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,140,20 }, COLLIDER_CAMERA, "up", (j1Module*)App->player);
+	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 
 	App->audio->LoadFx("audio/fx/jump.wav");
 	App->audio->LoadFx("audio/fx/walk.wav");

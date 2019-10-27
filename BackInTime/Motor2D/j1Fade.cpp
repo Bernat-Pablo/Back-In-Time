@@ -69,7 +69,6 @@ bool j1Fade::Update(float dt)
 			App->audio->Awake(App->GetConfig());
 			App->scene->Awake();
 			App->scene->Start();
-			App->player->Awake(App->GetConfig());
 			App->player->Start(); //At start we load player spritesheet
 			App->collision->Awake(App->GetConfig());	
 
