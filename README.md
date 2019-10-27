@@ -1,7 +1,7 @@
 # Back In Time
 
 ## Introduction
-Platformed game created by two students from Barcelona
+Platformed game created by two students from Terrassa
 
 ## Innovative feature
 The player can go a few seconds back to the past.
@@ -31,6 +31,7 @@ The player can go a few seconds back to the past.
   * Load data from XML
   * Start from the beginning (F3)
   * Save/Load (F5/F6)
+  * Memory Leaks
 * Bernat Casañas: https://github.com/BernatCasanas
   * Building the Engine with Modules and Functions
   * Movement and Mechanics
@@ -44,3 +45,6 @@ The player can go a few seconds back to the past.
 * Assets: https://oddpotatogift.itch.io/16x16-fantasy-pack
 * Music: https://www.fesliyanstudios.com/royalty-free-music/download/too-crazy/307
 * Sounds: https://freesound.org/
+
+# Link
+* https://github.com/Bernat-Pablo/Back-In-Time
