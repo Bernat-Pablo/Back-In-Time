@@ -122,6 +122,8 @@ private:
 	bool				finish_printing;
 
 	p2List_item<MapLayer*>* lay = nullptr;
+	MapLayer* layer;
+	TileSet* tileset;
 };
 
 #endif // __j1MAP_H__
