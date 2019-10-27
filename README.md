@@ -24,8 +24,16 @@ The player can go a few seconds back to the past.
 
 ## Team
 * Pablo Galve: https://github.com/pablogalve
+  * Module Collisions and in-game Collisions
+  * Camera
+  * Level Transition
+  * Debug
+  * XML linking
 * Bernat Casañas: https://github.com/BernatCasanas
-
+  * Building the Engine with Modules and Functions
+  * Mechanics and Movement
+  * Maps
+  * Audio
 ## Credits
 * Assets: https://oddpotatogift.itch.io/16x16-fantasy-pack
 * Music: https://www.fesliyanstudios.com/royalty-free-music/download/too-crazy/307
