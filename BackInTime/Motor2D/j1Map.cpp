@@ -57,25 +57,30 @@ void j1Map::Draw()
 
 				int n = layer->Get(j, i);
 				if (lay->data->name == "Arboles P") {
-					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9) {
+					//culling left and up with parallax
+					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9 && (App->player->position.y - node.child("finish_printing_up").attribute("value").as_int() * 16)) {
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
 					}
 				}
 				if (lay->data->name == "Arboles2 P") {
-					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9) {
+					//culling left and up with parallax
+					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9 && (App->player->position.y - node.child("finish_printing_up").attribute("value").as_int() * 16)) {
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
 					}
 				}
 				else
-					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16))
+					//culling left without parallax
+					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) && (App->player->position.y - node.child("finish_printing_up").attribute("value").as_int() * 16))
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]));
 				x += data.tile_width;
+				//culling right
 				if (x >= node.child("finish_printing_right").attribute("value").as_int() * 16 + App->player->position.x) {
 					j = layer->width;
 				}
 			}
 			x = 0;
 			y += data.tile_height;
+			//culling down
 			if (y >= node.child("finish_printing_down").attribute("value").as_int() * 16 + App->player->position.y) {
 				i = layer->height;
 			}

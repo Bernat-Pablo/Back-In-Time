@@ -99,7 +99,7 @@ private:
 	bool collider_at_left = false;
 
 	bool godMode = false;
-	bool walking = false;
+	bool walking = false; //is he walking?
 
 	bool ability_able = false;
 

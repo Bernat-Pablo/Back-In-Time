@@ -80,6 +80,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	return ret;
 }
 bool j1Player::Start(){		
+	//init clocks
 	tick2 = SDL_GetTicks();
 	tick4 = SDL_GetTicks();
 	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
@@ -96,12 +97,12 @@ bool j1Player::Start(){
 		position.x = config_local.child("player").child("initialPosition").child("map2").attribute("x").as_int();
 		position.y = config_local.child("player").child("initialPosition").child("map2").attribute("y").as_int();
 	}
-
+	//initial state
 	state = IDLE;
 	current_animation = &idle;
 
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
-
+	//set colliders to move the camera
 	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 100,20,140 }, COLLIDER_CAMERA, "right", (j1Module*)App->player);
 	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA, "left", (j1Module*)App->player);
 	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,140,20 }, COLLIDER_CAMERA, "up", (j1Module*)App->player);
@@ -128,9 +129,10 @@ bool j1Player::PreUpdate()
 			collider_at_right = false;
 		}			
 	}
-
+	//can we do the main ability?
 	checkAbility();
 
+	//check inputs
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
 	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
@@ -138,6 +140,7 @@ bool j1Player::PreUpdate()
 	player_input.pressing_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT;
 	player_input.pressing_lshift = App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT;
 	
+	//states machine
 	switch (state)
 	{
 	case IDLE:
@@ -294,6 +297,7 @@ bool j1Player::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update
 
+	//aplying the forces depending of the state
 	switch(state)
 	{
 		case IDLE:
@@ -467,6 +471,7 @@ bool j1Player::Update(float dt)
 
 	if (walking == true)	App->audio->PlayFx(2, 1); //sound of walking active
 
+	//do ability
 	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
 		useAbility();
 	}	
@@ -640,24 +645,24 @@ bool j1Player::Load(pugi::xml_node& data)
 }
 
 void j1Player::checkAbility() {
-	if (tick1 - tick2 >= 100) {
+	if (tick1 - tick2 >= 100) { // here we save each 0.1 sec the position.
 		if (iterator <= 14) {
 			old_position[iterator].x = App->player->position.x;
 			old_position[iterator].y = App->player->position.y;
 			iterator++;
 		}
 		else {
-			for (int i = 0; i <= 13; i++) {
+			for (int i = 0; i <= 13; i++) { //if its full, we move the array
 				old_position[i].x = old_position[i + 1].x;
 				old_position[i].y = old_position[i + 1].y;
 			}
-			old_position[14].x = App->player->position.x;
+			old_position[14].x = App->player->position.x; //what we pretend to do, is save the position of 1.5 sec before in time
 			old_position[14].y = App->player->position.y;
 		}
 		tick2 = SDL_GetTicks();
 	}
 	tick1 = SDL_GetTicks();
-
+	//we just can use the ab each 4 seconds
 	if (tick3 - tick4 >= 4000) {
 		ability_able = true;
 		tick4 = SDL_GetTicks();
@@ -667,15 +672,15 @@ void j1Player::checkAbility() {
 
 void j1Player::useAbility() {
 
-	position.x = old_position[0].x;
+	position.x = old_position[0].x; //we pass the first position of the array to the actual position
 	position.y = old_position[0].y;
-
+	 // we move all the camera colliders
 	camera_toRight->SetPos(position.x + 70, position.y - 100);
 	camera_toLeft->SetPos(position.x - 50, position.y - 100);
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
 	camera_toDown->SetPos(position.x - 50, position.y + 20);
 
-	App->render->camera.x = -position.x;
+	App->render->camera.x = -position.x; //we move the 
 
 	ability_able = false;
 }
