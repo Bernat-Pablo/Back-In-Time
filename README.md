@@ -29,7 +29,7 @@ The player can go a few seconds back to the past.
   * Level Transition (F1/F2)
   * Debug (F9) and god Mode (F10)
   * Load data from XML
-  * Start from the beginning of the current level
+  * Start from the beginning (F3)
   * Save/Load (F5/F6)
   * Memory Leaks
 * Bernat Casañas: https://github.com/BernatCasanas

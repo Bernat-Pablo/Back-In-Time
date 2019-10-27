@@ -105,7 +105,7 @@ bool j1Player::Start(){
 	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 100,20,140 }, COLLIDER_CAMERA, "right", (j1Module*)App->player);
 	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA, "left", (j1Module*)App->player);
 	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,140,20 }, COLLIDER_CAMERA, "up", (j1Module*)App->player);
-	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
+	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,40 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 
 	App->audio->LoadFx("audio/fx/jump.wav");
 	App->audio->LoadFx("audio/fx/walking.wav");
@@ -562,24 +562,24 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			localVelocity = run_velocity;
 		else
 			localVelocity = velocity;
-
+				
 		if (c2->name == "right") //Collision with camera_toRight
 		{
 			//Update the position of the camera colliders
 			MoveCameraColliders("x", localVelocity);
 
 		}
-		else if (c2->name == "left") //Collision with camera_toLeft
+		if (c2->name == "left") //Collision with camera_toLeft
 		{
 			//Update the position of the camera colliders
 			MoveCameraColliders("x", -localVelocity);			
 		}
-		else if (c2->name == "up") //Collision with camera_toUp
+		if (c2->name == "up") //Collision with camera_toUp
 		{
 			//Update the position of the camera colliders			
 			MoveCameraColliders("y", -localVelocity);
 		}
-		else if (c2->name == "down") //Collision with camera_toDown
+		if (c2->name == "down") //Collision with camera_toDown
 		{			
 			//Update the position of the camera colliders				
 			MoveCameraColliders("y", fall_velocity);
@@ -704,6 +704,12 @@ void j1Player::MoveCameraColliders(p2SString direction, float speed)
 		camera_toDown->rect.x += speed;
 	}else if(direction == "y") //Move up or down
 	{
+		if (speed < 0) //moving up
+				App->render->camera.y -= 2 * speed;
+		if (speed > 0) //moving down
+			if ((-App->render->camera.y + App->render->camera.h) < App->map->data.height * 32 -16) //Camera is inside the map
+				App->render->camera.y -= 2 * speed;
+
 		camera_toRight->rect.y += speed;
 		camera_toLeft->rect.y += speed;
 		camera_toUp->rect.y += speed;
@@ -711,7 +717,7 @@ void j1Player::MoveCameraColliders(p2SString direction, float speed)
 	}
 }
 
-bool j1Player::checkInAir()
+bool j1Player::checkInAir() //Checks if player is in_air or if it's grounded
 {
 	// Calculate collisions
 	Collider* c2;

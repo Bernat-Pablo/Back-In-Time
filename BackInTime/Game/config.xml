@@ -9,7 +9,7 @@
   <render>
     <vsync value="true"/>
     <camera_initialPosition>
-      <map1 x="0" y="300"/>
+      <map1 x="0" y="310"/>
       <map2 x="0" y="360"/>
     </camera_initialPosition>
     
