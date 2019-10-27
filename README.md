@@ -24,8 +24,23 @@ The player can go a few seconds back to the past.
 
 ## Team
 * Pablo Galve: https://github.com/pablogalve
+  * Module Collisions and in-game Collisions
+  * Camera
+  * Level Transition (F1/F2)
+  * Debug (F9) and god Mode (F10)
+  * Load data from XML
+  * Start from the beginning of the current level
+  * Save/Load (F5/F6)
+  * Memory Leaks
 * Bernat Casañas: https://github.com/BernatCasanas
-
+  * Building the Engine with Modules and Functions
+  * Movement and Mechanics
+  * Special Ability go Back In Time 
+  * Maps
+  * Audio (Music and FX)
+  * Parallax effect
+  * Vsync at 60 FPS
+  * Animations
 ## Credits
 * Assets: https://oddpotatogift.itch.io/16x16-fantasy-pack
 * Music: https://www.fesliyanstudios.com/royalty-free-music/download/too-crazy/307
