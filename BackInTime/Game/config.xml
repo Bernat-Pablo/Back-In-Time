@@ -24,7 +24,7 @@
     <fall_velocity value ="0.0"/>
     <decrease_vel value ="0.2" />
     <gravity value ="0.03"/>
-    <jump_vel value ="15.5"/>
+    <jump_vel value ="4.0"/>
 
     <!-- Audio and FX -->
     <jumpFX source ="jump.wav"/>
