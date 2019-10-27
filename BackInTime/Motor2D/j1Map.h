@@ -15,6 +15,7 @@ struct MapLayer
 	int			height;
 	float		x;
 	float		y;
+	float		parallax;
 	uint*		data;
 
 	MapLayer() : data(NULL){}

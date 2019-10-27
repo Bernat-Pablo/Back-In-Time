@@ -4,6 +4,9 @@
   <image source="Basic_Tiles_Only.png" width="1376" height="896"/>
  </tileset>
  <layer id="6" name="Arboles2 P" width="150" height="15">
+  <properties>
+   <property name="parallax" value="0.9"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -2258,6 +2261,9 @@
   </data>
  </layer>
  <layer id="4" name="Arboles P" width="150" height="15">
+  <properties>
+   <property name="parallax" value="0.9"/>
+  </properties>
   <data>
    <tile/>
    <tile/>

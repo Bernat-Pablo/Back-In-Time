@@ -59,13 +59,13 @@ void j1Map::Draw()
 				if (lay->data->name == "Arboles P") {
 					//culling left and up with parallax
 					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9 && (App->player->position.y - node.child("finish_printing_up").attribute("value").as_int() * 16)) {
-						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
+						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), lay->data->parallax);
 					}
 				}
 				if (lay->data->name == "Arboles2 P") {
 					//culling left and up with parallax
 					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9 && (App->player->position.y - node.child("finish_printing_up").attribute("value").as_int() * 16)) {
-						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
+						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), lay->data->parallax);
 					}
 				}
 				else
@@ -461,6 +461,9 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->name = node.attribute("name").as_string();
 	layer->width = node.attribute("width").as_int();
 	layer->height = node.attribute("height").as_int();
+	if (node.child("properties").child("property").attribute("value").as_float() != NULL) {
+		layer->parallax = node.child("properties").child("property").attribute("value").as_float();
+	}
 	pugi::xml_node layer_data = node.child("data");
 
 	if(layer_data == NULL)
