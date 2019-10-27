@@ -100,6 +100,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA,"left", (j1Module*)App->player ); 
 	camera_toUp = App->collision->AddCollider({ position.x - 50,position.y - 100,140,20 }, COLLIDER_CAMERA, "up", (j1Module*)App->player);
 	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,20 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
+
+
 	return ret;
 }
 bool j1Player::Start(){		
@@ -667,4 +669,11 @@ void j1Player::useAbility() {
 	position.x = old_position[0].x;
 	position.y = old_position[0].y;
 
+	camera_toRight->SetPos(position.x + 70, position.y - 100);
+	camera_toLeft->SetPos(position.x - 50, position.y - 100);
+	camera_toUp->SetPos(position.x - 50, position.y - 100);
+	camera_toDown->SetPos(position.x - 50, position.y + 20);
+
+	App->render->camera.x = position.x - 200;
+	App->render->camera.y = position.y - 50;
 }

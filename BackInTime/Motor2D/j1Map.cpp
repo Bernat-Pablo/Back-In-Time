@@ -59,7 +59,7 @@ void j1Map::Draw()
 
 				int n = layer->Get(j, i);
 				if (layer->data[n] != 0 && x>=App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16){
-					if (lay->data->name == "Subterreno4 P" || lay->data->name == "Subterreno3 P") {
+					if (lay->data->name == "Arboles P" || lay->data->name == "Arboles2 P") {
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
 					}
 					else
