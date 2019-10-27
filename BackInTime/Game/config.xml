@@ -8,7 +8,11 @@
 
   <render>
     <vsync value="true"/>
-    <camera_position x="0" y ="50"/>
+    <camera_initialPosition>
+      <map1 x="100" y="-150"/>
+      <map2 x="50" y="-150"/>
+    </camera_initialPosition>
+    
   </render>
 
   <player>

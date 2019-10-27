@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Window.h"
 #include "j1Render.h"
+#include "j1Scene.h"
 
 #define VSYNC true
 
@@ -44,8 +45,16 @@ bool j1Render::Awake(pugi::xml_node& config)
 	{
 		camera.w = App->win->screen_surface->w;
 		camera.h = App->win->screen_surface->h;
-		camera.x = 0;
-		camera.y = -150;
+		if(App->scene->choose_lv == 1)
+		{
+			LOG("config x: %i", config.child("camera_initialPosition").child("map1").attribute("x").as_int());
+			camera.x = config.child("camera_initialPosition").child("map1").attribute("x").as_int();
+			camera.y = config.child("camera_initialPosition").child("map1").attribute("y").as_int();
+		}else if(App->scene->choose_lv == 2)
+		{
+			camera.x = 1000;
+			camera.y = -15000;
+		}
 	}
 
 	return ret;

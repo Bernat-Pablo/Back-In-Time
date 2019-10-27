@@ -439,9 +439,11 @@ bool j1Player::Update(float dt)
 		{
 			fall_velocity += gravity;
 			position.y += fall_velocity;
-			LOG("IN AIR");
+			//LOG("IN AIR");
 		}else
-		LOG("NOT IN AIR");	
+		{
+			//LOG("NOT IN AIR");
+		}			
 	}		
 	else if(godMode == true)
 	{
