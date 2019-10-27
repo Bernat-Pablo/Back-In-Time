@@ -25,3 +25,8 @@ The player can go a few seconds back to the past.
 ## Team
 * Pablo Galve: https://github.com/pablogalve
 * Bernat Casañas: https://github.com/BernatCasanas
+
+## Credits
+* Assets: https://oddpotatogift.itch.io/16x16-fantasy-pack
+* Music: https://www.fesliyanstudios.com/royalty-free-music/download/too-crazy/307
+* Sounds: https://freesound.org/
