@@ -539,6 +539,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		case COLLIDER_DIE:
 			//Player goes to initial position
 			state = IDLE;
+			iterator = 0;
 			App->fade->FadeToBlack(App->scene, App->scene);
 			
 			break;
@@ -549,6 +550,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			else if (c2->name == "door2") 
 				App->scene->choose_lv = 1;
 
+			iterator = 0;
 			App->fade->FadeToBlack(App->scene, App->scene);
 			break;	
 		}
@@ -691,7 +693,7 @@ void j1Player::useAbility() {
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
 	camera_toDown->SetPos(position.x - 50, position.y + 20);
 
-	App->render->camera.x -= -position.x; //we move the player position
+	App->render->camera.x = -position.x; //we move the player position
 
 	ability_able = false;
 }
