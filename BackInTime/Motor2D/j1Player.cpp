@@ -443,10 +443,10 @@ bool j1Player::Update(float dt)
 		{
 			fall_velocity += gravity;
 			position.y += fall_velocity;
-			//LOG("IN AIR");
+			LOG("IN AIR");
 		}else
 		{
-			//LOG("NOT IN AIR");
+			LOG("NOT IN AIR");
 		}			
 	}		
 	else if(godMode == true)
@@ -599,7 +599,7 @@ bool j1Player::Save(pugi::xml_node& data) const {
 	//Player position
 	data.append_child("position").append_attribute("x") = position.x;
 	data.child("position").append_attribute("y") = position.y;
-		
+
 	//Current level
 	data.append_child("level").append_attribute("value") = App->scene->choose_lv;
 
@@ -753,12 +753,14 @@ bool j1Player::checkInAir() //Checks if player is in_air or if it's grounded
 		{
 			if (collider_player->CheckCollision(c2->rect) == true) //There is collision between the player and a wall
 			{
-				if (position.y + collider_player->rect.h < c2->rect.y)
+				if (position.y + collider_player->rect.h > c2->rect.y)
 				{
-					continue; //Player is not grounded. Let's check next collider
+					if (position.y < c2->rect.y)
+						return false;
+
 				}
-				else 
-					return false; //Player is grounded. in_air = false
+				//We return true if we didn't returned false
+				return true; //Player is grounded. in_air = false
 
 			}
 			else 
