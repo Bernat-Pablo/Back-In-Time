@@ -437,6 +437,7 @@ bool j1Player::Update(float dt)
 
 	if(godMode == false)
 	{
+		
 		in_air = checkInAir();
 
 		if(in_air == true)
@@ -444,7 +445,7 @@ bool j1Player::Update(float dt)
 			fall_velocity += gravity;
 			position.y += fall_velocity;
 			LOG("IN AIR");
-		}else
+		}else if(in_air == false)
 		{
 			LOG("NOT IN AIR");
 		}			
@@ -507,8 +508,14 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		case COLLIDER_WALL:
 			if (position.y < c2->rect.y) //Player is on the ground
 			{
-				in_air = false;
-				fall_velocity = 0;
+				if(position.x + 0.8*collider_player->rect.w > c2->rect.x)
+				{
+					if(position.x < c2->rect.x + c2->rect.w - 0.2*collider_player->rect.w)
+					{
+						in_air = false;
+						fall_velocity = 0;
+					}					
+				}				
 			}
 
 			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
@@ -754,11 +761,14 @@ bool j1Player::checkInAir() //Checks if player is in_air or if it's grounded
 			if (collider_player->CheckCollision(c2->rect) == true) //There is collision between the player and a wall
 			{
 				if (position.y + collider_player->rect.h > c2->rect.y)
-				{
 					if (position.y < c2->rect.y)
-						return false;
-
-				}
+						if (position.x > c2->rect.x)
+							return false;
+						else
+							return true;
+					else
+						return true;
+				
 				//We return true if we didn't returned false
 				return true; //Player is grounded. in_air = false
 
