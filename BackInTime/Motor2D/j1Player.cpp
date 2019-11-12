@@ -658,19 +658,19 @@ bool j1Player::Load(pugi::xml_node& data)
 }
 
 void j1Player::checkAbility() {
-	if (tick1 - tick2 >= 100) { // here we save each 0.1 sec the position.
-		if (iterator <= 14) {
+	if (tick1 - tick2 >= 10) { // here we save each 0.1 sec the position.
+		if (iterator <= 29) {
 			old_position[iterator].x = App->player->position.x;
 			old_position[iterator].y = App->player->position.y;
 			iterator++;
 		}
 		else {
-			for (int i = 0; i <= 13; i++) { //if its full, we move the array
+			for (int i = 0; i <= 28; i++) { //if its full, we move the array
 				old_position[i].x = old_position[i + 1].x;
 				old_position[i].y = old_position[i + 1].y;
 			}
-			old_position[14].x = App->player->position.x; //what we pretend to do, is save the position of 1.5 sec before in time
-			old_position[14].y = App->player->position.y;
+			old_position[29].x = App->player->position.x; //what we pretend to do, is save the position of 1.5 sec before in time
+			old_position[29].y = App->player->position.y;
 		}
 		tick2 = SDL_GetTicks();
 	}
@@ -698,7 +698,7 @@ void j1Player::useAbility() {
 	//remove magin numbers
 	App->render->camera.x = -position.x*2+160; //we move the player position
 
-	for (int i = 0; i <= 14; i++) {
+	for (int i = 0; i <= 29		 ; i++) {
 		old_position[i].y = position.y;
 		old_position[i].x = position.x;
 	}

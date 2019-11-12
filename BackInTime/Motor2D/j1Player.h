@@ -79,7 +79,7 @@ private:
 	float initial_x = 200.0f; // 2 blocks * 16 each one
 	float initial_y = 400.0f; // 25 blocks * 16 each one - height pj	
 	
-	iPoint old_position[15];
+	iPoint old_position[30];
 	int iterator = 0;
 
 	float decrease_vel = 0.2f;
