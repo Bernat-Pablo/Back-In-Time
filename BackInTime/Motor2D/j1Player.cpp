@@ -16,7 +16,7 @@ j1Player::j1Player() : j1Module()
 {
 	name.create("player");
 	
-	float speed = 0.2f;
+	float speed = 0.1f;
 	//IDLE
 	idle.PushBack({ 0,0,17,27 }, speed);
 	idle.PushBack({ 32,0,17,27 }, speed);
