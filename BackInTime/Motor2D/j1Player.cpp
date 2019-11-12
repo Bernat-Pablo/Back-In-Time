@@ -100,7 +100,6 @@ bool j1Player::Start(){
 	//initial state
 	state = IDLE;
 	current_animation = &idle;
-	fall_velocity = 0;
 
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
 	//set colliders to move the camera
@@ -755,7 +754,7 @@ bool j1Player::checkInAir() //Checks if player is in_air or if it's grounded
 					{
 						if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_player->rect.w)
 						{
-							fall_velocity = 0;
+							fall_velocity = 1;
 							return false;							
 						}
 					}
