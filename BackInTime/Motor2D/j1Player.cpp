@@ -466,6 +466,10 @@ bool j1Player::Update(float dt)
 	else
 		App->render->Blit(spritesheet_pj, position.x, position.y, &r); //looking at right
 
+	//print shadow player position
+	App->render->Blit(spritesheet_pj, old_position[0].x, old_position[0].y, &idle.GetCurrentFrame());
+
+
 	if (player_input.pressing_A == true || player_input.pressing_D == true) //watching if the pj is walkubg
 		walking = true;
 	else walking = false;
@@ -476,6 +480,7 @@ bool j1Player::Update(float dt)
 	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
 		useAbility();
 	}	
+
 
 	return true;
 }
@@ -688,6 +693,8 @@ void j1Player::checkAbility() {
 		tick4 = SDL_GetTicks();
 	}
 	tick3 = SDL_GetTicks();
+
+	
 }
 
 void j1Player::useAbility() {
@@ -700,7 +707,13 @@ void j1Player::useAbility() {
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
 	camera_toDown->SetPos(position.x - 50, position.y + 20);
 
-	App->render->camera.x = -position.x; //we move the player position
+	//remove magin numbers
+	App->render->camera.x = -position.x*2+160; //we move the player position
+
+	for (int i = 0; i <= 14; i++) {
+		old_position[i].y = position.y;
+		old_position[i].x = position.x;
+	}
 
 	ability_able = false;
 }
