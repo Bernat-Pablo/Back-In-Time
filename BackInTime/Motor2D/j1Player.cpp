@@ -122,7 +122,7 @@ bool j1Player::Start(){
 	screen_size = node.child("window").child("resolution").attribute("scale").as_int();
 
 
-	bar_pos.x = 5;
+	bar_pos.x = 10;
 	bar_pos.y = -130;
 
 	return true;
@@ -597,21 +597,18 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			//Update the position of the camera colliders
 			MoveCameraColliders("x", localVelocity);
 			//Controlling UI
-			bar_pos.x += velocity;
 		}
 		if (c2->name == "left") //Collision with camera_toLeft
 		{
 			//Update the position of the camera colliders
 			MoveCameraColliders("x", -localVelocity);	
 			//Controlling UI
-			bar_pos.x -= velocity;
 		}
 		if (c2->name == "up") //Collision with camera_toUp
 		{
 			//Update the position of the camera colliders			
 			MoveCameraColliders("y", -localVelocity);
 			//Controlling UI
-			//bar_pos.y -= jump_vel;
 
 		}
 		if (c2->name == "down") //Collision with camera_toDown
@@ -619,7 +616,6 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			//Update the position of the camera colliders				
 			MoveCameraColliders("y", fall_velocity);
 			//Controlling UI
-			//bar_pos.y += fall_velocity;
 		}
 	}		
 }
@@ -771,11 +767,15 @@ void j1Player::MoveCameraColliders(p2SString direction, float speed)
 	if(direction == "x") //Move right or left
 	{
 		if(speed < 0 ) //moving to left
-			if(App->render->camera.x <= -1) //Camera is inside the map
-				App->render->camera.x -= 2*speed;
-		if (speed > 0) //moving to right
-			if ((-App->render->camera.x + App->render->camera.w) <= App->map->data.width*32) //Camera is inside the map
+			if (App->render->camera.x <= -1) { //Camera is inside the map
 				App->render->camera.x -= 2 * speed;
+				bar_pos.x -= speed;
+			}
+		if (speed > 0) //moving to right
+			if ((-App->render->camera.x + App->render->camera.w) <= App->map->data.width * 32) { //Camera is inside the map
+				App->render->camera.x -= 2 * speed;
+				bar_pos.x += speed;
+			}
 
 		camera_toRight->rect.x += speed;
 		camera_toLeft->rect.x += speed;
@@ -783,11 +783,15 @@ void j1Player::MoveCameraColliders(p2SString direction, float speed)
 		camera_toDown->rect.x += speed;
 	}else if(direction == "y") //Move up or down
 	{
-		if (speed < 0) //moving up
-				App->render->camera.y -= 2 * speed;
+		if (speed < 0) { //moving up
+			App->render->camera.y -= 2 * speed;
+			bar_pos.y += speed;
+		}
 		if (speed > 0) //moving down
-			if ((-App->render->camera.y + App->render->camera.h) < App->map->data.height * 32 -16) //Camera is inside the map
+			if ((-App->render->camera.y + App->render->camera.h) < App->map->data.height * 32 - 16) { //Camera is inside the map
 				App->render->camera.y -= 2 * speed;
+				bar_pos.y += speed;
+			}
 
 		camera_toRight->rect.y += speed;
 		camera_toLeft->rect.y += speed;
