@@ -740,7 +740,7 @@ void j1Player::useAbility() {
 	camera_toLeft->SetPos(position.x - 50, position.y - 100);
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
 	camera_toDown->SetPos(position.x - 50, position.y + 20); 
-	bar_pos.x = position.x-initial_pos+ 62;//to fix
+	bar_pos.x = position.x-initial_pos+ 82;//this 92 is the bar width + 20 initial
 	
 	position_when_ability = -position.x * screen_size + initial_pos;
 
