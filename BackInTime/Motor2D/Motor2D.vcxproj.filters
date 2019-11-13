@@ -39,6 +39,12 @@
     <ClCompile Include="j1Fade.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="j1PerfTimer.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Timer.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -92,6 +98,12 @@
     <ClInclude Include="j1Fade.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="j1PerfTimer.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Timer.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">
@@ -105,6 +117,9 @@
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{7c56e46a-c471-43f4-ad52-bd5e1e81b836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{8776e66e-32d7-40e3-9ae8-e744202acbfa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

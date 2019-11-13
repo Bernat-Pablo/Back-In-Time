@@ -69,6 +69,7 @@ private:
 	Animation* current_animation;
 
 	SDL_Rect bar_0, bar_1, bar_2, bar_3, bar_4;
+	iPoint bar_pos;
 
 	SDL_Texture* spritesheet_pj = nullptr;
 	SDL_Texture* spritesheet_casper = nullptr;
