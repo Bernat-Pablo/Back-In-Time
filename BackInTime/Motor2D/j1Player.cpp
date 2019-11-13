@@ -769,7 +769,7 @@ void j1Player::MoveCameraColliders(p2SString direction, float speed)
 		if(speed < 0 ) //moving to left
 			if (App->render->camera.x <= -1) { //Camera is inside the map
 				App->render->camera.x -= 2 * speed;
-				bar_pos.x -= speed;
+				bar_pos.x += speed;
 			}
 		if (speed > 0) //moving to right
 			if ((-App->render->camera.x + App->render->camera.w) <= App->map->data.width * 32) { //Camera is inside the map
