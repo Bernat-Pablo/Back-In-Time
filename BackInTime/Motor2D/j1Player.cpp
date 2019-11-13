@@ -493,6 +493,7 @@ bool j1Player::Update(float dt)
 	//do ability
 	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
 		useAbility();
+		tick4 = SDL_GetTicks();
 	}	
 
 
@@ -694,26 +695,22 @@ void j1Player::checkAbility() {
 	tick1 = SDL_GetTicks();
 
 	//blit bar to fix
-	if (tick3 - tick4 >= 800) {
-		if (tick3 - tick4 >= 1600) {
-			if (tick3 - tick4 >= 2400) {
-				if (tick3 - tick4 >= 3200) {
-					if (tick3 - tick4 >= 4000) {
-						App->render->Blit(spritesheet_bars, position.x - initial_pos, -70, &bar_0);
-					}
-					else
-						App->render->Blit(spritesheet_bars, position.x - initial_pos, -70, &bar_1);
-				}
-				else
-					App->render->Blit(spritesheet_bars, position.x - initial_pos, -70, &bar_2);
+	if (tick3 - tick4 >= 1000) {
+		if (tick3 - tick4 >= 2000) {
+			if (tick3 - tick4 >= 3000) {
+				App->render->Blit(spritesheet_bars, position.x - initial_pos+70, -70, &bar_1);
 			}
-			else 
-				App->render->Blit(spritesheet_bars, position.x - initial_pos, -70, &bar_3);
+			else
+				App->render->Blit(spritesheet_bars, position.x - initial_pos + 70, -70, &bar_2);
 		}
 		else 
-			App->render->Blit(spritesheet_bars, position.x - initial_pos, -70, &bar_4);
+			App->render->Blit(spritesheet_bars, position.x - initial_pos +70, -70, &bar_3);
 	}
+	else
+		App->render->Blit(spritesheet_bars, position.x - initial_pos + 70, -70, &bar_4);
 
+	if(ability_able==true)
+		App->render->Blit(spritesheet_bars, position.x - initial_pos + 70, -70, &bar_0);
 
 	//we just can use the ab each 4 seconds
 	if (tick3 - tick4 >= 4000) {
