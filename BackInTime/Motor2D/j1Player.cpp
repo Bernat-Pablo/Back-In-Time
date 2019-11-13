@@ -703,7 +703,7 @@ void j1Player::checkAbility() {
 	tick1 = SDL_GetTicks();
 
 
-	//blit bar to fix
+	//blit bar
 	if (tick3 - tick4 >= 1000) {
 		if (tick3 - tick4 >= 2000) {
 			if (tick3 - tick4 >= 3000) {
@@ -740,12 +740,12 @@ void j1Player::useAbility() {
 	camera_toLeft->SetPos(position.x - 50, position.y - 100);
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
 	camera_toDown->SetPos(position.x - 50, position.y + 20); 
-	bar_pos.x = position.x-initial_pos+ 62 + 5;//to fix
+	bar_pos.x = position.x-initial_pos+ 62;//to fix
 	
 	position_when_ability = -position.x * screen_size + initial_pos;
 
 	//remove magin numbers
-	App->render->camera.x = -position.x*2+ 150; //we move the player position
+	App->render->camera.x = position_when_ability; //we move the player position
 
 	for (int i = 0; i <= 29; i++) {
 		old_position[i].y = position.y;
