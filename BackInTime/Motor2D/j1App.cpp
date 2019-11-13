@@ -20,6 +20,7 @@
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
+	PERF_START(ptimer);
 	frames = 0;
 	want_to_save = want_to_load = false;
 
@@ -91,6 +92,7 @@ bool j1App::Awake()
 		organization.create(app_config.child("organization").child_value());
 	
 		framerate_cap = config.child("app").attribute("framerate_cap").as_int();
+		LOG("FRAMERATE: %i", framerate_cap);
 	}
 
 	if(ret == true)
@@ -112,6 +114,7 @@ bool j1App::Awake()
 // Called before the first frame
 bool j1App::Start()
 {
+	PERF_START(ptimer);
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.start;
@@ -203,17 +206,16 @@ void j1App::FinishUpdate()
 	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu ",
 		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
 	App->win->SetTitle(title);
+	
+	j1PerfTimer delay_timer;
+	delay_timer.Start();
+	double delay = 1000 / framerate_cap - last_frame_ms;
 
-	// TODO 2: Use SDL_Delay to make sure you get your capped framerate
-	time = (1 * 1000 / framerate_cap) - last_frame_ms;
-
-	if (last_frame_ms < framerate_cap)
+	if (last_frame_ms < 1000/framerate_cap)
 	{
-		measure.Start();
-
-		SDL_Delay(time);		
+		SDL_Delay(delay);
 	}
-	LOG("We waited for %.0f milliseconds and got back in %f", time, measure.ReadMs());
+	LOG("We waited for %.0f milliseconds and got back in %f", delay, delay_timer);
 }
 
 // Call modules before each loop iteration
@@ -254,7 +256,7 @@ bool j1App::DoUpdate()
 			continue;
 		}
 
-		ret = item->data->Update(dt);
+		ret = item->data->Update(deltaTime);
 	}
 
 
@@ -285,6 +287,7 @@ bool j1App::PostUpdate()
 // Called before quitting
 bool j1App::CleanUp()
 {
+	PERF_START(ptimer);
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.end;
@@ -294,7 +297,7 @@ bool j1App::CleanUp()
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
-
+	PERF_PEEK(ptimer);
 	return ret;
 }
 
