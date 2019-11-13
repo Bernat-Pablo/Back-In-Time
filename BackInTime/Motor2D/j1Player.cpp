@@ -84,7 +84,8 @@ bool j1Player::Start(){
 	tick2 = SDL_GetTicks();
 	tick4 = SDL_GetTicks();
 	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
-	//spritesheet_pj = App->tex->Load(spritesheet_source);
+	spritesheet_casper = App->tex->Load("character/spritesheet_casper.png");
+	spritesheet_bars = App->tex->Load("character/spritesheet_bars.png");
 
 	pugi::xml_node config_local = App->GetConfig();
 	if (App->scene->choose_lv == 1) //We are on map1
@@ -109,6 +110,17 @@ bool j1Player::Start(){
 	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,40 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 
 	App->audio->LoadFx("audio/fx/jump.wav");
+
+	//bar ability
+	bar_0 = { 268,25,62,12 };
+	bar_1 = { 268,41,62,12 };
+	bar_2 = { 268,57,62,12 };
+	bar_3 = { 268,73,62,12 };
+	bar_4 = { 268,89,62,12 };
+
+	initial_pos = node.child("player").child("initialPosition").child("map1").attribute("x").as_int() + 70; //look to camera_toright
+	screen_size = node.child("window").child("resolution").attribute("scale").as_int();
+
 	return true;
 }
 
@@ -128,8 +140,6 @@ bool j1Player::PreUpdate()
 			collider_at_right = false;
 		}			
 	}
-	//can we do the main ability?
-	checkAbility();
 
 	//check inputs
 	player_input.pressing_W = App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT;
@@ -295,6 +305,10 @@ bool j1Player::Update(float dt)
 {
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update
+	
+	
+	//can we do the main ability?
+	checkAbility();
 
 	//aplying the forces depending of the state
 	switch(state)
@@ -460,13 +474,14 @@ bool j1Player::Update(float dt)
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
+	App->render->Blit(spritesheet_casper, old_position[0].x, old_position[0].y, &idle.GetCurrentFrame());
+
 	if(!looking_right)
 		App->render->Blit(spritesheet_pj, position.x, position.y, &r,1,2); //looking at left
 	else
 		App->render->Blit(spritesheet_pj, position.x, position.y, &r); //looking at right
 
 	//print shadow player position
-	App->render->Blit(spritesheet_pj, old_position[0].x, old_position[0].y, &idle.GetCurrentFrame());
 
 
 	if (player_input.pressing_A == true || player_input.pressing_D == true) //watching if the pj is walkubg
@@ -488,6 +503,8 @@ bool j1Player::CleanUp() {
 	LOG("Unloading player\n");
 	collider_player = nullptr;
 	spritesheet_pj = nullptr;
+	spritesheet_casper = nullptr;
+	spritesheet_bars = nullptr;
 	current_animation = nullptr;
 
 	//Unload colliders for the camera
@@ -658,7 +675,7 @@ bool j1Player::Load(pugi::xml_node& data)
 }
 
 void j1Player::checkAbility() {
-	if (tick1 - tick2 >= 10) { // here we save each 0.1 sec the position.
+	if (tick1 - tick2 >= 1) { // here we save each 0.05 sec the position.
 		if (iterator <= 29) {
 			old_position[iterator].x = App->player->position.x;
 			old_position[iterator].y = App->player->position.y;
@@ -675,6 +692,29 @@ void j1Player::checkAbility() {
 		tick2 = SDL_GetTicks();
 	}
 	tick1 = SDL_GetTicks();
+
+	//blit bar to fix
+	if (tick3 - tick4 >= 800) {
+		if (tick3 - tick4 >= 1600) {
+			if (tick3 - tick4 >= 2400) {
+				if (tick3 - tick4 >= 3200) {
+					if (tick3 - tick4 >= 4000) {
+						App->render->Blit(spritesheet_bars, position.x - initial_pos, -70, &bar_0);
+					}
+					else
+						App->render->Blit(spritesheet_bars, position.x - initial_pos, -70, &bar_1);
+				}
+				else
+					App->render->Blit(spritesheet_bars, position.x - initial_pos, -70, &bar_2);
+			}
+			else 
+				App->render->Blit(spritesheet_bars, position.x - initial_pos, -70, &bar_3);
+		}
+		else 
+			App->render->Blit(spritesheet_bars, position.x - initial_pos, -70, &bar_4);
+	}
+
+
 	//we just can use the ab each 4 seconds
 	if (tick3 - tick4 >= 4000) {
 		ability_able = true;
@@ -690,15 +730,17 @@ void j1Player::useAbility() {
 	position.x = old_position[0].x; //we pass the first position of the array to the actual position
 	position.y = old_position[0].y;
 	 // we move all the camera colliders
-	camera_toRight->SetPos(position.x + 70, position.y - 100);
+	camera_toRight->SetPos(position.x + 70, position.y - 100); //this +70 is added to initial pos too.
 	camera_toLeft->SetPos(position.x - 50, position.y - 100);
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
 	camera_toDown->SetPos(position.x - 50, position.y + 20);
+	
+	position_when_ability = -position.x * screen_size + initial_pos;
 
 	//remove magin numbers
-	App->render->camera.x = -position.x*2+160; //we move the player position
+	App->render->camera.x = -position.x*2+ 150; //we move the player position
 
-	for (int i = 0; i <= 29		 ; i++) {
+	for (int i = 0; i <= 29; i++) {
 		old_position[i].y = position.y;
 		old_position[i].x = position.x;
 	}

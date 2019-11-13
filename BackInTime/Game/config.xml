@@ -19,7 +19,7 @@
     <spritesheet source ="character/spritesheet_pj.png"/>
     <initialPosition>
       <map1 x="80" y="180"/>
-      <map2 x="40" y="53"/>
+      <map2 x="80" y="53"/>
     </initialPosition>
 
     <lives value ="3"/>

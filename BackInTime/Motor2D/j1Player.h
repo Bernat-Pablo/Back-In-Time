@@ -68,7 +68,11 @@ private:
 	Animation hurt;
 	Animation* current_animation;
 
+	SDL_Rect bar_0, bar_1, bar_2, bar_3, bar_4;
+
 	SDL_Texture* spritesheet_pj = nullptr;
+	SDL_Texture* spritesheet_casper = nullptr;
+	SDL_Texture* spritesheet_bars = nullptr;
 	const char* spritesheet_source;
 
 	Player_States state; //Current player state
@@ -81,6 +85,9 @@ private:
 	
 	iPoint old_position[30];
 	int iterator = 0;
+	int position_when_ability;
+	int initial_pos;
+	int screen_size;
 
 	float decrease_vel = 0.2f;
 	float velocity = 2.0f;
