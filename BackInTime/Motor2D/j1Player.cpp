@@ -121,6 +121,10 @@ bool j1Player::Start(){
 	initial_pos = node.child("player").child("initialPosition").child("map1").attribute("x").as_int() + 70; //look to camera_toright
 	screen_size = node.child("window").child("resolution").attribute("scale").as_int();
 
+
+	bar_pos.x = 5;
+	bar_pos.y = -130;
+
 	return true;
 }
 
@@ -323,9 +327,9 @@ bool j1Player::Update(float dt)
 			if(collider_at_right == false)
 			{
 				position.x += velocity;
-				moving_right = true;				
+				moving_right = true;
 			}
-			else			
+			else
 				moving_right = false;
 			
 			break;
@@ -557,6 +561,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		case COLLIDER_DIE:
 			//Player goes to initial position
 			state = IDLE;
+			ability_able = false;
 			iterator = 0;
 			App->fade->FadeToBlack(App->scene, App->scene);
 			
@@ -591,23 +596,30 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		{
 			//Update the position of the camera colliders
 			MoveCameraColliders("x", localVelocity);
-
+			//Controlling UI
+			bar_pos.x += velocity;
 		}
 		if (c2->name == "left") //Collision with camera_toLeft
 		{
 			//Update the position of the camera colliders
-			MoveCameraColliders("x", -localVelocity);			
+			MoveCameraColliders("x", -localVelocity);	
+			//Controlling UI
+			bar_pos.x -= velocity;
 		}
 		if (c2->name == "up") //Collision with camera_toUp
 		{
 			//Update the position of the camera colliders			
 			MoveCameraColliders("y", -localVelocity);
+			//Controlling UI
+			//bar_pos.y -= jump_vel;
+
 		}
 		if (c2->name == "down") //Collision with camera_toDown
 		{			
 			//Update the position of the camera colliders				
 			MoveCameraColliders("y", fall_velocity);
-			
+			//Controlling UI
+			//bar_pos.y += fall_velocity;
 		}
 	}		
 }
@@ -694,23 +706,24 @@ void j1Player::checkAbility() {
 	}
 	tick1 = SDL_GetTicks();
 
+
 	//blit bar to fix
 	if (tick3 - tick4 >= 1000) {
 		if (tick3 - tick4 >= 2000) {
 			if (tick3 - tick4 >= 3000) {
-				App->render->Blit(spritesheet_bars, position.x - initial_pos+70, -70, &bar_1);
+				App->render->Blit(spritesheet_bars, bar_pos.x, bar_pos.y, &bar_1);
 			}
 			else
-				App->render->Blit(spritesheet_bars, position.x - initial_pos + 70, -70, &bar_2);
+				App->render->Blit(spritesheet_bars, bar_pos.x, bar_pos.y, &bar_2);
 		}
 		else 
-			App->render->Blit(spritesheet_bars, position.x - initial_pos +70, -70, &bar_3);
+			App->render->Blit(spritesheet_bars, bar_pos.x, bar_pos.y, &bar_3);
 	}
 	else
-		App->render->Blit(spritesheet_bars, position.x - initial_pos + 70, -70, &bar_4);
+		App->render->Blit(spritesheet_bars, bar_pos.x, bar_pos.y, &bar_4);
 
 	if(ability_able==true)
-		App->render->Blit(spritesheet_bars, position.x - initial_pos + 70, -70, &bar_0);
+		App->render->Blit(spritesheet_bars, bar_pos.x, bar_pos.y, &bar_0);
 
 	//we just can use the ab each 4 seconds
 	if (tick3 - tick4 >= 4000) {
@@ -730,7 +743,8 @@ void j1Player::useAbility() {
 	camera_toRight->SetPos(position.x + 70, position.y - 100); //this +70 is added to initial pos too.
 	camera_toLeft->SetPos(position.x - 50, position.y - 100);
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
-	camera_toDown->SetPos(position.x - 50, position.y + 20);
+	camera_toDown->SetPos(position.x - 50, position.y + 20); 
+	bar_pos.x = position.x-initial_pos+ 62 + 5;//to fix
 	
 	position_when_ability = -position.x * screen_size + initial_pos;
 
