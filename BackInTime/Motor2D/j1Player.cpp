@@ -326,7 +326,7 @@ bool j1Player::Update(float dt)
 
 			if(collider_at_right == false)
 			{
-				position.x += velocity;
+				position.x += (float)ceil(velocity * dt);
 				moving_right = true;
 			}
 			else
@@ -338,7 +338,7 @@ bool j1Player::Update(float dt)
 
 			if (collider_at_left == false || collider_at_right == true)
 			{
-				position.x -= velocity;
+				position.x -= (float)ceil(velocity * dt);
 				moving_left = true;
 			}
 			else
@@ -351,7 +351,7 @@ bool j1Player::Update(float dt)
 			{
 				moving_right = true;
 				moving_left = false;
-				position.x += run_velocity;
+				position.x += (float)ceil(run_velocity * dt);
 			}
 			else if (collider_at_right == true)
 			{
@@ -365,7 +365,7 @@ bool j1Player::Update(float dt)
 			{
 				moving_left = true;
 				moving_right = false;
-				position.x -= run_velocity;
+				position.x -= (float)ceil(run_velocity * dt);
 			}else if(collider_at_left == true)
 			{
 				moving_left = false;
@@ -376,8 +376,8 @@ bool j1Player::Update(float dt)
 			if (jump_vel > 0) {
 				in_air = true;
 				current_animation = &jump_up;
-				jump_vel -= fall_velocity;
-				position.y -= jump_vel;
+				jump_vel -= (float)ceil(fall_velocity * dt);
+				position.y -= (float)ceil(jump_vel * dt);
 			}
 			else {
 				current_animation = &jump_down;
@@ -390,8 +390,8 @@ bool j1Player::Update(float dt)
 			if (jump_vel >= 0) {
 				current_animation = &jump_up;
 				in_air = true;
-				jump_vel -= fall_velocity;
-				position.y -= jump_vel;
+				jump_vel -= (float)ceil(fall_velocity * dt);
+				position.y -= (float)ceil(jump_vel * dt);
 			}
 			else {
 				current_animation = &jump_down;
@@ -401,14 +401,14 @@ bool j1Player::Update(float dt)
 				}
 			}
 			if (collider_at_right == false)
-				position.x += velocity;
+				position.x += (float)ceil(velocity * dt);
 
 			break;
 		case JUMP_BACKWARD:
 			if (jump_vel >= 0) {
 				current_animation = &jump_up;
 				in_air = true;
-				jump_vel -= fall_velocity;
+				jump_vel -= (float)ceil(fall_velocity * dt);
 				position.y -= jump_vel;
 			}
 			else {
@@ -419,7 +419,7 @@ bool j1Player::Update(float dt)
 				}
 			}
 			if (collider_at_left == false)
-				position.x -= velocity;
+				position.x -= (float)ceil(velocity * dt);
 			break;
 		case DASH_FORWARD:
 			current_animation = &walk;
