@@ -19,6 +19,7 @@ class j1Character;
 class j1Collision;
 class j1Player;
 class j1Fade;
+class j1PathFinding;
 
 class j1App
 {
@@ -68,6 +69,7 @@ public:
 	j1Collision* collision;
 	j1Player* player;
 	j1Fade* fade;
+	j1PathFinding* pathfinding;
 private:
 
 	// Load config file

@@ -45,6 +45,9 @@
     <ClCompile Include="j1Timer.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
+    <ClCompile Include="j1PathFinding.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -103,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="j1Timer.h">
       <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="j1PathFinding.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
