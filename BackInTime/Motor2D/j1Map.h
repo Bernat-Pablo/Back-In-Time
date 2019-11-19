@@ -8,6 +8,33 @@
 
 struct SDL_Texture;
 // ----------------------------------------------------
+struct Properties
+{
+	struct Property
+	{
+		p2SString name;
+		int value;
+	};
+
+	~Properties()
+	{
+		p2List_item<Property*>* item;
+		item = list.start;
+
+		while (item != NULL)
+		{
+			RELEASE(item->data);
+			item = item->next;
+		}
+
+		list.clear();
+	}
+
+	int Get(const char* name, int default_value = 0) const;
+
+	p2List<Property*>	list;
+};
+
 struct MapLayer
 {
 	p2SString	name;
@@ -17,6 +44,7 @@ struct MapLayer
 	float		y;
 	float		parallax;
 	uint*		data;
+	Properties	properties;
 
 	MapLayer() : data(NULL){}
 
@@ -101,6 +129,7 @@ public:
 
 	iPoint PosConverter(int x, int y);
 	SDL_Rect GetTileRect(TileSet* tileset, int id);
+	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
 private:
 
@@ -109,7 +138,11 @@ private:
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup);
-	
+	//pathfinding stuff
+	iPoint MapToWorld(int x, int y) const;
+	iPoint WorldToMap(int x, int y) const;
+	TileSet* GetTilesetFromTileId(int id) const;
+
 public:
 
 	MapData data;

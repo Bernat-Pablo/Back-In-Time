@@ -10,6 +10,7 @@
 #include "j1Scene.h"
 #include "j1Player.h"
 #include "j1Fade.h"
+#include "j1PathFinding.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -32,10 +33,15 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+	int w, h;
+	uchar* data = NULL;
 	if(choose_lv==1)
 		App->map->Load("maps/map_1.tmx");
 	else if (choose_lv==2)
 		App->map->Load("maps/map_2.tmx");
+	//pathfinding
+	if (App->map->CreateWalkabilityMap(w, h, &data))
+		App->pathfinding->SetMap(w, h, data);
 
 	//App->audio->PlayMusic("audio/music/music.ogg");
 	//App->map->Load("iso.tmx");
