@@ -279,3 +279,14 @@ void j1Render::cameraSetInitialPosition(pugi::xml_node& config)
 		camera.y = config.child("render").child("camera_initialPosition").child("map2").attribute("y").as_int();
 	}
 }
+
+iPoint j1Render::ScreenToWorld(int x, int y) const
+{
+	iPoint ret;
+	int scale = App->win->GetScale();
+
+	ret.x = (x - camera.x / scale);
+	ret.y = (y - camera.y / scale);
+
+	return ret;
+}

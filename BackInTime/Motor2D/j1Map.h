@@ -127,9 +127,13 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
+	//pathfinding stuff
 	iPoint PosConverter(int x, int y);
 	SDL_Rect GetTileRect(TileSet* tileset, int id);
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
+	iPoint WorldToMap(int x, int y) const;
+	iPoint MapToWorld(int x, int y) const;
+	TileSet* GetTilesetFromTileId(int id) const;
 
 private:
 
@@ -138,10 +142,6 @@ private:
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup);
-	//pathfinding stuff
-	iPoint MapToWorld(int x, int y) const;
-	iPoint WorldToMap(int x, int y) const;
-	TileSet* GetTilesetFromTileId(int id) const;
 
 public:
 
