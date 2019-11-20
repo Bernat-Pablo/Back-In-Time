@@ -226,8 +226,8 @@ bool j1Player::PreUpdate()
 			else			
 				state = DASH_FORWARD;			
 		}
-		else if (player_input.pressing_A && player_input.pressing_lshift) 
-			state = RUN_BACKWARD;	
+		else if (!player_input.pressing_D)
+			state = IDLE;
 
 		if (player_input.pressing_space)
 			state = JUMP_FORWARD;
@@ -244,8 +244,8 @@ bool j1Player::PreUpdate()
 			else			
 				state = DASH_BACKWARD;			
 		}
-		else if (player_input.pressing_D && player_input.pressing_lshift) 
-			state = RUN_FORWARD;
+		else if (!player_input.pressing_A) 
+			state = IDLE;
 		
 		if (player_input.pressing_space)
 			state = JUMP_BACKWARD;
