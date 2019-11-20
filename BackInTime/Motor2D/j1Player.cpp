@@ -376,8 +376,8 @@ bool j1Player::Update(float dt)
 			if (jump_vel > 0) {
 				in_air = true;
 				current_animation = &jump_up;
-				jump_vel -= (float)ceil(fall_velocity * dt);
-				position.y -= (float)ceil(jump_vel * dt);
+				jump_vel -= fall_velocity;
+				position.y -= jump_vel;
 			}
 			else {
 				current_animation = &jump_down;
@@ -390,8 +390,8 @@ bool j1Player::Update(float dt)
 			if (jump_vel >= 0) {
 				current_animation = &jump_up;
 				in_air = true;
-				jump_vel -= (float)ceil(fall_velocity * dt);
-				position.y -= (float)ceil(jump_vel * dt);
+				jump_vel -= fall_velocity;
+				position.y -= jump_vel;
 			}
 			else {
 				current_animation = &jump_down;
@@ -408,7 +408,7 @@ bool j1Player::Update(float dt)
 			if (jump_vel >= 0) {
 				current_animation = &jump_up;
 				in_air = true;
-				jump_vel -= (float)ceil(fall_velocity * dt);
+				jump_vel -= fall_velocity;
 				position.y -= jump_vel;
 			}
 			else {
