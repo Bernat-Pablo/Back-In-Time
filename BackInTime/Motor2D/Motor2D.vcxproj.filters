@@ -34,7 +34,7 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="j1Player.cpp">
-      <Filter>Characters</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="j1Fade.cpp">
       <Filter>Modules</Filter>
@@ -46,6 +46,12 @@
       <Filter>Tools</Filter>
     </ClCompile>
     <ClCompile Include="j1PathFinding.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,7 +101,7 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="j1Player.h">
-      <Filter>Characters</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="MemoryLeaks.h" />
     <ClInclude Include="j1Fade.h">
@@ -110,6 +116,12 @@
     <ClInclude Include="j1PathFinding.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">
@@ -118,14 +130,14 @@
     <Filter Include="Files">
       <UniqueIdentifier>{85559e9b-de74-49fc-a691-98916eb33003}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Characters">
-      <UniqueIdentifier>{dc32c766-6b50-4a33-8619-c4bd53ac957a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{7c56e46a-c471-43f4-ad52-bd5e1e81b836}</UniqueIdentifier>
     </Filter>
     <Filter Include="Tools">
       <UniqueIdentifier>{8776e66e-32d7-40e3-9ae8-e744202acbfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{dc32c766-6b50-4a33-8619-c4bd53ac957a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
