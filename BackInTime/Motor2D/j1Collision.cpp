@@ -4,6 +4,7 @@
 #include "j1Render.h"
 #include "j1Player.h"
 #include "p2Log.h"
+#include "Brofiler/Brofiler.h"
 
 //Constructor
 j1Collision::j1Collision()
@@ -101,6 +102,7 @@ bool j1Collision::PreUpdate()
 			
 		}
 	}
+	BROFILER_CATEGORY("Collision_PreUpdate", Profiler::Color::Bisque);
 
 	return ret;
 }
@@ -109,6 +111,7 @@ bool j1Collision::Update(float dt)
 {
 	bool ret = true;	
 	DebugDraw();
+	BROFILER_CATEGORY("Collision_Update", Profiler::Color::Black);
 	return ret;
 }
 

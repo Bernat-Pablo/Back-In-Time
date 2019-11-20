@@ -71,11 +71,13 @@ bool j1Render::Start()
 bool j1Render::PreUpdate()
 {
 	SDL_RenderClear(renderer);
+	BROFILER_CATEGORY("Render_PreUpdate", Profiler::Color::BlueViolet);
 	return true;
 }
 
 bool j1Render::Update(float dt)
 {
+	BROFILER_CATEGORY("Render_Update", Profiler::Color::Brown);
 	return true;
 }
 

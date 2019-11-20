@@ -14,6 +14,7 @@
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
 #include "SDL_mixer/include/SDL_mixer.h"
+#include "Brofiler/Brofiler.h"
 
 bool j1Fade::Awake(pugi::xml_node& c){
 	doc.load_file("config.xml");
@@ -95,6 +96,9 @@ bool j1Fade::Update(float dt)
 	// Finally render the black square with alpha on the screen
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
 	SDL_RenderFillRect(App->render->renderer, &screen);
+
+	BROFILER_CATEGORY("Fade_Update", Profiler::Color::BlanchedAlmond);
+
 	return true;
 }
 
