@@ -8,6 +8,7 @@
 #include "j1Window.h"
 #include <math.h>
 #include "j1Player.h"
+#include "Brofiler/Brofiler.h"
 
 
 
@@ -99,6 +100,7 @@ void j1Map::Draw()
 					
 		}
 	}	
+	BROFILER_CATEGORY("Map_Render", Profiler::Color::AntiqueWhite);
 }
 
 iPoint j1Map::PosConverter(int x, int y) {

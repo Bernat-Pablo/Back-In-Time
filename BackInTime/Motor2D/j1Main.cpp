@@ -80,11 +80,12 @@ int main(int argc, char* args[])
 			break;
 
 			// Loop all modules until we are asked to leave ---------------------
-			case LOOP:
-			if(App->Update() == false)
-				state = CLEAN;
-			break;
-
+			case LOOP: {
+				BROFILER_FRAME("Update");
+				if (App->Update() == false)
+					state = CLEAN;
+				break;
+			}
 			// Cleanup allocated memory -----------------------------------------
 			case CLEAN:
 			LOG("CLEANUP PHASE ===============================");

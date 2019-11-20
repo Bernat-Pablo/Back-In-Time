@@ -4,6 +4,7 @@
 #include "j1Window.h"
 #include "j1Render.h"
 #include "j1Scene.h"
+#include "Brofiler/Brofiler.h"
 
 #define VSYNC true
 
@@ -80,8 +81,16 @@ bool j1Render::Update(float dt)
 
 bool j1Render::PostUpdate()
 {
+	pugi::xml_node config = App->GetConfig();
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);
 	SDL_RenderPresent(renderer);
+	if (config.child("vsync").attribute("value").as_bool(true) == true)
+	{
+		BROFILER_CATEGORY("Render_PostUpdate(VSYNC)", Profiler::Color::Orange);
+	}
+	else {
+		BROFILER_CATEGORY("Render_PostUpdate(NO VSYNC)", Profiler::Color::AliceBlue);
+	}
 	return true;
 }
 

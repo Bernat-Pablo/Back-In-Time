@@ -11,6 +11,7 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "j1Fade.h"
+#include "Brofiler/Brofiler.h"
 
 j1Player::j1Player() : j1Module()
 {
@@ -301,6 +302,7 @@ bool j1Player::PreUpdate()
 
 	//Change player collider position
 	collider_player->SetPos(position.x, position.y);
+	BROFILER_CATEGORY("Player_PreUpdate", Profiler::Color::Aquamarine);
 
 	return true;
 }
@@ -500,6 +502,7 @@ bool j1Player::Update(float dt)
 		tick4 = SDL_GetTicks();
 	}	
 
+	BROFILER_CATEGORY("Player_Update", Profiler::Color::Beige);
 
 	return true;
 }
