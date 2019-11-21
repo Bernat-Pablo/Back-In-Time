@@ -46,7 +46,7 @@ The player can go a few seconds back to the past.
 * Music: https://www.fesliyanstudios.com/royalty-free-music/download/too-crazy/307
 * Sounds: https://freesound.org/
 
-# Link
+# GitHub Link
 * https://github.com/Bernat-Pablo/Back-In-Time
 
 # License
