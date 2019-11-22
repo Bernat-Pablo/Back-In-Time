@@ -309,6 +309,7 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt) 
 {
+	deltaTime = dt; //For camera colliders
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update
 	
@@ -328,7 +329,7 @@ bool j1Player::Update(float dt)
 
 			if(collider_at_right == false)
 			{
-				position.x += (float)ceil(velocity * dt);
+				position.x += (int)ceil(velocity * dt);
 				moving_right = true;
 			}
 			else
@@ -340,7 +341,7 @@ bool j1Player::Update(float dt)
 
 			if (collider_at_left == false || collider_at_right == true)
 			{
-				position.x -= (float)ceil(velocity * dt);
+				position.x -= (int)ceil(velocity * dt);
 				moving_left = true;
 			}
 			else
@@ -353,7 +354,7 @@ bool j1Player::Update(float dt)
 			{
 				moving_right = true;
 				moving_left = false;
-				position.x += (float)ceil(run_velocity * dt);
+				position.x += (int)ceil(run_velocity * dt);
 			}
 			else if (collider_at_right == true)
 			{
@@ -367,7 +368,7 @@ bool j1Player::Update(float dt)
 			{
 				moving_left = true;
 				moving_right = false;
-				position.x -= (float)ceil(run_velocity * dt);
+				position.x -= (int)ceil(run_velocity * dt);
 			}else if(collider_at_left == true)
 			{
 				moving_left = false;
@@ -403,7 +404,7 @@ bool j1Player::Update(float dt)
 				}
 			}
 			if (collider_at_right == false)
-				position.x += (float)ceil(velocity * dt);
+				position.x += (int)ceil(velocity * dt);
 
 			break;
 		case JUMP_BACKWARD:
@@ -421,15 +422,16 @@ bool j1Player::Update(float dt)
 				}
 			}
 			if (collider_at_left == false)
-				position.x -= (float)ceil(velocity * dt);
+				position.x -= (int)ceil(velocity * dt);
 			break;
 		case DASH_FORWARD:
 			current_animation = &walk;
 
 			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
-			
-			if(collider_at_right == false)
-				position.x += velocity;
+			velocity -= decrease_vel;
+
+			if (collider_at_right == false)
+				position.x += (int)(velocity * dt);
 
 			if (velocity <= 0) {
 				moving_right = false;
@@ -441,9 +443,10 @@ bool j1Player::Update(float dt)
 			current_animation = &walk;
 
 			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
+			velocity -= decrease_vel;
 
-			if(collider_at_left == false)
-				position.x -= velocity;
+			if (collider_at_left == false)
+				position.x -= (int)(velocity * dt);
 
 			if (velocity <= 0)
 			{
@@ -589,11 +592,11 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		float localVelocity = 0;
 		//We adjust camera velocity to player velocity depending his state
 		if (state == WALK_FORWARD || state == WALK_BACKWARD)
-			localVelocity = velocity;
+			localVelocity = velocity * deltaTime;
 		else if (state == RUN_FORWARD || state == RUN_BACKWARD)
-			localVelocity = run_velocity;
+			localVelocity = run_velocity * deltaTime;
 		else
-			localVelocity = velocity;
+			localVelocity = velocity * deltaTime;
 				
 		if (c2->name == "right") //Collision with camera_toRight
 		{
