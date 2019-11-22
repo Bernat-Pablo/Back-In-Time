@@ -428,9 +428,10 @@ bool j1Player::Update(float dt)
 			current_animation = &walk;
 
 			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
-			
-			if(collider_at_right == false)
-				position.x += velocity;
+			velocity -= decrease_vel;
+
+			if (collider_at_right == false)
+				position.x += (int)(velocity * dt);
 
 			if (velocity <= 0) {
 				moving_right = false;
@@ -442,10 +443,10 @@ bool j1Player::Update(float dt)
 			current_animation = &walk;
 
 			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
+			velocity -= decrease_vel;
 
-
-			if(collider_at_left == false)
-				position.x -= velocity;
+			if (collider_at_left == false)
+				position.x -= (int)(velocity * dt);
 
 			if (velocity <= 0)
 			{
