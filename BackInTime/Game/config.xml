@@ -23,10 +23,10 @@
     </initialPosition>
 
     <lives value ="3"/>
-    <velocity value ="2.0"/>
-    <run_velocity value ="3.0"/>
+    <velocity value ="30.0"/>
+    <run_velocity value ="45.0"/>
     <fall_velocity value ="0"/>
-    <decrease_vel value ="0.05" />
+    <decrease_vel value ="10.0" />
     <gravity value ="0.1"/>
     <jump_vel value ="10.0"/>
 
