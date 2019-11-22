@@ -507,7 +507,7 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	{
 		MapLayer* layer = item->data;
 
-		if (layer->properties.Get("Colliders", 0) == 0)
+		if (layer->properties.Get("Colliders_2", 0) == 0)
 			continue;
 
 		uchar* map = new uchar[layer->width * layer->height];
