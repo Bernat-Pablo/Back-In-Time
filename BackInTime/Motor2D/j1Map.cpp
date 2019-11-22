@@ -57,6 +57,9 @@ void j1Map::Draw()
 			for (int j = 0; j < layer->width && finish_printing == false; j++) {
 
 				int n = layer->Get(j, i);
+				if (lay->data->name == "Colliders_2") {
+					continue;
+				}
 				if (lay->data->name == "Arboles P") {
 					//culling left and up with parallax
 					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9 && (App->player->position.y - node.child("finish_printing_up").attribute("value").as_int() * 16)) {
@@ -504,7 +507,7 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 	{
 		MapLayer* layer = item->data;
 
-		if (layer->properties.Get("Navigation", 0) == 0)
+		if (layer->properties.Get("Colliders", 0) == 0)
 			continue;
 
 		uchar* map = new uchar[layer->width * layer->height];
