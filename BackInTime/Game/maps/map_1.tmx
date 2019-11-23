@@ -10541,6 +10541,9 @@
   </data>
  </layer>
  <layer id="6" name="Decoracion 2" width="100" height="15">
+  <properties>
+   <property name="Value" value="0"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
