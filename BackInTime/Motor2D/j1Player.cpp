@@ -190,12 +190,7 @@ bool j1Player::PreUpdate()
 			state = RUN_FORWARD;
 		
 		if (player_input.pressing_A)
-		{
-			if (collider_at_right)
-				position.x -= velocity;
-
-			state = WALK_BACKWARD;
-		}
+			state = WALK_BACKWARD;		
 		
 		looking_right = true;
 
