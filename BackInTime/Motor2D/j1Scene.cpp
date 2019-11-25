@@ -42,7 +42,7 @@ bool j1Scene::Start()
 	//pathfinding
 	if (App->map->CreateWalkabilityMap(w, h, &data))
 		App->pathfinding->SetMap(w, h, data);
-	debug_tex = App->tex->Load("maps/path2.png");
+	debug_tex = App->tex->Load("maps/pathRect.png");
 
 	//App->audio->PlayMusic("audio/music/music.ogg");
 	//App->map->Load("iso.tmx");
@@ -114,17 +114,10 @@ bool j1Scene::Update(float dt)
 	int x = 0, y = 0;
 	App->input->GetMousePosition(x, y);
 	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
-	//p2SString title("Forest Dash");
-	//Uncomment if want to display map info in game title
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
-		App->map->data.width, App->map->data.height,
-		App->map->data.tile_width, App->map->data.tile_height,
-		App->map->data.tilesets.count(), map_coordinates.x, map_coordinates.y);
 
 	iPoint p = App->render->ScreenToWorld(x, y);
 	p = App->map->WorldToMap(p.x, p.y);
 	p = App->map->MapToWorld(p.x, p.y);
-
 	App->render->Blit(debug_tex, p.x, p.y);
 
 
