@@ -95,6 +95,7 @@ private:
 
 	float run_velocity;
 	float fall_velocity;
+	float max_fall_velocity;
 	float gravity;
 	float jump_vel;
 

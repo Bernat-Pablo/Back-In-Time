@@ -70,6 +70,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	run_velocity = config.child("run_velocity").attribute("value").as_float();
 	velocity = config.child("velocity").attribute("value").as_float();
 	fall_velocity = config.child("fall_velocity").attribute("value").as_float();
+	max_fall_velocity = config.child("max_fall_velocity").attribute("value").as_float();
 	jump_vel = config.child("jump_vel").attribute("value").as_float();
 	decrease_vel = config.child("decrease_vel").attribute("value").as_float();
 	lives = config.child("lives").attribute("value").as_int();
@@ -453,7 +454,8 @@ bool j1Player::Update(float dt)
 
 		if(in_air == true)
 		{
-			fall_velocity += gravity;
+			if(fall_velocity < max_fall_velocity)
+				fall_velocity += gravity;
 			position.y += fall_velocity;
 			//LOG("IN AIR");
 		}else if(in_air == false)
@@ -465,9 +467,9 @@ bool j1Player::Update(float dt)
 	{
 		in_air = false;
 		if (player_input.pressing_W)
-			position.y -= velocity;
+			position.y -= (int)ceil(velocity*dt);
 		if (player_input.pressing_S)
-			position.y += velocity;
+			position.y += (int)ceil(velocity*dt);
 	}
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
