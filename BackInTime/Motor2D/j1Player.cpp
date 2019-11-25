@@ -165,14 +165,11 @@ bool j1Player::PreUpdate()
 			restart_variables(-1, 1);
 			state = JUMP;
 		}
-		else if (player_input.pressing_D)
-		{
-			state = WALK_FORWARD;
-		}
-		else if (player_input.pressing_A)
-		{					
+		else if (player_input.pressing_D)		
+			state = WALK_FORWARD;		
+		else if (player_input.pressing_A)						
 			state = WALK_BACKWARD;			
-		}
+		
 		break;
 	case WALK_FORWARD:		
 		restart_variables(-1, 1);
@@ -188,10 +185,7 @@ bool j1Player::PreUpdate()
 		
 		if (player_input.pressing_lshift)		
 			state = RUN_FORWARD;
-		
-		if (player_input.pressing_A)
-			state = WALK_BACKWARD;		
-		
+				
 		looking_right = true;
 
 		break;
