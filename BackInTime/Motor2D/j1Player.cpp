@@ -589,14 +589,14 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	//because even if it's at godMode, we want the camera to follow the player
 	if(c2->type == COLLIDER_CAMERA)
 	{
-		float localVelocity = 0;
+		float localVelocity = 0; 
 		//We adjust camera velocity to player velocity depending his state
 		if (state == WALK_FORWARD || state == WALK_BACKWARD)
-			localVelocity = velocity * deltaTime;
+			localVelocity = (int)ceil(velocity * deltaTime);
 		else if (state == RUN_FORWARD || state == RUN_BACKWARD)
-			localVelocity = run_velocity * deltaTime;
+			localVelocity = (int)ceil(run_velocity * deltaTime);
 		else
-			localVelocity = velocity * deltaTime;
+			localVelocity = (int)ceil(velocity * deltaTime);
 				
 		if (c2->name == "right") //Collision with camera_toRight
 		{
@@ -785,7 +785,7 @@ void j1Player::MoveCameraColliders(p2SString direction, float speed)
 
 		camera_toRight->rect.x += speed;
 		camera_toLeft->rect.x += speed;
-		camera_toUp->rect.x += speed;
+ 		camera_toUp->rect.x += speed;
 		camera_toDown->rect.x += speed;
 	}else if(direction == "y") //Move up or down
 	{

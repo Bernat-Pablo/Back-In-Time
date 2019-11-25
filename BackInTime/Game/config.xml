@@ -23,12 +23,12 @@
     </initialPosition>
 
     <lives value ="3"/>
-    <velocity value ="30.0"/>
-    <run_velocity value ="45.0"/>
+    <velocity value ="60.0"/>
+    <run_velocity value ="90.0"/>
     <fall_velocity value ="0"/>
-    <decrease_vel value ="10.0" />
-    <gravity value ="0.1"/>
-    <jump_vel value ="10.0"/>
+    <decrease_vel value ="20.0" />
+    <gravity value ="0.15"/>
+    <jump_vel value ="14.0"/>
 
     <!-- Audio and FX -->
     <jumpFX source ="jump.wav"/>
