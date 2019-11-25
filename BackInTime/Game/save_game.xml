@@ -7,18 +7,19 @@
 	<map />
 	<scene />
 	<player>
-		<position x="40" y="54" />
-		<level value="2" />
-		<camera_toRight x="110" y="-38" />
-		<camera_toLeft x="-10" y="-38" />
-		<camera_toUp x="-10" y="-38" />
-		<camera_toDown x="-10" y="73" />
-		<camera x="0" y="347" />
+		<position x="144" y="171" />
+		<level value="1" />
+		<camera_toRight x="188" y="97" />
+		<camera_toLeft x="68" y="97" />
+		<camera_toUp x="68" y="97" />
+		<camera_toDown x="68" y="217" />
+		<camera x="-146" y="308" />
 		<lives value="3" />
 	</player>
 	<:anonymous />
 	<:anonymous />
+	<pathfinding />
 	<renderer>
-		<camera x="0" y="347" />
+		<camera x="-146" y="308" />
 	</renderer>
 </game_state>

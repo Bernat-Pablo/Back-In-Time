@@ -445,18 +445,18 @@ bool j1Player::Update(float dt)
 				state = IDLE;
 			}
 			break;
-	}
+	}	
 
 	if(godMode == false)
-	{
-		
+	{		
 		in_air = checkInAir();
 
 		if(in_air == true)
 		{
 			if(fall_velocity < max_fall_velocity)
-				fall_velocity += gravity;
-			position.y += fall_velocity;
+				fall_velocity += gravity*dt;
+
+			position.y += (int)ceil(fall_velocity);
 			//LOG("IN AIR");
 		}else if(in_air == false)
 		{

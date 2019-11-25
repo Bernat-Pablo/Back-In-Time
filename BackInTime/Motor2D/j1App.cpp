@@ -218,7 +218,7 @@ void j1App::FinishUpdate()
 	{
 		SDL_Delay(delay);
 	}
-	LOG("We waited for %.0f milliseconds and got back in %f", delay, delay_timer);
+	//LOG("We waited for %.0f milliseconds and got back in %f", delay, delay_timer);
 }
 
 // Call modules before each loop iteration
