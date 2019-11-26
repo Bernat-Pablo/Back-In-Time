@@ -14,7 +14,7 @@
     </camera_initialPosition>
     
   </render>
-
+  
   <player>
     <spritesheet source ="character/spritesheet_pj.png"/>
     <initialPosition>

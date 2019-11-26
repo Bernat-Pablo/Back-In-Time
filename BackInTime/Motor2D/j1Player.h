@@ -81,51 +81,51 @@ private:
 	int lives = 3;
 
 	p2SString			folder;
-	float initial_x = 200.0f; // 2 blocks * 16 each one
-	float initial_y = 400.0f; // 25 blocks * 16 each one - height pj	
+	float				initial_x;
+	float				initial_y;
 	
-	iPoint old_position[30];
-	int iterator = 0;
-	int position_when_ability;
-	int initial_pos;
-	int screen_size;
+	iPoint				old_position[30];
+	int					iterator = 0;
+	int					position_when_ability;
+	int					initial_pos;
+	int					screen_size;
 
-	float decrease_vel = 0.2f;
-	float velocity = 2.0f;
+	float				decrease_vel;
+	float				velocity;
 
-	float run_velocity;
-	float fall_velocity;
-	float max_fall_velocity;
-	float gravity;
-	float jump_vel;
+	float				run_velocity;
+	float				fall_velocity;
+	float 				max_fall_velocity;
+	float 				gravity;
+	float 				jump_vel;
 
-	bool moving_right = false; //for slide
-	bool moving_left = false;	
-	bool in_air = false;
-	bool looking_right=true;
+	bool 				moving_right = false; //for slide
+	bool 				moving_left = false;
+	bool 				in_air = false;
+	bool 				looking_right=true;
 
-	bool collider_at_right = false; //If true, player can't go to the right 
-	bool collider_at_left = false;
+	bool 				collider_at_right = false; //If true, player can't go to the right 
+	bool 				collider_at_left = false;
 
-	bool godMode = false;
-	bool walking = false; //is he walking?
+	bool 				godMode = false;
+	bool 				walking = false; //is he walking?
 
-	bool ability_able = false;
+	bool 				ability_able = false;
 
-	int tick1 = 0, tick2 = 0;
-	int tick3 = 0, tick4 = 0;
+	int 				tick1 = 0, tick2 = 0;
+	int 				tick3 = 0, tick4 = 0;
 
-	float deltaTime;
+	float 				deltaTime;
 
-	Collider* collider_player = nullptr;
+	Collider*			collider_player = nullptr;
 
-	Collider* camera_toRight = nullptr;
-	Collider* camera_toLeft = nullptr;
-	Collider* camera_toUp = nullptr;
-	Collider* camera_toDown = nullptr;
+	Collider*			camera_toRight = nullptr;
+	Collider*			camera_toLeft = nullptr;
+	Collider*			camera_toUp = nullptr;
+	Collider*			camera_toDown = nullptr;
 
-	pugi::xml_document doc;
-	pugi::xml_node node;
+	pugi::xml_document	doc;
+	pugi::xml_node		node;
 };
 
 #endif // !_PLAYER_
