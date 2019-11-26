@@ -467,9 +467,6 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 	layer->width = node.attribute("width").as_int();
 	layer->height = node.attribute("height").as_int();
 	LoadProperties(node, layer->properties);
-	if (node.child("properties").child("property").attribute("value").as_float() != NULL) {
-		layer->parallax = node.child("properties").child("property").attribute("value").as_float();
-	}
 	pugi::xml_node layer_data = node.child("data");
 
 	if(layer_data == NULL)
@@ -526,6 +523,11 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 				if (tileset != NULL)
 				{
 					map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;
+					/*TileType* ts = tileset->GetTileType(tile_id);
+					if(ts != NULL)
+					{
+						map[i] = ts->properties.Get("walkable", 1);
+					}*/
 				}
 			}
 		}
