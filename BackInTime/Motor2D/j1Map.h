@@ -61,7 +61,7 @@ struct MapLayer
 
 struct TileSet
 {
-
+	SDL_Rect GetTileRect(int id) const;
 
 	p2SString			name;
 	int					firstgid;
