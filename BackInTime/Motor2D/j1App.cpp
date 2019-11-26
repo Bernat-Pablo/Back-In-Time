@@ -142,6 +142,12 @@ bool j1App::Update()
 	bool ret = true;
 	PrepareUpdate();
 
+	if (input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+		if (cap_framerate == true)
+			cap_framerate = false;
+		else
+			cap_framerate = true;
+
 	if(input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
 
@@ -195,7 +201,7 @@ void j1App::FinishUpdate()
 		LoadGameNow();
 
 	// Framerate calculations --
-
+	
 	if (last_sec_frame_time.Read() > 1000)
 	{
 		last_sec_frame_time.Start();
@@ -212,16 +218,19 @@ void j1App::FinishUpdate()
 	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i  Time since startup: %.3f Frame Count: %lu ",
 		avg_fps, last_frame_ms, frames_on_last_update, seconds_since_startup, frame_count);
 	App->win->SetTitle(title);
-	
-	j1PerfTimer delay_timer;
-	delay_timer.Start();
-	double delay = 1000 / framerate_cap - last_frame_ms;
 
-	if (last_frame_ms < 1000/framerate_cap)
+	if (cap_framerate == true)
 	{
-		SDL_Delay(delay);
-	}
-	//LOG("We waited for %.0f milliseconds and got back in %f", delay, delay_timer);
+		j1PerfTimer delay_timer;
+		delay_timer.Start();
+		double delay = 1000 / framerate_cap - last_frame_ms;
+
+		if (last_frame_ms < 1000 / framerate_cap)
+		{
+			SDL_Delay(delay);
+		}
+		//LOG("We waited for %.0f milliseconds and got back in %f", delay, delay_timer);
+	}	
 }
 
 // Call modules before each loop iteration

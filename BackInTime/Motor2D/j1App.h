@@ -125,6 +125,7 @@ private:
 
 	uint			    framerate_cap;
 	float				deltaTime;
+	bool				cap_framerate = true;
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S

@@ -1,7 +1,7 @@
 <!-- Config file for the game -->
 
 <config>
-  <app framerate_cap="60">
+  <app framerate_cap="30">
     <title>Back In Time</title>
     <organization>Bernat and Pablo</organization>
   </app>
@@ -23,8 +23,8 @@
     </initialPosition>
 
     <lives value ="3"/>
-    <velocity value ="60.0"/>
-    <run_velocity value ="90.0"/>
+    <velocity value ="70.0"/>
+    <run_velocity value ="110.0"/>
     <fall_velocity value ="0"/>
     <max_fall_velocity value ="30"/>
     <decrease_vel value ="20.0" />
