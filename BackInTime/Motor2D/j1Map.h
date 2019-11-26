@@ -131,6 +131,7 @@ public:
 	iPoint PosConverter(int x, int y);
 	SDL_Rect GetTileRect(TileSet* tileset, int id);
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
+	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 	iPoint WorldToMap(int x, int y) const;
 	iPoint MapToWorld(int x, int y) const;
 	TileSet* GetTilesetFromTileId(int id) const;

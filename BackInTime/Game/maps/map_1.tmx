@@ -4,9 +4,6 @@
   <image source="Basic_Tiles_Only.png" width="1376" height="896"/>
  </tileset>
  <layer id="11" name="Fondo" width="100" height="15" visible="0">
-  <properties>
-   <property name="Value" value="0"/>
-  </properties>
   <data>
    <tile gid="178"/>
    <tile gid="6"/>
@@ -1512,6 +1509,7 @@
  </layer>
  <layer id="8" name="Arboles P" width="100" height="15">
   <properties>
+   <property name="Value" value="0"/>
    <property name="parallax" value="0.9"/>
   </properties>
   <data>
@@ -3019,6 +3017,7 @@
  </layer>
  <layer id="9" name="Arboles2 P" width="100" height="15">
   <properties>
+   <property name="Value" value="0"/>
    <property name="parallax" value="0.9"/>
   </properties>
   <data>
@@ -4525,6 +4524,9 @@
   </data>
  </layer>
  <layer id="7" name="Arboles" width="100" height="15">
+  <properties>
+   <property name="Value" value="0"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -6029,6 +6031,9 @@
   </data>
  </layer>
  <layer id="2" name="Terreno" width="100" height="15">
+  <properties>
+   <property name="Value" value="0"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -7533,6 +7538,9 @@
   </data>
  </layer>
  <layer id="4" name="Casa" width="100" height="15">
+  <properties>
+   <property name="Value" value="0"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -10541,9 +10549,6 @@
   </data>
  </layer>
  <layer id="6" name="Decoracion 2" width="100" height="15">
-  <properties>
-   <property name="Value" value="0"/>
-  </properties>
   <data>
    <tile/>
    <tile/>
@@ -12049,7 +12054,7 @@
  </layer>
  <layer id="10" name="Colliders_2" width="100" height="15">
   <properties>
-   <property name="Value" value="1"/>
+   <property name="Navigation" type="int" value="1"/>
   </properties>
   <data>
    <tile/>

@@ -72,6 +72,14 @@ bool j1Scene::PreUpdate()
 
 	App->pathfinding->CreatePath(App->player->position, p);
 
+	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+
+	for (uint i = 0; i < path->Count(); ++i)
+	{
+		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+		App->render->Blit(debug_tex, pos.x, pos.y);
+	}
+
 
 	return true;
 }
