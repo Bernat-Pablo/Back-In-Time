@@ -150,5 +150,16 @@ bool j1FlyingEnemy::Update(float dt)
 
 bool j1FlyingEnemy::CleanUp()
 {
+	App->tex->UnLoad(spritesheet);
 	return true;
+}
+
+void j1FlyingEnemy::calculate_path()
+{
+
+}
+
+void j1FlyingEnemy::blit_path()
+{
+
 }

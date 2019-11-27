@@ -32,6 +32,9 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
+	void calculate_path();
+	void blit_path();
+
 	float x_pos, y_pos;
 
 private:
