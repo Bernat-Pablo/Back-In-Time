@@ -11,8 +11,8 @@
 struct SDL_Texture;
 struct Collider;
 
-enum Player_States {
-	IDLE,
+enum FEnemy_States {
+	FLY,
 	FLY_FORWARD,
 	FLY_BACKWARD,
 	FALL,
@@ -36,12 +36,18 @@ public:
 
 private:
 
-	Animation idle;
 	Animation fly;
 	Animation ground;
 	Animation hit;
 	Animation fall;
 	Animation* current_animation;
 
+	Collider* collider_enemy = nullptr;
+
+	float 				deltaTime;
+
+
+
 };
+
 #endif // !_FLYINGENEMY_

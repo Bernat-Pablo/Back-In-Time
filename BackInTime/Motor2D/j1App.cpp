@@ -17,6 +17,7 @@
 #include "j1Fade.h"
 #include "j1Player.h"
 #include "j1PathFinding.h"
+#include "j1FlyingEnemy.h"
 
 
 // Constructor
@@ -38,6 +39,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	collision = new j1Collision();
 	fade = new j1Fade();
 	pathfinding = new j1PathFinding();
+	flyingEnemy = new j1FlyingEnemy();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -52,6 +54,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(collision);
 	AddModule(fade);
 	AddModule(pathfinding);
+	AddModule(flyingEnemy);
 
 	// render last to swap buffer
 	AddModule(render);

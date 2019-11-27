@@ -20,6 +20,7 @@ class EntityManager;
 class j1Player;
 class j1Fade;
 class j1PathFinding;
+class j1FlyingEnemy;
 
 class j1App
 {
@@ -71,6 +72,7 @@ public:
 	j1Player* player;
 	j1Fade* fade;
 	j1PathFinding* pathfinding;
+	j1FlyingEnemy* flyingEnemy;
 private:
 
 	// Load config file

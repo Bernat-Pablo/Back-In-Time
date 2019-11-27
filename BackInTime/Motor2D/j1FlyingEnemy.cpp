@@ -14,7 +14,7 @@
 #include "Brofiler/Brofiler.h"
 #include "j1FlyingEnemy.h"
 
-j1Player::j1FlyingEnemy() : j1Module()
+j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 {
 	name.create("flyingEnemy");
 
