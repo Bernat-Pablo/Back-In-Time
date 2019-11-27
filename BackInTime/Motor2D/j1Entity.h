@@ -7,7 +7,7 @@
 #include "j1Map.h"
 #include "j1App.h"
 
-class Entity
+class j1Entity
 {
 public:
 	enum entityType
@@ -18,9 +18,9 @@ public:
 	};
 
 public:
-	Entity();
-	Entity(entityType type);
-	~Entity();
+	j1Entity();
+	j1Entity(entityType type);
+	~j1Entity();
 
 	void Draw(float dt);
 };

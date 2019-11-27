@@ -21,7 +21,7 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 	float speed = 0.55f;
 	
 	//FLY
-	fly.PushBack({ 2,73,30,35 },speed); //UGLY, TO FIX
+	fly.PushBack({ 2,73,30,35 },speed); //TODO: UGLY, TO FIX Animation Pushback
 	fly.PushBack({ 36,73,31,36 }, speed);
 	fly.PushBack({ 73,72,27,39 }, speed);
 	fly.PushBack({ 107,72,27,39 }, speed);
@@ -38,7 +38,7 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 	ground.PushBack({ 104,0,32,30 }, speed);
 
 	//HIT
-	speed = 0.3f; //UGLY, TO FIX
+	speed = 0.3f; //TODO: UGLY, TO FIX Animation Pushback
 	hit.PushBack({ 0,35,33,35 }, speed);	
 	hit.PushBack({ 35,35,33,35 }, speed);
 	hit.PushBack({ 70,35,33,35 }, speed);

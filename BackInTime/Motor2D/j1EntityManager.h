@@ -5,7 +5,7 @@
 #include "p2Point.h"
 #include "j1Animation.h"
 
-class Entity;
+class j1Entity;
 
 enum Entity_Types {
 	PLAYER,
@@ -13,11 +13,11 @@ enum Entity_Types {
 	FLYING_ENEMY,
 };
 
-class EntityManager : public j1Module
+class j1EntityManager : public j1Module
 {
 public:
-	EntityManager();
-	~EntityManager();
+	j1EntityManager();
+	~j1EntityManager();
 
 	virtual bool Awake(pugi::xml_node& config);
 	virtual bool Start();

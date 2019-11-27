@@ -77,8 +77,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="j1Entity.cpp" />
+    <ClCompile Include="j1EntityManager.cpp" />
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1Fade.cpp" />
     <ClCompile Include="j1FlyingEnemy.cpp" />
@@ -99,8 +99,8 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="j1Entity.h" />
+    <ClInclude Include="j1EntityManager.h" />
     <ClInclude Include="j1Animation.h" />
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="j1Fade.h" />

@@ -48,14 +48,14 @@
     <ClCompile Include="j1PathFinding.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="j1FlyingEnemy.cpp">
       <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="j1EntityManager.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,14 +119,14 @@
     <ClInclude Include="j1PathFinding.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityManager.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="j1FlyingEnemy.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="j1EntityManager.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

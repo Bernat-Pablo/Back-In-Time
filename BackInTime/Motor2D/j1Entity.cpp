@@ -1,5 +1,5 @@
-#include "EntityManager.h"
-#include "Entity.h"
+#include "j1EntityManager.h"
+#include "j1Entity.h"
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
@@ -13,19 +13,19 @@
 #include "j1Window.h"
 
 
-Entity::Entity()
+j1Entity::j1Entity()
 {
 }
 
-Entity::Entity(entityType type)
+j1Entity::j1Entity(entityType type)
 {
 }
 
-Entity::~Entity()
+j1Entity::~j1Entity()
 {
 }
 
-void Entity::Draw(float dt)
+void j1Entity::Draw(float dt)
 {
 	//TODO: Draw function
 }
