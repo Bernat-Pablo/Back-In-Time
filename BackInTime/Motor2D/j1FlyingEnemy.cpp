@@ -52,12 +52,16 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 	fall.PushBack({ 71,111,30,39 }, speed);
 	fall.PushBack({ 106,111,30,39 }, speed);
 
+	//SETTING VARIABLES
+	velocity = 2.0f;
+	fall_vel = 3.5f;
+
 }
 
 bool j1FlyingEnemy::Awake(pugi::xml_node&)
 {
-	position.x = 752;
-	position.y = 30;
+	x_pos = 752.0;
+	y_pos = 30.0;
 	return true;
 }
 
@@ -71,6 +75,7 @@ bool j1FlyingEnemy::Start()
 
 bool j1FlyingEnemy::PreUpdate()
 {
+	//STATE MACHINE
 	switch (state)
 	{
 	case FLY:
@@ -108,7 +113,7 @@ bool j1FlyingEnemy::PreUpdate()
 
 bool j1FlyingEnemy::Update(float dt)
 {
-
+	//STATE MACHINE APPLYING MOVEMENT
 	switch (state)
 	{
 	case FLY:
@@ -117,10 +122,12 @@ bool j1FlyingEnemy::Update(float dt)
 		break;
 	case FLY_FORWARD:
 		current_animation = &fly;
+		x_pos += velocity;
 
 		break;
 	case FLY_BACKWARD:
 		current_animation = &fly;
+		x_pos -= velocity;
 
 		break;
 	case FALL:
@@ -131,7 +138,8 @@ bool j1FlyingEnemy::Update(float dt)
 		break;
 	}
 
-	App->render->Blit(spritesheet, position.x, position.y, &current_animation->GetCurrentFrame());
+	//BLIT
+	App->render->Blit(spritesheet, x_pos, y_pos, &current_animation->GetCurrentFrame());
 	return true;
 }
 
