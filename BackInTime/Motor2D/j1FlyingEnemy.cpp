@@ -61,13 +61,14 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 
 bool j1FlyingEnemy::Awake(pugi::xml_node&)
 {
-	x_pos = 752.0;
-	y_pos = 30.0;
+
 	return true;
 }
 
 bool j1FlyingEnemy::Start()
 {
+	x_pos = 752.0;
+	y_pos = 30.0;
 	spritesheet = App->tex->Load("character/bird_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 	state = FLY;
@@ -114,6 +115,8 @@ bool j1FlyingEnemy::PreUpdate()
 	//PATH TO PLAYER (LOGIC)
 	calculate_path();
 
+
+
 	return true;
 }
 
@@ -129,20 +132,26 @@ bool j1FlyingEnemy::Update(float dt)
 	case FLY_FORWARD:
 		current_animation = &fly;
 		x_pos += velocity;
+		moving_right = true;
+		moving_left = false;
 
 		break;
 	case FLY_BACKWARD:
 		current_animation = &fly;
 		x_pos -= velocity;
+		moving_right = false;
+		moving_left = true;
 
 		break;
 	case FALL:
 		current_animation = &fall;
 		y_pos += fall_vel;
+		falling = true;
 
 		break;
 	case IN_GROUND:
 		current_animation = &ground;
+		falling = false;
 
 		break;
 	default:
@@ -154,6 +163,7 @@ bool j1FlyingEnemy::Update(float dt)
 
 	//PATH TO PLAYER (BLIT)
 	blit_path();
+
 
 	return true;
 }
@@ -171,8 +181,10 @@ void j1FlyingEnemy::calculate_path()
 
 	iPoint p = App->render->ScreenToWorld(x_pos, y_pos);
 	p = App->map->WorldToMap(x_pos, y_pos);
-
-	App->pathfinding->CreatePath(origin, p);
+	if (x_pos-App->player->position.x <=128 || x_pos - App->player->position.x <= -128) {
+		App->pathfinding->CreatePath(origin, p);
+		check_path_toMove();
+	}
 }
 
 void j1FlyingEnemy::blit_path()
@@ -183,5 +195,22 @@ void j1FlyingEnemy::blit_path()
 	{
 		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		App->render->Blit(debug_tex, pos.x, pos.y);
+	}
+}
+
+void j1FlyingEnemy::check_path_toMove()
+{
+	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+	iPoint pos = App->map->MapToWorld(path->At(path_num)->x, path->At(path_num)->y);
+	if (falling == false) {
+		if (pos.x < x_pos) {
+			state = FLY_BACKWARD;
+		}
+		if (pos.x > x_pos) {
+			state = FLY_FORWARD;
+		}
+		if (pos.x == x_pos) {
+			state = FALL;
+		}
 	}
 }

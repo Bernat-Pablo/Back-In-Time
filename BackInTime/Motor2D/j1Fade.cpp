@@ -15,6 +15,7 @@
 #include "SDL/include/SDL_timer.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "Brofiler/Brofiler.h"
+#include "j1FlyingEnemy.h"
 
 bool j1Fade::Awake(pugi::xml_node& c){
 	doc.load_file("config.xml");
@@ -63,6 +64,7 @@ bool j1Fade::Update(float dt)
 			App->scene->CleanUp(); //Clean up map			
 			App->audio->CleanUp();
 			App->tex->CleanUp();
+			App->flyingEnemy->CleanUp();
 			
 
 			//We load new map	
@@ -73,6 +75,7 @@ bool j1Fade::Update(float dt)
 			App->player->Start(); //Set initial player position
 			App->collision->Awake(App->GetConfig());	
 			App->render->cameraSetInitialPosition(App->GetConfig()); //Set initial camera position
+			App->flyingEnemy->Start();
 			
 
 			total_time += total_time;
