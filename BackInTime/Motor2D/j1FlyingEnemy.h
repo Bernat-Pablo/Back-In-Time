@@ -31,10 +31,12 @@ public:
 	bool PreUpdate();
 	bool Update(float dt);
 	bool CleanUp();
+	void OnCollision(Collider* c1, Collider* c2);
 
 	void calculate_path();
 	void blit_path();
 	void check_path_toMove();
+
 
 	float x_pos, y_pos;
 
@@ -51,8 +53,6 @@ private:
 	bool moving_left = false;
 	bool falling = false;
 
-	Collider* collider_enemy = nullptr;
-
 	float deltaTime;
 
 	float velocity;
@@ -62,6 +62,9 @@ private:
 	SDL_Texture* debug_tex = nullptr;
 
 	int path_num = 0;
+
+	Collider* collider_enemy = nullptr;
+
 
 };
 
