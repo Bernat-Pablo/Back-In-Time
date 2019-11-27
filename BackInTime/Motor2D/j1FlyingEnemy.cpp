@@ -61,13 +61,14 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 
 bool j1FlyingEnemy::Awake(pugi::xml_node&)
 {
-	x_pos = 752.0;
-	y_pos = 30.0;
+
 	return true;
 }
 
 bool j1FlyingEnemy::Start()
 {
+	x_pos = 752.0;
+	y_pos = 30.0;
 	spritesheet = App->tex->Load("character/bird_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 	state = FLY;
