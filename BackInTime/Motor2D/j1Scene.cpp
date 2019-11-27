@@ -66,8 +66,7 @@ bool j1Scene::PreUpdate()
 	}
 
 	// debug pathfing ------------------
-	iPoint origin = App->render->ScreenToWorld(App->player->position.x*2, App->player->position.y*2);
-	origin = App->map->WorldToMap(origin.x, origin.y);
+	iPoint origin = App->map->WorldToMap(App->player->position.x, App->player->position.y);
 
 	int x, y;
 	App->input->GetMousePosition(x, y);
