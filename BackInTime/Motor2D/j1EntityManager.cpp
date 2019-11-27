@@ -58,11 +58,24 @@ bool j1EntityManager::CleanUp()
 	return ret;
 }
 
-/*j1Entity* j1EntityManager::CreateEntity(j1Entity::entityTypes type)
+j1Entity* CreateEntity(entityTypes type, int position_x, int position_y)
 {
 	j1Entity* ret = nullptr;
 
-	ret = new j1Player(); break;
+	/*switch(type)
+	{
+	case entityTypes::PLAYER:
+		ret = new j1Player();
+		break;
+	case entityTypes::WALKING_ENEMY:
+		ret = new j1WalkingEnemy();
+		break;
+	case entityTypes::FLYING_ENEMY:
+		ret = new j1FlyingEnemy();
+		break;
+	default:
+		break;
+	}*/
 
 	return ret;
-}*/
+}

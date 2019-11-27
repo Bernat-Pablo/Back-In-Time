@@ -10,7 +10,7 @@
 
 class j1Entity
 {
-public:
+public:	
 	enum class entityStates
 	{
 		IDLE,

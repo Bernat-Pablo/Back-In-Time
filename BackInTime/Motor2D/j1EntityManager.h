@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include "p2Point.h"
 #include "j1Animation.h"
+#include "j1Player.h"
 
 class j1Entity;
 
@@ -26,12 +27,14 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 
-	//j1Entity* CreateEntity(j1Entity::entityTypes);
+	j1Entity* CreateEntity(entityTypes type, int position_x, int position_y);
 
 	//TODO 
 	//Function CreateEntity
 	//Function DestroyEntity
 	//Entities list
+public:
+	p2List<j1Entity*> entitiesList;
 };
 
 #endif // !__j1ENTITYMANAGER_H__
