@@ -131,8 +131,13 @@ bool j1FlyingEnemy::Update(float dt)
 
 		break;
 	case FALL:
+		current_animation = &fall;
+		y_pos += fall_vel;
+
 		break;
 	case IN_GROUND:
+		current_animation = &ground;
+
 		break;
 	default:
 		break;
