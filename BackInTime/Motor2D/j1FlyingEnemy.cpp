@@ -62,12 +62,38 @@ bool j1FlyingEnemy::Awake(pugi::xml_node&)
 bool j1FlyingEnemy::Start()
 {
 	spritesheet = App->tex->Load("character/bird_spritesheet.png");
-	current_animation = &fall;
+	state = FLY;
+
 	return true;
 }
 
 bool j1FlyingEnemy::PreUpdate()
 {
+	switch (state)
+	{
+	case FLY:
+		if (moving_right == true) {
+			state = FLY_FORWARD;
+		}
+		else if (moving_left == true) {
+			state = FLY_BACKWARD;
+		}
+		break;
+	case FLY_FORWARD:
+		if (moving_right == false) {
+			state = FLY;
+		}
+		break;
+	case FLY_BACKWARD:
+		if (moving_left == false) {
+			state = FLY;
+		}
+		break;
+	case FALL:
+		break;
+	case IN_GROUND:
+		break;
+	}
 	return true;
 }
 

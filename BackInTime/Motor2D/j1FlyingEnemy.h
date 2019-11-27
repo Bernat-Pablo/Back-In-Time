@@ -42,6 +42,11 @@ private:
 	Animation fall;
 	Animation* current_animation;
 
+	FEnemy_States state;
+	bool moving_right = false;
+	bool moving_left = false;
+	bool stop_falling
+
 	Collider* collider_enemy = nullptr;
 
 	float 				deltaTime;
