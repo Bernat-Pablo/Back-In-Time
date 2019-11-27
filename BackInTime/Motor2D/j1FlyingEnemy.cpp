@@ -37,11 +37,20 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 	ground.PushBack({ 70,1,32,30 }, speed);
 	ground.PushBack({ 104,0,32,30 }, speed);
 
-
 	//HIT
-
-
+	speed = 0.3f; //UGLY, TO FIX
+	hit.PushBack({ 0,35,33,35 }, speed);	
+	hit.PushBack({ 35,35,33,35 }, speed);
+	hit.PushBack({ 70,35,33,35 }, speed);
+	hit.PushBack({ 104,35,33,35 }, speed);
+	hit.PushBack({ 139,35,33,35 }, speed);
+	
 	//FALL
+	speed = 0.3f;
+	fall.PushBack({ 2,111,30,39 }, speed);
+	fall.PushBack({ 36,111,30,39 }, speed);
+	fall.PushBack({ 71,111,30,39 }, speed);
+	fall.PushBack({ 106,111,30,39 }, speed);
 
 }
 
@@ -53,7 +62,7 @@ bool j1FlyingEnemy::Awake(pugi::xml_node&)
 bool j1FlyingEnemy::Start()
 {
 	spritesheet = App->tex->Load("character/bird_spritesheet.png");
-	current_animation = &ground;
+	current_animation = &fall;
 	return true;
 }
 
