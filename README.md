@@ -42,7 +42,8 @@ The player can go a few seconds back to the past.
   * Vsync at 60 FPS
   * Animations
 ## Credits
-* Assets: https://oddpotatogift.itch.io/16x16-fantasy-pack
+* Assets_1: https://oddpotatogift.itch.io/16x16-fantasy-pack
+* Assets_2: https://pixel-frog.itch.io/pixel-adventure-2
 * Music: https://www.fesliyanstudios.com/royalty-free-music/download/too-crazy/307
 * Sounds: https://freesound.org/
 
