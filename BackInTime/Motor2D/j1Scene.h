@@ -1,4 +1,4 @@
-#ifndef __j1SCENE_H__
+﻿#ifndef __j1SCENE_H__
 #define __j1SCENE_H__
 
 #include "j1Module.h"

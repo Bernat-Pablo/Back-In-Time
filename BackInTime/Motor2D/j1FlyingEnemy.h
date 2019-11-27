@@ -58,6 +58,7 @@ private:
 	float fall_vel;
 
 	SDL_Texture* spritesheet = nullptr;
+	SDL_Texture* debug_tex = nullptr;
 
 };
 

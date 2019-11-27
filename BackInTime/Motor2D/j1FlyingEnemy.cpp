@@ -13,6 +13,7 @@
 #include "j1Fade.h"
 #include "Brofiler/Brofiler.h"
 #include "j1FlyingEnemy.h"
+#include "j1PathFinding.h"
 
 j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 {
@@ -68,6 +69,7 @@ bool j1FlyingEnemy::Awake(pugi::xml_node&)
 bool j1FlyingEnemy::Start()
 {
 	spritesheet = App->tex->Load("character/bird_spritesheet.png");
+	debug_tex = App->tex->Load("maps/pathRect.png");
 	state = FLY;
 
 	return true;
@@ -108,6 +110,10 @@ bool j1FlyingEnemy::PreUpdate()
 
 		break;
 	}
+
+	//PATH TO PLAYER (LOGIC)
+	calculate_path();
+
 	return true;
 }
 
@@ -145,21 +151,37 @@ bool j1FlyingEnemy::Update(float dt)
 
 	//BLIT
 	App->render->Blit(spritesheet, x_pos, y_pos, &current_animation->GetCurrentFrame());
+
+	//PATH TO PLAYER (BLIT)
+	blit_path();
+
 	return true;
 }
 
 bool j1FlyingEnemy::CleanUp()
 {
 	App->tex->UnLoad(spritesheet);
+	App->tex->UnLoad(debug_tex);
 	return true;
 }
 
 void j1FlyingEnemy::calculate_path()
 {
+	iPoint origin = App->map->WorldToMap(App->player->position.x, App->player->position.y);
 
+	iPoint p = App->render->ScreenToWorld(x_pos, y_pos);
+	p = App->map->WorldToMap(x_pos, y_pos);
+
+	App->pathfinding->CreatePath(origin, p);
 }
 
 void j1FlyingEnemy::blit_path()
 {
+	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 
+	for (uint i = 0; i < path->Count(); ++i)
+	{
+		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+		App->render->Blit(debug_tex, pos.x, pos.y);
+	}
 }

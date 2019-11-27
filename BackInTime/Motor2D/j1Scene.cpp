@@ -65,18 +65,6 @@ bool j1Scene::PreUpdate()
 		App->fade->FadeToBlack(App->scene, App->scene);
 	}
 
-	// debug pathfing ------------------
-	iPoint origin = App->map->WorldToMap(App->player->position.x, App->player->position.y);
-
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint p = App->render->ScreenToWorld(x, y);
-	p = App->map->WorldToMap(p.x, p.y);
-
-	App->pathfinding->CreatePath(origin, p);
-		
-
-
 	return true;
 }
 
@@ -114,29 +102,6 @@ bool j1Scene::Update(float dt)
 	//if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 
 	App->map->Draw();
-
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
-
-	// Debug pathfinding ------------------------------
-	//int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint p = App->render->ScreenToWorld(x, y);
-	p = App->map->WorldToMap(p.x, p.y);
-	p = App->map->MapToWorld(p.x, p.y);
-
-	App->render->Blit(debug_tex, p.x, p.y);
-
-	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
-
-	for (uint i = 0; i < path->Count(); ++i)
-	{
-		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		App->render->Blit(debug_tex, pos.x, pos.y);
-	}
-
-
 
 	return true;
 }
