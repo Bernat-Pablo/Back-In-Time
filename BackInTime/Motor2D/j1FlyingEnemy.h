@@ -45,7 +45,7 @@ private:
 	FEnemy_States state;
 	bool moving_right = false;
 	bool moving_left = false;
-	bool stop_falling
+	bool falling = false;
 
 	Collider* collider_enemy = nullptr;
 

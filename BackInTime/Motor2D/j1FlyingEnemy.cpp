@@ -56,6 +56,8 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 
 bool j1FlyingEnemy::Awake(pugi::xml_node&)
 {
+	position.x = 752;
+	position.y = 30;
 	return true;
 }
 
@@ -78,6 +80,9 @@ bool j1FlyingEnemy::PreUpdate()
 		else if (moving_left == true) {
 			state = FLY_BACKWARD;
 		}
+		else if (falling == true) {
+			state = FALL;
+		}
 		break;
 	case FLY_FORWARD:
 		if (moving_right == false) {
@@ -90,8 +95,12 @@ bool j1FlyingEnemy::PreUpdate()
 		}
 		break;
 	case FALL:
+		if (falling == false) {
+			state = IN_GROUND;
+		}
 		break;
 	case IN_GROUND:
+
 		break;
 	}
 	return true;
@@ -99,7 +108,30 @@ bool j1FlyingEnemy::PreUpdate()
 
 bool j1FlyingEnemy::Update(float dt)
 {
-	App->render->Blit(spritesheet, 50, 50, &current_animation->GetCurrentFrame());
+
+	switch (state)
+	{
+	case FLY:
+		current_animation = &fly;
+
+		break;
+	case FLY_FORWARD:
+		current_animation = &fly;
+
+		break;
+	case FLY_BACKWARD:
+		current_animation = &fly;
+
+		break;
+	case FALL:
+		break;
+	case IN_GROUND:
+		break;
+	default:
+		break;
+	}
+
+	App->render->Blit(spritesheet, position.x, position.y, &current_animation->GetCurrentFrame());
 	return true;
 }
 
