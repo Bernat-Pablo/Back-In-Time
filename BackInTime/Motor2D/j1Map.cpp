@@ -1,4 +1,4 @@
-#include "p2Defs.h"
+﻿#include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Render.h"
@@ -518,13 +518,12 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 				int i = (y * layer->width) + x;
 
 				int tile_id = layer->Get(x, y);
-				TileSet* tileset = (tile_id > 0) ? GetTilesetFromTileId(tile_id) : NULL;
+				
 
-				if (tileset != NULL)
+				if (layer->data[tile_id] > 0)
 				{
-					map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1; //here we have to put our tile number and set it 0 navigation.
+					map[i] = 0; //here we have to put our tile number and set it 0 navigation.
 					p++;
-					LOG("%i", map[i]);
 				}
 			}
 		}
