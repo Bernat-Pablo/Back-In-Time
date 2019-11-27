@@ -10,7 +10,7 @@
 
 j1EntityManager::j1EntityManager()
 {
-
+	name.create("entityManager");
 }
 
 j1EntityManager::~j1EntityManager()
@@ -34,10 +34,30 @@ bool j1EntityManager::Start()
 	return ret;
 }
 
-bool j1EntityManager::Update(float dt)
+bool j1EntityManager::PreUpdate()
 {
 	bool ret = true;
 
+	p2List_item<j1Entity*>* tmp = entitiesList.start;
+	while (tmp != nullptr)
+	{
+		ret = tmp->data->PreUpdate();
+		tmp = tmp->next;
+	}
+
+	return ret;
+}
+
+bool j1EntityManager::Update(float dt)
+{
+	bool ret = true;
+		
+	p2List_item<j1Entity*>* tmp = entitiesList.start;
+	while(tmp != nullptr)
+	{
+		ret = tmp->data->Update(dt);
+		tmp = tmp->next;
+	}
 
 	return ret;
 }
@@ -46,6 +66,12 @@ bool j1EntityManager::PostUpdate()
 {
 	bool ret = true;
 
+	p2List_item<j1Entity*>* tmp = entitiesList.start;
+	while (tmp != nullptr)
+	{
+		ret = tmp->data->PostUpdate();
+		tmp = tmp->next;
+	}
 
 	return ret;
 }
@@ -54,6 +80,12 @@ bool j1EntityManager::CleanUp()
 {
 	bool ret = true;
 
+	p2List_item<j1Entity*>* tmp = entitiesList.start;
+	while (tmp != nullptr)
+	{
+		ret = tmp->data->CleanUp();
+		tmp = tmp->next;
+	}
 
 	return ret;
 }
@@ -66,12 +98,18 @@ j1Entity* CreateEntity(entityTypes type, int position_x, int position_y)
 	{
 	case entityTypes::PLAYER:
 		ret = new j1Player();
+		ret->position.x = position_x;
+		ret->position.y = position_y;
 		break;
 	case entityTypes::WALKING_ENEMY:
 		ret = new j1WalkingEnemy();
+		ret->position.x = position_x;
+		ret->position.y = position_y;
 		break;
 	case entityTypes::FLYING_ENEMY:
 		ret = new j1FlyingEnemy();
+		ret->position.x = position_x;
+		ret->position.y = position_y;
 		break;
 	default:
 		break;

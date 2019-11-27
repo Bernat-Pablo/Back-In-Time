@@ -23,6 +23,7 @@ public:
 
 	virtual bool Awake(pugi::xml_node& config);
 	virtual bool Start();
+	virtual bool PreUpdate();
 	virtual bool Update(float dt);
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
