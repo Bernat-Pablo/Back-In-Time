@@ -6,23 +6,28 @@
 #include "p2Log.h"
 #include "j1Map.h"
 #include "j1App.h"
+#include "j1EntityManager.h"
 
 class j1Entity
 {
 public:
-	enum entityType
+	enum class entityTypes
 	{
 		PLAYER,
 		FLYING_ENEMY,
-		GROUND_ENEMY,
+		WALKING_ENEMY,
 	};
 
 public:
 	j1Entity();
-	j1Entity(entityType type);
+	j1Entity(entityTypes type);
 	~j1Entity();
 
-	void Draw(float dt);
+	virtual void Update();
+	virtual void Draw();
+	virtual void HandleInput();
+
+	iPoint position;
 };
 
 #endif // !__j1ENTITY_H__
