@@ -510,7 +510,7 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 
 		uchar* map = new uchar[layer->width * layer->height];
 		memset(map, 1, layer->width * layer->height);
-
+		int p = 0;
 		for (int y = 0; y < data.height; ++y)
 		{
 			for (int x = 0; x < data.width; ++x)
@@ -523,15 +523,12 @@ bool j1Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 				if (tileset != NULL)
 				{
 					map[i] = (tile_id - tileset->firstgid) > 0 ? 0 : 1;
-					/*TileType* ts = tileset->GetTileType(tile_id);
-					if(ts != NULL)
-					{
-						map[i] = ts->properties.Get("walkable", 1);
-					}*/
+					p++;
+					LOG("%i", map[i]);
 				}
 			}
 		}
-
+		LOG("%i", p);
 		*buffer = map;
 		width = data.width;
 		height = data.height;
