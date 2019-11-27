@@ -11,11 +11,18 @@
 class j1Entity
 {
 public:
-	enum class entityTypes
+	enum class entityStates
 	{
-		PLAYER,
-		FLYING_ENEMY,
-		WALKING_ENEMY,
+		IDLE,
+		WALK_FORWARD,
+		WALK_BACKWARD,
+		RUN_FORWARD,
+		RUN_BACKWARD,
+		JUMP,
+		JUMP_FORWARD,
+		JUMP_BACKWARD,
+		DASH_FORWARD, //Slowly stops the player
+		DASH_BACKWARD,
 	};
 
 public:
@@ -27,7 +34,19 @@ public:
 	virtual void Draw();
 	virtual void HandleInput();
 
-	iPoint position;
+	iPoint position; //Use position.x and position.y
+private:
+	Animation idle;
+	Animation walk;
+	Animation run;
+	Animation death;
+	Animation throw_rock;
+	Animation jump_up;
+	Animation jump_down;
+	Animation hurt;
+	Animation* current_animation;
+
+	Collider* collider_entity = nullptr;
 };
 
 #endif // !__j1ENTITY_H__

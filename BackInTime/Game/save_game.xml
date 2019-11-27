@@ -6,20 +6,22 @@
 	<audio />
 	<map />
 	<scene />
+	<:anonymous />
 	<player>
-		<position x="144" y="171" />
-		<level value="1" />
-		<camera_toRight x="188" y="97" />
-		<camera_toLeft x="68" y="97" />
-		<camera_toUp x="68" y="97" />
-		<camera_toDown x="68" y="217" />
-		<camera x="-146" y="308" />
+		<position x="80" y="59" />
+		<level value="2" />
+		<camera_toRight x="150" y="-32" />
+		<camera_toLeft x="30" y="-32" />
+		<camera_toUp x="30" y="-32" />
+		<camera_toDown x="30" y="86" />
+		<camera x="0" y="332" />
 		<lives value="3" />
 	</player>
 	<:anonymous />
 	<:anonymous />
 	<pathfinding />
+	<flyingEnemy />
 	<renderer>
-		<camera x="-146" y="308" />
+		<camera x="0" y="332" />
 	</renderer>
 </game_state>

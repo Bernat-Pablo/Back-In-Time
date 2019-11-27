@@ -7,6 +7,13 @@
 
 class j1Entity;
 
+enum class entityTypes
+{
+	PLAYER,
+	FLYING_ENEMY,
+	WALKING_ENEMY,
+};
+
 class j1EntityManager : public j1Module
 {
 public:
