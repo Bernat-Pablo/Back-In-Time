@@ -4,7 +4,6 @@
 #include "j1Module.h"
 #include "p2Point.h"
 #include "j1Animation.h"
-#include "j1Player.h"
 
 class j1Entity;
 
@@ -13,6 +12,7 @@ enum class entityTypes
 	PLAYER,
 	FLYING_ENEMY,
 	WALKING_ENEMY,
+	UNKNOWN,
 };
 
 class j1EntityManager : public j1Module

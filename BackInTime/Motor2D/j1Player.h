@@ -1,15 +1,9 @@
-#ifndef _PLAYER_
-#define _PLAYER_
+#ifndef _j1PLAYER_H_
+#define _j1PLAYER_H_
 
-#include "j1Module.h"
-#include "j1Animation.h"
-#include "j1App.h"
-#include "j1Map.h"
+#include "j1Entity.h"
 #include "p2Point.h"
 #include "SDL/include/SDL.h"
-
-struct SDL_Texture;
-struct Collider;
 
 struct Player_Input {
 	bool pressing_W;
@@ -20,24 +14,11 @@ struct Player_Input {
 	bool pressing_space;
 };
 
-enum Player_States {
-	IDLE,
-	WALK_FORWARD,
-	WALK_BACKWARD,
-	RUN_FORWARD,
-	RUN_BACKWARD,
-	JUMP,
-	JUMP_FORWARD,
-	JUMP_BACKWARD,
-	DASH_FORWARD, //Slowly stops the player
-	DASH_BACKWARD,
-};
-
-class j1Player : public j1Module
+class j1Player : public j1Entity
 {
 public:
 	j1Player();
-	~j1Player() {};
+	virtual ~j1Player() {};
 
 	bool Awake(pugi::xml_node&);
 	bool Start();
@@ -67,7 +48,7 @@ private:
 	Animation jump_down;
 	Animation hurt;
 	Animation* current_animation;
-
+	
 	SDL_Rect bar_0, bar_1, bar_2, bar_3, bar_4;
 	iPoint bar_pos;
 
@@ -76,7 +57,6 @@ private:
 	SDL_Texture* spritesheet_bars = nullptr;
 	const char* spritesheet_source;
 
-	Player_States state; //Current player state
 	Player_Input player_input; //Input introduced by the player
 	int lives = 3;
 
@@ -128,4 +108,4 @@ private:
 	pugi::xml_node		node;
 };
 
-#endif // !_PLAYER_
+#endif // !_j1PLAYER_H_

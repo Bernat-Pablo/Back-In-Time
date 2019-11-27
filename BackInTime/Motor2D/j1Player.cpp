@@ -13,7 +13,7 @@
 #include "j1Fade.h"
 #include "Brofiler/Brofiler.h"
 
-j1Player::j1Player() : j1Module()
+j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 {
 	name.create("player");
 	
@@ -101,7 +101,7 @@ bool j1Player::Start(){
 		position.y = config_local.child("player").child("initialPosition").child("map2").attribute("y").as_int();
 	}
 	//initial state
-	state = IDLE;
+	//state = state;
 	current_animation = &idle;
 
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
@@ -158,135 +158,135 @@ bool j1Player::PreUpdate()
 	//states machine
 	switch (state)
 	{
-	case IDLE:
+	case entityStates::IDLE:
 		moving_right = false;
 		moving_left = false;
 		if (player_input.pressing_space && in_air==false) //fix
 		{
 			restart_variables(-1, 1);
-			state = JUMP;
+			state = entityStates::JUMP;
 		}
 		else if (player_input.pressing_D)		
-			state = WALK_FORWARD;		
+			state = entityStates::WALK_FORWARD;
 		else if (player_input.pressing_A)						
-			state = WALK_BACKWARD;			
+			state = entityStates::WALK_BACKWARD;
 		
 		break;
-	case WALK_FORWARD:		
+	case entityStates::WALK_FORWARD:
 		restart_variables(-1, 1);
 
 		if (!player_input.pressing_D && moving_right == true)		
-			state = DASH_FORWARD;
+			state = entityStates::DASH_FORWARD;
 		
 		if (!player_input.pressing_D && moving_right == false)		
-			state = IDLE;
+			state = entityStates::IDLE;
 		
 		if (player_input.pressing_space && in_air == false)		
-			state = JUMP_FORWARD;
+			state = entityStates::JUMP_FORWARD;
 		
 		if (player_input.pressing_lshift)		
-			state = RUN_FORWARD;
+			state = entityStates::RUN_FORWARD;
 				
 		looking_right = true;
 
 		break;
-	case WALK_BACKWARD:
+	case entityStates::WALK_BACKWARD:
 		restart_variables(-1, 1);
 		if (!player_input.pressing_A && moving_left == true)
-			state = DASH_BACKWARD;
+			state = entityStates::DASH_BACKWARD;
 		
 		if (!player_input.pressing_A && moving_left == false)		
-			state = IDLE;
+			state = entityStates::IDLE;
 		
 		if (player_input.pressing_space && in_air == false)		
-			state = JUMP_BACKWARD;
+			state = entityStates::JUMP_BACKWARD;
 		
 		if (player_input.pressing_lshift)		
-			state = RUN_BACKWARD;
+			state = entityStates::RUN_BACKWARD;
 
 		looking_right = false;
 
 		break;
-	case RUN_FORWARD:
+	case entityStates::RUN_FORWARD:
 		restart_variables(-1, 1);
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_D)
-				state = WALK_FORWARD;			
+				state = entityStates::WALK_FORWARD;
 			else			
-				state = DASH_FORWARD;			
+				state = entityStates::DASH_FORWARD;
 		}
 		else if (!player_input.pressing_D)
-			state = IDLE;
+			state = entityStates::IDLE;
 
 		if (player_input.pressing_space)
-			state = JUMP_FORWARD;
+			state = entityStates::JUMP_FORWARD;
 
 		looking_right = true;
 
 		break;
-	case RUN_BACKWARD:
+	case entityStates::RUN_BACKWARD:
 		restart_variables(-1, 1);
 		if (!player_input.pressing_lshift)
 		{
 			if (player_input.pressing_A)			
-				state = WALK_BACKWARD;			
+				state = entityStates::WALK_BACKWARD;
 			else			
-				state = DASH_BACKWARD;			
+				state = entityStates::DASH_BACKWARD;
 		}
 		else if (!player_input.pressing_A) 
-			state = IDLE;
+			state = entityStates::IDLE;
 		
 		if (player_input.pressing_space)
-			state = JUMP_BACKWARD;
+			state = entityStates::JUMP_BACKWARD;
 
 		looking_right = false;
 
 		break;
-	case JUMP:
+	case entityStates::JUMP:
 		if (player_input.pressing_D) 
-			state = JUMP_FORWARD;		
+			state = entityStates::JUMP_FORWARD;
 		if (player_input.pressing_A) 
-			state = JUMP_BACKWARD;
+			state = entityStates::JUMP_BACKWARD;
 		
 		break;
-	case JUMP_FORWARD:
+	case entityStates::JUMP_FORWARD:
 		moving_right = true;
 		moving_left = false;
 		if (!player_input.pressing_D) 
-			state = JUMP;		
+			state = entityStates::JUMP;
 		break;
-	case JUMP_BACKWARD:
+	case entityStates::JUMP_BACKWARD:
 		moving_right = false;
 		moving_left = true;
 		if (!player_input.pressing_A) 
-			state = JUMP;		
+			state = entityStates::JUMP;
 
 		looking_right = false;
 
 		break;
-	case DASH_FORWARD:
+	case entityStates::DASH_FORWARD:
 		moving_right = false;
 		moving_left = false;
 		if (player_input.pressing_A) {
-			state = WALK_BACKWARD;
+			state = entityStates::WALK_BACKWARD;
 			restart_variables(1, -1);
 			if (player_input.pressing_lshift)
-				state = RUN_BACKWARD;			
+				state = entityStates::RUN_BACKWARD;
 		}
 		else if (!player_input.pressing_A)
-			state = IDLE;
+			state = entityStates::IDLE;
 		break;
-	case DASH_BACKWARD:
+	case entityStates::DASH_BACKWARD:
 		moving_right = false;
 		moving_left = true;
 		if (player_input.pressing_D) {
-			state = WALK_FORWARD;
+			state = entityStates::WALK_FORWARD;
 			restart_variables(1, -1);
 			if (player_input.pressing_lshift)
-				state = RUN_FORWARD;			
+				state = entityStates::RUN_FORWARD;
 		}else if (!player_input.pressing_D)
-			state = IDLE;
+			state = entityStates::IDLE;
 		break;
 	}
 
@@ -310,11 +310,11 @@ bool j1Player::Update(float dt)
 	//aplying the forces depending of the state
 	switch(state)
 	{
-		case IDLE:
+		case entityStates::IDLE:
 			current_animation = &idle;			
 
 			break;
-		case WALK_FORWARD:
+		case entityStates::WALK_FORWARD:
 			current_animation = &walk;
 
 			if(collider_at_right == false)
@@ -326,7 +326,7 @@ bool j1Player::Update(float dt)
 				moving_right = false;
 			
 			break;
-		case WALK_BACKWARD:
+		case entityStates::WALK_BACKWARD:
 			current_animation = &walk;
 
 			if (collider_at_left == false || collider_at_right == true)
@@ -338,7 +338,7 @@ bool j1Player::Update(float dt)
 				moving_left = false;
 			
 			break;
-		case RUN_FORWARD:
+		case entityStates::RUN_FORWARD:
 			current_animation = &run;
 			if (collider_at_right == false)
 			{
@@ -352,7 +352,7 @@ bool j1Player::Update(float dt)
 				moving_right = false;
 			}
 			break;
-		case RUN_BACKWARD:
+		case entityStates::RUN_BACKWARD:
 			current_animation = &run;
 			if (collider_at_left == false)
 			{
@@ -365,7 +365,7 @@ bool j1Player::Update(float dt)
 				moving_right = false;
 			}
 			break;
-		case JUMP:
+		case entityStates::JUMP:
 			if (jump_vel > 0) {
 				in_air = true;
 				current_animation = &jump_up;
@@ -375,11 +375,11 @@ bool j1Player::Update(float dt)
 			else {
 				current_animation = &jump_down;
 				if (in_air == false) {
-					state = IDLE;
+					state = entityStates::IDLE;
 				}
 			}
 			break;
-		case JUMP_FORWARD:
+		case entityStates::JUMP_FORWARD:
 			if (jump_vel >= 0) {
 				current_animation = &jump_up;
 				in_air = true;
@@ -389,7 +389,7 @@ bool j1Player::Update(float dt)
 			else {
 				current_animation = &jump_down;
 				if (in_air == false) {
-					state = WALK_FORWARD;
+					state = entityStates::WALK_FORWARD;
 					moving_right = true;
 				}
 			}
@@ -397,7 +397,7 @@ bool j1Player::Update(float dt)
 				position.x += (int)ceil(velocity * dt);
 
 			break;
-		case JUMP_BACKWARD:
+		case entityStates::JUMP_BACKWARD:
 			if (jump_vel >= 0) {
 				current_animation = &jump_up;
 				in_air = true;
@@ -407,14 +407,14 @@ bool j1Player::Update(float dt)
 			else {
 				current_animation = &jump_down;
 				if (in_air == false) {
-					state = WALK_BACKWARD;
+					state = entityStates::WALK_BACKWARD;
 					moving_left = true;
 				}
 			}
 			if (collider_at_left == false)
 				position.x -= (int)ceil(velocity * dt);
 			break;
-		case DASH_FORWARD:
+		case entityStates::DASH_FORWARD:
 			current_animation = &walk;
 
 			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
@@ -426,10 +426,10 @@ bool j1Player::Update(float dt)
 			if (velocity <= 0) {
 				moving_right = false;
 				velocity = 2.0f;
-				state = IDLE;
+				state = entityStates::IDLE;
 			}
 			break;
-		case DASH_BACKWARD:
+		case entityStates::DASH_BACKWARD:
 			current_animation = &walk;
 
 			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
@@ -442,7 +442,7 @@ bool j1Player::Update(float dt)
 			{
 				moving_left = false;
 				velocity = 2.0f;
-				state = IDLE;
+				state = entityStates::IDLE;
 			}
 			break;
 	}	
@@ -542,7 +542,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 
 			if (position.x < c2->rect.x + c2->rect.w) //Player is at the right of a wall
 			{
-				if(state == WALK_BACKWARD || state == RUN_BACKWARD || state == JUMP_BACKWARD || state == IDLE || state == DASH_BACKWARD)
+				if(state == entityStates::WALK_BACKWARD || state == entityStates::RUN_BACKWARD || state == entityStates::JUMP_BACKWARD || state == entityStates::IDLE || state == entityStates::DASH_BACKWARD)
 				{
 					if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
 					{
@@ -557,7 +557,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			break;
 		case COLLIDER_DIE:
 			//Player goes to initial position
-			state = IDLE;
+			state = entityStates::IDLE;
 			ability_able = false;
 			iterator = 0;
 			App->fade->FadeToBlack(App->scene, App->scene);
@@ -582,9 +582,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 	{
 		float localVelocity = 0; 
 		//We adjust camera velocity to player velocity depending his state
-		if (state == WALK_FORWARD || state == WALK_BACKWARD)
+		if (state == entityStates::WALK_FORWARD || state == entityStates::WALK_BACKWARD)
 			localVelocity = (int)ceil(velocity * deltaTime);
-		else if (state == RUN_FORWARD || state == RUN_BACKWARD)
+		else if (state == entityStates::RUN_FORWARD || state == entityStates::RUN_BACKWARD)
 			localVelocity = (int)ceil(run_velocity * deltaTime);
 		else
 			localVelocity = (int)ceil(velocity * deltaTime);
