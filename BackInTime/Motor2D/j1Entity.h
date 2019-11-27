@@ -27,7 +27,19 @@ public:
 	virtual void Draw();
 	virtual void HandleInput();
 
-	iPoint position;
+	iPoint position; //Use position.x and position.y
+private:
+	Animation idle;
+	Animation walk;
+	Animation run;
+	Animation death;
+	Animation throw_rock;
+	Animation jump_up;
+	Animation jump_down;
+	Animation hurt;
+	Animation* current_animation;
+
+	Collider* collider_entity = nullptr;
 };
 
 #endif // !__j1ENTITY_H__

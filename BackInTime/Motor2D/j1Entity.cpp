@@ -27,10 +27,12 @@ j1Entity::~j1Entity()
 
 void j1Entity::Update()
 {
+
 }
 
 void j1Entity::HandleInput()
 {
+
 }
 
 void j1Entity::Draw()
