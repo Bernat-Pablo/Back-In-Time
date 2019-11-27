@@ -54,6 +54,9 @@
     <ClCompile Include="EntityManager.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="j1FlyingEnemy.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="EntityManager.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1FlyingEnemy.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
