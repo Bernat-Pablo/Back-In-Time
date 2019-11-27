@@ -7,12 +7,6 @@
 
 class j1Entity;
 
-enum Entity_Types {
-	PLAYER,
-	WALKING_ENEMY,
-	FLYING_ENEMY,
-};
-
 class j1EntityManager : public j1Module
 {
 public:
@@ -25,9 +19,12 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 
+	//j1Entity* CreateEntity(j1Entity::entityTypes);
+
 	//TODO 
 	//Function CreateEntity
 	//Function DestroyEntity
+	//Entities list
 };
 
 #endif // !__j1ENTITYMANAGER_H__

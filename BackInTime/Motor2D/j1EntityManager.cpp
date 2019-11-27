@@ -1,4 +1,5 @@
 #include "j1EntityManager.h"
+#include "j1Entity.h"
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Scene.h"
@@ -56,3 +57,12 @@ bool j1EntityManager::CleanUp()
 
 	return ret;
 }
+
+/*j1Entity* j1EntityManager::CreateEntity(j1Entity::entityTypes type)
+{
+	j1Entity* ret = nullptr;
+
+	ret = new j1Player(); break;
+
+	return ret;
+}*/

@@ -17,7 +17,7 @@ j1Entity::j1Entity()
 {
 }
 
-j1Entity::j1Entity(entityType type)
+j1Entity::j1Entity(entityTypes type)
 {
 }
 
@@ -25,7 +25,15 @@ j1Entity::~j1Entity()
 {
 }
 
-void j1Entity::Draw(float dt)
+void j1Entity::Update()
+{
+}
+
+void j1Entity::HandleInput()
+{
+}
+
+void j1Entity::Draw()
 {
 	//TODO: Draw function
 }
