@@ -11,11 +11,18 @@
 class j1Entity
 {
 public:
-	enum class entityTypes
+	enum class entityStates
 	{
-		PLAYER,
-		FLYING_ENEMY,
-		WALKING_ENEMY,
+		IDLE,
+		WALK_FORWARD,
+		WALK_BACKWARD,
+		RUN_FORWARD,
+		RUN_BACKWARD,
+		JUMP,
+		JUMP_FORWARD,
+		JUMP_BACKWARD,
+		DASH_FORWARD, //Slowly stops the player
+		DASH_BACKWARD,
 	};
 
 public:
