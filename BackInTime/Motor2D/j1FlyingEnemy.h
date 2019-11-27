@@ -32,7 +32,7 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
-	iPoint position; //Use position.x and position.y
+	float x_pos, y_pos;
 
 private:
 
@@ -49,7 +49,10 @@ private:
 
 	Collider* collider_enemy = nullptr;
 
-	float 				deltaTime;
+	float deltaTime;
+
+	float velocity;
+	float fall_vel;
 
 	SDL_Texture* spritesheet = nullptr;
 
