@@ -115,6 +115,8 @@ bool j1FlyingEnemy::PreUpdate()
 	//PATH TO PLAYER (LOGIC)
 	calculate_path();
 
+
+
 	return true;
 }
 
@@ -130,20 +132,26 @@ bool j1FlyingEnemy::Update(float dt)
 	case FLY_FORWARD:
 		current_animation = &fly;
 		x_pos += velocity;
+		moving_right = true;
+		moving_left = false;
 
 		break;
 	case FLY_BACKWARD:
 		current_animation = &fly;
 		x_pos -= velocity;
+		moving_right = false;
+		moving_left = true;
 
 		break;
 	case FALL:
 		current_animation = &fall;
 		y_pos += fall_vel;
+		falling = true;
 
 		break;
 	case IN_GROUND:
 		current_animation = &ground;
+		falling = false;
 
 		break;
 	default:
@@ -155,6 +163,7 @@ bool j1FlyingEnemy::Update(float dt)
 
 	//PATH TO PLAYER (BLIT)
 	blit_path();
+
 
 	return true;
 }
@@ -174,6 +183,7 @@ void j1FlyingEnemy::calculate_path()
 	p = App->map->WorldToMap(x_pos, y_pos);
 	if (x_pos-App->player->position.x <=128 || x_pos - App->player->position.x <= -128) {
 		App->pathfinding->CreatePath(origin, p);
+		check_path_toMove();
 	}
 }
 
@@ -185,5 +195,22 @@ void j1FlyingEnemy::blit_path()
 	{
 		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		App->render->Blit(debug_tex, pos.x, pos.y);
+	}
+}
+
+void j1FlyingEnemy::check_path_toMove()
+{
+	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+	iPoint pos = App->map->MapToWorld(path->At(path_num)->x, path->At(path_num)->y);
+	if (falling == false) {
+		if (pos.x < x_pos) {
+			state = FLY_BACKWARD;
+		}
+		if (pos.x > x_pos) {
+			state = FLY_FORWARD;
+		}
+		if (pos.x == x_pos) {
+			state = FALL;
+		}
 	}
 }
