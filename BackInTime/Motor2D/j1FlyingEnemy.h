@@ -46,7 +46,7 @@ private:
 
 	float 				deltaTime;
 
-
+	SDL_Texture* spritesheet = nullptr;
 
 };
 

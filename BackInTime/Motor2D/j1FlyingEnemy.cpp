@@ -18,12 +18,24 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 {
 	name.create("flyingEnemy");
 
-	float speed = 0.1f;
+	float speed = 0.55f;
 	
-	//IDLE
-
+	//FLY
+	fly.PushBack({ 2,73,30,35 },speed); //UGLY, TO FIX
+	fly.PushBack({ 36,73,31,36 }, speed);
+	fly.PushBack({ 73,72,27,39 }, speed);
+	fly.PushBack({ 107,72,27,39 }, speed);
+	fly.PushBack({ 139,75,32,31 }, speed);
+	fly.PushBack({ 174,76,32,28 }, speed);
+	fly.PushBack({ 208,76,33,28 }, speed);
+	fly.PushBack({ 243,75,33,31 }, speed);
 
 	//GROUND
+	speed = 0.2f;
+	ground.PushBack({ 1,1,32,30 }, speed);
+	ground.PushBack({ 35,1,32,30 }, speed);
+	ground.PushBack({ 70,1,32,30 }, speed);
+	ground.PushBack({ 104,0,32,30 }, speed);
 
 
 	//HIT
@@ -40,6 +52,8 @@ bool j1FlyingEnemy::Awake(pugi::xml_node&)
 
 bool j1FlyingEnemy::Start()
 {
+	spritesheet = App->tex->Load("character/bird_spritesheet.png");
+	current_animation = &ground;
 	return true;
 }
 
@@ -50,6 +64,7 @@ bool j1FlyingEnemy::PreUpdate()
 
 bool j1FlyingEnemy::Update(float dt)
 {
+	App->render->Blit(spritesheet, 50, 50, &current_animation->GetCurrentFrame());
 	return true;
 }
 
