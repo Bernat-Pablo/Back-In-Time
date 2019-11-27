@@ -94,26 +94,28 @@ j1Entity* CreateEntity(entityTypes type, int position_x, int position_y)
 {
 	j1Entity* ret = nullptr;
 
-	/*switch(type)
+	switch(type)
 	{
 	case entityTypes::PLAYER:
 		ret = new j1Player();
 		ret->position.x = position_x;
 		ret->position.y = position_y;
 		break;
-	case entityTypes::WALKING_ENEMY:
-		ret = new j1WalkingEnemy();
-		ret->position.x = position_x;
-		ret->position.y = position_y;
-		break;
-	case entityTypes::FLYING_ENEMY:
-		ret = new j1FlyingEnemy();
-		ret->position.x = position_x;
-		ret->position.y = position_y;
+	//case entityTypes::WALKING_ENEMY:
+	//	ret = new j1WalkingEnemy();
+	//	ret->position.x = position_x;
+	//	ret->position.y = position_y;
+	//	break;
+	//case entityTypes::FLYING_ENEMY:
+	//	ret = new j1FlyingEnemy();
+	//	ret->position.x = position_x;
+	//	ret->position.y = position_y;
+	//	break;
+	case entityTypes::UNKNOWN:
 		break;
 	default:
 		break;
-	}*/
+	}
 
 	return ret;
 }
