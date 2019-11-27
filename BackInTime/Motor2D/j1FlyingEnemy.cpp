@@ -172,8 +172,9 @@ void j1FlyingEnemy::calculate_path()
 
 	iPoint p = App->render->ScreenToWorld(x_pos, y_pos);
 	p = App->map->WorldToMap(x_pos, y_pos);
-
-	App->pathfinding->CreatePath(origin, p);
+	if (x_pos-App->player->position.x <=128 || x_pos - App->player->position.x <= -128) {
+		App->pathfinding->CreatePath(origin, p);
+	}
 }
 
 void j1FlyingEnemy::blit_path()
