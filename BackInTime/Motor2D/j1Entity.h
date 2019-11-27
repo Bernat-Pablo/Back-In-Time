@@ -26,9 +26,8 @@ public:
 	};
 
 public:
-	j1Entity();
 	j1Entity(entityTypes type);
-	~j1Entity();
+	virtual ~j1Entity();
 
 	virtual bool Awake(pugi::xml_node& config) { return true; };
 	virtual bool Start() { return true; };
@@ -36,10 +35,7 @@ public:
 	virtual bool Update(float dt) { return true; };
 	virtual bool PostUpdate() { return true; };
 	virtual bool CleanUp() { return true; };
-
-	virtual void Draw();
-	virtual void HandleInput();
-
+	
 	iPoint position; //Use position.x and position.y
 private:
 	Animation idle;

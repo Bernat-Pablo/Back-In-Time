@@ -13,24 +13,10 @@
 #include "j1Window.h"
 
 
-j1Entity::j1Entity()
-{
-}
-
 j1Entity::j1Entity(entityTypes type)
 {
 }
 
 j1Entity::~j1Entity()
 {
-}
-
-void j1Entity::HandleInput()
-{
-
-}
-
-void j1Entity::Draw()
-{
-	//TODO: Draw function
 }
