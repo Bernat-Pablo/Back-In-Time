@@ -18,6 +18,7 @@
 
 j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 {
+	name.create("goundEnemy");
 
 }
 
