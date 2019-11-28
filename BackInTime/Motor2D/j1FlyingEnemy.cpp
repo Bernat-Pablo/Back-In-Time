@@ -22,36 +22,36 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 	float speed = 0.55f;
 	
 	//FLY
-	fly.PushBack({ 2,73,30,35 },speed); //TODO: UGLY, TO FIX Animation Pushback
-	fly.PushBack({ 36,73,31,36 }, speed);
-	fly.PushBack({ 73,72,27,39 }, speed);
-	fly.PushBack({ 107,72,27,39 }, speed);
-	fly.PushBack({ 139,75,32,31 }, speed);
-	fly.PushBack({ 174,76,32,28 }, speed);
-	fly.PushBack({ 208,76,33,28 }, speed);
-	fly.PushBack({ 243,75,33,31 }, speed);
+	fly.PushBack({ 24,0,35,39 },speed);
+	fly.PushBack({ 63,0,35,39 }, speed);
+	fly.PushBack({ 103,0,35,45 }, speed);
+	fly.PushBack({ 143,0,35,45 }, speed);
+	fly.PushBack({ 183,0,35,39 }, speed);
+	fly.PushBack({ 223,0,35,39 }, speed);
+	fly.PushBack({ 263,0,35,39 }, speed);
+	fly.PushBack({ 303,0,35,39 }, speed);
 
 	//GROUND
 	speed = 0.2f;
-	ground.PushBack({ 1,1,32,30 }, speed);
-	ground.PushBack({ 35,1,32,30 }, speed);
-	ground.PushBack({ 70,1,32,30 }, speed);
-	ground.PushBack({ 104,0,32,30 }, speed);
+	ground.PushBack({ 24,45,37,36 }, speed);
+	ground.PushBack({ 64,45,37,36 }, speed);
+	ground.PushBack({ 104,45,37,36 }, speed);
+	ground.PushBack({ 144,45,37,36 }, speed);
 
 	//HIT
-	speed = 0.3f; //TODO: UGLY, TO FIX Animation Pushback
-	hit.PushBack({ 0,35,33,35 }, speed);	
-	hit.PushBack({ 35,35,33,35 }, speed);
-	hit.PushBack({ 70,35,33,35 }, speed);
-	hit.PushBack({ 104,35,33,35 }, speed);
-	hit.PushBack({ 139,35,33,35 }, speed);
+	speed = 0.3f; 
+	hit.PushBack({ 23,126,39,39 }, speed);
+	hit.PushBack({ 64,126,39,39 }, speed);
+	hit.PushBack({ 104,126,39,39 }, speed);
+	hit.PushBack({ 143,126,39,39 }, speed);
+	hit.PushBack({ 184,126,39,39 }, speed);
 	
 	//FALL
 	speed = 0.3f;
-	fall.PushBack({ 2,111,30,39 }, speed);
-	fall.PushBack({ 36,111,30,39 }, speed);
-	fall.PushBack({ 71,111,30,39 }, speed);
-	fall.PushBack({ 106,111,30,39 }, speed);
+	fall.PushBack({ 24,81,35,45 }, speed);
+	fall.PushBack({ 64,81,35,45 }, speed);
+	fall.PushBack({ 104,81,35,45 }, speed);
+	fall.PushBack({ 144,81,35,45 }, speed);
 
 	//SETTING VARIABLES
 	//velocity = 2.0f;
