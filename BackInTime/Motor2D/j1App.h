@@ -21,6 +21,7 @@ class j1Player;
 class j1Fade;
 class j1PathFinding;
 class j1FlyingEnemy;
+class j1GroundEnemy;
 
 class j1App
 {
@@ -73,6 +74,8 @@ public:
 	j1Fade* fade;
 	j1PathFinding* pathfinding;
 	j1FlyingEnemy* flyingEnemy;
+	j1GroundEnemy* groundEnemy;
+
 private:
 
 	// Load config file

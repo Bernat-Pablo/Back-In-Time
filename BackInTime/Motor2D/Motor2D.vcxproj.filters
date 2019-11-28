@@ -57,6 +57,9 @@
     <ClCompile Include="j1EntityManager.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="j1GroundEnemy.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -126,6 +129,9 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="j1EntityManager.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="j1GroundEnemy.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
