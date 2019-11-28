@@ -13,10 +13,10 @@ enum COLLIDER_TYPE
 
 	COLLIDER_WALL,
 	COLLIDER_DIE,
-	COLLIDER_TRAP,
-	COLLIDER_ACTIVATE_TRAP,
 	COLLIDER_DOOR,
 	COLLIDER_CAMERA,
+	COLLIDER_FLYING_ENEMY,
+	COLLIDER_GROUND_ENEMY,
 
 	COLLIDER_MAX,
 };
@@ -29,7 +29,7 @@ struct Collider
 	j1Module* callback = nullptr;
 	p2SString name;
 
-	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, p2SString name, j1Module* callback =  nullptr) :
+	Collider(SDL_Rect rectangle, COLLIDER_TYPE type, p2SString name, j1Module* callback = nullptr) :
 		rect(rectangle),
 		type(type),
 		callback(callback),
@@ -65,7 +65,7 @@ public:
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 private:
-	
+
 	bool debug = false;
 };
 

@@ -11,11 +11,11 @@ j1Collision::j1Collision()
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;
-	
+
 	//To collide with the ground and walls
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
-	
+
 	//Colliders to move the camera
 	matrix[COLLIDER_PLAYER][COLLIDER_CAMERA] = true;
 	matrix[COLLIDER_CAMERA][COLLIDER_PLAYER] = true;
@@ -28,11 +28,13 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_PLAYER][COLLIDER_DOOR] = true;
 	matrix[COLLIDER_DOOR][COLLIDER_PLAYER] = true;
 
-	//Traps and activations
-	matrix[COLLIDER_PLAYER][COLLIDER_ACTIVATE_TRAP] = true;
-	matrix[COLLIDER_ACTIVATE_TRAP][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_TRAP] = true;
-	matrix[COLLIDER_TRAP][COLLIDER_PLAYER] = true;
+	//Flying enemies and player
+	matrix[COLLIDER_PLAYER][COLLIDER_FLYING_ENEMY] = true;
+	matrix[COLLIDER_FLYING_ENEMY][COLLIDER_PLAYER] = true;
+
+	//Ground enemis and player
+	matrix[COLLIDER_PLAYER][COLLIDER_GROUND_ENEMY] = true;
+	matrix[COLLIDER_GROUND_ENEMY][COLLIDER_PLAYER] = true;
 }
 
 //Destructor
@@ -99,7 +101,7 @@ bool j1Collision::PreUpdate()
 					c2->callback->OnCollision(c2, c1);
 
 			}
-			
+
 		}
 	}
 	BROFILER_CATEGORY("Collision_PreUpdate", Profiler::Color::Bisque);
@@ -109,13 +111,13 @@ bool j1Collision::PreUpdate()
 
 bool j1Collision::Update(float dt)
 {
-	bool ret = true;	
+	bool ret = true;
 	DebugDraw();
 	BROFILER_CATEGORY("Collision_Update", Profiler::Color::Black);
 	return ret;
 }
 
-Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, p2SString name, j1Module* callback )
+Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, p2SString name, j1Module* callback)
 {
 	Collider* ret = nullptr;
 
@@ -124,7 +126,7 @@ Collider* j1Collision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, p2SString 
 		if (colliders[i] == nullptr)
 		{
 			ret = colliders[i] = new Collider(rect, type, name, callback);
-			if(ret)
+			if (ret)
 				LOG("Collider added successfully! ");
 
 			break;
@@ -147,7 +149,7 @@ void j1Collision::DebugDraw()
 	if (App->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		debug = !debug;
 
-	if(debug == true)
+	if (debug == true)
 	{
 		for (int i = 0; i < MAX_COLLIDERS; ++i)
 		{
@@ -165,10 +167,10 @@ void j1Collision::DebugDraw()
 			case COLLIDER_DIE:
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, 80);
 				break;
-			case COLLIDER_TRAP:
+			case COLLIDER_FLYING_ENEMY:
 				App->render->DrawQuad(colliders[i]->rect, 211, 84, 0, 150);
 				break;
-			case COLLIDER_ACTIVATE_TRAP:
+			case COLLIDER_GROUND_ENEMY:
 				App->render->DrawQuad(colliders[i]->rect, 247, 220, 111, 50);
 				break;
 			case COLLIDER_DOOR:
@@ -178,7 +180,7 @@ void j1Collision::DebugDraw()
 				App->render->DrawQuad(colliders[i]->rect, 20, 109, 126, 150);
 				break;
 			}
-			
+
 		}
-	}	
+	}
 }
