@@ -21,23 +21,10 @@ public:
 	void blit_path();
 	void check_path_toMove();
 
-private:	
-
-	float x_pos, y_pos;
-
 private:
-
-	bool moving_right = false;
-	bool moving_left = false;
 	bool falling = false;
-	bool isground = false;
 	bool set_path = true;
 	bool set_timer = false;
-
-	float deltaTime;
-
-	float velocity;
-	float fall_vel;
 
 	SDL_Texture* spritesheet = nullptr;
 	SDL_Texture* debug_tex = nullptr;

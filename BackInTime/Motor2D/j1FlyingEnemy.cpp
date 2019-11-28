@@ -162,14 +162,14 @@ bool j1FlyingEnemy::Update(float dt)
 		}
 		current_animation = &ground;
 		falling = false;
-		isground = true;
+		isgrounded = true;
 		set_path = false;
 		tick1 = SDL_GetTicks();
 
 		if (tick1 - tick2 >= 2500) {
 			tick1 = tick2 = 0;
 			state = entityStates::FLY_UP;
-			y_pos -= 7; //i have to put this to avoid collide to ground and set allways state to IN_GROUND
+			position.y -= 7; //i have to put this to avoid collide to ground and set allways state to IN_GROUND
 			set_timer = false;
 		}
 
@@ -177,7 +177,7 @@ bool j1FlyingEnemy::Update(float dt)
 
 	case entityStates::FLY_UP:
 		current_animation = &fly;
-		y_pos -= velocity;
+		position.y -= velocity;
 		break;
 
 	default:
@@ -231,13 +231,13 @@ void j1FlyingEnemy::check_path_toMove()
 	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 	iPoint pos = App->map->MapToWorld(path->At(path_num)->x, path->At(path_num)->y);
 
-	if (pos.x < x_pos) {
+	if (pos.x < position.x) {
 		state = entityStates::FLY_BACKWARD;
 	}
-	if (pos.x > x_pos) {
+	if (pos.x > position.x) {
 		state = entityStates::FLY_FORWARD;
 	}
-	if (pos.x == x_pos) {
+	if (pos.x == position.x) {
 		state = entityStates::FALL;
 	}
 }
