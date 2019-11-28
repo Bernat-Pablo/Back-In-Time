@@ -111,6 +111,13 @@ bool j1FlyingEnemy::PreUpdate()
 		}
 		break;
 	case entityStates::IN_GROUND:
+		if (isgrounded == false) {
+			state = entityStates::FLY_UP;
+		}
+		break;
+
+	case entityStates::FLY_UP:
+
 
 		break;
 	}
@@ -176,6 +183,8 @@ bool j1FlyingEnemy::Update(float dt)
 		break;
 
 	case entityStates::FLY_UP:
+		set_path = false;
+		isgrounded = false;
 		current_animation = &fly;
 		position.y -= velocity;
 		break;
