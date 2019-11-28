@@ -64,11 +64,10 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	bool ret = true;	
 
 	config = App->GetConfig();
+	gravity = config.child("entities").child("gravity").attribute("value").as_float(); //We set gravity before going into player
 	config = config.child("entities").child("player");
-	//folder.create(config.child("folder").child_value());
 
-	//Set initial data of the player
-	gravity = config.child("gravity").attribute("value").as_float();
+	//Set initial data of the player	
 	run_velocity = config.child("run_velocity").attribute("value").as_float();
 	velocity = config.child("velocity").attribute("value").as_float();
 	fall_velocity = config.child("fall_velocity").attribute("value").as_float();

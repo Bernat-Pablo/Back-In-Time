@@ -15,22 +15,24 @@
   </render>
 
   <entities>
+    <gravity value ="5"/>
+    
     <player>
       <spritesheet source ="character/spritesheet_pj.png"/>
+      <!-- Initial Position -->
       <initialPosition>
         <map1 x="80" y="180"/>
         <map2 x="80" y="53"/>
       </initialPosition>
-
+      <!-- Player initial settings -->
       <lives value ="3"/>
       <velocity value ="70.0"/>
       <run_velocity value ="110.0"/>
       <fall_velocity value ="0"/>
       <max_fall_velocity value ="30"/>
-      <decrease_vel value ="20.0" />
-      <gravity value ="5"/>
+      <decrease_vel value ="20.0" />      
       <jump_vel value ="13.0"/>
-
+      
       <!-- Audio and FX -->
       <jumpFX source ="jump.wav"/>
       <musicFX source ="music.ogg"/>
@@ -39,9 +41,15 @@
       <walkFX source =""/>
       <dashFX source =""/>
     </player>
+    
     <flyingEnemy>
-      
+      <velocity value =""/>
+      <fallvelocity value ="0"/>
     </flyingEnemy>
+    
+    <walkingEnemy>
+      <velocity value =""/>
+    </walkingEnemy>
   </entities>
   
 
