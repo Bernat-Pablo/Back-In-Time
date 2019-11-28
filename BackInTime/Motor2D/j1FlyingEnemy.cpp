@@ -175,7 +175,7 @@ bool j1FlyingEnemy::Update(float dt)
 
 		if (tick1 - tick2 >= 2500) {
 			tick1 = tick2 = 0;
-			state = entityStates::FLY_UP;
+			isgrounded = false;
 			position.y -= 7; //i have to put this to avoid collide to ground and set allways state to IN_GROUND
 			set_timer = false;
 		}
@@ -183,10 +183,22 @@ bool j1FlyingEnemy::Update(float dt)
 		break;
 
 	case entityStates::FLY_UP:
+		if (!set_timer) {
+			set_timer = true;
+			tick2 = SDL_GetTicks();
+		}
 		set_path = false;
 		isgrounded = false;
 		current_animation = &fly;
 		position.y -= velocity;
+		tick1 = SDL_GetTicks();
+
+		if (tick1 - tick2 >= 2500) {
+			tick1 = tick2 = 0;
+			state = entityStates::FLY;
+			set_timer = false;
+		}
+
 		break;
 
 	default:
@@ -216,7 +228,7 @@ void j1FlyingEnemy::calculate_path()
 
 	iPoint p = App->render->ScreenToWorld(position.x, position.y);
 	p = App->map->WorldToMap(position.x, position.y);
-	if (position.x - App->player->position.x <=128 || position.x - App->player->position.x <= -128) {
+	if (position.x - App->player->position.x <=160 || position.x - App->player->position.x <= -160) {
 		App->pathfinding->CreatePath(origin, p);
 		if (set_path == true) {
 			check_path_toMove();
@@ -238,7 +250,7 @@ void j1FlyingEnemy::blit_path()
 void j1FlyingEnemy::check_path_toMove()
 {
 	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
-	iPoint pos = App->map->MapToWorld(path->At(path_num)->x, path->At(path_num)->y);
+	iPoint pos = App->map->MapToWorld(path->At(1)->x, path->At(1)->y);
 
 	if (pos.x < position.x) {
 		state = entityStates::FLY_BACKWARD;
