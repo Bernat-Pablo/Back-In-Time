@@ -26,6 +26,7 @@ enum FEnemy_States {
 	FLY,
 	FLY_FORWARD,
 	FLY_BACKWARD,
+	FLY_UP,
 	FALL,
 	IN_GROUND,
 };

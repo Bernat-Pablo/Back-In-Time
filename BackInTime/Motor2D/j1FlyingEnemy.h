@@ -31,6 +31,8 @@ private:
 	bool moving_left = false;
 	bool falling = false;
 	bool isground = false;
+	bool set_path = true;
+	bool set_timer = false;
 
 	float deltaTime;
 
@@ -41,6 +43,7 @@ private:
 	SDL_Texture* debug_tex = nullptr;
 
 	int path_num = 0;
+	int tick1 = 0, tick2 = 0;
 };
 
 #endif // !_FLYINGENEMY_
