@@ -28,13 +28,11 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_PLAYER][COLLIDER_DOOR] = true;
 	matrix[COLLIDER_DOOR][COLLIDER_PLAYER] = true;
 
-	//Flying enemies and player
-	matrix[COLLIDER_PLAYER][COLLIDER_FLYING_ENEMY] = true;
-	matrix[COLLIDER_FLYING_ENEMY][COLLIDER_PLAYER] = true;
-
-	//Ground enemis and player
-	matrix[COLLIDER_PLAYER][COLLIDER_GROUND_ENEMY] = true;
-	matrix[COLLIDER_GROUND_ENEMY][COLLIDER_PLAYER] = true;
+	//Traps and activations
+	matrix[COLLIDER_PLAYER][COLLIDER_ACTIVATE_TRAP] = true;
+	matrix[COLLIDER_ACTIVATE_TRAP][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_TRAP] = true;
+	matrix[COLLIDER_TRAP][COLLIDER_PLAYER] = true;
 }
 
 //Destructor
@@ -167,10 +165,10 @@ void j1Collision::DebugDraw()
 			case COLLIDER_DIE:
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, 80);
 				break;
-			case COLLIDER_FLYING_ENEMY:
+			case COLLIDER_TRAP:
 				App->render->DrawQuad(colliders[i]->rect, 211, 84, 0, 150);
 				break;
-			case COLLIDER_GROUND_ENEMY:
+			case COLLIDER_ACTIVATE_TRAP:
 				App->render->DrawQuad(colliders[i]->rect, 247, 220, 111, 50);
 				break;
 			case COLLIDER_DOOR:

@@ -307,6 +307,10 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL, "wall");
 				if(name == "2")
 					App->collision->AddCollider(objectgroup->object[i],  COLLIDER_DIE, "die");
+				if (name == "3")
+					App->collision->AddCollider(objectgroup->object[i],  COLLIDER_TRAP, "trap"); //Traps will be used at next assignment
+				if (name == "4")
+					App->collision->AddCollider(objectgroup->object[i], COLLIDER_ACTIVATE_TRAP, "activatetrap");
 				if (name == "5")
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door1");
 				if (name == "6")
