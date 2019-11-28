@@ -43,8 +43,8 @@
     </player>
     
     <flyingEnemy>
-      <velocity value =""/>
-      <fallvelocity value ="0"/>
+      <velocity value ="40.0"/>
+      <fall_velocity value ="150.0"/>
     </flyingEnemy>
     
     <walkingEnemy>

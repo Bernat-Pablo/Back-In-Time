@@ -54,21 +54,27 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 	fall.PushBack({ 106,111,30,39 }, speed);
 
 	//SETTING VARIABLES
-	velocity = 2.0f;
-	fall_velocity = 5.5f;
-
+	//velocity = 2.0f;
+	//fall_velocity = 5.5f;
 }
 
-bool j1FlyingEnemy::Awake(pugi::xml_node&)
+bool j1FlyingEnemy::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
+
+	config = App->GetConfig();
+	config = config.child("entities").child("flyingEnemy");
+
+	velocity = config.child("velocity").attribute("value").as_float();
+	fall_velocity = config.child("fall_velocity").attribute("value").as_float();
 
 	return ret;
 }
 
 bool j1FlyingEnemy::Start()
 {
-	position.x = 752.0;
+	//position.x = 752.0;
+	position.x = 250.0;
 	position.y = 30.0;
 	spritesheet_entity = App->tex->Load("character/bird_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
@@ -142,21 +148,21 @@ bool j1FlyingEnemy::Update(float dt)
 		break;
 	case entityStates::FLY_FORWARD:
 		current_animation = &fly;
-		position.x += velocity;
+		position.x += (int)ceil(velocity*dt);
 		moving_right = true;
 		moving_left = false;
 
 		break;
 	case entityStates::FLY_BACKWARD:
 		current_animation = &fly;
-		position.x -= velocity;
+		position.x -= (int)ceil(velocity * dt);
 		moving_right = false;
 		moving_left = true;
 
 		break;
 	case entityStates::FALL:
 		current_animation = &fall;
-		position.y += fall_velocity;
+		position.y += (int)ceil(fall_velocity * dt);
 		falling = true;
 		set_path = false;
 
@@ -186,7 +192,7 @@ bool j1FlyingEnemy::Update(float dt)
 		set_path = false;
 		isgrounded = false;
 		current_animation = &fly;
-		position.y -= velocity;
+		position.y -= (int)ceil(velocity * dt);
 		break;
 
 	default:
