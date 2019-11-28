@@ -11,6 +11,7 @@ enum class entityTypes
 {
 	PLAYER,
 	FLYING_ENEMY,
+	GROUND_ENEMY,
 	WALKING_ENEMY,
 	UNKNOWN,
 };
