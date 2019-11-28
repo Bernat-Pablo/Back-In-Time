@@ -54,6 +54,20 @@ public:
 
 	entityTypes type = entityTypes::UNKNOWN;
 	entityStates state = entityStates::IDLE;
+		
+	float				initial_x;
+	float				initial_y;
+
+	int					lives;
+
+	float				decrease_vel;
+	float				velocity;
+
+	float				run_velocity;
+	float				fall_velocity;
+	float 				max_fall_velocity;
+	float 				gravity;
+	float 				jump_vel;
 };
 
 #endif // !__j1ENTITY_H__
