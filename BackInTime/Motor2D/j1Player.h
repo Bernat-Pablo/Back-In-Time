@@ -39,20 +39,10 @@ public:
 
 	iPoint position; //Use position.x and position.y
 private:
-	Animation idle;
-	Animation walk;
-	Animation run;
-	Animation death;
-	Animation throw_rock;
-	Animation jump_up;
-	Animation jump_down;
-	Animation hurt;
-	Animation* current_animation;
 	
 	SDL_Rect bar_0, bar_1, bar_2, bar_3, bar_4;
 	iPoint bar_pos;
 
-	SDL_Texture* spritesheet_pj = nullptr;
 	SDL_Texture* spritesheet_casper = nullptr;
 	SDL_Texture* spritesheet_bars = nullptr;
 	const char* spritesheet_source;
@@ -67,13 +57,8 @@ private:
 	int					initial_pos;
 	int					screen_size;	
 
-	bool 				moving_right = false; //for slide
-	bool 				moving_left = false;
 	bool 				in_air = false;
-	bool 				looking_right=true;
-
-	bool 				collider_at_right = false; //If true, player can't go to the right 
-	bool 				collider_at_left = false;
+	bool 				looking_right=true;	
 
 	bool 				godMode = false;
 	bool 				walking = false; //is he walking?
@@ -82,8 +67,6 @@ private:
 
 	int 				tick1 = 0, tick2 = 0;
 	int 				tick3 = 0, tick4 = 0;
-
-	float 				deltaTime;
 
 	Collider*			collider_player = nullptr;
 

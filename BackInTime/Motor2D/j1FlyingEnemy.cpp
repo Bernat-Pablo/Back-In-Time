@@ -55,7 +55,7 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 
 	//SETTING VARIABLES
 	velocity = 2.0f;
-	fall_vel = 5.5f;
+	fall_velocity = 5.5f;
 
 }
 
@@ -68,11 +68,11 @@ bool j1FlyingEnemy::Awake(pugi::xml_node&)
 
 bool j1FlyingEnemy::Start()
 {
-	x_pos = 752.0;
-	y_pos = 30.0;
-	spritesheet = App->tex->Load("character/bird_spritesheet.png");
+	position.x = 752.0;
+	position.y = 30.0;
+	spritesheet_entity = App->tex->Load("character/bird_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
-	state = FLY;
+	state = entityStates::FLY;
 	current_animation = &fly;
 	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)App->flyingEnemy); //a collider to start
 
@@ -84,33 +84,33 @@ bool j1FlyingEnemy::PreUpdate()
 	//STATE MACHINE
 	switch (state)
 	{
-	case FLY:
+	case entityStates::FLY:
 		if (moving_right == true) {
-			state = FLY_FORWARD;
+			state = entityStates::FLY_FORWARD;
 		}
 		else if (moving_left == true) {
-			state = FLY_BACKWARD;
+			state = entityStates::FLY_BACKWARD;
 		}
 		else if (falling == true) {
-			state = FALL;
+			state = entityStates::FALL;
 		}
 		break;
-	case FLY_FORWARD:
+	case entityStates::FLY_FORWARD:
 		if (moving_right == false) {
-			state = FLY;
+			state = entityStates::FLY;
 		}
 		break;
-	case FLY_BACKWARD:
+	case entityStates::FLY_BACKWARD:
 		if (moving_left == false) {
-			state = FLY;
+			state = entityStates::FLY;
 		}
 		break;
-	case FALL:
+	case entityStates::FALL:
 		if (falling == false) {
-			state = IN_GROUND;
+			state = entityStates::IN_GROUND;
 		}
 		break;
-	case IN_GROUND:
+	case entityStates::IN_GROUND:
 
 		break;
 	}
@@ -118,45 +118,45 @@ bool j1FlyingEnemy::PreUpdate()
 	//PATH TO PLAYER (LOGIC)
 	calculate_path();
 
-	collider_entity->SetPos(x_pos, y_pos);
+	collider_entity->SetPos(position.x, position.y);
 
 	return true;
 }
 
 bool j1FlyingEnemy::Update(float dt)
 {
-	isground = false;
+	isgrounded = false;
 	//STATE MACHINE APPLYING MOVEMENT
 	switch (state)
 	{
-	case FLY:
+	case entityStates::FLY:
 		current_animation = &fly;
 
 		break;
-	case FLY_FORWARD:
+	case entityStates::FLY_FORWARD:
 		current_animation = &fly;
-		x_pos += velocity;
+		position.x += velocity;
 		moving_right = true;
 		moving_left = false;
 
 		break;
-	case FLY_BACKWARD:
+	case entityStates::FLY_BACKWARD:
 		current_animation = &fly;
-		x_pos -= velocity;
+		position.x -= velocity;
 		moving_right = false;
 		moving_left = true;
 
 		break;
-	case FALL:
+	case entityStates::FALL:
 		current_animation = &fall;
-		y_pos += fall_vel;
+		position.y += fall_velocity;
 		falling = true;
 
 		break;
-	case IN_GROUND:
+	case entityStates::IN_GROUND:
 		current_animation = &ground;
 		falling = false;
-		isground = true;
+		isgrounded = true;
 
 		break;
 	default:
@@ -164,18 +164,17 @@ bool j1FlyingEnemy::Update(float dt)
 	}
 
 	//BLIT
-	App->render->Blit(spritesheet, x_pos, y_pos, &current_animation->GetCurrentFrame());
+	App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
 
 	//PATH TO PLAYER (BLIT)
 	blit_path();
-
 
 	return true;
 }
 
 bool j1FlyingEnemy::CleanUp()
 {
-	App->tex->UnLoad(spritesheet);
+	App->tex->UnLoad(spritesheet_entity);
 	App->tex->UnLoad(debug_tex);
 	collider_entity = nullptr;
 	return true;
@@ -185,9 +184,9 @@ void j1FlyingEnemy::calculate_path()
 {
 	iPoint origin = App->map->WorldToMap(App->player->position.x, App->player->position.y);
 
-	iPoint p = App->render->ScreenToWorld(x_pos, y_pos);
-	p = App->map->WorldToMap(x_pos, y_pos);
-	if (x_pos-App->player->position.x <=128 || x_pos - App->player->position.x <= -128) {
+	iPoint p = App->render->ScreenToWorld(position.x, position.y);
+	p = App->map->WorldToMap(position.x, position.y);
+	if (position.x - App->player->position.x <=128 || position.x - App->player->position.x <= -128) {
 		App->pathfinding->CreatePath(origin, p);
 		check_path_toMove();
 	}
@@ -208,15 +207,15 @@ void j1FlyingEnemy::check_path_toMove()
 {
 	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 	iPoint pos = App->map->MapToWorld(path->At(path_num)->x, path->At(path_num)->y);
-	if (falling == false && isground == false) {
-		if (pos.x < x_pos) {
-			state = FLY_BACKWARD;
+	if (falling == false && isgrounded == false) {
+		if (pos.x < position.x) {
+			state = entityStates::FLY_BACKWARD;
 		}
-		if (pos.x > x_pos) {
-			state = FLY_FORWARD;
+		if (pos.x > position.x) {
+			state = entityStates::FLY_FORWARD;
 		}
-		if (pos.x == x_pos) {
-			state = FALL;
+		if (pos.x == position.x) {
+			state = entityStates::FALL;
 		}
 	}
 }
@@ -226,10 +225,10 @@ void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 	switch (c2->type)
 	{
 	case COLLIDER_WALL:
-		if (y_pos < c2->rect.y) {
-			if (x_pos + 0.8 * collider_entity->rect.w > c2->rect.x) {
-				if (x_pos < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
-					state = IN_GROUND;
+		if (position.y < c2->rect.y) {
+			if (position.x + 0.8 * collider_entity->rect.w > c2->rect.x) {
+				if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
+					state = entityStates::IN_GROUND;
 				}
 			}
 		}

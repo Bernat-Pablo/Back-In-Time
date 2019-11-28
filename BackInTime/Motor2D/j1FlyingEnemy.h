@@ -21,23 +21,9 @@ public:
 	void blit_path();
 	void check_path_toMove();
 
+private:	
+	bool falling = false;	
 
-	float x_pos, y_pos;
-
-private:
-
-	FEnemy_States state;
-	bool moving_right = false;
-	bool moving_left = false;
-	bool falling = false;
-	bool isground = false;
-
-	float deltaTime;
-
-	float velocity;
-	float fall_vel;
-
-	SDL_Texture* spritesheet = nullptr;
 	SDL_Texture* debug_tex = nullptr;
 
 	int path_num = 0;
