@@ -57,27 +57,15 @@ private:
 	SDL_Texture* spritesheet_bars = nullptr;
 	const char* spritesheet_source;
 
-	Player_Input player_input; //Input introduced by the player
-	int lives = 3;
+	Player_Input player_input; //Input introduced by the player	
 
 	p2SString			folder;
-	float				initial_x;
-	float				initial_y;
 	
 	iPoint				old_position[30];
 	int					iterator = 0;
 	int					position_when_ability;
 	int					initial_pos;
-	int					screen_size;
-
-	float				decrease_vel;
-	float				velocity;
-
-	float				run_velocity;
-	float				fall_velocity;
-	float 				max_fall_velocity;
-	float 				gravity;
-	float 				jump_vel;
+	int					screen_size;	
 
 	bool 				moving_right = false; //for slide
 	bool 				moving_left = false;
