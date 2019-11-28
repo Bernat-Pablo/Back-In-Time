@@ -15,7 +15,7 @@
 #include "j1FlyingEnemy.h"
 #include "j1PathFinding.h"
 
-j1FlyingEnemy::j1FlyingEnemy() : j1Module()
+j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 {
 	name.create("flyingEnemy");
 

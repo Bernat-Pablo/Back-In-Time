@@ -20,7 +20,7 @@ enum FEnemy_States {
 };
 
 
-class j1FlyingEnemy : public j1Module
+class j1FlyingEnemy : public j1Entity
 {
 public:
 	j1FlyingEnemy();
