@@ -52,6 +52,7 @@ private:
 	bool moving_right = false;
 	bool moving_left = false;
 	bool falling = false;
+	bool isground = false;
 
 	float deltaTime;
 

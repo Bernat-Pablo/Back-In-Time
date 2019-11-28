@@ -72,6 +72,7 @@ bool j1FlyingEnemy::Start()
 	spritesheet = App->tex->Load("character/bird_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 	state = FLY;
+	current_animation = &fly;
 	collider_enemy = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "bird", (j1Module*)App->flyingEnemy); //a collider to start
 
 	return true;
@@ -123,6 +124,7 @@ bool j1FlyingEnemy::PreUpdate()
 
 bool j1FlyingEnemy::Update(float dt)
 {
+	isground = false;
 	//STATE MACHINE APPLYING MOVEMENT
 	switch (state)
 	{
@@ -153,6 +155,7 @@ bool j1FlyingEnemy::Update(float dt)
 	case IN_GROUND:
 		current_animation = &ground;
 		falling = false;
+		isground = true;
 
 		break;
 	default:
