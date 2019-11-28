@@ -76,7 +76,7 @@ private:
 	Collider*			camera_toDown = nullptr;
 
 	pugi::xml_document	doc;
-	pugi::xml_node		node;
+	
 };
 
 #endif // !_j1PLAYER_H_

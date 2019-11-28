@@ -63,7 +63,9 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	LOG("Loading Player Data");
 	bool ret = true;	
 
-	folder.create(config.child("folder").child_value());
+	config = App->GetConfig();
+	config = config.child("entities").child("player");
+	//folder.create(config.child("folder").child_value());
 
 	//Set initial data of the player
 	gravity = config.child("gravity").attribute("value").as_float();
@@ -76,8 +78,10 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	lives = config.child("lives").attribute("value").as_int();
 	//spritesheet_source = config.child("spritesheet").attribute("source").as_string();
 
+	LOG("jump_vel: %f", jump_vel);
+	LOG("gravity: %f", gravity);
+
 	doc.load_file("config.xml");
-	node = doc.child("config");
 
 	return ret;
 }
@@ -90,18 +94,23 @@ bool j1Player::Start(){
 	spritesheet_bars = App->tex->Load("character/spritesheet_bars.png");
 
 	pugi::xml_node config_local = App->GetConfig();
+
+	//We get screen_size before moving config_local inside entities
+	screen_size = config_local.child("window").child("resolution").attribute("scale").as_int();
+
+	config_local = config_local.child("entities").child("player");
+
 	if (App->scene->choose_lv == 1) //We are on map1
 	{
-		position.x = config_local.child("player").child("initialPosition").child("map1").attribute("x").as_int();
-		position.y = config_local.child("player").child("initialPosition").child("map1").attribute("y").as_int();
+		position.x = config_local.child("initialPosition").child("map1").attribute("x").as_int();
+		position.y = config_local.child("initialPosition").child("map1").attribute("y").as_int();
 	}
 	else if (App->scene->choose_lv == 2) //We are on map2
 	{
-		position.x = config_local.child("player").child("initialPosition").child("map2").attribute("x").as_int();
-		position.y = config_local.child("player").child("initialPosition").child("map2").attribute("y").as_int();
+		position.x = config_local.child("initialPosition").child("map2").attribute("x").as_int();
+		position.y = config_local.child("initialPosition").child("map2").attribute("y").as_int();
 	}
 	//initial state
-	//state = state;
 	current_animation = &idle;
 
 	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
@@ -120,8 +129,7 @@ bool j1Player::Start(){
 	bar_3 = { 268,73,62,12 };
 	bar_4 = { 268,89,62,12 };
 
-	initial_pos = node.child("player").child("initialPosition").child("map1").attribute("x").as_int() + 70; //look to camera_toright
-	screen_size = node.child("window").child("resolution").attribute("scale").as_int();
+	initial_pos = position.x; //look to camera_toright. Position.x is the initial position at this moment
 
 
 	bar_pos.x = 10;
@@ -834,10 +842,13 @@ bool j1Player::checkInAir() //Checks if player is in_air or if it's grounded
 }
 
 void j1Player::restart_variables(int vel, int vel_jump) {
+
+	pugi::xml_node		node = App->GetConfig();
+
 	if (vel != -1) {
-		velocity = node.child("player").child("velocity").attribute("value").as_float();
+		velocity = node.child("entities").child("player").child("velocity").attribute("value").as_float();
 	}
 	if (vel_jump != -1) {
-		jump_vel= node.child("player").child("jump_vel").attribute("value").as_float();
+		jump_vel= node.child("entities").child("player").child("jump_vel").attribute("value").as_float();
 	}
 }
