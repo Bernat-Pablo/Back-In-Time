@@ -85,7 +85,7 @@ bool j1Player::Start(){
 	//init clocks
 	tick2 = SDL_GetTicks();
 	tick4 = SDL_GetTicks();
-	spritesheet_pj = App->tex->Load("character/spritesheet_pj.png");
+	spritesheet_entity = App->tex->Load("character/spritesheet_pj.png");
 	spritesheet_casper = App->tex->Load("character/spritesheet_casper.png");
 	spritesheet_bars = App->tex->Load("character/spritesheet_bars.png");
 
@@ -477,9 +477,9 @@ bool j1Player::Update(float dt)
 	App->render->Blit(spritesheet_casper, old_position[0].x, old_position[0].y, &idle.GetCurrentFrame());
 
 	if(!looking_right)
-		App->render->Blit(spritesheet_pj, position.x, position.y, &r,1,2); //looking at left
+		App->render->Blit(spritesheet_entity, position.x, position.y, &r,1,2); //looking at left
 	else
-		App->render->Blit(spritesheet_pj, position.x, position.y, &r); //looking at right
+		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right
 
 	//print shadow player position
 
@@ -504,7 +504,7 @@ bool j1Player::Update(float dt)
 bool j1Player::CleanUp() {
 	LOG("Unloading player\n");
 	collider_player = nullptr;
-	spritesheet_pj = nullptr;
+	spritesheet_entity = nullptr;
 	spritesheet_casper = nullptr;
 	spritesheet_bars = nullptr;
 	current_animation = nullptr;

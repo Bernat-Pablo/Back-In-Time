@@ -21,6 +21,8 @@ public:
 	void blit_path();
 	void check_path_toMove();
 
+private:	
+	bool falling = false;	
 
 	float x_pos, y_pos;
 

@@ -21,8 +21,7 @@ enum class entityStates
 	JUMP_BACKWARD,
 	DASH_FORWARD, //Slowly stops the entity 
 	DASH_BACKWARD,
-};
-enum FEnemy_States {
+
 	FLY,
 	FLY_FORWARD,
 	FLY_BACKWARD,
@@ -59,27 +58,39 @@ public:
 	Animation fall;
 	Animation* current_animation;
 
-	Collider* collider_entity = nullptr;
+	SDL_Texture* spritesheet_entity = nullptr;
+	Collider* collider_entity = nullptr;	
 
-	iPoint position; //Use position.x and position.y
-	SDL_Texture* texture = nullptr;
-
+	//Type and states
 	entityTypes type = entityTypes::UNKNOWN;
 	entityStates state = entityStates::IDLE;
 		
+	//Initial position
 	float				initial_x;
 	float				initial_y;
 
+	//Lives
 	int					lives;
-
-	float				decrease_vel;
+	
+	bool				moving_right = false;
+	bool				moving_left = false;
+	bool				isgrounded = false;
+	
+	//Entity settings
+	iPoint				position;
 	float				velocity;
-
 	float				run_velocity;
 	float				fall_velocity;
 	float 				max_fall_velocity;
 	float 				gravity;
 	float 				jump_vel;
+	float				decrease_vel;
+
+	float				deltaTime;
+
+	//Colliders and collisions
+	bool 				collider_at_right = false; //If true, entity can't go to the right 
+	bool 				collider_at_left = false;
 };
 
 #endif // !__j1ENTITY_H__
