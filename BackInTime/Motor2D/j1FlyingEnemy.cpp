@@ -55,7 +55,7 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Module()
 
 	//SETTING VARIABLES
 	velocity = 2.0f;
-	fall_vel = 3.5f;
+	fall_vel = 5.5f;
 
 }
 
@@ -207,7 +207,7 @@ void j1FlyingEnemy::check_path_toMove()
 {
 	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 	iPoint pos = App->map->MapToWorld(path->At(path_num)->x, path->At(path_num)->y);
-	if (falling == false) {
+	if (falling == false && isground == false) {
 		if (pos.x < x_pos) {
 			state = FLY_BACKWARD;
 		}
@@ -225,8 +225,12 @@ void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 	switch (c2->type)
 	{
 	case COLLIDER_WALL:
-		if (y_pos + current_animation->GetCurrentFrame().h > c2->rect.y - 2) {
-			state = IN_GROUND;
+		if (y_pos < c2->rect.y) {
+			if (x_pos + 0.8 * collider_enemy->rect.w > c2->rect.x) {
+				if (x_pos < c2->rect.x + c2->rect.w - 0.2 * collider_enemy->rect.w) {
+					state = IN_GROUND;
+				}
+			}
 		}
 
 		break;
