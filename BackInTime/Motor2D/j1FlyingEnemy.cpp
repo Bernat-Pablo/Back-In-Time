@@ -61,8 +61,9 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 
 bool j1FlyingEnemy::Awake(pugi::xml_node&)
 {
+	bool ret = true;
 
-	return true;
+	return ret;
 }
 
 bool j1FlyingEnemy::Start()
@@ -73,7 +74,7 @@ bool j1FlyingEnemy::Start()
 	debug_tex = App->tex->Load("maps/pathRect.png");
 	state = FLY;
 	current_animation = &fly;
-	collider_enemy = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)App->flyingEnemy); //a collider to start
+	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)App->flyingEnemy); //a collider to start
 
 	return true;
 }
@@ -117,7 +118,7 @@ bool j1FlyingEnemy::PreUpdate()
 	//PATH TO PLAYER (LOGIC)
 	calculate_path();
 
-	collider_enemy->SetPos(x_pos, y_pos);
+	collider_entity->SetPos(x_pos, y_pos);
 
 	return true;
 }
@@ -176,7 +177,7 @@ bool j1FlyingEnemy::CleanUp()
 {
 	App->tex->UnLoad(spritesheet);
 	App->tex->UnLoad(debug_tex);
-	collider_enemy = nullptr;
+	collider_entity = nullptr;
 	return true;
 }
 
@@ -226,8 +227,8 @@ void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 	{
 	case COLLIDER_WALL:
 		if (y_pos < c2->rect.y) {
-			if (x_pos + 0.8 * collider_enemy->rect.w > c2->rect.x) {
-				if (x_pos < c2->rect.x + c2->rect.w - 0.2 * collider_enemy->rect.w) {
+			if (x_pos + 0.8 * collider_entity->rect.w > c2->rect.x) {
+				if (x_pos < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
 					state = IN_GROUND;
 				}
 			}
@@ -235,7 +236,7 @@ void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 
 		break;
 	case COLLIDER_DIE:
-		//here we have to put -> delete enemy
+		//TODO here we have to put -> delete enemy
 
 		break;
 	default:

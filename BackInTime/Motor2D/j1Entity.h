@@ -19,8 +19,15 @@ enum class entityStates
 	JUMP,
 	JUMP_FORWARD,
 	JUMP_BACKWARD,
-	DASH_FORWARD, //Slowly stops the player
+	DASH_FORWARD, //Slowly stops the entity 
 	DASH_BACKWARD,
+};
+enum FEnemy_States {
+	FLY,
+	FLY_FORWARD,
+	FLY_BACKWARD,
+	FALL,
+	IN_GROUND,
 };
 
 class j1Entity : public j1EntityManager
@@ -45,6 +52,10 @@ public:
 	Animation jump_up;
 	Animation jump_down;
 	Animation hurt;
+	Animation fly;
+	Animation ground;
+	Animation hit;
+	Animation fall;
 	Animation* current_animation;
 
 	Collider* collider_entity = nullptr;

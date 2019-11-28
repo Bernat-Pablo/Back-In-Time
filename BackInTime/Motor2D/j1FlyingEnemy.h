@@ -1,24 +1,8 @@
 #ifndef _FLYINGENEMY_
 #define _FLYINGENEMY_
 
-#include "j1Module.h"
-#include "j1Animation.h"
-#include "j1App.h"
-#include "j1Map.h"
-#include "p2Point.h"
+#include "j1Entity.h"
 #include "SDL/include/SDL.h"
-
-struct SDL_Texture;
-struct Collider;
-
-enum FEnemy_States {
-	FLY,
-	FLY_FORWARD,
-	FLY_BACKWARD,
-	FALL,
-	IN_GROUND,
-};
-
 
 class j1FlyingEnemy : public j1Entity
 {
@@ -42,12 +26,6 @@ public:
 
 private:
 
-	Animation fly;
-	Animation ground;
-	Animation hit;
-	Animation fall;
-	Animation* current_animation;
-
 	FEnemy_States state;
 	bool moving_right = false;
 	bool moving_left = false;
@@ -63,10 +41,6 @@ private:
 	SDL_Texture* debug_tex = nullptr;
 
 	int path_num = 0;
-
-	Collider* collider_enemy = nullptr;
-
-
 };
 
 #endif // !_FLYINGENEMY_
