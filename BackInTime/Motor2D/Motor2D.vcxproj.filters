@@ -55,7 +55,7 @@
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="j1EntityManager.cpp">
-      <Filter>Modules</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,7 +126,7 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="j1EntityManager.h">
-      <Filter>Modules</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
