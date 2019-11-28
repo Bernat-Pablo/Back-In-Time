@@ -73,7 +73,7 @@ bool j1FlyingEnemy::Start()
 	debug_tex = App->tex->Load("maps/pathRect.png");
 	state = FLY;
 	current_animation = &fly;
-	collider_enemy = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "bird", (j1Module*)App->flyingEnemy); //a collider to start
+	collider_enemy = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)App->flyingEnemy); //a collider to start
 
 	return true;
 }

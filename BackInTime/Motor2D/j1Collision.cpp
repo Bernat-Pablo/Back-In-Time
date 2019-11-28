@@ -16,6 +16,14 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
 
+	//Enemy flying To collide with the ground and walls
+	matrix[COLLIDER_FLYING_ENEMY][COLLIDER_WALL] = true;
+	matrix[COLLIDER_WALL][COLLIDER_FLYING_ENEMY] = true;
+
+	//Enemy GROUND To collide with the ground and walls
+	matrix[COLLIDER_GROUND_ENEMY][COLLIDER_WALL] = true;
+	matrix[COLLIDER_WALL][COLLIDER_GROUND_ENEMY] = true;
+
 	//Colliders to move the camera
 	matrix[COLLIDER_PLAYER][COLLIDER_CAMERA] = true;
 	matrix[COLLIDER_CAMERA][COLLIDER_PLAYER] = true;
