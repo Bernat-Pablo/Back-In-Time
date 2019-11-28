@@ -72,6 +72,7 @@ bool j1FlyingEnemy::Start()
 	spritesheet = App->tex->Load("character/bird_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 	state = FLY;
+	collider_enemy = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "bird", (j1Module*)App->flyingEnemy); //a collider to start
 
 	return true;
 }
@@ -115,7 +116,7 @@ bool j1FlyingEnemy::PreUpdate()
 	//PATH TO PLAYER (LOGIC)
 	calculate_path();
 
-
+	collider_enemy->SetPos(x_pos, y_pos);
 
 	return true;
 }
@@ -172,6 +173,7 @@ bool j1FlyingEnemy::CleanUp()
 {
 	App->tex->UnLoad(spritesheet);
 	App->tex->UnLoad(debug_tex);
+	collider_enemy = nullptr;
 	return true;
 }
 
@@ -213,4 +215,24 @@ void j1FlyingEnemy::check_path_toMove()
 			state = FALL;
 		}
 	}
+}
+
+void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
+
+	switch (c2->type)
+	{
+	case COLLIDER_WALL:
+		if (y_pos + current_animation->GetCurrentFrame().h > c2->rect.y - 2) {
+			state = IN_GROUND;
+		}
+
+		break;
+	case COLLIDER_DIE:
+		//here we have to put -> delete enemy
+
+		break;
+	default:
+		break;
+	}
+
 }
