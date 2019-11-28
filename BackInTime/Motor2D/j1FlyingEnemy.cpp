@@ -168,8 +168,9 @@ bool j1FlyingEnemy::Update(float dt)
 
 		if (tick1 - tick2 >= 2500) {
 			tick1 = tick2 = 0;
-			state = FLY_UP;
+			state = entityStates::FLY_UP;
 			y_pos -= 7; //i have to put this to avoid collide to ground and set allways state to IN_GROUND
+			set_timer = false;
 		}
 
 		break;

@@ -22,13 +22,11 @@ public:
 	void check_path_toMove();
 
 private:	
-	bool falling = false;	
 
 	float x_pos, y_pos;
 
 private:
 
-	FEnemy_States state;
 	bool moving_right = false;
 	bool moving_left = false;
 	bool falling = false;
