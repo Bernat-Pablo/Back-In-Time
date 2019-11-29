@@ -14,7 +14,7 @@
     </camera_initialPosition>    
   </render>
 
-  <entities>
+  <entityManager>
     <gravity value ="5"/>
     
     <player>
@@ -45,12 +45,17 @@
     <flyingEnemy>
       <velocity value ="40.0"/>
       <fall_velocity value ="150.0"/>
+
+      <initialPosition>
+        <flyingEnemy1 x="50" y="50"/>
+        <flyingEnemy2 x="250" y="50"/>
+      </initialPosition>
     </flyingEnemy>
     
     <walkingEnemy>
       <velocity value =""/>
     </walkingEnemy>
-  </entities>
+  </entityManager>
   
 
   <window>

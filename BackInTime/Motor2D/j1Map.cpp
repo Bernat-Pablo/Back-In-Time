@@ -311,6 +311,11 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door1");
 				if (name == "6")
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door2");
+				if (name == "7")
+				{					 
+					j1Entity* flyingEnemy1 = App->entityManager->CreateEntity(entityTypes::FLYING_ENEMY, objectgroup->object[i].x, objectgroup->object[i].y);
+					//App->AddModule(flyingEnemy1);
+				}					
 
 				collidernum++;
 			}			

@@ -52,10 +52,6 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 	fall.PushBack({ 64,81,35,45 }, speed);
 	fall.PushBack({ 104,81,35,45 }, speed);
 	fall.PushBack({ 144,81,35,45 }, speed);
-
-	//SETTING VARIABLES
-	//velocity = 2.0f;
-	//fall_velocity = 5.5f;
 }
 
 bool j1FlyingEnemy::Awake(pugi::xml_node& config)
@@ -63,7 +59,7 @@ bool j1FlyingEnemy::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	config = App->GetConfig();
-	config = config.child("entities").child("flyingEnemy");
+	config = config.child("entityManager").child("flyingEnemy");
 
 	velocity = config.child("velocity").attribute("value").as_float();
 	fall_velocity = config.child("fall_velocity").attribute("value").as_float();
@@ -73,14 +69,13 @@ bool j1FlyingEnemy::Awake(pugi::xml_node& config)
 
 bool j1FlyingEnemy::Start()
 {
-	//position.x = 752.0;
-	position.x = 250.0;
-	position.y = 30.0;
 	spritesheet_entity = App->tex->Load("character/enemies_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 	state = entityStates::FLY;
 	current_animation = &fly;
 	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)App->flyingEnemy); //a collider to start
+
+	isgrounded = false;
 
 	return true;
 }
@@ -117,7 +112,7 @@ bool j1FlyingEnemy::PreUpdate()
 		}
 		break;
 	case entityStates::IN_GROUND:
-		if (isgrounded == false) {
+		if (starting_flying == true) {
 			state = entityStates::FLY_UP;
 		}
 		break;
@@ -137,18 +132,19 @@ bool j1FlyingEnemy::PreUpdate()
 }
 
 bool j1FlyingEnemy::Update(float dt)
-{
-	isgrounded = false;
+{	
 	//STATE MACHINE APPLYING MOVEMENT
 	switch (state)
 	{
 	case entityStates::FLY:
 		current_animation = &fly;
+		starting_flying = false;
 		set_path = true;
 
 		break;
 	case entityStates::FLY_FORWARD:
 		current_animation = &fly;
+		starting_flying = false;
 		position.x += (int)ceil(velocity*dt);
 		moving_right = true;
 		moving_left = false;
@@ -158,6 +154,7 @@ bool j1FlyingEnemy::Update(float dt)
 		current_animation = &fly;
 		position.x -= (int)ceil(velocity * dt);
 		moving_right = false;
+		starting_flying = false;
 		moving_left = true;
 
 		break;
@@ -171,7 +168,7 @@ bool j1FlyingEnemy::Update(float dt)
 
 		break;		
 
-	case entityStates::IN_GROUND: //FIX IN GROUND
+	case entityStates::IN_GROUND: 
 		if (!set_timer) {
 			set_timer = true;
 			tick2 = SDL_GetTicks();
@@ -187,6 +184,7 @@ bool j1FlyingEnemy::Update(float dt)
 			isgrounded = false;
 			position.y -= 7; //i have to put this to avoid collide to ground and set allways state to IN_GROUND
 			set_timer = false;
+			starting_flying = true;
 		}
 
 		break;
@@ -281,7 +279,8 @@ void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 			if (position.x + collider_entity->rect.w > c2->rect.x) {
 				if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
 					state = entityStates::IN_GROUND;
-					isgrounded = true;
+					if(!starting_flying)
+						isgrounded = true;
 				}
 			}
 		}
