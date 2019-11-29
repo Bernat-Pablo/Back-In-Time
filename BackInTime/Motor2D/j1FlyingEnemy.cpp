@@ -115,7 +115,7 @@ bool j1FlyingEnemy::PreUpdate()
 		}
 		break;
 	case entityStates::IN_GROUND:
-		if (isgrounded == true) {
+		if (isgrounded == false) {
 			state = entityStates::FLY_UP;
 		}
 		break;
@@ -184,6 +184,7 @@ bool j1FlyingEnemy::Update(float dt)
 			isgrounded = false;
 			position.y -= 7; //i have to put this to avoid collide to ground and set allways state to IN_GROUND
 			set_timer = false;
+			starting_flying = true;
 		}
 
 		break;
@@ -193,6 +194,7 @@ bool j1FlyingEnemy::Update(float dt)
 			set_timer = true;
 			tick2 = SDL_GetTicks();
 		}
+		starting_flying = false;
 		set_path = false;
 		isgrounded = false;
 		current_animation = &fly;
@@ -278,7 +280,8 @@ void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 			if (position.x + collider_entity->rect.w > c2->rect.x) {
 				if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
 					state = entityStates::IN_GROUND;
-					isgrounded = true;
+					if(!starting_flying)
+						isgrounded = true;
 				}
 			}
 		}

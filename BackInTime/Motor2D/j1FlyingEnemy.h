@@ -25,6 +25,7 @@ private:
 	bool falling = false;
 	bool set_path = true;
 	bool set_timer = false;
+	bool starting_flying = false;
 
 	SDL_Texture* spritesheet = nullptr;
 	SDL_Texture* debug_tex = nullptr;
