@@ -20,6 +20,32 @@ j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 {
 	name.create("goundEnemy");
 
+	speed = 0.5f;
+
+	idle.PushBack({ 23,165,50,29 }, speed);
+	idle.PushBack({ 75,165,50,29 }, speed);
+	idle.PushBack({ 127,165,50,29 }, speed);
+	idle.PushBack({ 179,165,50,29 }, speed);
+	idle.PushBack({ 232,165,50,29 }, speed);
+	idle.PushBack({ 284,165,50,29 }, speed);
+	idle.PushBack({ 335,165,50,29 }, speed);
+	idle.PushBack({ 388,165,50,29 }, speed);
+	idle.PushBack({ 440,165,50,29 }, speed);
+	idle.PushBack({ 492,165,50,29 }, speed);
+	idle.PushBack({ 544,165,50,29 }, speed);
+
+	run.PushBack({ 24,198,50,30 }, speed);
+	run.PushBack({ 76,198,50,30 }, speed);
+	run.PushBack({ 128,198,50,30 }, speed);
+	run.PushBack({ 180,198,50,30 }, speed);
+	run.PushBack({ 223,198,50,30 }, speed);
+	run.PushBack({ 284,198,50,30 }, speed);
+
+	hit.PushBack({ 22,234,44,36 }, speed);
+	hit.PushBack({ 74,234,44,36 }, speed);
+	hit.PushBack({ 125,234,44,36 }, speed);
+	hit.PushBack({ 176,234,44,36 }, speed);
+
 }
 
 bool j1GroundEnemy::Awake(pugi::xml_node&)

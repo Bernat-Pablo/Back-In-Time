@@ -30,6 +30,8 @@ private:
 
 	int path_num = 0;
 	int tick1 = 0, tick2 = 0;
+
+	int speed;
 };
 
 #endif // !_FLYINGENEMY_
