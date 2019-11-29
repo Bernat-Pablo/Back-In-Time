@@ -17,8 +17,6 @@
 		<camera x="-66" y="303" />
 		<lives value="3" />
 	</player>
-	<:anonymous />
-	<:anonymous />
 	<pathfinding />
 	<flyingEnemy />
 	<goundEnemy />

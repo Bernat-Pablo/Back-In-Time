@@ -11,6 +11,9 @@
 #include "j1Player.h"
 #include "j1Fade.h"
 #include "j1PathFinding.h"
+#include "j1EntityManager.h"
+#include "j1Entity.h"
+
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -43,6 +46,12 @@ bool j1Scene::Start()
 	if (App->map->CreateWalkabilityMap(w, h, &data))
 		App->pathfinding->SetMap(w, h, data);
 	debug_tex = App->tex->Load("maps/pathRect.png");
+
+	//TODO Add entities to scene
+	//bug: Gives unresolved external error if uncommented
+	/*j1Entity* player = App->entities->CreateEntity(entityTypes::PLAYER,10,10);
+	player->Awake(App->GetConfig().child(App->entities->name.GetString()));
+	player->Start();*/
 
 	//App->audio->PlayMusic("audio/music/music.ogg");
 	//App->map->Load("iso.tmx");

@@ -12,7 +12,6 @@ enum class entityTypes
 	PLAYER,
 	FLYING_ENEMY,
 	GROUND_ENEMY,
-	WALKING_ENEMY,
 	UNKNOWN,
 };
 
@@ -38,7 +37,7 @@ public:
 	//Function CreateEntity
 	//Function DestroyEntity
 	//Entities list
-public:
+
 	p2List<j1Entity*> entitiesList;
 };
 

@@ -52,10 +52,6 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 	fall.PushBack({ 64,81,35,45 }, speed);
 	fall.PushBack({ 104,81,35,45 }, speed);
 	fall.PushBack({ 144,81,35,45 }, speed);
-
-	//SETTING VARIABLES
-	//velocity = 2.0f;
-	//fall_velocity = 5.5f;
 }
 
 bool j1FlyingEnemy::Awake(pugi::xml_node& config)
