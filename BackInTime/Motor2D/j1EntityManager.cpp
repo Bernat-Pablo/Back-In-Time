@@ -119,3 +119,15 @@ j1Entity* CreateEntity(entityTypes type, int position_x, int position_y)
 
 	return ret;
 }
+
+bool j1EntityManager::Save(pugi::xml_node& file)const
+{
+	bool ret = true;
+	p2List_item<j1Entity*>* tmp = entitiesList.start;
+	while (tmp != nullptr)
+	{
+		tmp->data->Save(file);
+		tmp = tmp->next;
+	}
+	return ret;
+}

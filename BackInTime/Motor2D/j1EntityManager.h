@@ -29,6 +29,9 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 
+	bool Save(pugi::xml_node& file)const;
+	//bool Load(pugi::xml_node& file);
+
 	j1Entity* CreateEntity(entityTypes type, int position_x, int position_y);
 
 	//TODO 
