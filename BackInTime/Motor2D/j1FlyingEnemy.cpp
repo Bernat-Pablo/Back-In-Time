@@ -115,7 +115,7 @@ bool j1FlyingEnemy::PreUpdate()
 		}
 		break;
 	case entityStates::IN_GROUND:
-		if (isgrounded == false) {
+		if (starting_flying == true) {
 			state = entityStates::FLY_UP;
 		}
 		break;
@@ -141,11 +141,13 @@ bool j1FlyingEnemy::Update(float dt)
 	{
 	case entityStates::FLY:
 		current_animation = &fly;
+		starting_flying = false;
 		set_path = true;
 
 		break;
 	case entityStates::FLY_FORWARD:
 		current_animation = &fly;
+		starting_flying = false;
 		position.x += (int)ceil(velocity*dt);
 		moving_right = true;
 		moving_left = false;
@@ -155,6 +157,7 @@ bool j1FlyingEnemy::Update(float dt)
 		current_animation = &fly;
 		position.x -= (int)ceil(velocity * dt);
 		moving_right = false;
+		starting_flying = false;
 		moving_left = true;
 
 		break;
@@ -194,7 +197,6 @@ bool j1FlyingEnemy::Update(float dt)
 			set_timer = true;
 			tick2 = SDL_GetTicks();
 		}
-		starting_flying = false;
 		set_path = false;
 		isgrounded = false;
 		current_animation = &fly;
