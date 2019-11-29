@@ -21,6 +21,7 @@ enum class entityStates
 	JUMP_BACKWARD,
 	DASH_FORWARD, //Slowly stops the entity 
 	DASH_BACKWARD,
+	HIT,
 
 	FLY,
 	FLY_FORWARD,
@@ -28,6 +29,8 @@ enum class entityStates
 	FLY_UP,
 	FALL,
 	IN_GROUND,
+
+	STUNNED,
 };
 
 class j1Entity : public j1EntityManager
