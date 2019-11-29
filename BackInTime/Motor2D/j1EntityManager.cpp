@@ -119,7 +119,7 @@ j1Entity* CreateEntity(entityTypes type, int position_x, int position_y)
 	}
 
 	//if (ret)
-		//entitiesList.add(ret);
+	//	entitiesList.add(ret);
 
 	return ret;
 }

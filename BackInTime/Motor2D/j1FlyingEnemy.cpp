@@ -59,7 +59,7 @@ bool j1FlyingEnemy::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	config = App->GetConfig();
-	config = config.child("entities").child("flyingEnemy");
+	config = config.child("entityManager").child("flyingEnemy");
 
 	velocity = config.child("velocity").attribute("value").as_float();
 	fall_velocity = config.child("fall_velocity").attribute("value").as_float();

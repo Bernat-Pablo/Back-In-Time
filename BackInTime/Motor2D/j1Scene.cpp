@@ -49,9 +49,9 @@ bool j1Scene::Start()
 
 	//TODO Add entities to scene
 	//bug: Gives unresolved external error if uncommented
-	/*j1Entity* player = App->entities->CreateEntity(entityTypes::PLAYER,10,10);
-	player->Awake(App->GetConfig().child(App->entities->name.GetString()));
-	player->Start();*/
+	//j1Entity* flyingEnemy = App->entityManager->CreateEntity(entityTypes::FLYING_ENEMY,10,10);
+	//player->Awake(App->GetConfig().child(App->entityManager->name.GetString()));
+	//player->Start();
 
 	//App->audio->PlayMusic("audio/music/music.ogg");
 	//App->map->Load("iso.tmx");

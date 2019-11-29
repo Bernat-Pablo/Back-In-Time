@@ -12,7 +12,6 @@
 #include "j1Render.h"
 #include "j1Window.h"
 
-
 j1Entity::j1Entity(entityTypes type) : j1EntityManager()
 {
 }

@@ -14,7 +14,7 @@
     </camera_initialPosition>    
   </render>
 
-  <entities>
+  <entityManager>
     <gravity value ="5"/>
     
     <player>
@@ -50,7 +50,7 @@
     <walkingEnemy>
       <velocity value =""/>
     </walkingEnemy>
-  </entities>
+  </entityManager>
   
 
   <window>

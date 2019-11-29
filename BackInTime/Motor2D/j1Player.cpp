@@ -64,8 +64,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	bool ret = true;	
 
 	config = App->GetConfig();
-	gravity = config.child("entities").child("gravity").attribute("value").as_float(); //We set gravity before going into player
-	config = config.child("entities").child("player");
+	gravity = config.child("entityManager").child("gravity").attribute("value").as_float(); //We set gravity before going into player
+	config = config.child("entityManager").child("player");
 
 	//Set initial data of the player	
 	run_velocity = config.child("run_velocity").attribute("value").as_float();
@@ -97,7 +97,7 @@ bool j1Player::Start(){
 	//We get screen_size before moving config_local inside entities
 	screen_size = config_local.child("window").child("resolution").attribute("scale").as_int();
 
-	config_local = config_local.child("entities").child("player");
+	config_local = config_local.child("entityManager").child("player");
 
 	if (App->scene->choose_lv == 1) //We are on map1
 	{
@@ -845,9 +845,9 @@ void j1Player::restart_variables(int vel, int vel_jump) {
 	pugi::xml_node		node = App->GetConfig();
 
 	if (vel != -1) {
-		velocity = node.child("entities").child("player").child("velocity").attribute("value").as_float();
+		velocity = node.child("entityManager").child("player").child("velocity").attribute("value").as_float();
 	}
 	if (vel_jump != -1) {
-		jump_vel= node.child("entities").child("player").child("jump_vel").attribute("value").as_float();
+		jump_vel= node.child("entityManager").child("player").child("jump_vel").attribute("value").as_float();
 	}
 }
