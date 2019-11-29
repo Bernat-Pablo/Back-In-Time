@@ -171,7 +171,7 @@ bool j1FlyingEnemy::Update(float dt)
 
 		break;		
 
-	case entityStates::IN_GROUND:
+	case entityStates::IN_GROUND: //FIX IN GROUND
 		if (!set_timer) {
 			set_timer = true;
 			tick2 = SDL_GetTicks();
