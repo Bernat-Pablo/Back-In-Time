@@ -82,6 +82,8 @@ bool j1FlyingEnemy::Start()
 	current_animation = &fly;
 	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)App->flyingEnemy); //a collider to start
 
+	isgrounded = false;
+
 	return true;
 }
 
@@ -117,7 +119,7 @@ bool j1FlyingEnemy::PreUpdate()
 		}
 		break;
 	case entityStates::IN_GROUND:
-		if (isgrounded == false) {
+		if (isgrounded == true) {
 			state = entityStates::FLY_UP;
 		}
 		break;
@@ -137,8 +139,7 @@ bool j1FlyingEnemy::PreUpdate()
 }
 
 bool j1FlyingEnemy::Update(float dt)
-{
-	isgrounded = false;
+{	
 	//STATE MACHINE APPLYING MOVEMENT
 	switch (state)
 	{
@@ -171,7 +172,7 @@ bool j1FlyingEnemy::Update(float dt)
 
 		break;		
 
-	case entityStates::IN_GROUND: //FIX IN GROUND
+	case entityStates::IN_GROUND: 
 		if (!set_timer) {
 			set_timer = true;
 			tick2 = SDL_GetTicks();
