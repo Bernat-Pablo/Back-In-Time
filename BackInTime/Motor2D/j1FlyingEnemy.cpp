@@ -144,6 +144,7 @@ bool j1FlyingEnemy::Update(float dt)
 	{
 	case entityStates::FLY:
 		current_animation = &fly;
+		set_path = true;
 
 		break;
 	case entityStates::FLY_FORWARD:
@@ -235,7 +236,8 @@ void j1FlyingEnemy::calculate_path()
 
 	iPoint p = App->render->ScreenToWorld(position.x, position.y);
 	p = App->map->WorldToMap(position.x, position.y);
-	if (position.x - App->player->position.x <=160 || position.x - App->player->position.x <= -160) {
+	int distance = position.x - App->player->position.x;
+	if (distance <=160 || position.x + distance <= 160) {
 		App->pathfinding->CreatePath(origin, p);
 		if (set_path == true) {
 			check_path_toMove();
