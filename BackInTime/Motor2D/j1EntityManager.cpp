@@ -91,7 +91,7 @@ bool j1EntityManager::CleanUp()
 	return ret;
 }
 
-j1Entity* CreateEntity(entityTypes type, int position_x, int position_y)
+j1Entity* j1EntityManager::CreateEntity(entityTypes type, int position_x, int position_y)
 {
 	j1Entity* ret = nullptr;
 
