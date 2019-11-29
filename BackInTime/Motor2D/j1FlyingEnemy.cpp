@@ -165,6 +165,8 @@ bool j1FlyingEnemy::Update(float dt)
 		position.y += (int)ceil(fall_velocity * dt);
 		falling = true;
 		set_path = false;
+		moving_right = false;
+		moving_left = false;
 
 		break;		
 
@@ -198,7 +200,7 @@ bool j1FlyingEnemy::Update(float dt)
 		current_animation = &fly;
 		tick1 = SDL_GetTicks();
 
-		if (tick1 - tick2 >= 2500) {
+		if (tick1 - tick2 >= 2000) {
 			tick1 = tick2 = 0;
 			state = entityStates::FLY;
 			set_timer = false;
