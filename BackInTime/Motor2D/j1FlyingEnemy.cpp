@@ -69,9 +69,6 @@ bool j1FlyingEnemy::Awake(pugi::xml_node& config)
 
 bool j1FlyingEnemy::Start()
 {
-	//position.x = 752.0;
-	position.x = 250.0;
-	position.y = 30.0;
 	spritesheet_entity = App->tex->Load("character/enemies_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 	state = entityStates::FLY;
