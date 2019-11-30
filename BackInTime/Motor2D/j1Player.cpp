@@ -483,7 +483,7 @@ bool j1Player::Update(float dt)
 		in_air = checkInAir();
 
 		if(in_air == true)
-		{
+		{			
 			if(fall_velocity < max_fall_velocity)
 				fall_velocity += gravity*dt;
 
@@ -563,99 +563,113 @@ bool j1Player::CleanUp() {
 
 void j1Player::OnCollision(Collider* c1, Collider* c2) {
 
-	if(godMode == false)
+	if(c1->type == COLLIDER_PLAYER)
 	{
-		switch (c2->type)
+		if (godMode == false)
 		{
-		
-		case COLLIDER_WALL:
-
-			if (position.x + collider_entity->rect.w < c2->rect.x + 20) //Player is at the left of a wall
+			switch (c2->type)
 			{
-				if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
-					collider_at_right = true;
-				else
-					collider_at_right = false;
-			}
-			else
-				collider_at_right = false;
 
-			if (position.x < c2->rect.x + c2->rect.w) //Player is at the right of a wall
-			{
-				if(state == entityStates::WALK_BACKWARD || state == entityStates::RUN_BACKWARD || state == entityStates::JUMP_BACKWARD || state == entityStates::IDLE || state == entityStates::DASH_BACKWARD)
+			case COLLIDER_WALL:
+
+				if (position.x + collider_entity->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 				{
 					if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
-					{
-						collider_at_left = true;
-					}
+						collider_at_right = true;
 					else
-						collider_at_left = false;
-				}				
+						collider_at_right = false;
+				}
+				else
+					collider_at_right = false;
+
+				if (position.x < c2->rect.x + c2->rect.w) //Player is at the right of a wall
+				{
+					if (state == entityStates::WALK_BACKWARD || state == entityStates::RUN_BACKWARD || state == entityStates::JUMP_BACKWARD || state == entityStates::IDLE || state == entityStates::DASH_BACKWARD)
+					{
+						if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
+						{
+							collider_at_left = true;
+						}
+						else
+							collider_at_left = false;
+					}
+				}
+				else
+					collider_at_left = false;
+				break;
+
+			case COLLIDER_DIE:
+				//Player goes to initial position
+				state = entityStates::DIE;
+				break;
+
+			case COLLIDER_DOOR:
+				//Change scene from 1 to 2
+				if (c2->name == "door1") //We touch the first door, so we go to level 2
+					App->scene->choose_lv = 2;
+				else if (c2->name == "door2")
+					App->scene->choose_lv = 1;
+				iterator = 0;
+				App->fade->FadeToBlack(App->scene, App->scene);
+				break;
+
+			case COLLIDER_FLYING_ENEMY:
+				state = entityStates::DIE;
+				break;
 			}
+		}
+
+		//It's out of the if(godMode == false) 
+		//because even if it's at godMode, we want the camera to follow the player
+		if (c2->type == COLLIDER_CAMERA)
+		{
+			float localVelocity = 0;
+			//We adjust camera velocity to player velocity depending his state
+			if (state == entityStates::WALK_FORWARD || state == entityStates::WALK_BACKWARD)
+				localVelocity = (int)ceil(velocity * deltaTime);
+			else if (state == entityStates::RUN_FORWARD || state == entityStates::RUN_BACKWARD)
+				localVelocity = (int)ceil(run_velocity * deltaTime);
 			else
-				collider_at_left = false;
-			break;
+				localVelocity = (int)ceil(velocity * deltaTime);
 
-		case COLLIDER_DIE:
-			//Player goes to initial position
-			state = entityStates::DIE;		
-			break;
+			if (c2->name == "right") //Collision with camera_toRight
+			{
+				//Update the position of the camera colliders
+				MoveCameraColliders("x", localVelocity);
+				//Controlling UI
+			}
+			if (c2->name == "left") //Collision with camera_toLeft
+			{
+				//Update the position of the camera colliders
+				MoveCameraColliders("x", -localVelocity);
+				//Controlling UI
+			}
+			if (c2->name == "up") //Collision with camera_toUp
+			{
+				//Update the position of the camera colliders			
+				MoveCameraColliders("y", -localVelocity);
+				//Controlling UI
 
-		case COLLIDER_DOOR:			
-			//Change scene from 1 to 2
-			if(c2->name == "door1") //We touch the first door, so we go to level 2
-				App->scene->choose_lv = 2;
-			else if (c2->name == "door2") 
-				App->scene->choose_lv = 1;
-			iterator = 0;
-			App->fade->FadeToBlack(App->scene, App->scene);
-			break;	
-
+			}
+			if (c2->name == "down") //Collision with camera_toDown
+			{
+				//Update the position of the camera colliders				
+				MoveCameraColliders("y", fall_velocity);
+				//Controlling UI
+			}
+		}
+	}else if(c1->type == COLLIDER_ROCK)
+	{
+		switch(c2->type)
+		{
 		case COLLIDER_FLYING_ENEMY:
-			state = entityStates::DIE;
+			LOG("Collision with flying enemy detected");
+			break;
+		case COLLIDER_GROUND_ENEMY:
+			LOG("Collision with ground enemy detected");
 			break;
 		}
 	}
-
-	//It's out of the if(godMode == false) 
-	//because even if it's at godMode, we want the camera to follow the player
-	if(c2->type == COLLIDER_CAMERA)
-	{
-		float localVelocity = 0; 
-		//We adjust camera velocity to player velocity depending his state
-		if (state == entityStates::WALK_FORWARD || state == entityStates::WALK_BACKWARD)
-			localVelocity = (int)ceil(velocity * deltaTime);
-		else if (state == entityStates::RUN_FORWARD || state == entityStates::RUN_BACKWARD)
-			localVelocity = (int)ceil(run_velocity * deltaTime);
-		else
-			localVelocity = (int)ceil(velocity * deltaTime);
-				
-		if (c2->name == "right") //Collision with camera_toRight
-		{
-			//Update the position of the camera colliders
-			MoveCameraColliders("x", localVelocity);
-			//Controlling UI
-		}
-		if (c2->name == "left") //Collision with camera_toLeft
-		{
-			//Update the position of the camera colliders
-			MoveCameraColliders("x", -localVelocity);	
-			//Controlling UI
-		}
-		if (c2->name == "up") //Collision with camera_toUp
-		{
-			//Update the position of the camera colliders			
-			MoveCameraColliders("y", -localVelocity);
-			//Controlling UI
-
-		}
-		if (c2->name == "down") //Collision with camera_toDown
-		{			
-			//Update the position of the camera colliders				
-			MoveCameraColliders("y", fall_velocity);
-			//Controlling UI
-		}
-	}		
 }
 
 bool j1Player::Save(pugi::xml_node& data) const {
@@ -892,7 +906,8 @@ void j1Player::rockMovement()
 {
 	if (rock_able == false) //If we have already thrown the rock
 	{
-		if (rock_timer >= rock_cooldown) { //If cooldown has finished
+		//We check if cooldown has finished or we continue with the rock
+		if (rock_timer >= rock_cooldown) { 
 			//Delete rock
 			rockPosition.x = -50;
 			rockPosition.y = -50;
@@ -900,51 +915,74 @@ void j1Player::rockMovement()
 		}
 		else
 			rock_timer += deltaTime; //We increase the countdown to make it available again
-			   
 		
 		//Rock movement
-		//We calculate rock velocity depending on the state 
-		entityStates localState = state;
-
-		switch (localState)
+		if(rockCheckInAir() == true)
 		{
-		case entityStates::IDLE:
-			break;
-		case entityStates::WALK_FORWARD:
-			break;
-		case entityStates::WALK_BACKWARD:
-			break;
-		case entityStates::RUN_FORWARD:
-			break;
-		case entityStates::RUN_BACKWARD:
-			break;
-		case entityStates::JUMP:
-			break;
-		case entityStates::JUMP_FORWARD:
-			break;
-		case entityStates::JUMP_BACKWARD:
-			break;
-		case entityStates::DASH_FORWARD:
-			break;
-		case entityStates::DASH_BACKWARD:
-			break;
-		case entityStates::DIE:
-			break;
-		}
-	}else if(rock_able == true)
-	{
-		//Don't do anything.
-		//If it's able it means that it is waiting for the player to throw it and make it unavailable
+			//We change the position based on the force 
+			rockPosition.x += (int)ceil(rockVelocity.x * deltaTime);
+			rockPosition.y -= (int)ceil(rockVelocity.y * deltaTime);
+
+			//We apply gravity to the rock
+			rock_fall_velocity += gravity;
+			rockPosition.y += (int)ceil(rock_fall_velocity * deltaTime);
+		}		
 	}
 }
 
 void j1Player::throwRock()
 {
 	if(rock_able == true)
-	{
-		rockPosition.x = position.x + collider_entity->rect.w;
+	{		
 		rockPosition.y = position.y;
 		rock_timer = 0;
 		rock_able = false;
+
+		//Rock movement
+		//We calculate rock velocity depending on the state 
+		if (state == entityStates::WALK_FORWARD || state == entityStates::RUN_FORWARD || state == entityStates::JUMP_FORWARD || state == entityStates::DASH_FORWARD)
+		{
+			rockPosition.x = position.x + collider_entity->rect.w;
+			if (rockVelocity.x < 0)
+				rockVelocity.x *= -1; //We make sure that velocity is positive in X axis
+		}else if(state == entityStates::WALK_BACKWARD || state == entityStates::RUN_BACKWARD || state == entityStates::JUMP_BACKWARD || state == entityStates::DASH_BACKWARD)
+		{
+			rockPosition.x = position.x;
+			if (rockVelocity.x > 0)
+				rockVelocity.x *= -1; //We make sure that velocity is negative in X axis
+		}else
+		{
+			//Same as forward
+			rockPosition.x = position.x + collider_entity->rect.w;
+			if (rockVelocity.x < 0)
+				rockVelocity.x *= -1; //We make sure that velocity is positive in X axis
+		}
+		
 	}
+}
+
+bool j1Player::rockCheckInAir()
+{
+	// Calculate collisions
+	Collider* c2;
+
+	// avoid checking collisions already checked
+	for (uint k = 0; k < MAX_COLLIDERS; ++k)
+	{
+		// skip empty colliders
+		if (App->collision->colliders[k] == nullptr)
+			continue;
+
+		c2 = App->collision->colliders[k];
+
+		if (c2->type == COLLIDER_WALL) //We only want to check if player is colliding with a wall
+			if (collider_rock->CheckCollision(c2->rect) == true) //There is collision between the rock and a wall			
+				if (rockPosition.y < c2->rect.y) //Rock is on the ground
+				{
+					rock_fall_velocity = 0;
+					return false;						
+				}
+	}
+
+	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
 }

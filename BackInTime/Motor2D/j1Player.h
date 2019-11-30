@@ -40,6 +40,7 @@ public:
 
 	void rockMovement();
 	void throwRock();
+	bool rockCheckInAir();
 
 	iPoint position;	
 private:
@@ -76,6 +77,7 @@ private:
 	bool 				rock_able = true;
 	float				rock_timer = 0;
 	float				rock_cooldown;
+	float				rock_fall_velocity = 0;
 
 	int 				tick1 = 0, tick2 = 0;
 	int 				tick3 = 0, tick4 = 0;
