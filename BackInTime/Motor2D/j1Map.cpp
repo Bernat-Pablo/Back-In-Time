@@ -6,7 +6,6 @@
 #include "j1Map.h"
 #include "j1Collision.h"
 #include "j1Window.h"
-#include <math.h>
 #include "j1Player.h"
 #include "Brofiler/Brofiler.h"
 
