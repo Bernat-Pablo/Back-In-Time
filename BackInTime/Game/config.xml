@@ -31,7 +31,7 @@
       <fall_velocity value ="0"/>
       <max_fall_velocity value ="30"/>
       <decrease_vel value ="20.0" />      
-      <jump_vel value ="13.0"/>
+      <jump_vel value ="13.0"/>      
       
       <!-- Audio and FX -->
       <jumpFX source ="jump.wav"/>
@@ -40,6 +40,9 @@
       <idleFX source =""/>
       <walkFX source =""/>
       <dashFX source =""/>
+      <rock>
+        <velocity x="100.0" y="10.0"/>
+      </rock>
     </player>
     
     <flyingEnemy>

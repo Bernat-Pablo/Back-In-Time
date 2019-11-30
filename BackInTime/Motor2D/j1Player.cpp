@@ -307,6 +307,8 @@ bool j1Player::PreUpdate()
 
 	//Change player collider position
 	collider_entity->SetPos(position.x, position.y);
+	//Change rock collider position
+	//collider_rock->SetPos(rockPosition.x, rockPosition.y);
 	BROFILER_CATEGORY("Player_PreUpdate", Profiler::Color::Aquamarine);
 
 	return true;
@@ -534,6 +536,10 @@ bool j1Player::CleanUp() {
 	spritesheet_casper = nullptr;
 	spritesheet_bars = nullptr;
 	current_animation = nullptr;
+
+	//Unload rock
+	spritesheet_rock = nullptr;
+	collider_rock = nullptr;
 
 	//Unload colliders for the camera
 	camera_toRight = nullptr;

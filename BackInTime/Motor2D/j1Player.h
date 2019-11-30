@@ -79,6 +79,8 @@ private:
 	Collider*			camera_toUp = nullptr;
 	Collider*			camera_toDown = nullptr;
 
+	Collider*			collider_rock = nullptr;
+
 	pugi::xml_document	doc;
 	
 };
