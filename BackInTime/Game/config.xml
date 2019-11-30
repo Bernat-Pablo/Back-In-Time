@@ -42,7 +42,7 @@
       <dashFX source =""/>
       <rock>
         <velocity x="100.0" y="10.0"/>
-        <cooldown value="5"/>
+        <cooldown value="3"/>
       </rock>
     </player>
     
