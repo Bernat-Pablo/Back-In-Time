@@ -52,10 +52,7 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 	fall.PushBack({ 24,81,35,45 }, speed);
 	fall.PushBack({ 64,81,35,45 }, speed);
 	fall.PushBack({ 104,81,35,45 }, speed);
-	fall.PushBack({ 144,81,35,45 }, speed);
-
-	current_animation = &fly;
-	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)App->flyingEnemy); //a collider to start
+	fall.PushBack({ 144,81,35,45 }, speed);	
 }
 
 bool j1FlyingEnemy::Awake(pugi::xml_node& config)
@@ -76,6 +73,9 @@ bool j1FlyingEnemy::Start()
 	spritesheet_entity = App->tex->Load("character/enemies_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 	state = entityStates::FLY;
+
+	current_animation = &fly;
+	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)App->flyingEnemy); //a collider to start
 
 	isgrounded = false;
 
@@ -125,6 +125,9 @@ bool j1FlyingEnemy::PreUpdate()
 
 		break;
 	}
+
+	//PATH TO PLAYER (LOGIC)
+	calculate_path();
 
 	return true;
 }
@@ -213,8 +216,7 @@ bool j1FlyingEnemy::Update(float dt)
 	App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
 	collider_entity->SetPos(position.x, position.y);
 
-	//PATH TO PLAYER (LOGIC)
-	calculate_path();
+	
 	//PATH TO PLAYER (BLIT)
 	blit_path();
 
