@@ -72,7 +72,7 @@ bool j1GroundEnemy::Start()
 
 	state = entityStates::IDLE;	
 
-	position.x = 50;
+	position.x = 500;
 	position.y = 180;
 
 	current_animation = &idle;
@@ -188,7 +188,7 @@ void j1GroundEnemy::calculate_path()
 
 	iPoint p = App->render->ScreenToWorld(position.x, position.y);
 	p = App->map->WorldToMap(position.x, position.y);
-	if (App->player->position.x - position.x <= 160 && position.x - App->player->position.x >= -160) {
+	if (App->player->position.x - position.x >= -160 && position.x - App->player->position.x >= -160) {
 		App->pathfinding->CreatePath(origin, p);
 		if (set_path == true) {
 			check_path_toMove();
