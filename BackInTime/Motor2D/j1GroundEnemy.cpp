@@ -80,6 +80,7 @@ bool j1GroundEnemy::Start()
 
 bool j1GroundEnemy::PreUpdate()
 {
+	LOG("%i", state);
 	switch (state)
 	{
 	case entityStates::IDLE:
@@ -92,11 +93,15 @@ bool j1GroundEnemy::PreUpdate()
 	case entityStates::RUN_FORWARD:
 		if(stun)
 			state = entityStates::STUNNED;
+		if (moving_left)
+			state = entityStates::RUN_BACKWARD;
 
 		break;
 	case entityStates::RUN_BACKWARD:
 		if (stun)
 			state = entityStates::STUNNED;
+		if (moving_right)
+			state = entityStates::RUN_FORWARD;
 
 		break;
 	case entityStates::STUNNED:
@@ -110,6 +115,9 @@ bool j1GroundEnemy::PreUpdate()
 
 		break;
 	}
+
+
+
 
 	return true;
 }
@@ -125,10 +133,16 @@ bool j1GroundEnemy::Update(float dt)
 	case entityStates::RUN_FORWARD:
 		current_animation = &run;
 		reversed = true;
+		moving_left = false;
+		moving_right = true;
+		position.x += 2;
 		break;
 	case entityStates::RUN_BACKWARD:
 		current_animation = &run;
 		reversed = false;
+		moving_left = true;
+		moving_right = false;
+		position.x -= 2;
 		break;
 	case entityStates::STUNNED:
 		current_animation = &stunning;
@@ -139,7 +153,15 @@ bool j1GroundEnemy::Update(float dt)
 	}
 	
 	//BLIT
-	App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
+	if(reversed)
+		App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame(),1,2)	;
+	else
+		App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
+
+	collider_entity->SetPos(position.x, position.y);
+
+	calculate_path();
+	blit_path();
 
 	return true;
 }
@@ -184,5 +206,17 @@ void j1GroundEnemy::blit_path()
 
 void j1GroundEnemy::check_path_toMove()
 {
+	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+	iPoint pos = App->map->MapToWorld(path->At(path->Count()-1)->x, path->At(path->Count()-1)->y);
+
+	if (pos.x < position.x) {
+		moving_left = true;
+		moving_right = false;
+	}
+	if (pos.x > position.x) {
+		moving_right = true;
+		moving_left = false;
+	}
+
 
 }

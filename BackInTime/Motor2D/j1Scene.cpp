@@ -58,7 +58,7 @@ bool j1Scene::Start()
 
 	
 
-	App->audio->PlayMusic("audio/music/music.ogg");
+	//App->audio->PlayMusic("audio/music/music.ogg");
 	
 	return true;
 }
