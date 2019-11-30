@@ -83,6 +83,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	//Set initial data of the rock
 	rockVelocity.x = config.child("rock").child("velocity").attribute("x").as_float();
 	rockVelocity.y = config.child("rock").child("velocity").attribute("x").as_float();
+	rock_cooldown = config.child("rock").child("cooldown").attribute("value").as_float();
+	
 
 	LOG("jump_vel: %f", jump_vel);
 	LOG("gravity: %f", gravity);
@@ -511,7 +513,7 @@ bool j1Player::Update(float dt)
 		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right
 
 	//Rock stuff
-	rockMovement();	
+	rockMovement();			
 
 	App->render->Blit(spritesheet_rock, rockPosition.x, rockPosition.y, &throw_rock.GetCurrentFrame());
 
@@ -888,17 +890,23 @@ void j1Player::restart_variables(int vel, int vel_jump) {
 
 void j1Player::rockMovement()
 {
-	//si la roca está lanzada y temporizador < 5s
-	//la pelota seguirá la trayectoría de velocidades y fuerzas
-	//cuando sea falso, la roca estará en (-50, -50) para que no se vea	
-	
-
-	if(rock_able == false) //Rock has already been shot and we are on countdown
+	if (rock_able == false) //If we have already thrown the rock
 	{
-		entityStates localState = state;
+		if (rock_timer >= rock_cooldown) { //If cooldown has finished
+			//Delete rock
+			rockPosition.x = -50;
+			rockPosition.y = -50;
+			rock_able = true; //We can throw the rock again
+		}
+		else
+			rock_timer += deltaTime; //We increase the countdown to make it available again
+			   
+		
 		//Rock movement
 		//We calculate rock velocity depending on the state 
-		switch(localState)
+		entityStates localState = state;
+
+		switch (localState)
 		{
 		case entityStates::IDLE:
 			break;
@@ -923,16 +931,10 @@ void j1Player::rockMovement()
 		case entityStates::DIE:
 			break;
 		}
-
-		//We check if we can throw a new rock
-		rock_timer += deltaTime;
-		if (deltaTime >= 5)
-		{
-			//We delete the rock and player can throw a new rock
-			rockPosition.x = -50;
-			rockPosition.y = -50;
-			rock_able = true;
-		}			
+	}else if(rock_able == true)
+	{
+		//Don't do anything.
+		//If it's able it means that it is waiting for the player to throw it and make it unavailable
 	}
 }
 

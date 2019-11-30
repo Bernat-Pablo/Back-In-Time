@@ -75,6 +75,7 @@ private:
 	iPoint				rockVelocity;
 	bool 				rock_able = true;
 	float				rock_timer = 0;
+	float				rock_cooldown;
 
 	int 				tick1 = 0, tick2 = 0;
 	int 				tick3 = 0, tick4 = 0;
