@@ -295,7 +295,7 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 		{				
 			p2SString name(object.attribute("name").as_string());
 			
-			if(name == "1" || name == "2" || name == "3" || name == "4" || name == "5" || name == "6")
+			if(name == "1" || name == "2" || name == "5" || name == "6" || name == "7" || name == "8" || name == "9")
 			{
 				objectgroup->object[i].x = object.attribute("x").as_int();
 				objectgroup->object[i].y = object.attribute("y").as_int();
@@ -310,14 +310,19 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door1");
 				if (name == "6")
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door2");
-				if (name == "7")
+				if (name == "7") //Spawn flying enemy
 				{					 
 					j1Entity* flyingEnemy1 = App->entityManager->CreateEntity(entityTypes::FLYING_ENEMY, objectgroup->object[i].x, objectgroup->object[i].y);
 					//App->AddModule(flyingEnemy1);
 				}	
-				if (name == "8")
+				if (name == "8") //Spawn ground enemy
 				{
 					j1Entity* goundEnemy1 = App->entityManager->CreateEntity(entityTypes::GROUND_ENEMY , objectgroup->object[i].x, objectgroup->object[i].y);
+				}
+				if (name == "9") //Spawn player
+				{
+					App->player->position.x = objectgroup->object[i].x;
+					App->player->position.y = objectgroup->object[i].y;
 				}
 
 				collidernum++;
@@ -325,8 +330,8 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 
 			object = object.next_sibling("object");
 
-			LOG("Collider %i", i);
-			LOG("Total colliders is: %i", collidernum);
+			//LOG("Collider %i", i);
+			//LOG("Total colliders is: %i", collidernum);
 
 			i++;
 		}
