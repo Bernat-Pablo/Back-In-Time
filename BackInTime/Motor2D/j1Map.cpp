@@ -313,18 +313,17 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 				if (name == "7") //Spawn flying enemy
 				{					 
 					j1Entity* flyingEnemy1 = App->entityManager->CreateEntity(entityTypes::FLYING_ENEMY, objectgroup->object[i].x, objectgroup->object[i].y);
-					//App->AddModule(flyingEnemy1);
+					App->AddModule(flyingEnemy1);
 				}	
 				if (name == "8") //Spawn ground enemy
 				{
 					j1Entity* goundEnemy1 = App->entityManager->CreateEntity(entityTypes::GROUND_ENEMY , objectgroup->object[i].x, objectgroup->object[i].y);
+					App->AddModule(goundEnemy1);
 				}
 				if (name == "9") //Spawn player
 				{
-					/*App->player = new j1Player();
-					App->player->position.x = objectgroup->object[i].x;
-					App->player->position.y = objectgroup->object[i].y;*/
-					//App->entityManager->CreateEntity(entityTypes::PLAYER, 50, 50);
+					//App->player = new j1Player();
+					//App->AddModule(App->player);
 				}
 
 				collidernum++;

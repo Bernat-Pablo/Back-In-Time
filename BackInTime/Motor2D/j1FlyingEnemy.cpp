@@ -18,6 +18,7 @@
 j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 {
 	name.create("flyingEnemy");
+	type = entityTypes::FLYING_ENEMY;
 
 	float speed = 0.55f;
 	
