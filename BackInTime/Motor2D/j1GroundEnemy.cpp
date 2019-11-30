@@ -45,6 +45,7 @@ j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 	stunning.PushBack({ 74,234,44,36 }, speed);
 	stunning.PushBack({ 125,234,44,36 }, speed);
 	stunning.PushBack({ 176,234,44,36 }, speed);
+	stunning.loop = false;
 
 	hit.PushBack({ 24,268,52,29 }, speed);
 	hit.PushBack({ 76,268,52,29 }, speed);
@@ -150,6 +151,10 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	case entityStates::STUNNED:
 		current_animation = &stunning;
+		if (current_animation->SeeCurrentFrame()==3) {
+			stun = false;
+			stunning.Reset();
+		}
 		break;
 	case entityStates::HIT:
 		current_animation = &hit;
@@ -218,7 +223,7 @@ void j1GroundEnemy::check_path_toMove()
 		objective = App->map->MapToWorld(path->At(0)->x, path->At(0)->y);
 	}
 	tick1 = SDL_GetTicks();
-	if (tick1 - tick2 >= 2000) {
+	if (tick1 - tick2 >= 1500) {
 		tick1 = tick2 = 0;
 		iPoint pos = App->map->MapToWorld(path->At(0)->x, path->At(0)->y);
 		if (objective.x < position.x) {
@@ -227,6 +232,13 @@ void j1GroundEnemy::check_path_toMove()
 		}
 		if (objective.x > position.x) {
 			moving_right = true;
+			moving_left = false;
+		}
+		if (objective.x == position.x) {
+			state = entityStates::STUNNED;
+			stun = true;
+			set_timer = false;
+			moving_right = false;
 			moving_left = false;
 		}
 	}

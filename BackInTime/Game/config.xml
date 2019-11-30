@@ -57,7 +57,7 @@
     </flyingEnemy>
     
     <groundEnemy>
-      <velocity value ="40.0"/>
+      <velocity value ="200.0"/>
     </groundEnemy>
 
   </entityManager>
