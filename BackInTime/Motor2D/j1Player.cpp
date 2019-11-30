@@ -117,6 +117,7 @@ bool j1Player::Start(){
 	current_animation = &idle;
 
 	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
+	collider_rock = App->collision->AddCollider(throw_rock.GetCurrentFrame(), COLLIDER_ROCK, "rock", (j1Module*)App->player);
 	//set colliders to move the camera
 	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 100,20,140 }, COLLIDER_CAMERA, "right", (j1Module*)App->player);
 	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA, "left", (j1Module*)App->player);
@@ -308,7 +309,7 @@ bool j1Player::PreUpdate()
 	//Change player collider position
 	collider_entity->SetPos(position.x, position.y);
 	//Change rock collider position
-	//collider_rock->SetPos(rockPosition.x, rockPosition.y);
+	collider_rock->SetPos(rockPosition.x, rockPosition.y);
 	BROFILER_CATEGORY("Player_PreUpdate", Profiler::Color::Aquamarine);
 
 	return true;
@@ -504,8 +505,7 @@ bool j1Player::Update(float dt)
 		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right
 
 	//Rock stuff
-	rockPosition.x = position.x + collider_entity->rect.w ;
-	rockPosition.y = position.y;
+	rockMovement();	
 
 	App->render->Blit(spritesheet_rock, rockPosition.x, rockPosition.y, &throw_rock.GetCurrentFrame());
 
@@ -876,6 +876,19 @@ void j1Player::restart_variables(int vel, int vel_jump) {
 	if (vel_jump != -1) {
 		jump_vel= node.child("entityManager").child("player").child("jump_vel").attribute("value").as_float();
 	}
+}
+
+
+
+void j1Player::rockMovement()
+{
+	//si la roca está lanzada y temporizador < 5s
+	//la pelota seguirá la trayectoría de velocidades y fuerzas
+	//cuando sea falso, la roca estará en (-50, -50) para que no se vea
+	rockPosition.x = position.x + collider_entity->rect.w;
+	rockPosition.y = position.y;
+
+	
 }
 
 void j1Player::throwRock()

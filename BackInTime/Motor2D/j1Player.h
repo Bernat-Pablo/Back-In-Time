@@ -38,6 +38,7 @@ public:
 	void MoveCameraColliders(p2SString direction, float speed);
 	bool checkInAir();
 
+	void rockMovement();
 	void throwRock();
 
 	iPoint position;
@@ -70,6 +71,7 @@ private:
 
 	bool 				ability_able = false;
 	bool 				rock_able = false;
+	float				rock_timer = 0;
 
 	int 				tick1 = 0, tick2 = 0;
 	int 				tick3 = 0, tick4 = 0;
