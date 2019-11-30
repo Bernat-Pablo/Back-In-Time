@@ -20,7 +20,7 @@ j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 {
 	name.create("goundEnemy");
 
-	speed = 0.5f;
+	float speed = 0.5f;
 
 	idle.PushBack({ 23,165,50,29 }, speed);
 	idle.PushBack({ 75,165,50,29 }, speed);
@@ -68,6 +68,7 @@ bool j1GroundEnemy::Awake(pugi::xml_node& config)
 bool j1GroundEnemy::Start()
 {
 	spritesheet_entity = App->tex->Load("character/enemies_spritesheet.png");
+	spritesheet = App->tex->Load("character/enemies_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 
 	state = entityStates::IDLE;	
@@ -172,6 +173,7 @@ bool j1GroundEnemy::Update(float dt)
 bool j1GroundEnemy::CleanUp()
 {
 	App->tex->UnLoad(spritesheet_entity);
+	App->tex->UnLoad(spritesheet);
 	App->tex->UnLoad(debug_tex);
 
 	return true;
