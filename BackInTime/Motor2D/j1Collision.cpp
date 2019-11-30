@@ -177,7 +177,7 @@ void j1Collision::DebugDraw()
 				App->render->DrawQuad(colliders[i]->rect, 211, 84, 0, 150);
 				break;
 			case COLLIDER_GROUND_ENEMY:
-				App->render->DrawQuad(colliders[i]->rect, 247, 220, 111, 50);
+				App->render->DrawQuad(colliders[i]->rect, 0, 153, 0, 80); 
 				break;
 			case COLLIDER_DOOR:
 				App->render->DrawQuad(colliders[i]->rect, 93, 109, 126, 150);

@@ -112,7 +112,7 @@ bool j1Player::Start(){
 	//initial state
 	current_animation = &idle;
 
-	collider_player = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
+	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_PLAYER, "player", (j1Module*)App->player); //a collider to start
 	//set colliders to move the camera
 	camera_toRight = App->collision->AddCollider({ position.x + 70,position.y - 100,20,140 }, COLLIDER_CAMERA, "right", (j1Module*)App->player);
 	camera_toLeft = App->collision->AddCollider({ position.x - 50,position.y - 100,20,140 }, COLLIDER_CAMERA, "left", (j1Module*)App->player);
@@ -298,7 +298,7 @@ bool j1Player::PreUpdate()
 	}
 
 	//Change player collider position
-	collider_player->SetPos(position.x, position.y);
+	collider_entity->SetPos(position.x, position.y);
 	BROFILER_CATEGORY("Player_PreUpdate", Profiler::Color::Aquamarine);
 
 	return true;
@@ -510,7 +510,7 @@ bool j1Player::Update(float dt)
 
 bool j1Player::CleanUp() {
 	LOG("Unloading player\n");
-	collider_player = nullptr;
+	collider_entity = nullptr;
 	spritesheet_entity = nullptr;
 	spritesheet_casper = nullptr;
 	spritesheet_bars = nullptr;
@@ -537,9 +537,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 		
 		case COLLIDER_WALL:
 
-			if (position.x + collider_player->rect.w < c2->rect.x + 20) //Player is at the left of a wall
+			if (position.x + collider_entity->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 			{
-				if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
+				if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
 					collider_at_right = true;
 				else
 					collider_at_right = false;
@@ -551,7 +551,7 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			{
 				if(state == entityStates::WALK_BACKWARD || state == entityStates::RUN_BACKWARD || state == entityStates::JUMP_BACKWARD || state == entityStates::IDLE || state == entityStates::DASH_BACKWARD)
 				{
-					if (position.y + 0.7f * collider_player->rect.h > c2->rect.y) //There is a wall
+					if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
 					{
 						collider_at_left = true;
 					}
@@ -820,13 +820,13 @@ bool j1Player::checkInAir() //Checks if player is in_air or if it's grounded
 
 		if(c2->type == COLLIDER_WALL) //We only want to check if player is colliding with a wall
 		{
-			if (collider_player->CheckCollision(c2->rect) == true) //There is collision between the player and a wall
+			if (collider_entity->CheckCollision(c2->rect) == true) //There is collision between the player and a wall
 			{
 				if (position.y < c2->rect.y) //Player is on the ground
 				{
-					if (position.x + 0.8 * collider_player->rect.w > c2->rect.x)
+					if (position.x + 0.8 * collider_entity->rect.w > c2->rect.x)
 					{
-						if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_player->rect.w)
+						if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w)
 						{
 							fall_velocity = 1;
 							return false;							
