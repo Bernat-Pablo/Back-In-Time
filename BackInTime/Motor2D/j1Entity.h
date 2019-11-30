@@ -22,6 +22,7 @@ enum class entityStates
 	DASH_FORWARD, //Slowly stops the entity 
 	DASH_BACKWARD,
 	HIT,
+	DIE,
 
 	FLY,
 	FLY_FORWARD,
