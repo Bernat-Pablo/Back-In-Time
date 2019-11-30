@@ -616,6 +616,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			case COLLIDER_FLYING_ENEMY:
 				state = entityStates::DIE;
 				break;
+			case COLLIDER_GROUND_ENEMY:
+				state = entityStates::DIE;
+				break;
 			}
 		}
 
