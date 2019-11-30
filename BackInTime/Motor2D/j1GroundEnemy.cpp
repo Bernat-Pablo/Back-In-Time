@@ -52,7 +52,9 @@ j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 	hit.PushBack({ 180,268,52,29 }, speed);
 	hit.PushBack({ 232,268,52,29 }, speed);
 
+	current_animation = &idle;
 
+	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_GROUND_ENEMY, "rino", (j1Module*)App->groundEnemy); //a collider to start
 }
 
 bool j1GroundEnemy::Awake(pugi::xml_node& config)
@@ -71,10 +73,7 @@ bool j1GroundEnemy::Start()
 	spritesheet_entity = App->tex->Load("character/enemies_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 
-	state = entityStates::IDLE;
-	current_animation = &fly;
-
-	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_GROUND_ENEMY, "rino", (j1Module*)App->groundEnemy); //a collider to start
+	state = entityStates::IDLE;	
 
 	return true;
 }
