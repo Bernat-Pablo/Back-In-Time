@@ -892,7 +892,8 @@ void j1Player::rockMovement()
 {
 	if (rock_able == false) //If we have already thrown the rock
 	{
-		if (rock_timer >= rock_cooldown) { //If cooldown has finished
+		//We check if cooldown has finished or we continue with the rock
+		if (rock_timer >= rock_cooldown) { 
 			//Delete rock
 			rockPosition.x = -50;
 			rockPosition.y = -50;
@@ -900,38 +901,8 @@ void j1Player::rockMovement()
 		}
 		else
 			rock_timer += deltaTime; //We increase the countdown to make it available again
-			   
 		
 		//Rock movement
-		//We calculate rock velocity depending on the state 
-		entityStates localState = state;
-
-		switch (localState)
-		{
-		case entityStates::IDLE:
-			break;
-		case entityStates::WALK_FORWARD:
-			break;
-		case entityStates::WALK_BACKWARD:
-			break;
-		case entityStates::RUN_FORWARD:
-			break;
-		case entityStates::RUN_BACKWARD:
-			break;
-		case entityStates::JUMP:
-			break;
-		case entityStates::JUMP_FORWARD:
-			break;
-		case entityStates::JUMP_BACKWARD:
-			break;
-		case entityStates::DASH_FORWARD:
-			break;
-		case entityStates::DASH_BACKWARD:
-			break;
-		case entityStates::DIE:
-			break;
-		}
-		
 		if(rockCheckInAir() == true)
 		{
 			//We change the position based on the force 
@@ -949,10 +920,31 @@ void j1Player::throwRock()
 {
 	if(rock_able == true)
 	{
-		rockPosition.x = position.x + collider_entity->rect.w;
+		
 		rockPosition.y = position.y;
 		rock_timer = 0;
 		rock_able = false;
+
+		//Rock movement
+		//We calculate rock velocity depending on the state 
+		if (state == entityStates::WALK_FORWARD || state == entityStates::RUN_FORWARD || state == entityStates::JUMP_FORWARD || state == entityStates::DASH_FORWARD)
+		{
+			rockPosition.x = position.x + collider_entity->rect.w;
+			if (rockVelocity.x < 0)
+				rockVelocity.x *= -1; //We make sure that velocity is positive in X axis
+		}else if(state == entityStates::WALK_BACKWARD || state == entityStates::RUN_BACKWARD || state == entityStates::JUMP_BACKWARD || state == entityStates::DASH_BACKWARD)
+		{
+			rockPosition.x = position.x;
+			if (rockVelocity.x > 0)
+				rockVelocity.x *= -1; //We make sure that velocity is negative in X axis
+		}else
+		{
+			//Same as forward
+			rockPosition.x = position.x + collider_entity->rect.w;
+			if (rockVelocity.x < 0)
+				rockVelocity.x *= -1; //We make sure that velocity is positive in X axis
+		}
+		
 	}
 }
 
