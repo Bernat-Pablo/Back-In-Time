@@ -483,7 +483,7 @@ bool j1Player::Update(float dt)
 		in_air = checkInAir();
 
 		if(in_air == true)
-		{
+		{			
 			if(fall_velocity < max_fall_velocity)
 				fall_velocity += gravity*dt;
 
@@ -931,10 +931,17 @@ void j1Player::rockMovement()
 		case entityStates::DIE:
 			break;
 		}
-	}else if(rock_able == true)
-	{
-		//Don't do anything.
-		//If it's able it means that it is waiting for the player to throw it and make it unavailable
+		
+		if(rockCheckInAir() == true)
+		{
+			//We change the position based on the force 
+			rockPosition.x += (int)ceil(rockVelocity.x * deltaTime);
+			rockPosition.y -= (int)ceil(rockVelocity.y * deltaTime);
+
+			//We apply gravity to the rock
+			rock_fall_velocity += gravity;
+			rockPosition.y += (int)ceil(rock_fall_velocity * deltaTime);
+		}		
 	}
 }
 
@@ -947,4 +954,30 @@ void j1Player::throwRock()
 		rock_timer = 0;
 		rock_able = false;
 	}
+}
+
+bool j1Player::rockCheckInAir()
+{
+	// Calculate collisions
+	Collider* c2;
+
+	// avoid checking collisions already checked
+	for (uint k = 0; k < MAX_COLLIDERS; ++k)
+	{
+		// skip empty colliders
+		if (App->collision->colliders[k] == nullptr)
+			continue;
+
+		c2 = App->collision->colliders[k];
+
+		if (c2->type == COLLIDER_WALL) //We only want to check if player is colliding with a wall
+			if (collider_rock->CheckCollision(c2->rect) == true) //There is collision between the rock and a wall			
+				if (rockPosition.y < c2->rect.y) //Rock is on the ground
+				{
+					rock_fall_velocity = 0;
+					return false;						
+				}
+	}
+
+	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
 }
