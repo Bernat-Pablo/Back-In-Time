@@ -138,7 +138,7 @@ bool j1GroundEnemy::Update(float dt)
 		current_animation = &hit;
 		break;
 	}
-
+	
 	//BLIT
 	App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
 
