@@ -38,6 +38,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new j1EntityManager();
 	player = new j1Player();
 	flyingEnemy = new j1FlyingEnemy();
+	groundEnemy = new j1GroundEnemy();
 	collision = new j1Collision();
 	fade = new j1Fade();
 	pathfinding = new j1PathFinding();
@@ -53,6 +54,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(player);
 	AddModule(flyingEnemy);
+	AddModule(groundEnemy);
 	AddModule(collision);
 	AddModule(fade);
 	AddModule(pathfinding);

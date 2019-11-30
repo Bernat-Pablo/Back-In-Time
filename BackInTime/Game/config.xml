@@ -52,9 +52,9 @@
       </initialPosition>
     </flyingEnemy>
     
-    <walkingEnemy>
-      <velocity value =""/>
-    </walkingEnemy>
+    <groundEnemy>
+      <velocity value ="40.0"/>
+    </groundEnemy>
   </entityManager>
   
 
