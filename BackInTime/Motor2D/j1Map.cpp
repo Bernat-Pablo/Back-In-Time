@@ -295,7 +295,7 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 		{				
 			p2SString name(object.attribute("name").as_string());
 			
-			if(name == "1" || name == "2" || name == "5" || name == "6" || name == "7" || name == "8" || name == "9")
+			if(name != NULL)
 			{
 				objectgroup->object[i].x = object.attribute("x").as_int();
 				objectgroup->object[i].y = object.attribute("y").as_int();
@@ -313,16 +313,21 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 				if (name == "7") //Spawn flying enemy
 				{					 
 					j1Entity* flyingEnemy1 = App->entityManager->CreateEntity(entityTypes::FLYING_ENEMY, objectgroup->object[i].x, objectgroup->object[i].y);
-					//App->AddModule(flyingEnemy1);
+					App->AddModule(flyingEnemy1);
+					flyingEnemy1->Awake(App->GetConfig());
+					flyingEnemy1->Start();
 				}	
 				if (name == "8") //Spawn ground enemy
 				{
-					j1Entity* goundEnemy1 = App->entityManager->CreateEntity(entityTypes::GROUND_ENEMY , objectgroup->object[i].x, objectgroup->object[i].y);
+					j1Entity* groundEnemy1 = App->entityManager->CreateEntity(entityTypes::GROUND_ENEMY , objectgroup->object[i].x, objectgroup->object[i].y);
+					App->AddModule(groundEnemy1);
+					groundEnemy1->Awake(App->GetConfig());
+					groundEnemy1->Start();
 				}
 				if (name == "9") //Spawn player
 				{
-					App->player->position.x = objectgroup->object[i].x;
-					App->player->position.y = objectgroup->object[i].y;
+					//App->player = new j1Player();
+					//App->AddModule(App->player);
 				}
 
 				collidernum++;

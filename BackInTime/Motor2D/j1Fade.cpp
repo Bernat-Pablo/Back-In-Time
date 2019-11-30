@@ -64,8 +64,10 @@ bool j1Fade::Update(float dt)
 			App->scene->CleanUp(); //Clean up map			
 			App->audio->CleanUp();
 			App->tex->CleanUp();
-			App->flyingEnemy->CleanUp();
-			
+			//App->flyingEnemy->CleanUp();
+			App->entityManager->CleanUp();
+			//TODO cleanup for entities
+			//Pathfinding of flyingEnemy makes the game crash at fade
 
 			//We load new map	
 			App->tex->Awake(App->GetConfig());
@@ -75,7 +77,7 @@ bool j1Fade::Update(float dt)
 			App->player->Start(); //Set initial player position
 			App->collision->Awake(App->GetConfig());	
 			App->render->cameraSetInitialPosition(App->GetConfig()); //Set initial camera position
-			App->flyingEnemy->Start();
+			//App->flyingEnemy->Start();
 			
 
 			total_time += total_time;

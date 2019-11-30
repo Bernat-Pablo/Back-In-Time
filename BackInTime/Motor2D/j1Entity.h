@@ -50,6 +50,7 @@ public:
 	Animation idle;
 	Animation walk;
 	Animation run;
+	Animation stunning;
 	Animation death;
 	Animation throw_rock;
 	Animation jump_up;

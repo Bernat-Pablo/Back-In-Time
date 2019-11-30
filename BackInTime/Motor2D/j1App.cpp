@@ -40,15 +40,13 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	collision = new j1Collision();
 	fade = new j1Fade();
 	pathfinding = new j1PathFinding();
-	flyingEnemy = new j1FlyingEnemy();
-	groundEnemy = new j1GroundEnemy();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(input);
 	AddModule(win);	
 	AddModule(tex);
-	AddModule(audio);	
+	AddModule(audio);
 	AddModule(map);
 	AddModule(scene);
 	AddModule(entityManager);
@@ -56,8 +54,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(collision);
 	AddModule(fade);
 	AddModule(pathfinding);
-	AddModule(flyingEnemy);
-	AddModule(groundEnemy);
 
 	// render last to swap buffer
 	AddModule(render);
