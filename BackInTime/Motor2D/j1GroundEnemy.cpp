@@ -38,7 +38,7 @@ j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 	run.PushBack({ 76,198,50,30 }, speed);
 	run.PushBack({ 128,198,50,30 }, speed);
 	run.PushBack({ 180,198,50,30 }, speed);
-	run.PushBack({ 223,198,50,30 }, speed);
+	run.PushBack({ 232,198,50,30 }, speed);
 	run.PushBack({ 284,198,50,30 }, speed);
 
 	stunning.PushBack({ 24,234,44,36 }, speed);
