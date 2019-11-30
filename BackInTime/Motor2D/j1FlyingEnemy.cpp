@@ -126,9 +126,6 @@ bool j1FlyingEnemy::PreUpdate()
 		break;
 	}
 
-	//PATH TO PLAYER (LOGIC)
-	calculate_path();	
-
 	return true;
 }
 
@@ -216,6 +213,8 @@ bool j1FlyingEnemy::Update(float dt)
 	App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
 	collider_entity->SetPos(position.x, position.y);
 
+	//PATH TO PLAYER (LOGIC)
+	calculate_path();
 	//PATH TO PLAYER (BLIT)
 	blit_path();
 
