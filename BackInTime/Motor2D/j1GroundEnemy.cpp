@@ -77,18 +77,30 @@ bool j1GroundEnemy::PreUpdate()
 	switch (state)
 	{
 	case entityStates::IDLE:
+		if (moving_left)
+			state = entityStates::RUN_BACKWARD;
+		if (moving_right)
+			state = entityStates::RUN_FORWARD;
 
 		break;
 	case entityStates::RUN_FORWARD:
+		if(stun)
+			state = entityStates::STUNNED;
 
 		break;
 	case entityStates::RUN_BACKWARD:
+		if (stun)
+			state = entityStates::STUNNED;
 
 		break;
 	case entityStates::STUNNED:
+		if (!stun)
+			state = entityStates::IDLE;
 
 		break;
 	case entityStates::HIT:
+		if(!being_hit)
+			state = entityStates::IDLE;
 
 		break;
 	}
