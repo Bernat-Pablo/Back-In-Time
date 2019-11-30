@@ -8,19 +8,21 @@
 	<scene />
 	<entityManager />
 	<player>
-		<position x="164" y="151" />
+		<position x="80" y="183" />
 		<level value="1" />
-		<camera_toRight x="183" y="91" />
-		<camera_toLeft x="63" y="91" />
-		<camera_toUp x="63" y="91" />
-		<camera_toDown x="63" y="211" />
-		<camera x="-66" y="303" />
+		<camera_toRight x="150" y="90" />
+		<camera_toLeft x="30" y="90" />
+		<camera_toUp x="30" y="90" />
+		<camera_toDown x="30" y="210" />
+		<camera x="0" y="304" />
 		<lives value="3" />
 	</player>
+	<:anonymous />
+	<:anonymous />
 	<pathfinding />
-	<flyingEnemy />
-	<goundEnemy />
 	<renderer>
-		<camera x="-66" y="303" />
+		<camera x="0" y="304" />
 	</renderer>
+	<goundEnemy />
+	<flyingEnemy />
 </game_state>
