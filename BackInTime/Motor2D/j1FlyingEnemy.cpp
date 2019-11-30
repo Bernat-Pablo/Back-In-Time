@@ -118,7 +118,8 @@ bool j1FlyingEnemy::PreUpdate()
 		break;
 
 	case entityStates::HIT:
-
+		if (!being_hit)
+			state = entityStates::FLY;
 
 		break;
 	}

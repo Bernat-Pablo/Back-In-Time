@@ -78,7 +78,8 @@ public:
 	bool				moving_right = false;
 	bool				moving_left = false;
 	bool				isgrounded = false;
-	
+	bool				being_hit = false;
+
 	//Entity settings
 	iPoint				position;
 	float				velocity;

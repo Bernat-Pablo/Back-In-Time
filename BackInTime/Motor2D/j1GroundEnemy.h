@@ -32,6 +32,8 @@ private:
 	int tick1 = 0, tick2 = 0;
 
 	int speed;
+
+	bool stun = false;
 };
 
 #endif // !_FLYINGENEMY_
