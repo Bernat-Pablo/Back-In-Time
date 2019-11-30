@@ -78,6 +78,7 @@ private:
 	float				rock_timer = 0;
 	float				rock_cooldown;
 	float				rock_fall_velocity = 0;
+	float				rock_gravity;
 
 	int 				tick1 = 0, tick2 = 0;
 	int 				tick3 = 0, tick4 = 0;

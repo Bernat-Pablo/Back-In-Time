@@ -82,9 +82,9 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	//Set initial data of the rock
 	rockVelocity.x = config.child("rock").child("velocity").attribute("x").as_float();
-	rockVelocity.y = config.child("rock").child("velocity").attribute("x").as_float();
+	rockVelocity.y = config.child("rock").child("velocity").attribute("y").as_float();
 	rock_cooldown = config.child("rock").child("cooldown").attribute("value").as_float();
-	
+	rock_gravity = config.child("rock").child("gravity").attribute("value").as_float();	
 
 	LOG("jump_vel: %f", jump_vel);
 	LOG("gravity: %f", gravity);
@@ -616,6 +616,9 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			case COLLIDER_FLYING_ENEMY:
 				state = entityStates::DIE;
 				break;
+			case COLLIDER_GROUND_ENEMY:
+				state = entityStates::DIE;
+				break;
 			}
 		}
 
@@ -778,9 +781,7 @@ void j1Player::checkAbility() {
 		ability_able = true;
 		tick4 = SDL_GetTicks();
 	}
-	tick3 = SDL_GetTicks();
-
-	
+	tick3 = SDL_GetTicks();	
 }
 
 void j1Player::useAbility() {
@@ -924,9 +925,14 @@ void j1Player::rockMovement()
 			rockPosition.y -= (int)ceil(rockVelocity.y * deltaTime);
 
 			//We apply gravity to the rock
-			rock_fall_velocity += gravity;
+			rock_fall_velocity += rock_gravity;
 			rockPosition.y += (int)ceil(rock_fall_velocity * deltaTime);
-		}		
+		}else
+		{
+			//Delete rock
+			rockPosition.x = -5000;
+			rockPosition.y = -5000;
+		}
 	}
 }
 
