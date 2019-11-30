@@ -64,8 +64,8 @@ bool j1GroundEnemy::Start()
 	spritesheet_entity = App->tex->Load("character/enemies_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 
-	//state = entityStates::FLY;
-	//current_animation = &fly;
+	state = entityStates::IDLE;
+	current_animation = &fly;
 
 	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_GROUND_ENEMY, "rino", (j1Module*)App->groundEnemy); //a collider to start
 
@@ -116,6 +116,9 @@ bool j1GroundEnemy::Update(float dt)
 
 		break;
 	}
+
+	//BLIT
+	App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
 
 	return true;
 }
