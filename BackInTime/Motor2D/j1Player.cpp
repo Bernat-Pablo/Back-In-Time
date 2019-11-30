@@ -295,6 +295,9 @@ bool j1Player::PreUpdate()
 		}else if (!player_input.pressing_D)
 			state = entityStates::IDLE;
 		break;
+	case entityStates::DIE:
+		state = entityStates::IDLE;
+		break;
 	}
 
 	//Change player collider position
@@ -452,6 +455,11 @@ bool j1Player::Update(float dt)
 				state = entityStates::IDLE;
 			}
 			break;
+		case entityStates::DIE:
+			ability_able = false;
+			iterator = 0;
+			App->fade->FadeToBlack(App->scene, App->scene);
+			break;
 	}	
 
 	if(godMode == false)
@@ -562,24 +570,25 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 			else
 				collider_at_left = false;
 			break;
+
 		case COLLIDER_DIE:
 			//Player goes to initial position
-			state = entityStates::IDLE;
-			ability_able = false;
-			iterator = 0;
-			App->fade->FadeToBlack(App->scene, App->scene);
-			
+			state = entityStates::DIE;		
 			break;
+
 		case COLLIDER_DOOR:			
 			//Change scene from 1 to 2
 			if(c2->name == "door1") //We touch the first door, so we go to level 2
 				App->scene->choose_lv = 2;
 			else if (c2->name == "door2") 
 				App->scene->choose_lv = 1;
-
 			iterator = 0;
 			App->fade->FadeToBlack(App->scene, App->scene);
 			break;	
+
+		case COLLIDER_FLYING_ENEMY:
+			state = entityStates::DIE;
+			break;
 		}
 	}
 
