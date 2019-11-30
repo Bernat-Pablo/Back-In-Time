@@ -266,7 +266,7 @@ void j1FlyingEnemy::check_path_toMove()
 	if (pos.x > position.x) {
 		state = entityStates::FLY_FORWARD;
 	}
-	if (pos.x == position.x) {
+	if (pos.x >= position.x-5 && pos.x <= position.x + 5) {
 		state = entityStates::FALL;
 	}
 }
