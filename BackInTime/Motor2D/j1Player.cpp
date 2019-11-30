@@ -56,6 +56,9 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 	run.PushBack({ 96,141,19,25 }, speed);
 	run.PushBack({ 129,141,18,25 }, speed);
 	run.PushBack({ 161,141,18,28 }, speed);
+
+	throw_rock.PushBack({ 128,218,12,7 }, speed);
+	throw_rock.loop = true;
 }
 
 bool j1Player::Awake(pugi::xml_node& config) {
@@ -91,6 +94,7 @@ bool j1Player::Start(){
 	spritesheet_entity = App->tex->Load("character/spritesheet_pj.png");
 	spritesheet_casper = App->tex->Load("character/spritesheet_casper.png");
 	spritesheet_bars = App->tex->Load("character/spritesheet_bars.png");
+	spritesheet_rock = App->tex->Load("character/spritesheet_pj.png");
 
 	pugi::xml_node config_local = App->GetConfig();
 
@@ -159,6 +163,7 @@ bool j1Player::PreUpdate()
 	player_input.pressing_A = App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT;
 	player_input.pressing_S = App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT;
 	player_input.pressing_D = App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT;
+	player_input.pressing_F = App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT;
 	player_input.pressing_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT;
 	player_input.pressing_lshift = App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT;
 	
@@ -495,6 +500,12 @@ bool j1Player::Update(float dt)
 		App->render->Blit(spritesheet_entity, position.x, position.y, &r,1,2); //looking at left
 	else
 		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right
+
+	//Rock stuff
+	rockPosition.x = position.x + collider_entity->rect.w ;
+	rockPosition.y = position.y;
+
+	App->render->Blit(spritesheet_rock, rockPosition.x, rockPosition.y, &throw_rock.GetCurrentFrame());
 
 	//print shadow player position
 
@@ -858,5 +869,16 @@ void j1Player::restart_variables(int vel, int vel_jump) {
 	}
 	if (vel_jump != -1) {
 		jump_vel= node.child("entityManager").child("player").child("jump_vel").attribute("value").as_float();
+	}
+}
+
+void j1Player::throwRock()
+{
+	rockPosition.x = position.x;
+	rockPosition.y = position.y;
+
+	if(rock_able == true)
+	{
+		
 	}
 }
