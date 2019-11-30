@@ -40,9 +40,17 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_PLAYER][COLLIDER_FLYING_ENEMY] = true;
 	matrix[COLLIDER_FLYING_ENEMY][COLLIDER_PLAYER] = true;
 
-	//Ground enemis and player
+	//Ground enemy and player
 	matrix[COLLIDER_PLAYER][COLLIDER_GROUND_ENEMY] = true;
 	matrix[COLLIDER_GROUND_ENEMY][COLLIDER_PLAYER] = true;
+
+	//Rock and ground enemy
+	matrix[COLLIDER_ROCK][COLLIDER_GROUND_ENEMY] = true;
+	matrix[COLLIDER_GROUND_ENEMY][COLLIDER_ROCK] = true;
+
+	//Rock and flying enemy
+	matrix[COLLIDER_ROCK][COLLIDER_FLYING_ENEMY] = true;
+	matrix[COLLIDER_FLYING_ENEMY][COLLIDER_ROCK] = true;
 }
 
 //Destructor
@@ -177,12 +185,15 @@ void j1Collision::DebugDraw()
 				App->render->DrawQuad(colliders[i]->rect, 211, 84, 0, 150);
 				break;
 			case COLLIDER_GROUND_ENEMY:
-				App->render->DrawQuad(colliders[i]->rect, 0, 153, 0, 80); 
+				App->render->DrawQuad(colliders[i]->rect, 0, 153, 0, 80);
 				break;
 			case COLLIDER_DOOR:
 				App->render->DrawQuad(colliders[i]->rect, 93, 109, 126, 150);
 				break;
 			case COLLIDER_CAMERA:
+				App->render->DrawQuad(colliders[i]->rect, 20, 109, 126, 150);
+				break;
+			case COLLIDER_ROCK:
 				App->render->DrawQuad(colliders[i]->rect, 20, 109, 126, 150);
 				break;
 			}

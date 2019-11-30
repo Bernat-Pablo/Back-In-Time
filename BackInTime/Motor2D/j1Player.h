@@ -10,6 +10,7 @@ struct Player_Input {
 	bool pressing_A;
 	bool pressing_S;
 	bool pressing_D;
+	bool pressing_F;
 	bool pressing_lshift;
 	bool pressing_space;
 };
@@ -37,12 +38,17 @@ public:
 	void MoveCameraColliders(p2SString direction, float speed);
 	bool checkInAir();
 
-	iPoint position; //Use position.x and position.y
+	void rockMovement();
+	void throwRock();
+
+	iPoint position;
+	iPoint rockPosition;
 private:
 	
 	SDL_Rect bar_0, bar_1, bar_2, bar_3, bar_4;
 	iPoint bar_pos;
 
+	SDL_Texture* spritesheet_rock = nullptr;
 	SDL_Texture* spritesheet_casper = nullptr;
 	SDL_Texture* spritesheet_bars = nullptr;
 	const char* spritesheet_source;
@@ -64,6 +70,8 @@ private:
 	bool 				walking = false; //is he walking?
 
 	bool 				ability_able = false;
+	bool 				rock_able = false;
+	float				rock_timer = 0;
 
 	int 				tick1 = 0, tick2 = 0;
 	int 				tick3 = 0, tick4 = 0;
@@ -72,6 +80,8 @@ private:
 	Collider*			camera_toLeft = nullptr;
 	Collider*			camera_toUp = nullptr;
 	Collider*			camera_toDown = nullptr;
+
+	Collider*			collider_rock = nullptr;
 
 	pugi::xml_document	doc;
 	
