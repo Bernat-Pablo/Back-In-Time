@@ -84,7 +84,6 @@ bool j1GroundEnemy::Start()
 
 bool j1GroundEnemy::PreUpdate()
 {
-	LOG("%i", state);
 	switch (state)
 	{
 	case entityStates::IDLE:
@@ -211,7 +210,7 @@ void j1GroundEnemy::blit_path()
 void j1GroundEnemy::check_path_toMove()
 {
 	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
-	iPoint pos = App->map->MapToWorld(path->At(path->Count()-1)->x, path->At(path->Count()-1)->y);
+	iPoint pos = App->map->MapToWorld(path->At(0)->x, path->At(0)->y);
 
 	if (pos.x < position.x) {
 		moving_left = true;
