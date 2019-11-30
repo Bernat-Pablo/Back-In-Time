@@ -13588,10 +13588,8 @@
   <object id="31" name="5" x="1568" y="160" width="16" height="48"/>
   <object id="32" name="1" x="0" y="64" width="16" height="144"/>
   <object id="33" name="1" x="1584" y="48" width="16" height="160"/>
-  <object id="34" name="7" x="159.667" y="110.667" width="16" height="16"/>
   <object id="37" name="8" x="80" y="192" width="16" height="16"/>
   <object id="39" name="9" x="48.3333" y="144" width="16" height="16"/>
-  <object id="40" name="7" x="64.3333" y="80" width="16" height="16"/>
-  <object id="41" name="7" x="128.667" y="79.6667" width="16" height="16"/>
+  <object id="41" name="7" x="240" y="48" width="16" height="16"/>
  </objectgroup>
 </map>
