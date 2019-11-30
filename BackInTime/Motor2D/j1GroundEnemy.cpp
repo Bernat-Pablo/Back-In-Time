@@ -41,10 +41,17 @@ j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 	run.PushBack({ 223,198,50,30 }, speed);
 	run.PushBack({ 284,198,50,30 }, speed);
 
-	hit.PushBack({ 22,234,44,36 }, speed);
-	hit.PushBack({ 74,234,44,36 }, speed);
-	hit.PushBack({ 125,234,44,36 }, speed);
-	hit.PushBack({ 176,234,44,36 }, speed);
+	stunning.PushBack({ 24,234,44,36 }, speed);
+	stunning.PushBack({ 74,234,44,36 }, speed);
+	stunning.PushBack({ 125,234,44,36 }, speed);
+	stunning.PushBack({ 176,234,44,36 }, speed);
+
+	hit.PushBack({ 24,268,52,29 }, speed);
+	hit.PushBack({ 76,268,52,29 }, speed);
+	hit.PushBack({ 128,268,52,29 }, speed);
+	hit.PushBack({ 180,268,52,29 }, speed);
+	hit.PushBack({ 232,268,52,29 }, speed);
+
 
 }
 
@@ -113,19 +120,22 @@ bool j1GroundEnemy::Update(float dt)
 	switch (state)
 	{
 	case entityStates::IDLE:
+		current_animation = &idle;
 
 		break;
 	case entityStates::RUN_FORWARD:
-
+		current_animation = &run;
+		reversed = true;
 		break;
 	case entityStates::RUN_BACKWARD:
-
+		current_animation = &run;
+		reversed = false;
 		break;
 	case entityStates::STUNNED:
-
+		current_animation = &stunning;
 		break;
 	case entityStates::HIT:
-
+		current_animation = &hit;
 		break;
 	}
 
