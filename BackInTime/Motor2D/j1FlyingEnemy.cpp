@@ -227,6 +227,8 @@ bool j1FlyingEnemy::CleanUp()
 	App->tex->UnLoad(spritesheet_entity);
 	App->tex->UnLoad(debug_tex);
 	collider_entity = nullptr;
+	spritesheet_entity = nullptr;
+	spritesheet = nullptr;
 	return true;
 }
 

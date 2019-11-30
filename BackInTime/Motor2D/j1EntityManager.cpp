@@ -37,27 +37,13 @@ bool j1EntityManager::Start()
 bool j1EntityManager::PreUpdate()
 {
 	bool ret = true;
-
-	p2List_item<j1Entity*>* tmp = entitiesList.start;
-	while (tmp != nullptr)
-	{
-		ret = tmp->data->PreUpdate();
-		tmp = tmp->next;
-	}
-
+	
 	return ret;
 }
 
 bool j1EntityManager::Update(float dt)
 {
 	bool ret = true;
-		
-	p2List_item<j1Entity*>* tmp = entitiesList.start;
-	while(tmp != nullptr)
-	{
-		ret = tmp->data->Update(dt);
-		tmp = tmp->next;
-	}
 
 	return ret;
 }
@@ -65,13 +51,6 @@ bool j1EntityManager::Update(float dt)
 bool j1EntityManager::PostUpdate()
 {
 	bool ret = true;
-
-	p2List_item<j1Entity*>* tmp = entitiesList.start;
-	while (tmp != nullptr)
-	{
-		ret = tmp->data->PostUpdate();
-		tmp = tmp->next;
-	}
 
 	return ret;
 }
@@ -83,7 +62,7 @@ bool j1EntityManager::CleanUp()
 	p2List_item<j1Entity*>* tmp = entitiesList.start;
 	while (tmp != nullptr)
 	{
-		ret = tmp->data->CleanUp();
+		ret = tmp->data->CleanUp();		
 		tmp = tmp->next;
 	}
 
@@ -117,8 +96,8 @@ j1Entity* j1EntityManager::CreateEntity(entityTypes type, int position_x, int po
 		break;
 	}
 
-	//if (ret)
-	//	entitiesList.add(ret);
+	if (ret)
+		entitiesList.add(ret);
 
 	return ret;
 }

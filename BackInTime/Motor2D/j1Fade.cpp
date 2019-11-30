@@ -65,7 +65,9 @@ bool j1Fade::Update(float dt)
 			App->audio->CleanUp();
 			App->tex->CleanUp();
 			//App->flyingEnemy->CleanUp();
+			App->entityManager->CleanUp();
 			//TODO cleanup for entities
+			//Pathfinding of flyingEnemy makes the game crash at fade
 
 			//We load new map	
 			App->tex->Awake(App->GetConfig());
