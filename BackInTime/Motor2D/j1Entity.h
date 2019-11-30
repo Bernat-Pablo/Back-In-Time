@@ -60,7 +60,6 @@ public:
 	Animation ground;
 	Animation hit;
 	Animation fall;
-	Animation stunning;
 	Animation* current_animation;
 
 	SDL_Texture* spritesheet_entity = nullptr;
