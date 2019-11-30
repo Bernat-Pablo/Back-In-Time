@@ -31,6 +31,8 @@ private:
 	int path_num = 0;
 	int tick1 = 0, tick2 = 0;
 
+	bool reversed = false;
+
 	int speed;
 
 	bool stun = false;

@@ -22,7 +22,6 @@ j1EntityManager::~j1EntityManager()
 bool j1EntityManager::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
-
 	
 
 	return ret;
