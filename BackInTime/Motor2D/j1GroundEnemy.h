@@ -34,6 +34,9 @@ private:
 	int speed;
 
 	bool stun = false;
+	bool reset = true;
+
+	iPoint objective;
 };
 
 #endif // !_FLYINGENEMY_

@@ -212,16 +212,23 @@ void j1GroundEnemy::blit_path()
 void j1GroundEnemy::check_path_toMove()
 {
 	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
-	iPoint pos = App->map->MapToWorld(path->At(0)->x, path->At(0)->y);
-
-	if (pos.x < position.x) {
-		moving_left = true;
-		moving_right = false;
+	if (!set_timer) {
+		set_timer = true;
+		tick2 = SDL_GetTicks();
+		objective = App->map->MapToWorld(path->At(0)->x, path->At(0)->y);
 	}
-	if (pos.x > position.x) {
-		moving_right = true;
-		moving_left = false;
+	tick1 = SDL_GetTicks();
+	if (tick1 - tick2 >= 2000) {
+		tick1 = tick2 = 0;
+		iPoint pos = App->map->MapToWorld(path->At(0)->x, path->At(0)->y);
+		if (objective.x < position.x) {
+			moving_left = true;
+			moving_right = false;
+		}
+		if (objective.x > position.x) {
+			moving_right = true;
+			moving_left = false;
+		}
 	}
-
 
 }
