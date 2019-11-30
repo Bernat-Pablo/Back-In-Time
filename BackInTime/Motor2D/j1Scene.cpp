@@ -47,6 +47,8 @@ bool j1Scene::Start()
 		App->pathfinding->SetMap(w, h, data);
 	debug_tex = App->tex->Load("maps/pathRect.png");
 
+
+
 	//TODO Add entities to scene	
 	//j1Entity* flyingEnemy1 = App->entityManager->CreateEntity(entityTypes::FLYING_ENEMY,80,150);
 	//App->AddModule(flyingEnemy1);
@@ -56,8 +58,7 @@ bool j1Scene::Start()
 
 	
 
-	//App->audio->PlayMusic("audio/music/music.ogg");
-	//App->map->Load("iso.tmx");
+	App->audio->PlayMusic("audio/music/music.ogg");
 	
 	return true;
 }

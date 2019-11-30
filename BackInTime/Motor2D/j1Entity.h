@@ -59,6 +59,7 @@ public:
 	Animation ground;
 	Animation hit;
 	Animation fall;
+	Animation stunning;
 	Animation* current_animation;
 
 	SDL_Texture* spritesheet_entity = nullptr;
@@ -79,6 +80,7 @@ public:
 	bool				moving_left = false;
 	bool				isgrounded = false;
 	bool				being_hit = false;
+	bool				reversed = false;
 
 	//Entity settings
 	iPoint				position;
