@@ -80,6 +80,10 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	lives = config.child("lives").attribute("value").as_int();
 	//spritesheet_source = config.child("spritesheet").attribute("source").as_string();
 
+	//Set initial data of the rock
+	rockVelocity.x = config.child("rock").child("velocity").attribute("x").as_float();
+	rockVelocity.y = config.child("rock").child("velocity").attribute("x").as_float();
+
 	LOG("jump_vel: %f", jump_vel);
 	LOG("gravity: %f", gravity);
 
@@ -305,6 +309,8 @@ bool j1Player::PreUpdate()
 		state = entityStates::IDLE;
 		break;
 	}
+	if (player_input.pressing_F)
+		throwRock();
 
 	//Change player collider position
 	collider_entity->SetPos(position.x, position.y);
@@ -884,20 +890,59 @@ void j1Player::rockMovement()
 {
 	//si la roca está lanzada y temporizador < 5s
 	//la pelota seguirá la trayectoría de velocidades y fuerzas
-	//cuando sea falso, la roca estará en (-50, -50) para que no se vea
-	rockPosition.x = position.x + collider_entity->rect.w;
-	rockPosition.y = position.y;
-
+	//cuando sea falso, la roca estará en (-50, -50) para que no se vea	
 	
+
+	if(rock_able == false) //Rock has already been shot and we are on countdown
+	{
+		entityStates localState = state;
+		//Rock movement
+		//We calculate rock velocity depending on the state 
+		switch(localState)
+		{
+		case entityStates::IDLE:
+			break;
+		case entityStates::WALK_FORWARD:
+			break;
+		case entityStates::WALK_BACKWARD:
+			break;
+		case entityStates::RUN_FORWARD:
+			break;
+		case entityStates::RUN_BACKWARD:
+			break;
+		case entityStates::JUMP:
+			break;
+		case entityStates::JUMP_FORWARD:
+			break;
+		case entityStates::JUMP_BACKWARD:
+			break;
+		case entityStates::DASH_FORWARD:
+			break;
+		case entityStates::DASH_BACKWARD:
+			break;
+		case entityStates::DIE:
+			break;
+		}
+
+		//We check if we can throw a new rock
+		rock_timer += deltaTime;
+		if (deltaTime >= 5)
+		{
+			//We delete the rock and player can throw a new rock
+			rockPosition.x = -50;
+			rockPosition.y = -50;
+			rock_able = true;
+		}			
+	}
 }
 
 void j1Player::throwRock()
 {
-	rockPosition.x = position.x;
-	rockPosition.y = position.y;
-
 	if(rock_able == true)
 	{
-		
+		rockPosition.x = position.x + collider_entity->rect.w;
+		rockPosition.y = position.y;
+		rock_timer = 0;
+		rock_able = false;
 	}
 }

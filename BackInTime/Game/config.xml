@@ -58,6 +58,7 @@
     <groundEnemy>
       <velocity value ="40.0"/>
     </groundEnemy>
+
   </entityManager>
   
 

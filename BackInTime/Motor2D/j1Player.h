@@ -41,8 +41,7 @@ public:
 	void rockMovement();
 	void throwRock();
 
-	iPoint position;
-	iPoint rockPosition;
+	iPoint position;	
 private:
 	
 	SDL_Rect bar_0, bar_1, bar_2, bar_3, bar_4;
@@ -70,7 +69,11 @@ private:
 	bool 				walking = false; //is he walking?
 
 	bool 				ability_able = false;
-	bool 				rock_able = false;
+
+	//Rock data
+	iPoint				rockPosition;
+	iPoint				rockVelocity;
+	bool 				rock_able = true;
 	float				rock_timer = 0;
 
 	int 				tick1 = 0, tick2 = 0;
