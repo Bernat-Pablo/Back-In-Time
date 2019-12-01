@@ -297,7 +297,11 @@ bool j1Player::PreUpdate()
 				state = entityStates::RUN_BACKWARD;
 		}
 		else if (!player_input.pressing_A)
+		{
+			restart_variables(1, -1);
 			state = entityStates::IDLE;
+		}
+			
 		break;
 	case entityStates::DASH_BACKWARD:
 		moving_right = false;
@@ -308,7 +312,11 @@ bool j1Player::PreUpdate()
 			if (player_input.pressing_lshift)
 				state = entityStates::RUN_FORWARD;
 		}else if (!player_input.pressing_D)
+		{
+			restart_variables(1, -1);
 			state = entityStates::IDLE;
+		}
+			
 		break;
 	case entityStates::DIE:
 		state = entityStates::IDLE;
@@ -330,14 +338,15 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt) 
 {
 	deltaTime = dt; //For camera colliders
-	LOG("-------------------------");
+	//Debug Log
+	/*LOG("-------------------------");
 	LOG("dt: %f", dt);
 	LOG("velocity: %f", velocity);
 	LOG("run velocity: %f", run_velocity);
 	LOG("max_fall_velocity: %f", max_fall_velocity);
 	LOG("fall_velocity: %f", fall_velocity);
 	LOG("jump_vel: %f", jump_vel);
-	LOG("decrease_vel: %f", decrease_vel);
+	LOG("decrease_vel: %f", decrease_vel);*/
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update
 	
