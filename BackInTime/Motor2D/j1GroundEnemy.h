@@ -41,7 +41,6 @@ private:
 
 	iPoint objective;
 
-	entityStates beforeStun;
 };
 
 #endif // !_FLYINGENEMY_
