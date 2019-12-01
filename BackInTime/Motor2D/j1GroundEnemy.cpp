@@ -209,6 +209,9 @@ void j1GroundEnemy::OnCollision(Collider* c1, Collider* c2)
 			}
 		}
 		break;
+	case COLLIDER_ROCK:
+		App->entityManager->DestroyEntity(this);
+		break;
 	case COLLIDER_DIE:
 		App->entityManager->DestroyEntity(this);
 		break;

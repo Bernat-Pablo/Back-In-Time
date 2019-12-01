@@ -293,17 +293,18 @@ void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 		{
 		case COLLIDER_WALL:
 			if (position.y < c2->rect.y) {
-				if (position.x + collider_entity->rect.w > c2->rect.x) {
-					if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
-						state = entityStates::IN_GROUND;
-						if (!starting_flying)
-							isgrounded = true;
+				if(collider_entity != nullptr)
+					if (position.x + collider_entity->rect.w > c2->rect.x) {
+						if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
+							state = entityStates::IN_GROUND;
+							if (!starting_flying)
+								isgrounded = true;
+						}
 					}
-				}
 			}
 			break;
 		case COLLIDER_ROCK:
-			LOG("fd");
+			App->entityManager->DestroyEntity(this);
 			break;
 		case COLLIDER_DIE:
 			App->entityManager->DestroyEntity(this);
