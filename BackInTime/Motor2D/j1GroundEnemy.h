@@ -21,6 +21,8 @@ public:
 	void blit_path();
 	void check_path_toMove();
 
+	bool checkInAir();
+
 private:
 	bool set_path = true;
 	bool set_timer = false;

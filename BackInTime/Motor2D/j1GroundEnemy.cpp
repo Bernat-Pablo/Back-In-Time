@@ -76,7 +76,7 @@ bool j1GroundEnemy::Start()
 	state = entityStates::IDLE;	
 
 	position.x = 120;
-	position.y = 170;
+	position.y = 50;
 
 	current_animation = &idle;
 
@@ -164,6 +164,8 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	}
 	
+	falling = checkInAir();
+
 	if (falling) {
 		position.y += 3;
 	}
@@ -203,8 +205,6 @@ void j1GroundEnemy::OnCollision(Collider* c1, Collider* c2)
 				}
 			}
 		}
-		else
-			falling = true;
 
 		break;
 	case COLLIDER_DIE:
@@ -272,4 +272,38 @@ void j1GroundEnemy::check_path_toMove()
 		}
 	}
 
+}
+bool j1GroundEnemy::checkInAir() //Checks if player is in_air or if it's grounded
+{
+	// Calculate collisions
+	Collider* c2;
+
+	// avoid checking collisions already checked
+	for (uint k = 0; k < MAX_COLLIDERS; ++k)
+	{
+		// skip empty colliders
+		if (App->collision->colliders[k] == nullptr)
+			continue;
+
+		c2 = App->collision->colliders[k];
+
+		if (c2->type == COLLIDER_WALL) //We only want to check if player is colliding with a wall
+		{
+			if (collider_entity->CheckCollision(c2->rect) == true) //There is collision between the player and a wall
+			{
+				if (position.y < c2->rect.y) //Player is on the ground
+				{
+					if (position.x + 0.8 * collider_entity->rect.w > c2->rect.x)
+					{
+						if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w)
+						{
+							return false;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
 }
