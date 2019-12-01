@@ -967,18 +967,6 @@ void j1Player::throwRock()
 			if (rockVelocity.x > 0)
 				rockVelocity.x *= -1;
 		}
-
-		//if (state == entityStates::WALK_FORWARD || state == entityStates::RUN_FORWARD || state == entityStates::JUMP_FORWARD || state == entityStates::DASH_FORWARD)
-		//{
-		//	rockPosition.x = position.x + collider_entity->rect.w;
-		//}else if(state == entityStates::WALK_BACKWARD || state == entityStates::RUN_BACKWARD || state == entityStates::JUMP_BACKWARD || state == entityStates::DASH_BACKWARD)
-		//{
-		//	rockPosition.x = position.x;
-		//}else
-		//{
-		//	//Same as forward
-		//	rockPosition.x = position.x + collider_entity->rect.w;
-		//}
 		
 	}
 }
