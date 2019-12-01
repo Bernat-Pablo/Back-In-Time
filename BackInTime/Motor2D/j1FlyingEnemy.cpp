@@ -214,7 +214,7 @@ bool j1FlyingEnemy::Update(float dt)
 	case entityStates::HIT:
 		current_animation = &hit;
 		hit.Reset();
-
+		App->entityManager->DestroyEntity(this);
 		break;
 	default:
 		break;
@@ -304,7 +304,7 @@ void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 			}
 			break;
 		case COLLIDER_ROCK:
-			App->entityManager->DestroyEntity(this);
+			state = entityStates::HIT;			
 			break;
 		case COLLIDER_DIE:
 			App->entityManager->DestroyEntity(this);

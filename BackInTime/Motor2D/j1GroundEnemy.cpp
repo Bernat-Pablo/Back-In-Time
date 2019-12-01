@@ -18,7 +18,7 @@
 
 j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 {
-	name.create("goundEnemy");
+	name.create("groundEnemy");
 	type = entityTypes::GROUND_ENEMY;
 
 	float speed = 0.5f;
@@ -223,30 +223,33 @@ void j1GroundEnemy::OnCollision(Collider* c1, Collider* c2)
 	switch (c2->type)
 	{
 	case COLLIDER_WALL:
-		if (position.x + collider_entity->rect.w < c2->rect.x + 20) //Player is at the left of a wall
+		if(collider_entity != nullptr)
 		{
-			if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
-				collider_at_right = true;
-			else
-				collider_at_right = false;
-		}
-		else
-			collider_at_right = false;
-
-		if (position.x < c2->rect.x + c2->rect.w) //Player is at the right of a wall
-		{
-			if (state == entityStates::RUN_BACKWARD ||state == entityStates::IDLE)
+			if (position.x + collider_entity->rect.w < c2->rect.x + 20) //Player is at the left of a wall
 			{
 				if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
-				{
-					collider_at_left = true;
-				}
+					collider_at_right = true;
 				else
-					collider_at_left = false;
+					collider_at_right = false;
 			}
-		}
-		else
-			collider_at_left = false;
+			else
+				collider_at_right = false;
+
+			if (position.x < c2->rect.x + c2->rect.w) //Player is at the right of a wall
+			{
+				if (state == entityStates::RUN_BACKWARD || state == entityStates::IDLE)
+				{
+					if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
+					{
+						collider_at_left = true;
+					}
+					else
+						collider_at_left = false;
+				}
+			}
+			else
+				collider_at_left = false;
+		}		
 		break;
 	case COLLIDER_ROCK:
 		App->entityManager->DestroyEntity(this);
