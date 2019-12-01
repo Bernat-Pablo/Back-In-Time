@@ -108,8 +108,15 @@ bool j1GroundEnemy::PreUpdate()
 
 		break;
 	case entityStates::STUNNED:
-		if (!stun)
-			state = entityStates::IDLE;
+		if (!stun) {
+			if (beforeStun == entityStates::RUN_BACKWARD) {
+				state = entityStates::RUN_FORWARD;
+			}
+			if (beforeStun == entityStates::RUN_FORWARD) {
+				state = entityStates::RUN_BACKWARD;
+			}
+		}
+			
 
 		break;
 	case entityStates::HIT:
@@ -137,6 +144,7 @@ bool j1GroundEnemy::Update(float dt)
 	case entityStates::RUN_FORWARD:
 		current_animation = &run;
 		if (collider_at_right) {
+			beforeStun = entityStates::RUN_FORWARD;
 			state = entityStates::STUNNED;
 			stun = true;
 		}
@@ -148,6 +156,7 @@ bool j1GroundEnemy::Update(float dt)
 	case entityStates::RUN_BACKWARD:
 		current_animation = &run;
 		if (collider_at_left) {
+			beforeStun = entityStates::RUN_BACKWARD;
 			state = entityStates::STUNNED;
 			stun = true;
 		}
@@ -158,9 +167,15 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	case entityStates::STUNNED:
 		current_animation = &stunning;
-		if (current_animation->SeeCurrentFrame()==3) {
+		if (current_animation->SeeCurrentFrame() == 3) {
 			stun = false;
 			stunning.Reset();
+			if (beforeStun == entityStates::RUN_BACKWARD) {
+				position.x += 5;
+			}
+			if (beforeStun == entityStates::RUN_FORWARD) {
+				position.x -= 5;
+			}
 		}
 		break;
 	case entityStates::HIT:
