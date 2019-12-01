@@ -111,16 +111,13 @@ bool j1EntityManager::PostUpdate()
 bool j1EntityManager::CleanUp()
 {
 	bool ret = true;
-
 	p2List_item<j1Entity*>* entity = entitiesList.start;
 	while (entity != nullptr)
 	{
-		//ret = entity->data->CleanUp();
-		//entity->data->DestroyEntity(entity->data);
+		ret = entity->data->CleanUp();
 		entity = entity->next;
-	}	
+	}
 	DestroyAllEntities();
-
 
 	return ret;
 }
@@ -194,6 +191,7 @@ void j1EntityManager::DestroyAllEntities()
 	for (entity = entitiesList.start; entity != nullptr; entity = entity->next)
 	{
 		if (entity->data != player) {
+			//If we destroy the player, sometimes the game crashes because of enemy pathfinding not finding the player
 			DestroyEntity(entity->data);
 		}
 	}
