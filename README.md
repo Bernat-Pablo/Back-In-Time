@@ -20,8 +20,9 @@ The player can go a few seconds back to the past.
 * F3: Start from the beginning of the current level
 * F5: Save Game
 * F6: Load Game
-* F9: View colliders and game logic
+* F9: View colliders and pathfinding
 * F10: God mode
+* F11: Enable/Disable framerate cap to 30 FPS
 
 ## Team
 * Pablo Galve: https://github.com/pablogalve
