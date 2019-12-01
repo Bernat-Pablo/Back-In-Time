@@ -954,24 +954,31 @@ void j1Player::throwRock()
 		rock_able = false;
 
 		//Rock movement
-		//We calculate rock velocity depending on the state 
-		if (state == entityStates::WALK_FORWARD || state == entityStates::RUN_FORWARD || state == entityStates::JUMP_FORWARD || state == entityStates::DASH_FORWARD)
-		{
+		//We calculate rock velocity depending on the state
+
+		if (looking_right) {
 			rockPosition.x = position.x + collider_entity->rect.w;
 			if (rockVelocity.x < 0)
-				rockVelocity.x *= -1; //We make sure that velocity is positive in X axis
-		}else if(state == entityStates::WALK_BACKWARD || state == entityStates::RUN_BACKWARD || state == entityStates::JUMP_BACKWARD || state == entityStates::DASH_BACKWARD)
-		{
-			rockPosition.x = position.x;
-			if (rockVelocity.x > 0)
-				rockVelocity.x *= -1; //We make sure that velocity is negative in X axis
-		}else
-		{
-			//Same as forward
-			rockPosition.x = position.x + collider_entity->rect.w;
-			if (rockVelocity.x < 0)
-				rockVelocity.x *= -1; //We make sure that velocity is positive in X axis
+				rockVelocity.x *= -1;
 		}
+		else {
+			rockPosition.x = position.x;
+			rockVelocity.x *=-1;
+			if (rockVelocity.x > 0)
+				rockVelocity.x *= -1;
+		}
+
+		//if (state == entityStates::WALK_FORWARD || state == entityStates::RUN_FORWARD || state == entityStates::JUMP_FORWARD || state == entityStates::DASH_FORWARD)
+		//{
+		//	rockPosition.x = position.x + collider_entity->rect.w;
+		//}else if(state == entityStates::WALK_BACKWARD || state == entityStates::RUN_BACKWARD || state == entityStates::JUMP_BACKWARD || state == entityStates::DASH_BACKWARD)
+		//{
+		//	rockPosition.x = position.x;
+		//}else
+		//{
+		//	//Same as forward
+		//	rockPosition.x = position.x + collider_entity->rect.w;
+		//}
 		
 	}
 }
