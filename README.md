@@ -28,14 +28,18 @@ The player can go a few seconds back to the past.
 * Pablo Galve: https://github.com/pablogalve
   * Module Collisions and in-game Collisions
   * Camera
-  * Level Transition (F1/F2)
-  * Debug (F9) and god Mode (F10)
+  * Debug functions
+    * Level Transition (F1/F2)
+    * Start from the beginning (F3)
+    * Save/Load (F5/F6)
+    * Debug (F9)
+    * God Mode (F10)
+    * 30/60 FPS (F11)
   * Load data from XML
-  * Start from the beginning (F3)
-  * Save/Load (F5/F6)
   * Entities
-  * Move through DT
-  * 30/60 FPS
+    * Kill/die system
+    * Throw rock  
+  * Move through delta time
 * Bernat Casañas: https://github.com/BernatCasanas
   * Building the Engine with Modules and Functions
   * Movement and Mechanics
