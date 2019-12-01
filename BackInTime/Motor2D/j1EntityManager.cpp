@@ -104,10 +104,11 @@ bool j1EntityManager::CleanUp()
 	p2List_item<j1Entity*>* entity = entitiesList.start;
 	while (entity != nullptr)
 	{
-		ret = entity->data->CleanUp();
+		//ret = entity->data->CleanUp();
 		//entity->data->DestroyEntity(entity->data);
 		entity = entity->next;
 	}	
+	DestroyAllEntities();
 
 	return ret;
 }
@@ -155,4 +156,31 @@ bool j1EntityManager::Save(pugi::xml_node& file)const
 		tmp = tmp->next;
 	}
 	return ret;
+}
+
+void j1EntityManager::DestroyEntity(j1Entity* entity)
+{
+	p2List_item<j1Entity*>* item;
+
+	if (entity != nullptr) {
+		item = entitiesList.At(entitiesList.find(entity));
+		if (entity->collider_entity != nullptr)
+		{
+			delete entity->collider_entity;
+			entity->collider_entity = nullptr;
+		}
+		entitiesList.del(item);;
+	}
+}
+
+void j1EntityManager::DestroyAllEntities()
+{
+	p2List_item<j1Entity*>* entity;
+
+	for (entity = entitiesList.start; entity != nullptr; entity = entity->next)
+	{
+		if (entity->data != player) {
+			DestroyEntity(entity->data);
+		}
+	}
 }
