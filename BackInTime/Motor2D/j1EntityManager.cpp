@@ -164,8 +164,8 @@ bool j1EntityManager::Save(pugi::xml_node& file)const
 	while (entity != nullptr)
 	{
 		pugi::xml_node child = file.append_child(entity->data->name.GetString());
-		child.append_attribute("position_x") = entity->data->position.x;
-		child.append_attribute("position_y") = entity->data->position.y;
+		child.append_child("position").append_attribute("x") = entity->data->position.x;
+		child.child("position").append_attribute("y") = entity->data->position.y;
 
 		entity = entity->next;
 	}
