@@ -283,7 +283,7 @@ void j1GroundEnemy::check_path_toMove()
 		tick2 = SDL_GetTicks();
 	}
 	tick1 = SDL_GetTicks();
-	if (tick1 - tick2 >= 1500) {
+	if (tick1 - tick2 >= 500) {
 		tick1 = tick2 = 0;
 		iPoint pos = App->map->MapToWorld(path->At(0)->x, path->At(0)->y);
 		if (objective.x < position.x) {
