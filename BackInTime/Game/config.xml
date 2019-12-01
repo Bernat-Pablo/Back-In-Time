@@ -41,9 +41,9 @@
       <walkFX source =""/>
       <dashFX source =""/>
       <rock>
-        <gravity value="1"/>
-        <velocity x="200.0" y="50.0"/>
-        <cooldown value="3"/>
+        <gravity value="0"/>
+        <velocity x="200.0" y="0.0"/>
+        <cooldown value="1"/>
       </rock>
     </player>
     

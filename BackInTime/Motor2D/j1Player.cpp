@@ -319,7 +319,6 @@ bool j1Player::PreUpdate()
 	}
 	if (player_input.pressing_F) {
 		throwRock();
-		App->audio->PlayFx(3);
 	}
 
 	//Change player collider position
@@ -949,6 +948,7 @@ void j1Player::throwRock()
 {
 	if(rock_able == true)
 	{		
+		App->audio->PlayFx(3);
 		rockPosition.y = position.y;
 		rock_timer = 0;
 		rock_able = false;
