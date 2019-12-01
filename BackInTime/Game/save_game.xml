@@ -8,10 +8,10 @@
 	<scene />
 	<entityManager>
 		<flyingEnemy>
-			<position x="1143" y="64" />
+			<position x="1208" y="64" />
 		</flyingEnemy>
 		<flyingEnemy>
-			<position x="231" y="80" />
+			<position x="360" y="80" />
 		</flyingEnemy>
 		<groundEnemy>
 			<position x="720" y="165" />
@@ -23,16 +23,16 @@
 			<position x="720" y="165" />
 		</groundEnemy>
 		<groundEnemy>
-			<position x="66" y="182" />
+			<position x="64" y="137" />
 		</groundEnemy>
 	</entityManager>
 	<player>
-		<position x="31" y="184" />
+		<position x="80" y="184" />
 		<level value="1" />
-		<camera_toRight x="130" y="91" />
-		<camera_toLeft x="10" y="91" />
-		<camera_toUp x="10" y="91" />
-		<camera_toDown x="10" y="211" />
+		<camera_toRight x="150" y="91" />
+		<camera_toLeft x="30" y="91" />
+		<camera_toUp x="30" y="91" />
+		<camera_toDown x="30" y="211" />
 		<camera x="0" y="303" />
 		<lives value="3" />
 	</player>
