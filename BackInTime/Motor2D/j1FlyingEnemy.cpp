@@ -76,7 +76,7 @@ bool j1FlyingEnemy::Start()
 	state = entityStates::FLY;
 
 	current_animation = &fly;
-	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)App->flyingEnemy); //a collider to start
+	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)this); //a collider to start
 
 	isgrounded = false;
 
