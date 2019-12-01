@@ -160,7 +160,11 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	case entityStates::HIT:
 		current_animation = &hit;
-		hit.Reset();
+		if (current_animation->SeeCurrentFrame() == 3) {
+			App->entityManager->DestroyEntity(this);
+			hit.Reset();
+		}
+
 		break;
 	}
 	
@@ -232,10 +236,10 @@ void j1GroundEnemy::OnCollision(Collider* c1, Collider* c2)
 		}		
 		break;
 	case COLLIDER_ROCK:
-		App->entityManager->DestroyEntity(this);
+		state = entityStates::HIT;
 		break;
 	case COLLIDER_DIE:
-		App->entityManager->DestroyEntity(this);
+		state = entityStates::HIT;
 		break;
 	default:
 		break;
