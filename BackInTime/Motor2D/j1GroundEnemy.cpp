@@ -19,6 +19,7 @@
 j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 {
 	name.create("goundEnemy");
+	type = entityTypes::GROUND_ENEMY;
 
 	float speed = 0.5f;
 
@@ -73,9 +74,6 @@ bool j1GroundEnemy::Start()
 	debug_tex = App->tex->Load("maps/pathRect.png");
 
 	state = entityStates::IDLE;	
-
-	position.x = 120;
-	position.y = 50;
 
 	current_animation = &idle;
 
@@ -191,7 +189,8 @@ bool j1GroundEnemy::CleanUp()
 {
 	App->tex->UnLoad(spritesheet_entity);
 	App->tex->UnLoad(debug_tex);
-
+	collider_entity = nullptr;
+	spritesheet_entity = nullptr;
 	return true;
 }
 
