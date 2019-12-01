@@ -161,6 +161,7 @@ bool j1GroundEnemy::Update(float dt)
 	case entityStates::HIT:
 		current_animation = &hit;
 		if (current_animation->SeeCurrentFrame() == 3) {
+			collider_entity->SetPos(-500, -500);
 			App->entityManager->DestroyEntity(this);
 			hit.Reset();
 		}
