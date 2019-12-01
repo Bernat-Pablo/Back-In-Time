@@ -136,6 +136,10 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	case entityStates::RUN_FORWARD:
 		current_animation = &run;
+		if (collider_at_right) {
+			state = entityStates::STUNNED;
+			stun = true;
+		}
 		reversed = true;
 		moving_left = false;
 		moving_right = true;
@@ -143,6 +147,10 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	case entityStates::RUN_BACKWARD:
 		current_animation = &run;
+		if (collider_at_left) {
+			state = entityStates::STUNNED;
+			stun = true;
+		}
 		reversed = false;
 		moving_left = true;
 		moving_right = false;
@@ -200,14 +208,30 @@ void j1GroundEnemy::OnCollision(Collider* c1, Collider* c2)
 	switch (c2->type)
 	{
 	case COLLIDER_WALL:
-		if (position.y < c2->rect.y) {
-			
+		if (position.x + collider_entity->rect.w < c2->rect.x + 20) //Player is at the left of a wall
+		{
+			if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
+				collider_at_right = true;
+			else
+				collider_at_right = false;
 		}
-		if (position.x + collider_entity->rect.w > c2->rect.x) {
-			if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
-				
+		else
+			collider_at_right = false;
+
+		if (position.x < c2->rect.x + c2->rect.w) //Player is at the right of a wall
+		{
+			if (state == entityStates::RUN_BACKWARD ||state == entityStates::IDLE)
+			{
+				if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
+				{
+					collider_at_left = true;
+				}
+				else
+					collider_at_left = false;
 			}
 		}
+		else
+			collider_at_left = false;
 		break;
 	case COLLIDER_DIE:
 		//TODO here we have to put -> delete enemy
@@ -291,11 +315,11 @@ bool j1GroundEnemy::checkInAir() //Checks if player is in_air or if it's grounde
 
 		if(collider_entity != nullptr && c2 != nullptr)
 		{
-			if (c2->type == COLLIDER_WALL) //We only want to check if player is colliding with a wall
+			if (c2->type == COLLIDER_WALL) //We only want to check if entity is colliding with a wall
 			{
-				if (collider_entity->CheckCollision(c2->rect) == true) //There is collision between the player and a wall
+				if (collider_entity->CheckCollision(c2->rect) == true) //There is collision between the entity and a wall
 				{
-					if (position.y < c2->rect.y) //Player is on the ground
+					if (position.y < c2->rect.y) //Entity is on the ground
 					{
 						if (position.x + 0.8 * collider_entity->rect.w > c2->rect.x)
 						{
@@ -312,3 +336,5 @@ bool j1GroundEnemy::checkInAir() //Checks if player is in_air or if it's grounde
 
 	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
 }
+
+
