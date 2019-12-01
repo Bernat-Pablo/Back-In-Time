@@ -111,7 +111,7 @@ bool j1Player::Start(){
 	screen_size = config_local.child("window").child("resolution").attribute("scale").as_int();
 
 	config_local = config_local.child("entityManager").child("player");
-
+	fall_velocity = 0;
 	if (App->scene->choose_lv == 1) //We are on map1
 	{
 		position.x = config_local.child("initialPosition").child("map1").attribute("x").as_int();
