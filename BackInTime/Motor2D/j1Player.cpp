@@ -85,6 +85,8 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	rockVelocity.y = config.child("rock").child("velocity").attribute("y").as_float();
 	rock_cooldown = config.child("rock").child("cooldown").attribute("value").as_float();
 	rock_gravity = config.child("rock").child("gravity").attribute("value").as_float();	
+	rockPosition.x = -5000;
+	rockPosition.y = -5000;
 
 	LOG("jump_vel: %f", jump_vel);
 	LOG("gravity: %f", gravity);
