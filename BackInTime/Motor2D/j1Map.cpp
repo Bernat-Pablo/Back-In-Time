@@ -59,13 +59,13 @@ void j1Map::Draw()
 				if (lay->data->name == "Colliders_2") {
 					continue;
 				}
-				if (lay->data->name == "Arboles P") {
+				if (lay->data->name == "Trees P") {
 					//culling left and up with parallax
 					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9 && (App->player->position.y - node.child("finish_printing_up").attribute("value").as_int() * 16)) {
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
 					}
 				}
-				if (lay->data->name == "Arboles2 P") {
+				if (lay->data->name == "Trees2 P") {
 					//culling left and up with parallax
 					if (layer->data[n] != 0 && x >= (App->player->position.x - node.child("finish_printing_left").attribute("value").as_int() * 16) * 0.9 && (App->player->position.y - node.child("finish_printing_up").attribute("value").as_int() * 16)) {
 						App->render->Blit(tileset->texture, x, y, &GetTileRect(tileset, layer->data[n]), 0.9f);
