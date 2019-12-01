@@ -88,9 +88,6 @@ bool j1Player::Awake(pugi::xml_node& config) {
 	rockPosition.x = -5000;
 	rockPosition.y = -5000;
 
-	LOG("jump_vel: %f", jump_vel);
-	LOG("gravity: %f", gravity);
-
 	doc.load_file("config.xml");
 
 	return ret;
@@ -333,6 +330,14 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt) 
 {
 	deltaTime = dt; //For camera colliders
+	LOG("-------------------------");
+	LOG("dt: %f", dt);
+	LOG("velocity: %f", velocity);
+	LOG("run velocity: %f", run_velocity);
+	LOG("max_fall_velocity: %f", max_fall_velocity);
+	LOG("fall_velocity: %f", fall_velocity);
+	LOG("jump_vel: %f", jump_vel);
+	LOG("decrease_vel: %f", decrease_vel);
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update
 	
@@ -451,7 +456,7 @@ bool j1Player::Update(float dt)
 			current_animation = &walk;
 
 			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
-			velocity -= decrease_vel;
+			velocity -= (int)ceil(decrease_vel*dt);
 
 			if (collider_at_right == false)
 				position.x += (int)(velocity * dt);
@@ -466,7 +471,7 @@ bool j1Player::Update(float dt)
 			current_animation = &walk;
 
 			//velocity -= decrease_vel; BUG WITH VELOCITY pendent to solve
-			velocity -= decrease_vel;
+			velocity -= (int)ceil(decrease_vel * dt);
 
 			if (collider_at_left == false)
 				position.x -= (int)(velocity * dt);
