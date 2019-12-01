@@ -210,8 +210,7 @@ void j1GroundEnemy::OnCollision(Collider* c1, Collider* c2)
 		}
 		break;
 	case COLLIDER_DIE:
-		//TODO here we have to put -> delete enemy
-
+		App->entityManager->DestroyEntity(this);
 		break;
 	default:
 		break;
