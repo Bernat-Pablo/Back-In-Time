@@ -52,6 +52,7 @@ j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 	hit.PushBack({ 128,268,52,29 }, speed);
 	hit.PushBack({ 180,268,52,29 }, speed);
 	hit.PushBack({ 232,268,52,29 }, speed);
+	hit.loop = false;
 }
 
 bool j1GroundEnemy::Awake(pugi::xml_node& config)
@@ -159,6 +160,7 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	case entityStates::HIT:
 		current_animation = &hit;
+		hit.Reset();
 		break;
 	}
 	
