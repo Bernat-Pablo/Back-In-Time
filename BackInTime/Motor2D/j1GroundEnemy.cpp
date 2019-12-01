@@ -173,7 +173,8 @@ bool j1GroundEnemy::Update(float dt)
 	else
 		App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
 
-	collider_entity->SetPos(position.x, position.y);
+	if(collider_entity != nullptr)
+		collider_entity->SetPos(position.x, position.y);
 
 	calculate_path();
 	if (App->collision->debug)
@@ -288,22 +289,25 @@ bool j1GroundEnemy::checkInAir() //Checks if player is in_air or if it's grounde
 
 		c2 = App->collision->colliders[k];
 
-		if (c2->type == COLLIDER_WALL) //We only want to check if player is colliding with a wall
+		if(collider_entity != nullptr && c2 != nullptr)
 		{
-			if (collider_entity->CheckCollision(c2->rect) == true) //There is collision between the player and a wall
+			if (c2->type == COLLIDER_WALL) //We only want to check if player is colliding with a wall
 			{
-				if (position.y < c2->rect.y) //Player is on the ground
+				if (collider_entity->CheckCollision(c2->rect) == true) //There is collision between the player and a wall
 				{
-					if (position.x + 0.8 * collider_entity->rect.w > c2->rect.x)
+					if (position.y < c2->rect.y) //Player is on the ground
 					{
-						if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w)
+						if (position.x + 0.8 * collider_entity->rect.w > c2->rect.x)
 						{
-							return false;
+							if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w)
+							{
+								return false;
+							}
 						}
 					}
 				}
 			}
-		}
+		}		
 	}
 
 	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
