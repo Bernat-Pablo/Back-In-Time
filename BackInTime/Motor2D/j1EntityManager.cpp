@@ -23,7 +23,7 @@ j1EntityManager::~j1EntityManager()
 bool j1EntityManager::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
-	player = new j1Player();
+	player = CreateEntity(entityTypes::PLAYER, 0, 0);
 	player->Awake(config.child("player"));	
 	entitiesList.add(player);
 	
