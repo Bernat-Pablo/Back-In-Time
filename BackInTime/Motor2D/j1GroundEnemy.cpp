@@ -70,7 +70,6 @@ bool j1GroundEnemy::Awake(pugi::xml_node& config)
 bool j1GroundEnemy::Start()
 {
 	spritesheet_entity = App->tex->Load("character/enemies_spritesheet.png");
-	spritesheet = App->tex->Load("character/enemies_spritesheet.png");
 	debug_tex = App->tex->Load("maps/pathRect.png");
 
 	state = entityStates::IDLE;	
@@ -187,7 +186,6 @@ bool j1GroundEnemy::Update(float dt)
 bool j1GroundEnemy::CleanUp()
 {
 	App->tex->UnLoad(spritesheet_entity);
-	App->tex->UnLoad(spritesheet);
 	App->tex->UnLoad(debug_tex);
 
 	return true;
