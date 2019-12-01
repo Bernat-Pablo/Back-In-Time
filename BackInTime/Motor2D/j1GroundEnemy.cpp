@@ -204,10 +204,7 @@ void j1GroundEnemy::OnCollision(Collider* c1, Collider* c2)
 		}
 		if (position.x + collider_entity->rect.w > c2->rect.x) {
 			if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
-				if (state == entityStates::RUN_BACKWARD || state == entityStates::RUN_FORWARD) {
-					state = entityStates::STUNNED;
-					stun = true;
-				}
+				
 			}
 		}
 		break;
