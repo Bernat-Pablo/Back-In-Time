@@ -29,9 +29,9 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	//entitiesList.add(player);
 	
 	//Spawn test enemy
-	testFlyingEnemy = CreateEntity(entityTypes::FLYING_ENEMY, 100, 0);	
+	/*testFlyingEnemy = CreateEntity(entityTypes::FLYING_ENEMY, 100, 0);	
 	testFlyingEnemy->Awake(config.child("flyingEnemy"));	
-	entitiesList.add(testFlyingEnemy);
+	entitiesList.add(testFlyingEnemy);*/
 
 	/*testFlyingEnemy2 = CreateEntity(entityTypes::FLYING_ENEMY, 200, 0);
 	testFlyingEnemy2->Awake(config.child("flyingEnemy"));
@@ -87,7 +87,6 @@ bool j1EntityManager::PostUpdate()
 {
 	bool ret = true;
 	//player->PostUpdate();
-	testFlyingEnemy->PostUpdate();
 
 	p2List_item<j1Entity*>* entity = entitiesList.start;
 	while (entity != nullptr)
