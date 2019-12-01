@@ -13588,11 +13588,9 @@
   <object id="31" name="5" x="1568" y="160" width="16" height="48"/>
   <object id="32" name="1" x="0" y="0" width="16" height="208"/>
   <object id="33" name="1" x="1584" y="48" width="16" height="160"/>
-  <object id="37" name="8" x="32" y="80" width="16" height="16"/>
-  <object id="39" name="9" x="48.3333" y="144" width="16" height="16"/>
-  <object id="41" name="7" x="240" y="48" width="16" height="16"/>
-  <object id="42" name="7" x="96" y="48" width="16" height="16"/>
-  <object id="43" name="8" x="304" y="176" width="16" height="16"/>
+  <object id="39" name="9" x="160" y="96" width="16" height="16"/>
+  <object id="41" name="7" x="1024" y="32" width="16" height="16"/>
+  <object id="42" name="7" x="432" y="80" width="16" height="16"/>
   <object id="44" name="8" x="720" y="144" width="16" height="16"/>
   <object id="45" name="8" x="1488" y="144" width="16" height="16"/>
  </objectgroup>

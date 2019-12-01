@@ -312,8 +312,8 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door2");
 				if (name == "7") //Spawn flying enemy
 				{					 
-					//j1Entity* flyingEnemy = App->entityManager->CreateEntity(entityTypes::FLYING_ENEMY, objectgroup->object[i].x, objectgroup->object[i].y);
-					//flyingEnemy->Awake(App->GetConfig().child("entityManager").child("flyingEnemy"));
+					j1Entity* flyingEnemy = App->entityManager->CreateEntity(entityTypes::FLYING_ENEMY, objectgroup->object[i].x, objectgroup->object[i].y);
+					flyingEnemy->Awake(App->GetConfig().child("entityManager").child("flyingEnemy"));
 				}	
 				if (name == "8") //Spawn ground enemy
 				{
