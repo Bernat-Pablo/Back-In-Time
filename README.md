@@ -33,7 +33,9 @@ The player can go a few seconds back to the past.
   * Load data from XML
   * Start from the beginning (F3)
   * Save/Load (F5/F6)
-  * Memory Leaks
+  * Entities
+  * Move through DT
+  * 30/60 FPS
 * Bernat Casañas: https://github.com/BernatCasanas
   * Building the Engine with Modules and Functions
   * Movement and Mechanics
@@ -43,6 +45,10 @@ The player can go a few seconds back to the past.
   * Parallax effect
   * Vsync at 60 FPS
   * Animations
+  * Enemies (Rino and Bird)
+  * PathFinding
+  * Profiling
+
 ## Credits
 * Assets_1: https://oddpotatogift.itch.io/16x16-fantasy-pack
 * Assets_2: https://pixel-frog.itch.io/pixel-adventure-2
