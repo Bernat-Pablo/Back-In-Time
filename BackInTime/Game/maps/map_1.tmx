@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="4816" columns="86">
   <image source="Basic_Tiles_Only.png" width="1376" height="896"/>
  </tileset>
- <layer id="11" name="Fondo" width="100" height="15" visible="0">
+ <layer id="11" name="Background" width="100" height="15" visible="0">
   <data>
    <tile gid="178"/>
    <tile gid="6"/>
@@ -1507,7 +1507,7 @@
    <tile gid="180"/>
   </data>
  </layer>
- <layer id="8" name="Arboles P" width="100" height="15">
+ <layer id="8" name="Trees P" width="100" height="15">
   <properties>
    <property name="Value" value="0"/>
    <property name="parallax" value="0.9"/>
@@ -3015,7 +3015,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="9" name="Arboles2 P" width="100" height="15">
+ <layer id="9" name="Trees2 P" width="100" height="15">
   <properties>
    <property name="Value" value="0"/>
    <property name="parallax" value="0.9"/>
@@ -4523,7 +4523,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="7" name="Arboles" width="100" height="15">
+ <layer id="7" name="Trees" width="100" height="15">
   <properties>
    <property name="Value" value="0"/>
   </properties>
@@ -6030,7 +6030,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="Terreno" width="100" height="15">
+ <layer id="2" name="Terrain" width="100" height="15">
   <properties>
    <property name="Value" value="0"/>
   </properties>
@@ -7537,7 +7537,7 @@
    <tile gid="1722"/>
   </data>
  </layer>
- <layer id="4" name="Casa" width="100" height="15">
+ <layer id="4" name="House" width="100" height="15">
   <properties>
    <property name="Value" value="0"/>
   </properties>
@@ -9044,7 +9044,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="5" name="Decoracion1" width="100" height="15">
+ <layer id="5" name="Decoration" width="100" height="15">
   <data>
    <tile/>
    <tile/>
@@ -10548,7 +10548,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="6" name="Decoracion 2" width="100" height="15">
+ <layer id="6" name="Decoration 2" width="100" height="15">
   <data>
    <tile/>
    <tile/>

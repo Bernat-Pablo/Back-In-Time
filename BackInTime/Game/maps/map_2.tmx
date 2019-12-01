@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="150" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="50">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="150" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="50">
  <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16" tilecount="4816" columns="86">
   <image source="Basic_Tiles_Only.png" width="1376" height="896"/>
  </tileset>
- <layer id="6" name="Arboles2 P" width="150" height="15">
+ <layer id="6" name="Trees2 P" width="150" height="15">
   <properties>
    <property name="parallax" value="0.9"/>
   </properties>
@@ -2260,7 +2260,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="4" name="Arboles P" width="150" height="15">
+ <layer id="4" name="Trees P" width="150" height="15">
   <properties>
    <property name="parallax" value="0.9"/>
   </properties>
@@ -4517,7 +4517,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="5" name="Arboles" width="150" height="15">
+ <layer id="5" name="Trees" width="150" height="15">
   <data>
    <tile/>
    <tile/>
@@ -6771,7 +6771,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="1" name="Terreno" width="150" height="15">
+ <layer id="1" name="Terrain" width="150" height="15">
   <data>
    <tile/>
    <tile/>
@@ -9025,7 +9025,7 @@
    <tile gid="1378"/>
   </data>
  </layer>
- <layer id="2" name="Casa" width="150" height="15">
+ <layer id="2" name="House" width="150" height="15">
   <data>
    <tile gid="2498"/>
    <tile gid="2499"/>
@@ -11279,7 +11279,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="3" name="Decoracion" width="150" height="15">
+ <layer id="3" name="Decoration" width="150" height="15">
   <data>
    <tile/>
    <tile/>
