@@ -171,10 +171,12 @@ bool j1GroundEnemy::Update(float dt)
 			stun = false;
 			stunning.Reset();
 			if (beforeStun == entityStates::RUN_BACKWARD) {
-				position.x += 5;
+				position.x += 20;
+				collider_at_left = false;
 			}
 			if (beforeStun == entityStates::RUN_FORWARD) {
-				position.x -= 5;
+				position.x -= 20;
+				collider_at_right = false;
 			}
 		}
 		break;
