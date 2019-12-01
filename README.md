@@ -12,6 +12,7 @@ The player can go a few seconds back to the past.
 * A: Go left
 * S: Go down (Godmode only)
 * D: Go right
+* F: Shoot a rock
 * Spacebar: Jump
 * Enter: Special Ability | Go back in time
 ### Debug
