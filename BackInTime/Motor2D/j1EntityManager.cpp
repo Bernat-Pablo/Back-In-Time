@@ -23,10 +23,19 @@ j1EntityManager::~j1EntityManager()
 bool j1EntityManager::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
-	player = CreateEntity(entityTypes::PLAYER, 0, 0);
-	player->Awake(config.child("player"));	
-	entitiesList.add(player);
+	//Spawn player
+	//player = CreateEntity(entityTypes::PLAYER, 0, 0);
+	//player->Awake(config.child("player"));	
+	//entitiesList.add(player);
 	
+	//Spawn test enemy
+	testFlyingEnemy = CreateEntity(entityTypes::FLYING_ENEMY, 100, 0);	
+	testFlyingEnemy->Awake(config.child("flyingEnemy"));	
+	entitiesList.add(testFlyingEnemy);
+
+	/*testFlyingEnemy2 = CreateEntity(entityTypes::FLYING_ENEMY, 200, 0);
+	testFlyingEnemy2->Awake(config.child("flyingEnemy"));
+	entitiesList.add(testFlyingEnemy2);*/
 
 	return ret;
 }
@@ -34,8 +43,14 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 bool j1EntityManager::Start()
 {
 	bool ret = true;
-	player->Start();
+	//player->Start();
 
+	p2List_item<j1Entity*>* entity = entitiesList.start;
+	while (entity != nullptr)
+	{
+		entity->data->Start();
+		entity = entity->next;
+	}
 
 	return ret;
 }
@@ -43,24 +58,43 @@ bool j1EntityManager::Start()
 bool j1EntityManager::PreUpdate()
 {
 	bool ret = true;
-	player->PreUpdate();
+	//player->PreUpdate();
 
+	p2List_item<j1Entity*>* entity = entitiesList.start;
+	while (entity != nullptr)
+	{
+		entity->data->PreUpdate();
+		entity = entity->next;
+	}
 	return ret;
 }
 
 bool j1EntityManager::Update(float dt)
 {
 	bool ret = true;
-	player->Update(dt);
-
+	//player->Update(dt);
+	
+	p2List_item<j1Entity*>* entity = entitiesList.start;
+	while (entity != nullptr)
+	{
+		entity->data->Update(dt);
+		entity = entity->next;
+	}
 	return ret;
 }
 
 bool j1EntityManager::PostUpdate()
 {
 	bool ret = true;
-	player->PostUpdate();
+	//player->PostUpdate();
+	testFlyingEnemy->PostUpdate();
 
+	p2List_item<j1Entity*>* entity = entitiesList.start;
+	while (entity != nullptr)
+	{
+		entity->data->PostUpdate();
+		entity = entity->next;
+	}
 	return ret;
 }
 
@@ -68,12 +102,13 @@ bool j1EntityManager::CleanUp()
 {
 	bool ret = true;
 
-	p2List_item<j1Entity*>* tmp = entitiesList.start;
-	while (tmp != nullptr)
+	p2List_item<j1Entity*>* entity = entitiesList.start;
+	while (entity != nullptr)
 	{
-		ret = tmp->data->CleanUp();		
-		tmp = tmp->next;
-	}
+		ret = entity->data->CleanUp();
+		//entity->data->DestroyEntity(entity->data);
+		entity = entity->next;
+	}	
 
 	return ret;
 }
