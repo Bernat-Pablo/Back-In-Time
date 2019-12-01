@@ -172,6 +172,31 @@ bool j1EntityManager::Save(pugi::xml_node& file)const
 	return ret;
 }
 
+bool j1EntityManager::Load(pugi::xml_node& file) 
+{
+	bool ret = true;
+	pugi::xml_node entity_saved = file.first_child();
+	//We delete all entities and create them again using saved positions
+	DestroyAllEntities();
+
+	while(entity_saved != nullptr)
+	{
+		p2SString entity_name(entity_saved.name());
+		iPoint position_saved;
+		position_saved.x = entity_saved.child("position").attribute("x").as_int();
+		position_saved.y = entity_saved.child("position").attribute("y").as_int();
+
+		//if (entity_name == "flyingEnemy")
+		//	CreateEntity(entityTypes::FLYING_ENEMY, position_saved.x, position_saved.y);
+		//else if (entity_name == "groundEnemy")
+		//	CreateEntity(entityTypes::GROUND_ENEMY, position_saved.x, position_saved.y);
+
+		entity_saved = entity_saved.next_sibling();
+	}
+
+	return ret;
+}
+
 void j1EntityManager::DestroyEntity(j1Entity* entity)
 {
 	p2List_item<j1Entity*>* item;
