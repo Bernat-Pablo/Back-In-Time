@@ -133,6 +133,7 @@ bool j1GroundEnemy::Update(float dt)
 	{
 	case entityStates::IDLE:
 		current_animation = &idle;
+		ready = true;
 
 		break;
 	case entityStates::RUN_FORWARD:
@@ -217,10 +218,12 @@ void j1GroundEnemy::blit_path()
 void j1GroundEnemy::check_path_toMove()
 {
 	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+	if(ready)
+		objective = App->map->MapToWorld(path->At(0)->x, path->At(0)->y);
+	ready = false;
 	if (!set_timer) {
 		set_timer = true;
 		tick2 = SDL_GetTicks();
-		objective = App->map->MapToWorld(path->At(0)->x, path->At(0)->y);
 	}
 	tick1 = SDL_GetTicks();
 	if (tick1 - tick2 >= 1500) {
