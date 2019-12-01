@@ -50,10 +50,12 @@
     <flyingEnemy>
       <velocity value ="40.0"/>
       <fall_velocity value ="150.0"/>
+      <die_timer value ="1"/>
     </flyingEnemy>
     
     <groundEnemy>
       <velocity value ="200.0"/>
+      <die_timer value ="1"/>
     </groundEnemy>
 
   </entityManager>

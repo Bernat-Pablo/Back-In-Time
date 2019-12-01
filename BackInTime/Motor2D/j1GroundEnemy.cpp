@@ -18,7 +18,7 @@
 
 j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 {
-	name.create("goundEnemy");
+	name.create("groundEnemy");
 	type = entityTypes::GROUND_ENEMY;
 
 	float speed = 0.5f;

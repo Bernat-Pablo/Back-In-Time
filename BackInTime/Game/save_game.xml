@@ -6,23 +6,26 @@
 	<audio />
 	<map />
 	<scene />
-	<entityManager />
+	<entityManager>
+		<flyingEnemy position_x="1180" position_y="64" />
+		<flyingEnemy position_x="332" position_y="80" />
+		<groundEnemy position_x="720" position_y="165" />
+		<groundEnemy position_x="1488" position_y="180" />
+	</entityManager>
 	<player>
-		<position x="80" y="183" />
+		<position x="98" y="184" />
 		<level value="1" />
-		<camera_toRight x="150" y="90" />
-		<camera_toLeft x="30" y="90" />
-		<camera_toUp x="30" y="90" />
-		<camera_toDown x="30" y="210" />
-		<camera x="0" y="304" />
+		<camera_toRight x="150" y="91" />
+		<camera_toLeft x="30" y="91" />
+		<camera_toUp x="30" y="91" />
+		<camera_toDown x="30" y="211" />
+		<camera x="0" y="303" />
 		<lives value="3" />
 	</player>
 	<:anonymous />
 	<:anonymous />
 	<pathfinding />
 	<renderer>
-		<camera x="0" y="304" />
+		<camera x="0" y="303" />
 	</renderer>
-	<goundEnemy />
-	<flyingEnemy />
 </game_state>

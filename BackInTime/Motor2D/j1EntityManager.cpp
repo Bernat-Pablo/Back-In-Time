@@ -160,11 +160,14 @@ j1Entity* j1EntityManager::CreateEntity(entityTypes type, int position_x, int po
 bool j1EntityManager::Save(pugi::xml_node& file)const
 {
 	bool ret = true;
-	p2List_item<j1Entity*>* tmp = entitiesList.start;
-	while (tmp != nullptr)
+	p2List_item<j1Entity*>* entity = entitiesList.start;
+	while (entity != nullptr)
 	{
-		tmp->data->Save(file);
-		tmp = tmp->next;
+		pugi::xml_node child = file.append_child(entity->data->name.GetString());
+		child.append_attribute("position_x") = entity->data->position.x;
+		child.append_attribute("position_y") = entity->data->position.y;
+
+		entity = entity->next;
 	}
 	return ret;
 }
