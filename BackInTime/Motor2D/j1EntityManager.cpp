@@ -140,11 +140,13 @@ j1Entity* j1EntityManager::CreateEntity(entityTypes type, int position_x, int po
 		ret = new j1GroundEnemy();
 		ret->position.x = position_x;
 		ret->position.y = position_y;
+		ret->Awake(App->GetConfig().child("entityManager").child("groundEnemy"));
 		break;
 	case entityTypes::FLYING_ENEMY:
 		ret = new j1FlyingEnemy();
 		ret->position.x = position_x;
 		ret->position.y = position_y;
+		ret->Awake(App->GetConfig().child("entityManager").child("flyingEnemy"));
 		break;
 	case entityTypes::UNKNOWN:
 		break;
