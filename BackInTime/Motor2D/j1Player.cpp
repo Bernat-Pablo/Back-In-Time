@@ -669,17 +669,6 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 				//Controlling UI
 			}
 		}
-	}else if(c1->type == COLLIDER_ROCK)
-	{
-		switch(c2->type)
-		{
-		case COLLIDER_FLYING_ENEMY:
-			LOG("Collision with flying enemy detected");
-			break;
-		case COLLIDER_GROUND_ENEMY:
-			LOG("Collision with ground enemy detected");
-			break;
-		}
 	}
 }
 
