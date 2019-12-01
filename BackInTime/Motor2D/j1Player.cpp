@@ -111,7 +111,7 @@ bool j1Player::Start(){
 	screen_size = config_local.child("window").child("resolution").attribute("scale").as_int();
 
 	config_local = config_local.child("entityManager").child("player");
-
+	fall_velocity = 0;
 	if (App->scene->choose_lv == 1) //We are on map1
 	{
 		position.x = config_local.child("initialPosition").child("map1").attribute("x").as_int();
@@ -668,17 +668,6 @@ void j1Player::OnCollision(Collider* c1, Collider* c2) {
 				MoveCameraColliders("y", fall_velocity);
 				//Controlling UI
 			}
-		}
-	}else if(c1->type == COLLIDER_ROCK)
-	{
-		switch(c2->type)
-		{
-		case COLLIDER_FLYING_ENEMY:
-			LOG("Collision with flying enemy detected");
-			break;
-		case COLLIDER_GROUND_ENEMY:
-			LOG("Collision with ground enemy detected");
-			break;
 		}
 	}
 }

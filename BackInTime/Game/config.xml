@@ -22,7 +22,7 @@
       <!-- Initial Position -->
       <initialPosition>
         <map1 x="80" y="180"/>
-        <map2 x="80" y="53"/>
+        <map2 x="80" y="40"/>
       </initialPosition>
       <!-- Player initial settings -->
       <lives value ="3"/>
