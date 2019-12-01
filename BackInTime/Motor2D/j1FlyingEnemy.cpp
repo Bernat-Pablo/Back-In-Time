@@ -46,6 +46,7 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 	hit.PushBack({ 104,126,39,39 }, speed);
 	hit.PushBack({ 143,126,39,39 }, speed);
 	hit.PushBack({ 184,126,39,39 }, speed);
+	hit.loop = false;
 	
 	//FALL
 	speed = 0.3f;
@@ -208,6 +209,11 @@ bool j1FlyingEnemy::Update(float dt)
 		position.y -= (int)ceil(velocity * dt);
 		break;
 
+	case entityStates::HIT:
+		current_animation = &hit;
+		hit.Reset();
+
+		break;
 	default:
 		break;
 	}

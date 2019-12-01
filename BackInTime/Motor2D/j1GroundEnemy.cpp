@@ -74,8 +74,8 @@ bool j1GroundEnemy::Start()
 
 	state = entityStates::IDLE;	
 
-	position.x = 500;
-	position.y = 180;
+	position.x = 120;
+	position.y = 170;
 
 	current_animation = &idle;
 
@@ -162,6 +162,10 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	}
 	
+	if (falling) {
+		position.y += 3;
+	}
+
 	//BLIT
 	if(reversed)
 		App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame(),1,2)	;
@@ -187,7 +191,27 @@ bool j1GroundEnemy::CleanUp()
 
 void j1GroundEnemy::OnCollision(Collider* c1, Collider* c2)
 {
+	switch (c2->type)
+	{
+	case COLLIDER_WALL:
+		if (position.y < c2->rect.y) {
+			if (position.x + collider_entity->rect.w > c2->rect.x) {
+				if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
+					falling = false;
+				}
+			}
+		}
+		else
+			falling = true;
 
+		break;
+	case COLLIDER_DIE:
+		//TODO here we have to put -> delete enemy
+
+		break;
+	default:
+		break;
+	}
 }
 
 void j1GroundEnemy::calculate_path()

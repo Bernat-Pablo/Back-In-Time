@@ -36,6 +36,7 @@ private:
 	bool stun = false;
 	bool reset = true;
 	bool ready = true;
+	bool falling = true;
 
 	iPoint objective;
 };
