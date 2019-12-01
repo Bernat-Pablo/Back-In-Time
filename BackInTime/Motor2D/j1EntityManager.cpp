@@ -8,6 +8,7 @@
 #include "j1GroundEnemy.h"
 #include "PugiXml/src/pugixml.hpp"
 #include "j1Textures.h"
+#include "Brofiler/Brofiler.h"
 
 j1EntityManager::j1EntityManager()
 {
@@ -66,6 +67,10 @@ bool j1EntityManager::PreUpdate()
 		entity->data->PreUpdate();
 		entity = entity->next;
 	}
+
+	BROFILER_CATEGORY("EntityM_PreUpdate", Profiler::Color::LightGreen);
+
+
 	return ret;
 }
 
@@ -80,6 +85,9 @@ bool j1EntityManager::Update(float dt)
 		entity->data->Update(dt);
 		entity = entity->next;
 	}
+
+	BROFILER_CATEGORY("EntityM_Update", Profiler::Color::Gold);
+
 	return ret;
 }
 
@@ -94,6 +102,9 @@ bool j1EntityManager::PostUpdate()
 		entity->data->PostUpdate();
 		entity = entity->next;
 	}
+
+	BROFILER_CATEGORY("EntityM_PostUpdate", Profiler::Color::SaddleBrown);
+
 	return ret;
 }
 
@@ -109,6 +120,7 @@ bool j1EntityManager::CleanUp()
 		entity = entity->next;
 	}	
 	DestroyAllEntities();
+
 
 	return ret;
 }
