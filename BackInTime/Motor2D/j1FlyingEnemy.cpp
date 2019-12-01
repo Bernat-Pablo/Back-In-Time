@@ -224,7 +224,8 @@ bool j1FlyingEnemy::Update(float dt)
 
 	
 	//PATH TO PLAYER (BLIT)
-	blit_path();
+	if(App->collision->debug)
+		blit_path();
 
 	return true;
 }

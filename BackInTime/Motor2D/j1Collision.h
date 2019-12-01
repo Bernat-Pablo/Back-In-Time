@@ -65,9 +65,9 @@ public:
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, p2SString name, j1Module* callback = nullptr);
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
+	bool debug = false;
 private:
 
-	bool debug = false;
 };
 
 #endif // __ModuleCollision_H__

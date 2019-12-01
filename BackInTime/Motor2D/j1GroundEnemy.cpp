@@ -178,7 +178,8 @@ bool j1GroundEnemy::Update(float dt)
 	collider_entity->SetPos(position.x, position.y);
 
 	calculate_path();
-	blit_path();
+	if (App->collision->debug)
+		blit_path();
 
 	return true;
 }
