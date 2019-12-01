@@ -99,6 +99,7 @@ bool j1Player::Start(){
 	//init clocks
 	tick2 = SDL_GetTicks();
 	tick4 = SDL_GetTicks();
+
 	spritesheet_entity = App->tex->Load("character/spritesheet_pj.png");
 	spritesheet_casper = App->tex->Load("character/spritesheet_casper.png");
 	spritesheet_bars = App->tex->Load("character/spritesheet_bars.png");
@@ -133,6 +134,8 @@ bool j1Player::Start(){
 	camera_toDown = App->collision->AddCollider({ position.x - 50,position.y + 20,140,40 }, COLLIDER_CAMERA, "down", (j1Module*)App->player);
 
 	App->audio->LoadFx("audio/fx/jump.wav");
+	App->audio->LoadFx("audio/fx/hurt.wav");
+
 
 	//bar ability
 	bar_0 = { 268,25,62,12 };
@@ -313,8 +316,10 @@ bool j1Player::PreUpdate()
 		state = entityStates::IDLE;
 		break;
 	}
-	if (player_input.pressing_F)
+	if (player_input.pressing_F) {
 		throwRock();
+		//App->audio->PlayFx(3);
+	}
 
 	//Change player collider position
 	collider_entity->SetPos(position.x, position.y);
@@ -477,6 +482,7 @@ bool j1Player::Update(float dt)
 			ability_able = false;
 			iterator = 0;
 			App->fade->FadeToBlack(App->scene, App->scene);
+			App->audio->PlayFx(2);
 			break;
 	}	
 
@@ -526,7 +532,7 @@ bool j1Player::Update(float dt)
 		walking = true;
 	else walking = false;
 
-	if (walking == true)	App->audio->PlayFx(2, 1); //sound of walking active
+	//if (walking == true)	App->audio->PlayFx(2, 1); //sound of walking active
 
 	//do ability
 	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
