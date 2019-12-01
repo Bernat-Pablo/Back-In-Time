@@ -40,6 +40,7 @@ public:
 	//Entities list
 
 	p2List<j1Entity*> entitiesList;
+	j1Entity* player;
 };
 
 #endif // !__j1ENTITYMANAGER_H__

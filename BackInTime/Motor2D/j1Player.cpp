@@ -743,8 +743,8 @@ bool j1Player::Load(pugi::xml_node& data)
 void j1Player::checkAbility() {
 	if (tick1 - tick2 >= 1) { // here we save each 0.05 sec the position.
 		if (iterator <= 29) {
-			old_position[iterator].x = App->player->position.x;
-			old_position[iterator].y = App->player->position.y;
+			old_position[iterator].x = position.x;
+			old_position[iterator].y = position.y;
 			iterator++;
 		}
 		else {
@@ -752,8 +752,8 @@ void j1Player::checkAbility() {
 				old_position[i].x = old_position[i + 1].x;
 				old_position[i].y = old_position[i + 1].y;
 			}
-			old_position[29].x = App->player->position.x; //what we pretend to do, is save the position of 1.5 sec before in time
-			old_position[29].y = App->player->position.y;
+			old_position[29].x = position.x; //what we pretend to do, is save the position of 1.5 sec before in time
+			old_position[29].y = position.y;
 		}
 		tick2 = SDL_GetTicks();
 	}

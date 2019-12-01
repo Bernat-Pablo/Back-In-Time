@@ -12,6 +12,7 @@
 j1EntityManager::j1EntityManager()
 {
 	name.create("entityManager");
+	
 }
 
 j1EntityManager::~j1EntityManager()
@@ -22,6 +23,9 @@ j1EntityManager::~j1EntityManager()
 bool j1EntityManager::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
+	player = new j1Player();
+	player->Awake(config.child("player"));	
+	entitiesList.add(player);
 	
 
 	return ret;
@@ -30,6 +34,8 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 bool j1EntityManager::Start()
 {
 	bool ret = true;
+	player->Start();
+
 
 	return ret;
 }
@@ -37,13 +43,15 @@ bool j1EntityManager::Start()
 bool j1EntityManager::PreUpdate()
 {
 	bool ret = true;
-	
+	player->PreUpdate();
+
 	return ret;
 }
 
 bool j1EntityManager::Update(float dt)
 {
 	bool ret = true;
+	player->Update(dt);
 
 	return ret;
 }
@@ -51,6 +59,7 @@ bool j1EntityManager::Update(float dt)
 bool j1EntityManager::PostUpdate()
 {
 	bool ret = true;
+	player->PostUpdate();
 
 	return ret;
 }
