@@ -287,26 +287,30 @@ void j1FlyingEnemy::check_path_toMove()
 
 void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 
-	switch (c2->type)
+	if(c1->type == COLLIDER_FLYING_ENEMY)
 	{
-	case COLLIDER_WALL:
-		if (position.y < c2->rect.y) {
-			if (position.x + collider_entity->rect.w > c2->rect.x) {
-				if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
-					state = entityStates::IN_GROUND;
-					if(!starting_flying)
-						isgrounded = true;
-				}
+		switch (c2->type)
+		{
+		case COLLIDER_WALL:
+			if (position.y < c2->rect.y) {
+				if(collider_entity != nullptr)
+					if (position.x + collider_entity->rect.w > c2->rect.x) {
+						if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w) {
+							state = entityStates::IN_GROUND;
+							if (!starting_flying)
+								isgrounded = true;
+						}
+					}
 			}
+			break;
+		case COLLIDER_ROCK:
+			App->entityManager->DestroyEntity(this);
+			break;
+		case COLLIDER_DIE:
+			App->entityManager->DestroyEntity(this);
+			break;
+		default:
+			break;
 		}
-
-		break;
-	case COLLIDER_DIE:
-		//TODO here we have to put -> delete enemy
-
-		break;
-	default:
-		break;
-	}
-
+	}	
 }

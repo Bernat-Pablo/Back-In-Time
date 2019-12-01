@@ -32,6 +32,12 @@ j1Collision::j1Collision()
 	matrix[COLLIDER_PLAYER][COLLIDER_DIE] = true;
 	matrix[COLLIDER_DIE][COLLIDER_PLAYER] = true;
 
+	//Colliders to die for enemies
+	matrix[COLLIDER_FLYING_ENEMY][COLLIDER_DIE] = true;
+	matrix[COLLIDER_DIE][COLLIDER_FLYING_ENEMY] = true;
+	matrix[COLLIDER_GROUND_ENEMY][COLLIDER_DIE] = true;
+	matrix[COLLIDER_DIE][COLLIDER_GROUND_ENEMY] = true;
+
 	//Colliders to change scene
 	matrix[COLLIDER_PLAYER][COLLIDER_DOOR] = true;
 	matrix[COLLIDER_DOOR][COLLIDER_PLAYER] = true;
