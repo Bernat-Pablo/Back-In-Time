@@ -168,37 +168,35 @@ int PathNode::CalculateF(const iPoint& destination)
 // ----------------------------------------------------------------------------------
 int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 {
-	//if origin or destination are not walkable, return -1
+	//Return -1 if the path origin or destination are unwalkable
 	if (IsWalkable(origin) == false || IsWalkable(destination) == false) {
 		return -1;
 	}
-	//Create two lists: open, close
 
+	//I Create 2 Path lists
 	last_path.Clear();
-
 	PathList open;
 	PathList closed;
+
 	// Add the origin tile to open
 	open.list.add(PathNode(0, origin.DistanceTo(destination), origin, NULL));
-	// Iterate while we have tile in the open list
 
+	// Iterate while we have tile in the open list
 	PathNode* current_node;
+
+	// i create a list of nodes to avoid memory leaks
 	p2List<PathNode*> list_todelete;
 
 	while (open.GetNodeLowestScore() != NULL)
 	{
 		current_node = new PathNode(open.GetNodeLowestScore()->data);
 		//Move the lowest score cell from open list to the closed list
-		list_todelete.add(current_node);
 		closed.list.add(*current_node);
 		open.list.del(open.Find(current_node->pos));
-		//If we just added the destination, we are done!
-		// Backtrack to create the final path
-		// Use the Pathnode::parent and Flip() the path when you are finish... ¿ed?
+		list_todelete.add(current_node); //we also add the node to the list to delete
+
 		if (current_node->pos == destination) {
-
 			PathNode* iterator = current_node;
-
 			for (iterator; iterator->pos != origin; iterator = iterator->parent) {
 				last_path.PushBack(iterator->pos);
 			}
@@ -207,38 +205,34 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 			for (int i = 0; i < list_todelete.count(); i++) {
 				delete list_todelete[i];
 			}
-
 			last_path.Flip();
+
 			return 0;
 
 		}
 
-		//Fill a list of all adjancent nodes
-		PathList Adjacent_list;
-		uint limit = current_node->FindWalkableAdjacents(Adjacent_list);
-		//Iterate adjancent nodes:
+		//We get a list of adjacent nodes
+		PathList adjacentNodes;
+		uint limit = current_node->FindWalkableAdjacents(adjacentNodes);
+		//We iterate adjancent nodes
 		for (uint i = 0; i < limit; i++) {
 			// ignore nodes in the closed list <======> do things only if we didnt find them
-			if ((closed.Find(Adjacent_list.list[i].pos)) == NULL) {
-				// If it is NOT found, calculate its F and add it to the open list
-				if ((open.Find(Adjacent_list.list[i].pos)) == NULL) {
-					Adjacent_list.list[i].CalculateF(destination);
-					open.list.add(Adjacent_list.list[i]);
+			if ((closed.Find(adjacentNodes.list[i].pos)) == NULL) {
+				//if adjacent node is null, we calculate the open one
+				if ((open.Find(adjacentNodes.list[i].pos)) == NULL) {
+					adjacentNodes.list[i].CalculateF(destination);
+					open.list.add(adjacentNodes.list[i]);
 				}
-				else { // If it is already in the open list, check if it is a better path (compare G)
-					if (Adjacent_list.list[i].g < open.Find(Adjacent_list.list[i].pos)->data.g) {
-						// If it is a better path, Update the parent
-						//open.Find(Adjacent_list.list[i].pos)->data.parent = Adjacent_list.list[i].parent;
-						Adjacent_list.list[i].CalculateF(destination);
-						open.list.del(open.Find(Adjacent_list.list[i].pos));
-						open.list.add(Adjacent_list.list[i]);
-
+				else { //if we are already into open list, we check a better path
+					if (adjacentNodes.list[i].g < open.Find(adjacentNodes.list[i].pos)->data.g) {
+						// if we find a better path, we search a new parent
+						adjacentNodes.list[i].CalculateF(destination);
+						open.list.del(open.Find(adjacentNodes.list[i].pos));
+						open.list.add(adjacentNodes.list[i]);
 					}
 				}
 			}
 		}
-
-
 	}
 	BROFILER_CATEGORY("PathFinding", Profiler::Color::Aqua);
 }
