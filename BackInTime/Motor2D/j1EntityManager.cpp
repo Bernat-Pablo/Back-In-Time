@@ -49,7 +49,7 @@ bool j1EntityManager::Start()
 	p2List_item<j1Entity*>* entity = entitiesList.start;
 	while (entity != nullptr)
 	{
-		entity->data->Start();
+		//entity->data->Start();
 		entity = entity->next;
 	}
 
@@ -138,12 +138,14 @@ j1Entity* j1EntityManager::CreateEntity(entityTypes type, int position_x, int po
 		ret->position.x = position_x;
 		ret->position.y = position_y;
 		ret->Awake(App->GetConfig().child("entityManager").child("groundEnemy"));
+		ret->Start();
 		break;
 	case entityTypes::FLYING_ENEMY:
 		ret = new j1FlyingEnemy();
 		ret->position.x = position_x;
 		ret->position.y = position_y;
 		ret->Awake(App->GetConfig().child("entityManager").child("flyingEnemy"));
+		ret->Start();
 		break;
 	case entityTypes::UNKNOWN:
 		break;
@@ -186,8 +188,8 @@ bool j1EntityManager::Load(pugi::xml_node& file)
 		position_saved.x = entity_saved.child("position").attribute("x").as_int();
 		position_saved.y = entity_saved.child("position").attribute("y").as_int();
 
-		//if (entity_name == "flyingEnemy")
-		//	CreateEntity(entityTypes::FLYING_ENEMY, position_saved.x, position_saved.y);
+		if (entity_name == "flyingEnemy")
+			CreateEntity(entityTypes::FLYING_ENEMY, position_saved.x, position_saved.y);
 		//else if (entity_name == "groundEnemy")
 		//	CreateEntity(entityTypes::GROUND_ENEMY, position_saved.x, position_saved.y);
 
@@ -205,6 +207,7 @@ void j1EntityManager::DestroyEntity(j1Entity* entity)
 		item = entitiesList.At(entitiesList.find(entity));
 		if (entity->collider_entity != nullptr)
 		{
+			entity->CleanUp();
 			delete entity->collider_entity;
 			entity->collider_entity = nullptr;
 		}
