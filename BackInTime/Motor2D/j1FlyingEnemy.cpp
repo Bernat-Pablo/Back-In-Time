@@ -76,7 +76,7 @@ bool j1FlyingEnemy::Start()
 	state = entityStates::FLY;
 
 	current_animation = &fly;
-	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)App->flyingEnemy); //a collider to start
+	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_FLYING_ENEMY, "bird", (j1Module*)this); //a collider to start
 
 	isgrounded = false;
 
@@ -220,7 +220,8 @@ bool j1FlyingEnemy::Update(float dt)
 
 	//BLIT
 	App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
-	collider_entity->SetPos(position.x, position.y);
+	if(collider_entity != nullptr)
+		collider_entity->SetPos(position.x, position.y);
 
 	
 	//PATH TO PLAYER (BLIT)

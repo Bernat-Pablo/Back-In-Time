@@ -73,8 +73,6 @@ public:
 	j1Player* player;
 	j1Fade* fade;
 	j1PathFinding* pathfinding;
-	j1FlyingEnemy* flyingEnemy;
-	j1GroundEnemy* groundEnemy;
 
 private:
 

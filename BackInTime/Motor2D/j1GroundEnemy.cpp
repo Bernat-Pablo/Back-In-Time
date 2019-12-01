@@ -79,7 +79,7 @@ bool j1GroundEnemy::Start()
 
 	current_animation = &idle;
 
-	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_GROUND_ENEMY, "rino", (j1Module*)App->groundEnemy); //a collider to start
+	collider_entity = App->collision->AddCollider(current_animation->GetCurrentFrame(), COLLIDER_GROUND_ENEMY, "rino", (j1Module*)this); //a collider to start
 
 	return true;
 }
