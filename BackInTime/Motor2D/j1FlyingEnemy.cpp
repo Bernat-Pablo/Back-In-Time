@@ -250,7 +250,7 @@ void j1FlyingEnemy::calculate_path()
 
 	iPoint p = App->render->ScreenToWorld(position.x, position.y);
 	p = App->map->WorldToMap(position.x, position.y);
-	if (App->player->position.x-position.x<=160 && position.x - App->player->position.x >=-160) {
+	if (App->player->position.x - position.x >= -160 && position.x - App->player->position.x >= -160) {
 		App->pathfinding->CreatePath(origin, p);
 		if (set_path == true) {
 			check_path_toMove();
