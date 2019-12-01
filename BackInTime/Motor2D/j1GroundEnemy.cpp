@@ -122,7 +122,7 @@ bool j1GroundEnemy::PreUpdate()
 	}
 
 
-
+	BROFILER_CATEGORY("Rino_PreUpdate", Profiler::Color::HotPink);
 
 	return true;
 }
@@ -180,6 +180,9 @@ bool j1GroundEnemy::Update(float dt)
 	calculate_path();
 	if (App->collision->debug)
 		blit_path();
+
+	BROFILER_CATEGORY("Rino_Update", Profiler::Color::FloralWhite);
+
 
 	return true;
 }

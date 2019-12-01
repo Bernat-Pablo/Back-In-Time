@@ -130,6 +130,8 @@ bool j1FlyingEnemy::PreUpdate()
 	//PATH TO PLAYER (LOGIC)
 	calculate_path();
 
+	BROFILER_CATEGORY("Bird_PreUpdate", Profiler::Color::DarkGray);
+
 	return true;
 }
 
@@ -226,6 +228,8 @@ bool j1FlyingEnemy::Update(float dt)
 	//PATH TO PLAYER (BLIT)
 	if(App->collision->debug)
 		blit_path();
+
+	BROFILER_CATEGORY("Bird_Update", Profiler::Color::Fuchsia);
 
 	return true;
 }
