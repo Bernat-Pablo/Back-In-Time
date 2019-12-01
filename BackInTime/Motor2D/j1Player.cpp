@@ -135,6 +135,7 @@ bool j1Player::Start(){
 
 	App->audio->LoadFx("audio/fx/jump.wav");
 	App->audio->LoadFx("audio/fx/hurt.wav");
+	App->audio->LoadFx("audio/fx/throw.wav");
 
 
 	//bar ability
@@ -318,7 +319,7 @@ bool j1Player::PreUpdate()
 	}
 	if (player_input.pressing_F) {
 		throwRock();
-		//App->audio->PlayFx(3);
+		App->audio->PlayFx(3);
 	}
 
 	//Change player collider position
