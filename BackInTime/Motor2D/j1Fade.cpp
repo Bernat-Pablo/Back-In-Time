@@ -77,11 +77,7 @@ bool j1Fade::Update(float dt)
 			App->scene->Start();
 			App->player->Start(); //Set initial player position
 			App->collision->Awake(App->GetConfig());	
-			App->render->cameraSetInitialPosition(App->GetConfig()); //Set initial camera position
-			App->flyingEnemy->Awake(App->GetConfig());
-			App->flyingEnemy->Start();
-			App->groundEnemy->Awake(App->GetConfig());
-			App->groundEnemy->Start();			
+			App->render->cameraSetInitialPosition(App->GetConfig()); //Set initial camera position					
 
 			total_time += total_time;
 			start_time = SDL_GetTicks();

@@ -50,11 +50,6 @@
     <flyingEnemy>
       <velocity value ="40.0"/>
       <fall_velocity value ="150.0"/>
-
-      <initialPosition>
-        <flyingEnemy1 x="50" y="50"/>
-        <flyingEnemy2 x="250" y="50"/>
-      </initialPosition>
     </flyingEnemy>
     
     <groundEnemy>
