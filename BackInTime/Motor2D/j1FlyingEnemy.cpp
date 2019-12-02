@@ -214,7 +214,6 @@ bool j1FlyingEnemy::Update(float dt)
 	case entityStates::HIT:
 		current_animation = &hit;
 		hit.Reset();
-		collider_entity->SetPos(-500, -500);
 		App->entityManager->DestroyEntity(this);
 		break;
 	default:
@@ -240,7 +239,7 @@ bool j1FlyingEnemy::CleanUp()
 {
 	App->tex->UnLoad(spritesheet_entity);
 	App->tex->UnLoad(debug_tex);
-	collider_entity->SetPos(-500, -500);
+	collider_entity->to_delete = true;
 	collider_entity = nullptr;
 	spritesheet_entity = nullptr;
 	return true;

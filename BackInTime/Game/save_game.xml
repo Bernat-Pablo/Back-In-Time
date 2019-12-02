@@ -10,24 +10,30 @@
 		<flyingEnemy>
 			<position x="1280" y="0" />
 		</flyingEnemy>
+		<flyingEnemy>
+			<position x="342" y="80" />
+		</flyingEnemy>
+		<flyingEnemy>
+			<position x="736" y="96" />
+		</flyingEnemy>
 		<groundEnemy>
 			<position x="1472" y="182" />
 		</groundEnemy>
 	</entityManager>
 	<player>
-		<position x="932" y="120" />
+		<position x="284" y="184" />
 		<level value="1" />
-		<camera_toRight x="952" y="69" />
-		<camera_toLeft x="832" y="69" />
-		<camera_toUp x="832" y="69" />
-		<camera_toDown x="832" y="189" />
-		<camera x="-1684" y="323" />
+		<camera_toRight x="303" y="92" />
+		<camera_toLeft x="183" y="92" />
+		<camera_toUp x="183" y="92" />
+		<camera_toDown x="183" y="212" />
+		<camera x="-306" y="299" />
 		<lives value="3" />
 	</player>
 	<:anonymous />
 	<:anonymous />
 	<pathfinding />
 	<renderer>
-		<camera x="-1684" y="323" />
+		<camera x="-306" y="299" />
 	</renderer>
 </game_state>
