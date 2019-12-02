@@ -308,8 +308,7 @@ void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 			state = entityStates::HIT;			
 			break;
 		case COLLIDER_DIE:
-			App->entityManager->DestroyEntity(this);
-			break;
+			state = entityStates::HIT;
 		default:
 			break;
 		}
