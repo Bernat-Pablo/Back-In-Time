@@ -160,11 +160,10 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	case entityStates::HIT:
 		current_animation = &hit;
-		//if (current_animation->SeeCurrentFrame() == 3) {
+		if (current_animation->SeeCurrentFrame() == 3) {
 			App->entityManager->DestroyEntity(this);
 			hit.Reset();
-		//}
-
+		}
 		break;
 	}
 	
@@ -175,13 +174,17 @@ bool j1GroundEnemy::Update(float dt)
 	}
 
 	//BLIT
-	if(reversed)
-		App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame(),1,2)	;
-	else
-		App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
+	if(spritesheet_entity != nullptr && current_animation != nullptr)
+	{
+		if (reversed)
+			App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame(), 1, 2);
+		else
+			App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
 
-	if(collider_entity != nullptr)
-		collider_entity->SetPos(position.x, position.y);
+		if (collider_entity != nullptr)
+			collider_entity->SetPos(position.x, position.y);
+	}
+	
 
 	calculate_path();
 	if (App->collision->debug)
