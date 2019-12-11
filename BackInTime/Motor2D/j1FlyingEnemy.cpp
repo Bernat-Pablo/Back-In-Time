@@ -242,6 +242,7 @@ bool j1FlyingEnemy::CleanUp()
 	collider_entity->to_delete = true;
 	collider_entity = nullptr;
 	spritesheet_entity = nullptr;
+	current_animation = nullptr;
 	return true;
 }
 

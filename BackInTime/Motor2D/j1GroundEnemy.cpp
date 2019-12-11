@@ -160,10 +160,10 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	case entityStates::HIT:
 		current_animation = &hit;
-		if (current_animation->SeeCurrentFrame() == 3) {
+		//if (current_animation->SeeCurrentFrame() == 3) {
 			App->entityManager->DestroyEntity(this);
 			hit.Reset();
-		}
+		//}
 
 		break;
 	}
@@ -200,6 +200,8 @@ bool j1GroundEnemy::CleanUp()
 	collider_entity->to_delete = true;
 	collider_entity = nullptr;
 	spritesheet_entity = nullptr;
+	current_animation = nullptr;
+	
 	return true;
 }
 

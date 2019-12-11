@@ -28,15 +28,6 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	//player = CreateEntity(entityTypes::PLAYER, 0, 0);
 	//player->Awake(config.child("player"));	
 	//entitiesList.add(player);
-	
-	//Spawn test enemy
-	/*testFlyingEnemy = CreateEntity(entityTypes::FLYING_ENEMY, 100, 0);	
-	testFlyingEnemy->Awake(config.child("flyingEnemy"));	
-	entitiesList.add(testFlyingEnemy);*/
-
-	/*testFlyingEnemy2 = CreateEntity(entityTypes::FLYING_ENEMY, 200, 0);
-	testFlyingEnemy2->Awake(config.child("flyingEnemy"));
-	entitiesList.add(testFlyingEnemy2);*/
 
 	return ret;
 }
@@ -44,14 +35,8 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 bool j1EntityManager::Start()
 {
 	bool ret = true;
-	//player->Start();
-
-	p2List_item<j1Entity*>* entity = entitiesList.start;
-	while (entity != nullptr)
-	{
-		//entity->data->Start();
-		entity = entity->next;
-	}
+	
+	//Entity Start() is called at CreateEntity()
 
 	return ret;
 }

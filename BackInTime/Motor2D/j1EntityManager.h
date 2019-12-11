@@ -38,9 +38,6 @@ public:
 
 	p2List<j1Entity*> entitiesList;
 	j1Entity* player = nullptr;
-	j1Entity* testFlyingEnemy = nullptr;
-	j1Entity* testFlyingEnemy2 = nullptr;
-	j1Entity* testGroundEnemy = nullptr;
 };
 
 #endif // !__j1ENTITYMANAGER_H__
