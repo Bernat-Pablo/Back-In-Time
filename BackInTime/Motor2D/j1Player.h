@@ -42,6 +42,7 @@ public:
 	void throwRock();
 	bool rockCheckInAir();
 
+	void ApplyForces(float dt);
 	iPoint position;	
 private:
 	

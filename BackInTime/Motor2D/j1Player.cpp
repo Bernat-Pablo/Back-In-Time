@@ -499,32 +499,8 @@ bool j1Player::Update(float dt)
 			break;
 	}	
 
-	//Gravity system
-	if(godMode == false)
-	{				
-		in_air = checkInAir();
-
-		if(in_air == true)
-		{			
-			if(fall_velocity < max_fall_velocity)
-				fall_velocity += gravity*dt;
-
-			position.y += (int)ceil(fall_velocity);
-			//LOG("IN AIR");
-		}else if(in_air == false)
-		{
-			//LOG("NOT IN AIR");
-		}			
-	}	
-	//Activate godmode
-	else if(godMode == true)
-	{
-		in_air = false;
-		if (player_input.pressing_W)
-			position.y -= (int)ceil(velocity*dt);
-		if (player_input.pressing_S)
-			position.y += (int)ceil(velocity*dt);
-	}
+	ApplyForces(dt);//Gravity and godmode
+	rockMovement();
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
@@ -533,9 +509,7 @@ bool j1Player::Update(float dt)
 	if(!looking_right)
 		App->render->Blit(spritesheet_entity, position.x, position.y, &r,1,2); //looking at left
 	else
-		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right
-		
-	rockMovement();			
+		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right			
 
 	App->render->Blit(spritesheet_rock, rockPosition.x, rockPosition.y, &throw_rock.GetCurrentFrame());
 	   
@@ -986,4 +960,35 @@ bool j1Player::rockCheckInAir()
 	}
 
 	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
+}
+
+void j1Player::ApplyForces(float dt)
+{
+	//Gravity system
+	if (godMode == false)
+	{
+		in_air = checkInAir();
+
+		if (in_air == true)
+		{
+			if (fall_velocity < max_fall_velocity)
+				fall_velocity += gravity * dt;
+
+			position.y += (int)ceil(fall_velocity);
+			//LOG("IN AIR");
+		}
+		else if (in_air == false)
+		{
+			//LOG("NOT IN AIR");
+		}
+	}
+	//Activate godmode
+	else if (godMode == true)
+	{
+		in_air = false;
+		if (player_input.pressing_W)
+			position.y -= (int)ceil(velocity * dt);
+		if (player_input.pressing_S)
+			position.y += (int)ceil(velocity * dt);
+	}
 }
