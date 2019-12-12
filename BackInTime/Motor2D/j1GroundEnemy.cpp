@@ -91,36 +91,29 @@ bool j1GroundEnemy::PreUpdate()
 			state = entityStates::RUN_BACKWARD;
 		if (moving_right)
 			state = entityStates::RUN_FORWARD;
-
 		break;
 	case entityStates::RUN_FORWARD:
 		if(stun)
 			state = entityStates::STUNNED;
 		if (moving_left)
 			state = entityStates::RUN_BACKWARD;
-
 		break;
 	case entityStates::RUN_BACKWARD:
 		if (stun)
 			state = entityStates::STUNNED;
 		if (moving_right)
 			state = entityStates::RUN_FORWARD;
-
 		break;
 	case entityStates::STUNNED:
 		if (!stun) {
 			state = entityStates::IDLE;
-		}
-			
-
+		}	
 		break;
 	case entityStates::HIT:
 		if(!being_hit)
 			state = entityStates::IDLE;
-
 		break;
 	}
-
 
 	BROFILER_CATEGORY("Rino_PreUpdate", Profiler::Color::HotPink);
 
@@ -134,7 +127,6 @@ bool j1GroundEnemy::Update(float dt)
 	case entityStates::IDLE:
 		current_animation = &idle;
 		ready = true;
-
 		break;
 	case entityStates::RUN_FORWARD:
 		current_animation = &run;
@@ -166,12 +158,9 @@ bool j1GroundEnemy::Update(float dt)
 		}
 		break;
 	}
-	
-	falling = checkInAir();
 
-	if (falling) {
-		position.y += 3;
-	}
+	if (checkInAir())
+		position.y += (int)ceil(90 * dt);	
 
 	//BLIT
 	if(spritesheet_entity != nullptr && current_animation != nullptr)
@@ -183,15 +172,13 @@ bool j1GroundEnemy::Update(float dt)
 
 		if (collider_entity != nullptr)
 			collider_entity->SetPos(position.x, position.y);
-	}
-	
+	}	
 
 	calculate_path();
 	if (App->collision->debug)
 		blit_path();
 
 	BROFILER_CATEGORY("Rino_Update", Profiler::Color::FloralWhite);
-
 
 	return true;
 }
@@ -200,8 +187,10 @@ bool j1GroundEnemy::CleanUp()
 {
 	App->tex->UnLoad(spritesheet_entity);
 	App->tex->UnLoad(debug_tex);
+
 	collider_entity->to_delete = true;
 	collider_entity = nullptr;
+
 	spritesheet_entity = nullptr;
 	current_animation = nullptr;
 	
@@ -229,10 +218,8 @@ void j1GroundEnemy::OnCollision(Collider* c1, Collider* c2)
 			{
 				if (state == entityStates::RUN_BACKWARD || state == entityStates::IDLE)
 				{
-					if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall
-					{
-						collider_at_left = true;
-					}
+					if (position.y + 0.7f * collider_entity->rect.h > c2->rect.y) //There is a wall					
+						collider_at_left = true;					
 					else
 						collider_at_left = false;
 				}
@@ -260,9 +247,8 @@ void j1GroundEnemy::calculate_path()
 	p = App->map->WorldToMap(position.x, position.y);
 	if (App->player->position.x - position.x >= -160 && position.x - App->player->position.x >= -160) {
 		App->pathfinding->CreatePath(origin, p);
-		if (set_path == true) {
-			check_path_toMove();
-		}
+		if (set_path == true) 
+			check_path_toMove();		
 	}
 }
 
