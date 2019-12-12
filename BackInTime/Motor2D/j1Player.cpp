@@ -869,27 +869,25 @@ bool j1Player::checkInAir() //Checks if player is in_air or if it's grounded
 			continue;
 
 		c2 = App->collision->colliders[k];
+		
+		if (c2->type != COLLIDER_WALL) //We only want to check if player is colliding with a wall
+			continue;
+		if (collider_entity->CheckCollision(c2->rect) == false)
+			continue;
+		if (position.y > c2->rect.y)
+			continue;
+		if (position.x + 0.8 * collider_entity->rect.w < c2->rect.x)
+			continue;
+		if (position.x > c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w)
+			continue;
 
-		if(c2->type == COLLIDER_WALL) //We only want to check if player is colliding with a wall
-		{
-			if (collider_entity->CheckCollision(c2->rect) == true) //There is collision between the player and a wall
-			{
-				if (position.y < c2->rect.y) //Player is on the ground
-				{
-					if (position.x + 0.8 * collider_entity->rect.w > c2->rect.x)
-					{
-						if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w)
-						{
-							fall_velocity = 1;
-							return false;							
-						}
-					}
-				}
-			}
-		}	
+		//If we get here, player is grounded
+		fall_velocity = 1;
+		return false;
 	}
 	
-	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
+	//We didn't found a collision with a wall, so in_air = true
+	return true; 
 }
 
 void j1Player::restart_variables(int vel, int vel_jump) {
