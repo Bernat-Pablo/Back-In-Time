@@ -73,10 +73,7 @@ public:
 		
 	//Initial position
 	float				initial_x;
-	float				initial_y;
-
-	//Lives
-	int					lives;
+	float				initial_y;	
 	
 	bool				moving_right = false;
 	bool				moving_left = false;

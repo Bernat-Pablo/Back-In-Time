@@ -97,6 +97,8 @@ bool j1Player::Start(){
 	tick2 = SDL_GetTicks();
 	tick4 = SDL_GetTicks();
 
+	livesUpdated = false;
+
 	spritesheet_entity = App->tex->Load("character/spritesheet_pj.png");
 	spritesheet_casper = App->tex->Load("character/spritesheet_casper.png");
 	spritesheet_bars = App->tex->Load("character/spritesheet_bars.png");
@@ -316,15 +318,22 @@ bool j1Player::PreUpdate()
 			restart_variables(1, -1);
 			state = entityStates::IDLE;
 		}
-			
 		break;
 	case entityStates::DIE:
+		if (!livesUpdated)
+		{
+			lives--;
+			livesUpdated = true;
+		}
+		
 		state = entityStates::IDLE;
 		break;
 	}
 	if (player_input.pressing_F) {
 		throwRock();
 	}
+
+	LOG("lives: %i", lives);
 
 	//Change player collider position
 	collider_entity->SetPos(position.x, position.y);

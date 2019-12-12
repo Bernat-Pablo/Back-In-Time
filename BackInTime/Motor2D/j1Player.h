@@ -92,6 +92,9 @@ private:
 
 	pugi::xml_document	doc;
 	
+	//Lives
+	int					lives;
+	bool				livesUpdated = false;
 };
 
 #endif // !_j1PLAYER_H_
