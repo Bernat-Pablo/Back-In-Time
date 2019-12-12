@@ -502,16 +502,7 @@ bool j1Player::Update(float dt)
 	ApplyForces(dt);//Gravity and godmode
 	rockMovement();
 
-	SDL_Rect r = current_animation->GetCurrentFrame();
-
-	App->render->Blit(spritesheet_casper, old_position[0].x, old_position[0].y, &idle.GetCurrentFrame());
-
-	if(!looking_right)
-		App->render->Blit(spritesheet_entity, position.x, position.y, &r,1,2); //looking at left
-	else
-		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right			
-
-	App->render->Blit(spritesheet_rock, rockPosition.x, rockPosition.y, &throw_rock.GetCurrentFrame());
+	BlitEverything();
 	   
 	if (player_input.pressing_A == true || player_input.pressing_D == true) //watching if the pj is walkubg
 		walking = true;
@@ -520,10 +511,12 @@ bool j1Player::Update(float dt)
 	//if (walking == true)	App->audio->PlayFx(2, 1); //sound of walking active
 
 	//do ability
-	if (ability_able == true && App->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
-		useAbility();
-		tick4 = SDL_GetTicks();
-	}	
+	if (ability_able == true)
+		if(App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+		{
+			useAbility();
+			tick4 = SDL_GetTicks();
+		}		
 
 	BROFILER_CATEGORY("Player_Update", Profiler::Color::Beige);
 
@@ -991,4 +984,18 @@ void j1Player::ApplyForces(float dt)
 		if (player_input.pressing_S)
 			position.y += (int)ceil(velocity * dt);
 	}
+}
+
+void j1Player::BlitEverything()
+{
+	SDL_Rect r = current_animation->GetCurrentFrame();
+
+	App->render->Blit(spritesheet_casper, old_position[0].x, old_position[0].y, &idle.GetCurrentFrame());
+
+	if (!looking_right)
+		App->render->Blit(spritesheet_entity, position.x, position.y, &r, 1, 2); //looking at left
+	else
+		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right			
+
+	App->render->Blit(spritesheet_rock, rockPosition.x, rockPosition.y, &throw_rock.GetCurrentFrame());
 }

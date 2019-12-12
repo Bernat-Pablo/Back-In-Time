@@ -43,6 +43,7 @@ public:
 	bool rockCheckInAir();
 
 	void ApplyForces(float dt);
+	void BlitEverything();
 	iPoint position;	
 private:
 	
