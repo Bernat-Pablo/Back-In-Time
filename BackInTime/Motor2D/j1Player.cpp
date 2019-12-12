@@ -92,6 +92,7 @@ bool j1Player::Awake(pugi::xml_node& config) {
 
 	return ret;
 }
+
 bool j1Player::Start(){		
 	//init clocks
 	tick2 = SDL_GetTicks();
@@ -346,25 +347,14 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt) 
 {
-	deltaTime = dt; //For camera colliders
-	//Debug Log
-	/*LOG("-------------------------");
-	LOG("dt: %f", dt);
-	LOG("velocity: %f", velocity);
-	LOG("run velocity: %f", run_velocity);
-	LOG("max_fall_velocity: %f", max_fall_velocity);
-	LOG("fall_velocity: %f", fall_velocity);
-	LOG("jump_vel: %f", jump_vel);
-	LOG("decrease_vel: %f", decrease_vel);*/
+	deltaTime = dt; 
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update
-	
-	
-	//can we do the main ability?
-	checkAbility();
+			
+	checkAbility();//can we do the main ability?
 
-	//aplying the forces depending of the state
-	switch(state)
+	//State machine
+	switch(state) 
 	{
 		case entityStates::IDLE:
 			current_animation = &idle;			
@@ -509,8 +499,9 @@ bool j1Player::Update(float dt)
 			break;
 	}	
 
+	//Gravity system
 	if(godMode == false)
-	{		
+	{				
 		in_air = checkInAir();
 
 		if(in_air == true)
@@ -524,7 +515,8 @@ bool j1Player::Update(float dt)
 		{
 			//LOG("NOT IN AIR");
 		}			
-	}		
+	}	
+	//Activate godmode
 	else if(godMode == true)
 	{
 		in_air = false;
@@ -542,15 +534,11 @@ bool j1Player::Update(float dt)
 		App->render->Blit(spritesheet_entity, position.x, position.y, &r,1,2); //looking at left
 	else
 		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right
-
-	//Rock stuff
+		
 	rockMovement();			
 
 	App->render->Blit(spritesheet_rock, rockPosition.x, rockPosition.y, &throw_rock.GetCurrentFrame());
-
-	//print shadow player position
-
-
+	   
 	if (player_input.pressing_A == true || player_input.pressing_D == true) //watching if the pj is walkubg
 		walking = true;
 	else walking = false;
@@ -808,7 +796,7 @@ void j1Player::useAbility() {
 
 	position.x = old_position[0].x; //we pass the first position of the array to the actual position
 	position.y = old_position[0].y;
-	 // we move all the camera colliders
+	//We move all the camera colliders
 	camera_toRight->SetPos(position.x + 70, position.y - 100); //this +70 is added to initial pos too.
 	camera_toLeft->SetPos(position.x - 50, position.y - 100);
 	camera_toUp->SetPos(position.x - 50, position.y - 100);
@@ -920,8 +908,6 @@ void j1Player::restart_variables(int vel, int vel_jump) {
 		jump_vel= node.child("entityManager").child("player").child("jump_vel").attribute("value").as_float();
 	}
 }
-
-
 
 void j1Player::rockMovement()
 {
