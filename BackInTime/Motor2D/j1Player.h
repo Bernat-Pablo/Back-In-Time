@@ -38,7 +38,7 @@ public:
 	void MoveCameraColliders(p2SString direction, float speed);
 	bool checkInAir();
 
-	void rockMovement();
+	void rockMovement(float dt);
 	void throwRock();
 	bool rockCheckInAir();
 

@@ -500,7 +500,7 @@ bool j1Player::Update(float dt)
 	}	
 
 	ApplyForces(dt);//Gravity and godmode
-	rockMovement();
+	rockMovement(dt);
 
 	BlitEverything();
 	   
@@ -869,7 +869,7 @@ void j1Player::restart_variables(int vel, int vel_jump) {
 	}
 }
 
-void j1Player::rockMovement()
+void j1Player::rockMovement(float dt)
 {
 	if (rock_able == false) //If we have already thrown the rock
 	{
@@ -881,18 +881,18 @@ void j1Player::rockMovement()
 			rock_able = true; //We can throw the rock again
 		}
 		else
-			rock_timer += deltaTime; //We increase the countdown to make it available again
+			rock_timer += dt; //We increase the countdown to make it available again
 		
 		//Rock movement
 		if(rockCheckInAir() == true)
 		{
 			//We change the position based on the force 
-			rockPosition.x += (int)ceil(rockVelocity.x * deltaTime);
-			rockPosition.y -= (int)ceil(rockVelocity.y * deltaTime);
+			rockPosition.x += (int)ceil(rockVelocity.x * dt);
+			rockPosition.y -= (int)ceil(rockVelocity.y * dt);
 
 			//We apply gravity to the rock
 			rock_fall_velocity += rock_gravity;
-			rockPosition.y += (int)ceil(rock_fall_velocity * deltaTime);
+			rockPosition.y += (int)ceil(rock_fall_velocity * dt);
 		}else
 		{
 			//Delete rock
