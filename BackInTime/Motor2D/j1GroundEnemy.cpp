@@ -323,28 +323,24 @@ bool j1GroundEnemy::checkInAir() //Checks if player is in_air or if it's grounde
 
 		c2 = App->collision->colliders[k];
 
-		if(collider_entity != nullptr && c2 != nullptr)
-		{
-			if (c2->type == COLLIDER_WALL) //We only want to check if entity is colliding with a wall
-			{
-				if (collider_entity->CheckCollision(c2->rect) == true) //There is collision between the entity and a wall
-				{
-					if (position.y < c2->rect.y) //Entity is on the ground
-					{
-						if (position.x + 0.8 * collider_entity->rect.w > c2->rect.x)
-						{
-							if (position.x < c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w)
-							{
-								return false;
-							}
-						}
-					}
-				}
-			}
-		}		
+		if (c2->type != COLLIDER_WALL) //We only want to check if player is colliding with a wall
+			continue;
+		if (collider_entity->CheckCollision(c2->rect) == false)
+			continue;
+		if (position.y > c2->rect.y)
+			continue;
+		if (position.x + 0.8 * collider_entity->rect.w < c2->rect.x)
+			continue;
+		if (position.x > c2->rect.x + c2->rect.w - 0.2 * collider_entity->rect.w)
+			continue;
+
+		//If we get here, player is grounded
+		fall_velocity = 1;
+		return false;
 	}
 
-	return true; //We didn't found a collision with a wall, so in_air = true. Player is not grounded
+	//We didn't found a collision with a wall, so in_air = true
+	return true;
 }
 
 
