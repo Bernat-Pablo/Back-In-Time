@@ -152,10 +152,10 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	case entityStates::HIT:
 		current_animation = &hit;
-		if (current_animation->SeeCurrentFrame() == 3) {
-			App->entityManager->DestroyEntity(this);
-			hit.Reset();
-		}
+		hit.Reset();
+		App->entityManager->DestroyEntity(this);		
+		break;
+	default:
 		break;
 	}
 
@@ -306,6 +306,9 @@ bool j1GroundEnemy::checkInAir() //Checks if player is in_air or if it's grounde
 		// skip empty colliders
 		if (App->collision->colliders[k] == nullptr)
 			continue;
+
+		if (collider_entity == nullptr) //Avoid a crash
+			break;
 
 		c2 = App->collision->colliders[k];
 
