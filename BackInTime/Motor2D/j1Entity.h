@@ -47,6 +47,8 @@ public:
 	virtual bool PostUpdate() { return true; };
 	virtual bool CleanUp() { return true; };	
 	virtual bool OnCollision() { return true; };
+
+	virtual void BlitEverything() {};
 	
 public:
 	Animation idle;

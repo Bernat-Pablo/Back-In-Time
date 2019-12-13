@@ -20,7 +20,7 @@ public:
 	void calculate_path();
 	void blit_path();
 	void check_path_toMove();
-
+	void BlitEverything();
 private:
 	bool falling = false;
 	bool set_path = true;

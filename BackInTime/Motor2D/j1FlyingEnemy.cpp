@@ -220,17 +220,7 @@ bool j1FlyingEnemy::Update(float dt)
 		break;
 	}
 
-	//BLIT
-	if (spritesheet_entity != nullptr && current_animation != nullptr)
-		App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
-	
-	if(collider_entity != nullptr)
-		collider_entity->SetPos(position.x, position.y);
-
-	
-	//PATH TO PLAYER (BLIT)
-	if(App->collision->debug)
-		blit_path();
+	BlitEverything();
 
 	BROFILER_CATEGORY("Bird_Update", Profiler::Color::Fuchsia);
 
@@ -316,4 +306,19 @@ void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
 			break;
 		}
 	}	
+}
+
+void j1FlyingEnemy::BlitEverything()
+{
+	//BLIT
+	if (spritesheet_entity != nullptr && current_animation != nullptr)
+		App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
+
+	if (collider_entity != nullptr)
+		collider_entity->SetPos(position.x, position.y);
+
+
+	//PATH TO PLAYER (BLIT)
+	if (App->collision->debug)
+		blit_path();
 }

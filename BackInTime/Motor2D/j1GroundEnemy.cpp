@@ -161,22 +161,10 @@ bool j1GroundEnemy::Update(float dt)
 
 	if (checkInAir())
 		position.y += (int)ceil(90 * dt);	
-
-	//BLIT
-	if(spritesheet_entity != nullptr && current_animation != nullptr)
-	{
-		if (reversed)
-			App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame(), 1, 2);
-		else
-			App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
-
-		if (collider_entity != nullptr)
-			collider_entity->SetPos(position.x, position.y);
-	}	
-
+	
 	calculate_path();
-	if (App->collision->debug)
-		blit_path();
+
+	BlitEverything();
 
 	BROFILER_CATEGORY("Rino_Update", Profiler::Color::FloralWhite);
 
@@ -295,6 +283,7 @@ void j1GroundEnemy::check_path_toMove()
 	}
 
 }
+
 bool j1GroundEnemy::checkInAir() //Checks if player is in_air or if it's grounded
 {
 	// Calculate collisions
@@ -332,4 +321,19 @@ bool j1GroundEnemy::checkInAir() //Checks if player is in_air or if it's grounde
 	return true;
 }
 
+void j1GroundEnemy::BlitEverything()
+{
+	if (spritesheet_entity != nullptr && current_animation != nullptr)
+	{
+		if (reversed)
+			App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame(), 1, 2);
+		else
+			App->render->Blit(spritesheet_entity, position.x, position.y, &current_animation->GetCurrentFrame());
 
+		if (collider_entity != nullptr)
+			collider_entity->SetPos(position.x, position.y);
+	}
+
+	if (App->collision->debug)
+		blit_path();
+}
