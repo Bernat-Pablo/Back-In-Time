@@ -259,7 +259,8 @@ void j1FlyingEnemy::blit_path()
 	for (uint i = 0; i < path->Count(); ++i)
 	{
 		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		App->render->Blit(debug_tex, pos.x, pos.y);
+		if(debug_tex != nullptr)
+			App->render->Blit(debug_tex, pos.x, pos.y);
 	}
 }
 
