@@ -35,6 +35,7 @@ public:
 	bool Load(pugi::xml_node& data);
 	void restart_variables(int vel, int jump_vel);
 
+	void checkCameraColliders(Collider* c1, Collider* c2);
 	void MoveCameraColliders(p2SString direction, float speed);
 	bool checkInAir();
 
