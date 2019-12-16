@@ -16,10 +16,23 @@ TODO - Add link to Release of Assignment 3
 
 ### Take a look at our [repository](https://github.com/Bernat-Pablo/Back-In-Time)
 
-
-## Controls
-
-
+## Controls 
+### Gameplay
+* W: Go up (Godmode only)
+* A: Go left
+* S: Go down (Godmode only)
+* D: Go right
+* F: Shoot a rock
+* Spacebar: Jump
+* Enter: Special Ability | Go back in time
+### Debug
+* F1/F2: Change level
+* F3: Start from the beginning of the current level
+* F5: Save Game
+* F6: Load Game
+* F9: View colliders and pathfinding
+* F10: God mode
+* F11: Enable/Disable framerate cap to 30 FPS
 
 ## Changelist:
 * v 0.1
