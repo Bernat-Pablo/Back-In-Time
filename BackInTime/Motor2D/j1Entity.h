@@ -77,6 +77,7 @@ public:
 	float				initial_x;
 	float				initial_y;	
 	
+	bool				isDead = false;
 	bool				moving_right = false;
 	bool				moving_left = false;
 	bool				isgrounded = false;

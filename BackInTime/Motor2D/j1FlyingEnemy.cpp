@@ -214,6 +214,7 @@ bool j1FlyingEnemy::Update(float dt)
 	case entityStates::HIT:
 		current_animation = &hit;
 		hit.Reset();
+		isDead = true;
 		App->entityManager->DestroyEntity(this);
 		break;
 	default:

@@ -49,7 +49,8 @@ bool j1EntityManager::PreUpdate()
 	p2List_item<j1Entity*>* entity = entitiesList.start;
 	while (entity != nullptr)
 	{
-		entity->data->PreUpdate();
+		if (entity->data->isDead == false)
+			entity->data->PreUpdate();
 		entity = entity->next;
 	}
 
@@ -67,7 +68,8 @@ bool j1EntityManager::Update(float dt)
 	p2List_item<j1Entity*>* entity = entitiesList.start;
 	while (entity != nullptr)
 	{
-		entity->data->Update(dt);
+		if(entity->data->isDead == false)
+			entity->data->Update(dt);
 		entity = entity->next;
 	}
 
@@ -84,7 +86,8 @@ bool j1EntityManager::PostUpdate()
 	p2List_item<j1Entity*>* entity = entitiesList.start;
 	while (entity != nullptr)
 	{
-		entity->data->PostUpdate();
+		if (entity->data->isDead == false)
+			entity->data->PostUpdate();
 		entity = entity->next;
 	}
 
@@ -175,8 +178,8 @@ bool j1EntityManager::Load(pugi::xml_node& file)
 
 		if (entity_name == "flyingEnemy")
 			CreateEntity(entityTypes::FLYING_ENEMY, position_saved.x, position_saved.y);
-		//else if (entity_name == "groundEnemy")
-		//	CreateEntity(entityTypes::GROUND_ENEMY, position_saved.x, position_saved.y);
+		else if (entity_name == "groundEnemy")
+			CreateEntity(entityTypes::GROUND_ENEMY, position_saved.x, position_saved.y);
 
 		entity_saved = entity_saved.next_sibling();
 	}

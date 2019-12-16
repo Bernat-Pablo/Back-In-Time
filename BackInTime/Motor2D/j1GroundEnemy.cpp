@@ -153,6 +153,7 @@ bool j1GroundEnemy::Update(float dt)
 	case entityStates::HIT:
 		current_animation = &hit;
 		hit.Reset();
+		isDead = true;
 		App->entityManager->DestroyEntity(this);		
 		break;
 	default:

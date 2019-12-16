@@ -615,7 +615,6 @@ void j1Player::checkCameraColliders(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_CAMERA)
 	{
-		LOG("colldier");
 		float localVelocity = 0;
 		//We adjust camera velocity to player velocity depending his state
 		if (state == entityStates::WALK_FORWARD || state == entityStates::WALK_BACKWARD)
