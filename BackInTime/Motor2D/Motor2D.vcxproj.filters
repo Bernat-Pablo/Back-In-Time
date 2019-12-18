@@ -151,6 +151,9 @@
     <Filter Include="Entities">
       <UniqueIdentifier>{dc32c766-6b50-4a33-8619-c4bd53ac957a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI Elements">
+      <UniqueIdentifier>{3a440703-086c-43dc-bd40-93c9f2753877}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Game\config.xml">
