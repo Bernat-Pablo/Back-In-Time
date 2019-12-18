@@ -60,6 +60,9 @@
     <ClCompile Include="j1GroundEnemy.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="j1Gui.cpp">
+      <Filter>UI Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="j1GroundEnemy.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Gui.h">
+      <Filter>UI Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
