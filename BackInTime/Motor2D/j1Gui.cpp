@@ -5,6 +5,7 @@
 #include "j1Textures.h"
 #include "j1Input.h"
 #include "j1Gui.h"
+#include "j1Fonts.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -59,7 +60,7 @@ j1Gui * j1Gui::CreateUI_Element(UI_TypeElement type, int position_x, int positio
 	j1Gui* ret = nullptr;
 
 	if (type == UI_TypeElement::TEXT) {
-		//ret = new j1Fonts();
+		ret = new j1Fonts();
 		ret->position.x = position_x;
 		ret->position.y = position_y;
 	}

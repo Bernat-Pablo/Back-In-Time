@@ -6,13 +6,7 @@
 #define CURSOR_WIDTH 2
 
 // TODO 1: Create your structure of classes
-enum class UI_TypeElement {
-	BUTTON,
-	IMAGE,
-	INPUT_TEXT,
-	SCROLL_BAR,
-	TEXT,
-};
+
 
 // ---------------------------------------------------
 class j1Gui : public j1Module
@@ -41,9 +35,8 @@ public:
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
-	j1Gui* CreateUI_Element(UI_TypeElement type, int position_x, int position_y);
+	j1Gui* CreateUI_Element( type, int position_x, int position_y); //hacer funciones para boton, text, etc. y despues añadirlo a la lista de elementos
 	void destroyUI_Element(j1Gui* element);
-	void Destroy_AllGui();
 
 	const SDL_Texture* GetAtlas() const;
 
@@ -51,6 +44,7 @@ private:
 
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
+	//crear lista de elementos ui
 
 	iPoint position;
 };
