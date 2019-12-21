@@ -54,13 +54,18 @@ bool j1Gui::CleanUp()
 
 j1Gui * j1Gui::CreateUI_Element(UI_TypeElement type, int position_x, int position_y)
 {
-	j1Gui* ret = nullptr;
+	UI_Element* ret = nullptr;
 
 	if (type == UI_TypeElement::TEXT) {
 		ret = new j1Fonts();
 		ret->position.x = position_x;
 		ret->position.y = position_y;
+		
 	}
+
+	if(ret != nullptr)
+		ui_list.add(ret);
+
 	return ret;
 }
 
