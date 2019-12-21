@@ -8,19 +8,12 @@
 
 struct SDL_Texture;
 
-enum class UI_TypeElement {
-	BUTTON,
-	IMAGE,
-	INPUT_TEXT,
-	SCROLL_BAR,
-	TEXT,
-};
 
 class UI_Element : public j1Gui
 {
 public:
 	UI_Element();
-	~UI_Element();
+	~UI_Element() {};
 
 private:
 

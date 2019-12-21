@@ -2,11 +2,22 @@
 #define __j1GUI_H__
 
 #include "j1Module.h"
+#include "SDL/include/SDL.h"
+#include "p2Point.h"
 
 #define CURSOR_WIDTH 2
 
 // TODO 1: Create your structure of classes
 
+enum class UI_TypeElement {
+	BUTTON,
+	IMAGE,
+	INPUT_TEXT,
+	SCROLL_BAR,
+	TEXT,
+};
+
+class j1UI_Element;
 
 // ---------------------------------------------------
 class j1Gui : public j1Module
@@ -16,7 +27,7 @@ public:
 	j1Gui();
 
 	// Destructor
-	virtual ~j1Gui();
+	virtual ~j1Gui() {};
 
 	// Called when before render is available
 	bool Awake(pugi::xml_node&);
@@ -35,7 +46,7 @@ public:
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
-	j1Gui* CreateUI_Element( type, int position_x, int position_y); //hacer funciones para boton, text, etc. y despues añadirlo a la lista de elementos
+	j1Gui* CreateUI_Element(UI_TypeElement type, int position_x, int position_y); //hacer funciones para boton, text, etc. y despues añadirlo a la lista de elementos
 	void destroyUI_Element(j1Gui* element);
 
 	const SDL_Texture* GetAtlas() const;

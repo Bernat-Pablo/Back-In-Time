@@ -12,9 +12,6 @@ j1Gui::j1Gui() : j1Module()
 	name.create("gui");
 }
 
-// Destructor
-j1Gui::~j1Gui()
-{}
 
 // Called before render is available
 bool j1Gui::Awake(pugi::xml_node& conf)
@@ -68,10 +65,6 @@ j1Gui * j1Gui::CreateUI_Element(UI_TypeElement type, int position_x, int positio
 }
 
 void j1Gui::destroyUI_Element(j1Gui * element)
-{
-}
-
-void j1Gui::Destroy_AllGui()
 {
 }
 

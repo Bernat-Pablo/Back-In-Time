@@ -9,7 +9,7 @@
 #include<string.h>
 
 // Constructor
-j1Fonts::j1Fonts() : j1Module()
+j1Fonts::j1Fonts() : UI_Element()
 {}
 
 // Destructor
