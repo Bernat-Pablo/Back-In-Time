@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include "SDL/include/SDL.h"
 #include "p2Point.h"
+#include "p2List.h"
 
 #define CURSOR_WIDTH 2
 
@@ -17,7 +18,7 @@ enum class UI_TypeElement {
 	TEXT,
 };
 
-class j1UI_Element;
+class UI_Element;
 
 // ---------------------------------------------------
 class j1Gui : public j1Module
@@ -46,7 +47,7 @@ public:
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
-	j1Gui* CreateUI_Element(UI_TypeElement type, int position_x, int position_y); //hacer funciones para boton, text, etc. y despues añadirlo a la lista de elementos
+	UI_Element* CreateUI_Element(UI_TypeElement type, int position_x, int position_y); //hacer funciones para boton, text, etc. y despues añadirlo a la lista de elementos
 	void destroyUI_Element(j1Gui* element);
 
 	const SDL_Texture* GetAtlas() const;
@@ -57,7 +58,8 @@ private:
 	p2SString atlas_file_name;
 	//crear lista de elementos ui
 
-	iPoint position;
+	p2List<UI_Element*> ui_list;
+
 };
 
 #endif // __j1GUI_H__

@@ -319,10 +319,10 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 					//App->player = new j1Player();
 					//App->AddModule(App->player);
 				}
-
+				
 				collidernum++;
 			}			
-
+			
 			object = object.next_sibling("object");
 
 			//LOG("Collider %i", i);

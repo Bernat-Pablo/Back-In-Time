@@ -52,7 +52,7 @@ bool j1Gui::CleanUp()
 	return true;
 }
 
-j1Gui * j1Gui::CreateUI_Element(UI_TypeElement type, int position_x, int position_y)
+UI_Element* j1Gui::CreateUI_Element(UI_TypeElement type, int position_x, int position_y)
 {
 	UI_Element* ret = nullptr;
 
@@ -60,7 +60,6 @@ j1Gui * j1Gui::CreateUI_Element(UI_TypeElement type, int position_x, int positio
 		ret = new j1Fonts();
 		ret->position.x = position_x;
 		ret->position.y = position_y;
-		
 	}
 
 	if(ret != nullptr)

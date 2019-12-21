@@ -13,6 +13,8 @@
 #include "j1PathFinding.h"
 #include "j1EntityManager.h"
 #include "j1Entity.h"
+#include "j1Gui.h"
+#include "j1UI_Element.h"
 
 
 j1Scene::j1Scene() : j1Module()
@@ -60,6 +62,9 @@ bool j1Scene::Start()
 
 	App->audio->PlayMusic("audio/music/music.ogg");
 	
+	//UI_Element* text = App->gui->CreateUI_Element(UI_TypeElement::TEXT, 50, 50);
+
+
 	return true;
 }
 
@@ -125,7 +130,7 @@ bool j1Scene::PostUpdate()
 	bool ret = true;
 
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+		ret = false;	
 
 	return ret;
 }

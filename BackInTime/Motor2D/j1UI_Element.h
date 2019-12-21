@@ -15,7 +15,9 @@ public:
 	UI_Element();
 	~UI_Element() {};
 
-private:
+public:
+	iPoint position;
+	char* text;
 
 };
 
