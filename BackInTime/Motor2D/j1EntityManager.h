@@ -13,6 +13,7 @@ enum class entityTypes
 	FLYING_ENEMY,
 	GROUND_ENEMY,
 	ROCK,
+	COIN,
 	UNKNOWN,
 };
 

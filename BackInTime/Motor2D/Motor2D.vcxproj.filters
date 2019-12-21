@@ -69,6 +69,9 @@
     <ClCompile Include="j1Fonts.cpp">
       <Filter>UI Elements</Filter>
     </ClCompile>
+    <ClCompile Include="j1Coin.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="j1Fonts.h">
       <Filter>UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Coin.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
