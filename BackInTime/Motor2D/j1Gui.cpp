@@ -28,6 +28,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
+	
 
 	return true;
 }
@@ -41,6 +42,14 @@ bool j1Gui::PreUpdate()
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
+	p2List_item<UI_Element*>* element = ui_list.start;
+	while (element != nullptr) {
+		
+
+		element->data->fontModule->BlitText(element->data->position.x, element->data->position.y, 0, "hola");
+	}
+
+
 	return true;
 }
 
