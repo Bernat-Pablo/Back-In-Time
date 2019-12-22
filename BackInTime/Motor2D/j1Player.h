@@ -51,9 +51,9 @@ private:
 	SDL_Rect bar_0, bar_1, bar_2, bar_3, bar_4;
 	iPoint bar_pos;
 
-	SDL_Texture* spritesheet_rock = nullptr;
-	SDL_Texture* spritesheet_casper = nullptr;
-	SDL_Texture* spritesheet_bars = nullptr;
+	SDL_Texture* spritesheet_rock;
+	SDL_Texture* spritesheet_casper;
+	SDL_Texture* spritesheet_bars;
 	const char* spritesheet_source;
 
 	Player_Input player_input; //Input introduced by the player	
@@ -66,38 +66,38 @@ private:
 	int					initial_pos;
 	int					screen_size;	
 
-	bool 				in_air = false;
-	bool 				looking_right=true;	
+	bool 				in_air;
+	bool 				looking_right;	
 
-	bool 				godMode = false;
-	bool 				walking = false; //is he walking?
+	bool 				godMode;
+	bool 				walking; //is he walking?
 
-	bool 				ability_able = false;
+	bool 				ability_able;
 
 	//Rock data
 	iPoint				rockPosition;
 	iPoint				rockVelocity;
 	bool 				rock_able = true;
-	float				rock_timer = 0;
+	float				rock_timer;
 	float				rock_cooldown;
-	float				rock_fall_velocity = 0;
+	float				rock_fall_velocity;
 	float				rock_gravity;
 
-	int 				tick1 = 0, tick2 = 0;
-	int 				tick3 = 0, tick4 = 0;
+	int 				tick1, tick2;
+	int 				tick3, tick4;
 
-	Collider*			camera_toRight = nullptr;
-	Collider*			camera_toLeft = nullptr;
-	Collider*			camera_toUp = nullptr;
-	Collider*			camera_toDown = nullptr;
+	Collider*			camera_toRight;
+	Collider*			camera_toLeft;
+	Collider*			camera_toUp;
+	Collider*			camera_toDown;
 
-	Collider*			collider_rock = nullptr;
+	Collider*			collider_rock;
 
 	pugi::xml_document	doc;
 	
 	//Lives
 	int					lives;
-	bool				livesUpdated = false;
+	bool				livesUpdated;
 };
 
 #endif // !_j1PLAYER_H_

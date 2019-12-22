@@ -14,7 +14,18 @@
 
 j1Entity::j1Entity(entityTypes type) : j1EntityManager()
 {
+	spritesheet_entity = nullptr;
+	collider_entity = nullptr;
+
 	isDead = false;
+	moving_right = false;
+	moving_left = false;
+	isgrounded = false;
+	being_hit = false;
+	reversed = false;
+
+	collider_at_right = false; //If true, entity can't go to the right 
+	collider_at_left = false;
 }
 
 j1Entity::~j1Entity()

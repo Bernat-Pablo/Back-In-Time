@@ -17,6 +17,34 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 {
 	name.create("player");
 	
+	spritesheet_rock = nullptr;
+	spritesheet_casper = nullptr;
+	spritesheet_bars = nullptr;
+	spritesheet_source = nullptr;
+
+	in_air = false;
+	looking_right = true;
+
+	godMode = false;
+	walking = false; //is he walking?
+
+	ability_able = false;
+
+	rock_timer = 0;
+	rock_fall_velocity = 0;
+
+	tick1 = 0, tick2 = 0;
+	tick3 = 0, tick4 = 0;
+
+	camera_toRight = nullptr;
+	camera_toLeft = nullptr;
+	camera_toUp = nullptr;
+	camera_toDown = nullptr;
+
+	collider_rock = nullptr;
+
+	livesUpdated = false;
+
 	float speed = 0.1f;
 	//IDLE
 	idle.PushBack({ 0,0,17,27 }, speed);
