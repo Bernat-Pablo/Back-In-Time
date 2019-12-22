@@ -14,6 +14,10 @@ public:
 	bool PreUpdate();
 	bool Update(float dt);
 	bool CleanUp();
+
+private:
+	Animation rotate;
+	SDL_Texture* coin_texture = nullptr;
 };
 
 #endif // !_j1COIN_H
