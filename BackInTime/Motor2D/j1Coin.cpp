@@ -23,9 +23,10 @@ j1Coin::~j1Coin(){}
 bool j1Coin::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
-
+	
+	//Initialize variables from j1Coin.h
 	current_animation = &rotate;
-
+	
 	return ret;
 }
 
@@ -57,6 +58,16 @@ bool j1Coin::Update(float dt)
 	return ret;
 }
 
+bool j1Coin::PostUpdate()
+{
+	bool ret = true;
+
+	if (isDead == true)
+		App->entityManager->DestroyEntity(this);
+
+	return ret;
+}
+
 bool j1Coin::CleanUp()
 {
 	bool ret = true;
@@ -66,4 +77,16 @@ bool j1Coin::CleanUp()
 	collider_entity = nullptr;
 
 	return ret;
+}
+
+void j1Coin::OnCollision(Collider* c1, Collider* c2) 
+{
+	switch (c2->type)
+	{
+	case COLLIDER_PLAYER:
+		isDead = true;
+		break;
+	default:
+		break;
+	}
 }

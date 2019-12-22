@@ -13,11 +13,13 @@ public:
 	bool Start();
 	bool PreUpdate();
 	bool Update(float dt);
+	bool PostUpdate();
 	bool CleanUp();
 
+	void OnCollision(Collider* c1, Collider* c2);
 private:
-	Animation rotate;
-	SDL_Texture* coin_texture = nullptr;
+	Animation		rotate;
+	SDL_Texture*	coin_texture = nullptr;
 };
 
 #endif // !_j1COIN_H

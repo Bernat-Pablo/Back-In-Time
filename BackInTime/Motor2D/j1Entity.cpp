@@ -14,6 +14,7 @@
 
 j1Entity::j1Entity(entityTypes type) : j1EntityManager()
 {
+	isDead = false;
 }
 
 j1Entity::~j1Entity()
