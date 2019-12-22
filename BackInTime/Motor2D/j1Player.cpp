@@ -334,8 +334,6 @@ bool j1Player::PreUpdate()
 		throwRock();
 	}
 
-	LOG("lives: %i", lives);
-
 	//Change player collider position
 	collider_entity->SetPos(position.x, position.y);
 	//Change rock collider position
