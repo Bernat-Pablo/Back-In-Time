@@ -57,6 +57,10 @@ j1Collision::j1Collision()
 	//Rock and flying enemy
 	matrix[COLLIDER_ROCK][COLLIDER_FLYING_ENEMY] = true;
 	matrix[COLLIDER_FLYING_ENEMY][COLLIDER_ROCK] = true;
+
+	//Coins and player
+	matrix[COLLIDER_PLAYER][COLLIDER_COIN] = true;
+	matrix[COLLIDER_COIN][COLLIDER_PLAYER] = true;
 }
 
 //Destructor
@@ -201,6 +205,9 @@ void j1Collision::DebugDraw()
 				break;
 			case COLLIDER_ROCK:
 				App->render->DrawQuad(colliders[i]->rect, 20, 109, 126, 150);
+				break;
+			case COLLIDER_COIN:
+				App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, 150);
 				break;
 			}
 

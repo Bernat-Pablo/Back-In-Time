@@ -22,6 +22,7 @@ class j1Fade;
 class j1PathFinding;
 class j1FlyingEnemy;
 class j1GroundEnemy;
+class j1Coin;
 class j1Gui;
 
 class j1App

@@ -19,6 +19,7 @@
 #include "j1PathFinding.h"
 #include "j1FlyingEnemy.h"
 #include "j1GroundEnemy.h"
+#include "j1Coin.h"
 #include "j1Gui.h"
 
 
