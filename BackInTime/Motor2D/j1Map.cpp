@@ -319,7 +319,9 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 					//App->player = new j1Player();
 					//App->AddModule(App->player);
 				}
-
+				if(name == "Coin")				
+					j1Entity* coin = App->entityManager->CreateEntity(entityTypes::COIN, objectgroup->object[i].x, objectgroup->object[i].y);
+				
 				collidernum++;
 			}			
 

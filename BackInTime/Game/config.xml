@@ -58,6 +58,9 @@
       <die_timer value ="1"/>
     </groundEnemy>
 
+    <coin>
+      
+    </coin>
   </entityManager>
   
 
