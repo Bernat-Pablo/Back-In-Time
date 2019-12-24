@@ -65,9 +65,6 @@ bool j1Coin::PostUpdate()
 {
 	bool ret = true;
 
-	if (isDead == true)
-		App->entityManager->DestroyEntity(this);
-
 	return ret;
 }
 
@@ -88,7 +85,7 @@ void j1Coin::OnCollision(Collider* c1, Collider* c2)
 	{
 	case COLLIDER_PLAYER:
 		App->player->CollectCoin();
-		isDead = true;
+		App->entityManager->DestroyEntity(this);
 		break;
 	default:
 		break;
