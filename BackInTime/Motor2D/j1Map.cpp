@@ -302,19 +302,19 @@ bool j1Map::LoadObjectGroup(pugi::xml_node& node, ObjectGroup* objectgroup)
 				objectgroup->object[i].w = object.attribute("width").as_int();
 				objectgroup->object[i].h = object.attribute("height").as_int();				
 
-				if(name == "1")
+				if(name == "terrain")
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_WALL, "wall");
-				if(name == "2")
+				if(name == "death")
 					App->collision->AddCollider(objectgroup->object[i],  COLLIDER_DIE, "die");
-				if (name == "5")
+				if (name == "door1")
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door1");
-				if (name == "6")
+				if (name == "door2")
 					App->collision->AddCollider(objectgroup->object[i], COLLIDER_DOOR, "door2");
-				if (name == "7") //Spawn flying enemy								 
+				if (name == "flyingEnemy") 							 
 					j1Entity* flyingEnemy = App->entityManager->CreateEntity(entityTypes::FLYING_ENEMY, objectgroup->object[i].x, objectgroup->object[i].y);
-				if (name == "8") //Spawn ground enemy
+				if (name == "rino") 
 					j1Entity* groundEnemy = App->entityManager->CreateEntity(entityTypes::GROUND_ENEMY , objectgroup->object[i].x, objectgroup->object[i].y);
-				if (name == "9") //Spawn player
+				if (name == "player") 
 				{
 					//App->player = new j1Player();
 					//App->AddModule(App->player);
