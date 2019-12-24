@@ -19,7 +19,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 private:
 	Animation		rotate;
-	SDL_Texture*	coin_texture = nullptr;
+	SDL_Texture*	coin_texture;
 };
 
 #endif // !_j1COIN_H

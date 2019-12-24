@@ -3,10 +3,13 @@
 #include "j1Textures.h"
 #include "j1Render.h"
 #include "j1Collision.h"
+#include "j1Player.h"
 
 j1Coin::j1Coin() : j1Entity(entityTypes::COIN)
 {
 	type = entityTypes::COIN;
+
+	coin_texture = nullptr;
 
 	float speed = 0.1f;
 	//Rotate
@@ -84,6 +87,7 @@ void j1Coin::OnCollision(Collider* c1, Collider* c2)
 	switch (c2->type)
 	{
 	case COLLIDER_PLAYER:
+		App->player->CollectCoin();
 		isDead = true;
 		break;
 	default:

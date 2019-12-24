@@ -46,6 +46,8 @@ public:
 	void ApplyForces(float dt);
 	void BlitEverything();
 	iPoint position;	
+
+	void CollectCoin();
 private:
 	
 	SDL_Rect bar_0, bar_1, bar_2, bar_3, bar_4;
@@ -98,6 +100,8 @@ private:
 	//Lives
 	int					lives;
 	bool				livesUpdated;
+
+	int					collected_coins;
 };
 
 #endif // !_j1PLAYER_H_

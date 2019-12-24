@@ -45,6 +45,8 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 
 	livesUpdated = false;
 
+	collected_coins = 0;
+
 	float speed = 0.1f;
 	//IDLE
 	idle.PushBack({ 0,0,17,27 }, speed);
@@ -174,8 +176,7 @@ bool j1Player::Start(){
 	bar_4 = { 268,89,62,12 };
 
 	initial_pos = position.x; //look to camera_toright. Position.x is the initial position at this moment
-
-
+	
 	bar_pos.x = 10;
 	bar_pos.y = -130;
 
@@ -1031,4 +1032,9 @@ void j1Player::BlitEverything()
 		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right			
 
 	App->render->Blit(spritesheet_rock, rockPosition.x, rockPosition.y, &throw_rock.GetCurrentFrame());
+}
+
+void j1Player::CollectCoin()
+{
+	collected_coins++;
 }
