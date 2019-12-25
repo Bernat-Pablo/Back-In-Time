@@ -4,6 +4,7 @@
 #include "j1Render.h"
 #include "j1Collision.h"
 #include "j1Player.h"
+#include "Brofiler/Brofiler.h"
 
 j1Coin::j1Coin() : j1Entity(entityTypes::COIN)
 {
@@ -49,6 +50,7 @@ bool j1Coin::PreUpdate()
 
 	collider_entity->SetPos(position.x, position.y);
 
+	BROFILER_CATEGORY("Coin_PreUpdate", Profiler::Color::Aquamarine);
 	return ret;
 }
 
@@ -58,6 +60,7 @@ bool j1Coin::Update(float dt)
 
 	App->render->Blit(coin_texture, position.x, position.y, &current_animation->GetCurrentFrame());
 	
+	BROFILER_CATEGORY("Coin_Update", Profiler::Color::Aquamarine);
 	return ret;
 }
 
@@ -65,6 +68,7 @@ bool j1Coin::PostUpdate()
 {
 	bool ret = true;
 
+	BROFILER_CATEGORY("Coin_PostUpdate", Profiler::Color::Aquamarine);
 	return ret;
 }
 
