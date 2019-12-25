@@ -15,7 +15,7 @@ public:
 	j1Gui();
 	~j1Gui() {};
 
-	//UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y);
+	UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y);
 	
 private:
 	
