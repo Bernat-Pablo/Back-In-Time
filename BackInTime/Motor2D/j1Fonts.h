@@ -2,6 +2,7 @@
 #define __ModuleFonts_H__
 
 #include "j1Module.h"
+#include "UI_Elements.h"
 #include "SDL\include\SDL_pixels.h"
 
 #define MAX_FONTS 10
@@ -16,7 +17,7 @@ struct Font
 	uint rows, len, char_w, char_h, row_chars;
 };
 
-class j1Fonts : j1Module
+class j1Fonts : UI_Elements
 {
 public:
 	Font	 fonts[MAX_FONTS];

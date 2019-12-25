@@ -5,12 +5,13 @@
 #include "j1RectSprites.h"
 #include "p2Log.h"
 #include "j1Module.h"
+#include "UI_Elements.h"
 
 
 #include<string.h>
 
 // Constructor
-j1Fonts::j1Fonts() : j1Module()
+j1Fonts::j1Fonts() : UI_Elements()
 {}
 
 
