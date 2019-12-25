@@ -20,8 +20,6 @@
 #include "j1FlyingEnemy.h"
 #include "j1GroundEnemy.h"
 #include "j1Gui.h"
-
-
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {

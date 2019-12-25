@@ -60,13 +60,10 @@
     <ClCompile Include="j1GroundEnemy.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="j1Gui.cpp">
-      <Filter>UI Elements</Filter>
-    </ClCompile>
-    <ClCompile Include="j1UI_Element.cpp">
-      <Filter>UI Elements</Filter>
-    </ClCompile>
     <ClCompile Include="j1Fonts.cpp">
+      <Filter>UI Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Gui.cpp">
       <Filter>UI Elements</Filter>
     </ClCompile>
   </ItemGroup>
@@ -143,13 +140,10 @@
     <ClInclude Include="j1GroundEnemy.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="j1Gui.h">
-      <Filter>UI Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="j1UI_Element.h">
-      <Filter>UI Elements</Filter>
-    </ClInclude>
     <ClInclude Include="j1Fonts.h">
+      <Filter>UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Gui.h">
       <Filter>UI Elements</Filter>
     </ClInclude>
   </ItemGroup>

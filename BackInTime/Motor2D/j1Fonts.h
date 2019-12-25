@@ -2,7 +2,6 @@
 #define __ModuleFonts_H__
 
 #include "j1Module.h"
-#include "j1UI_Element.h"
 #include "SDL\include\SDL_pixels.h"
 
 #define MAX_FONTS 10
@@ -17,12 +16,12 @@ struct Font
 	uint rows, len, char_w, char_h, row_chars;
 };
 
-class j1Fonts : public UI_Element
+class j1Fonts : j1Module
 {
 public:
 	Font	 fonts[MAX_FONTS];
 	j1Fonts();
-	~j1Fonts();
+	~j1Fonts() {};
 
 	// Load Font
 	int Load(const char* texture_path, const char* characters, uint rows, uint h, uint w, uint rc);

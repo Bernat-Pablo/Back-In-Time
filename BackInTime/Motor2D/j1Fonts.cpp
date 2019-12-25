@@ -4,17 +4,15 @@
 #include "j1Fonts.h"
 #include "j1RectSprites.h"
 #include "p2Log.h"
+#include "j1Module.h"
 
 
 #include<string.h>
 
 // Constructor
-j1Fonts::j1Fonts() : UI_Element()
+j1Fonts::j1Fonts() : j1Module()
 {}
 
-// Destructor
-j1Fonts::~j1Fonts()
-{}
 
 // Load new texture from file path
 int j1Fonts::Load(const char* texture_path, const char* characters, uint rows, uint w, uint h, uint rc)

@@ -13,8 +13,6 @@
 #include "j1PathFinding.h"
 #include "j1EntityManager.h"
 #include "j1Entity.h"
-#include "j1Gui.h"
-#include "j1UI_Element.h"
 
 
 j1Scene::j1Scene() : j1Module()
