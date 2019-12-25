@@ -10,6 +10,7 @@ Player can go a few seconds back in time
 * [Pablo Galve](https://github.com/pablogalve)
 * [Bernat Casañas](https://github.com/bernatCasanas)
 
+<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/Assets/team_photo.jpeg" data-canonical-src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/Assets/team_photo.jpeg" width="300" height="400" />
 
 ### Download our game  [Back In Time](https://github.com/Bernat-Pablo/Back-In-Time/releases)
 TODO - Add link to Release of Assignment 3
