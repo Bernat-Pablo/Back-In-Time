@@ -8,6 +8,9 @@ class j1Gui : public j1Module {
 public:
 	j1Gui();
 	~j1Gui() {};
+
+private:
+	
 };
 
 #endif // !_GUI_
