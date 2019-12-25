@@ -3,6 +3,7 @@
 
 #include "j1Gui.h"
 
+
 class UI_Elements : public j1Gui {
 public:
 	UI_Elements();
@@ -11,7 +12,6 @@ public:
 private:
 
 	char* text;
-	
 
 };
 

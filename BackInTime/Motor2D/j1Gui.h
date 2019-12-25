@@ -4,6 +4,8 @@
 #include "j1Module.h"
 #include "p2List.h"
 
+class UI_Elements;
+
 enum class UI_Type{
 	TEXT,
 };
@@ -13,6 +15,7 @@ public:
 	j1Gui();
 	~j1Gui() {};
 
+	UI_Elements* CreateEntity(UI_Type type, int position_x, int position_y);
 
 
 private:

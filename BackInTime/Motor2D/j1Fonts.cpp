@@ -6,6 +6,7 @@
 #include "p2Log.h"
 #include "j1Module.h"
 #include "UI_Elements.h"
+#include "j1Gui.h"
 
 
 #include<string.h>

@@ -2,6 +2,7 @@
 #define __ModuleFonts_H__
 
 #include "j1Module.h"
+#include "j1Gui.h"
 #include "UI_Elements.h"
 #include "SDL\include\SDL_pixels.h"
 
