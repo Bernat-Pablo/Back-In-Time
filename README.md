@@ -26,33 +26,10 @@ The player can go a few seconds back to the past.
 
 ## Team
 * Pablo Galve: https://github.com/pablogalve
-  * Module Collisions and in-game Collisions
-  * Camera
-  * Debug functions
-    * Level Transition (F1/F2)
-    * Start from the beginning (F3)
-    * Save/Load (F5/F6)
-    * Debug (F9)
-    * God Mode (F10)
-    * 30/60 FPS (F11)
-  * Load data from XML
-  * Entities
-    * Kill/die system
-    * Throw rock  
-  * Move through delta time
+  * Website
+  * UI System
 * Bernat Casañas: https://github.com/BernatCasanas
-  * Building the Engine with Modules and Functions
-  * Movement and Mechanics
-  * Special Ability go Back In Time 
-  * Maps
-  * Audio (Music and FX)
-  * Parallax effect
-  * Vsync at 60 FPS
-  * Animations
-  * Enemies (Rino and Bird)
-  * PathFinding
-  * Profiling
-
+  * Console
 ## Credits
 * Assets_1: https://oddpotatogift.itch.io/16x16-fantasy-pack
 * Assets_2: https://pixel-frog.itch.io/pixel-adventure-2
