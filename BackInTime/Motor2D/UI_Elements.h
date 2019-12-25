@@ -7,6 +7,12 @@ class UI_Elements : public j1Gui {
 public:
 	UI_Elements();
 	~UI_Elements() {};
+
+private:
+
+	char* text;
+	
+
 };
 
 
