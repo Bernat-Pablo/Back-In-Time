@@ -21,6 +21,18 @@ j1GroundEnemy::j1GroundEnemy() : j1Entity(entityTypes::GROUND_ENEMY)
 	name.create("groundEnemy");
 	type = entityTypes::GROUND_ENEMY;
 
+	set_path = true;
+	set_timer = false;
+
+	debug_tex = nullptr;
+
+	path_num = 0;
+	tick1 = 0, tick2 = 0;
+
+	stun = false;
+	reset = true;
+	ready = true;
+
 	float speed = 0.5f;
 
 	idle.PushBack({ 23,165,50,29 }, speed);

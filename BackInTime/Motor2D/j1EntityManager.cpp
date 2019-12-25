@@ -6,6 +6,7 @@
 #include "j1Player.h"
 #include "j1FlyingEnemy.h"
 #include "j1GroundEnemy.h"
+#include "j1Coin.h"
 #include "PugiXml/src/pugixml.hpp"
 #include "j1Textures.h"
 #include "Brofiler/Brofiler.h"
@@ -135,6 +136,12 @@ j1Entity* j1EntityManager::CreateEntity(entityTypes type, int position_x, int po
 		ret->Awake(App->GetConfig().child("entityManager").child("flyingEnemy"));
 		ret->Start();
 		break;
+	case entityTypes::COIN:
+		ret = new j1Coin();
+		ret->position.x = position_x;
+		ret->position.y = position_y;
+		ret->Awake(App->GetConfig().child("entityManager").child("coin"));
+		ret->Start();
 	case entityTypes::UNKNOWN:
 		break;
 	default:

@@ -25,19 +25,19 @@ public:
 	bool checkInAir();
 
 private:
-	bool set_path = true;
-	bool set_timer = false;
+	bool set_path;
+	bool set_timer;
 
-	SDL_Texture* debug_tex = nullptr;
+	SDL_Texture* debug_tex;
 
-	int path_num = 0;
-	int tick1 = 0, tick2 = 0;
+	int path_num;
+	int tick1, tick2;
 
 	int speed;
 
-	bool stun = false;
-	bool reset = true;
-	bool ready = true;
+	bool stun;
+	bool reset;
+	bool ready;
 
 	iPoint objective;
 

@@ -66,8 +66,8 @@ public:
 	Animation fall;
 	Animation* current_animation;
 
-	SDL_Texture* spritesheet_entity = nullptr;
-	Collider* collider_entity = nullptr;	
+	SDL_Texture* spritesheet_entity;
+	Collider* collider_entity;	
 
 	//Type and states
 	entityTypes type = entityTypes::UNKNOWN;
@@ -77,12 +77,12 @@ public:
 	float				initial_x;
 	float				initial_y;	
 	
-	bool				isDead = false;
-	bool				moving_right = false;
-	bool				moving_left = false;
-	bool				isgrounded = false;
-	bool				being_hit = false;
-	bool				reversed = false;
+	bool				isDead;
+	bool				moving_right;
+	bool				moving_left;
+	bool				isgrounded;
+	bool				being_hit;
+	bool				reversed;
 
 	//Entity settings
 	iPoint				position;
@@ -97,8 +97,8 @@ public:
 	float				deltaTime;
 
 	//Colliders and collisions
-	bool 				collider_at_right = false; //If true, entity can't go to the right 
-	bool 				collider_at_left = false;
+	bool 				collider_at_right; //If true, entity can't go to the right 
+	bool 				collider_at_left;
 };
 
 #endif // !__j1ENTITY_H__

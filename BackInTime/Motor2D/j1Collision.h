@@ -1,7 +1,7 @@
 #ifndef __ModuleCollision_H__
 #define __ModuleCollision_H__
 
-#define MAX_COLLIDERS 250
+#define MAX_COLLIDERS 150
 
 #include "j1Module.h"
 #include "j1App.h"
@@ -18,6 +18,7 @@ enum COLLIDER_TYPE
 	COLLIDER_FLYING_ENEMY,
 	COLLIDER_GROUND_ENEMY,
 	COLLIDER_ROCK,
+	COLLIDER_COIN,
 
 	COLLIDER_MAX,
 };

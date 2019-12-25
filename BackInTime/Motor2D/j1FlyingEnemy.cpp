@@ -20,8 +20,16 @@ j1FlyingEnemy::j1FlyingEnemy() : j1Entity(entityTypes::FLYING_ENEMY)
 	name.create("flyingEnemy");
 	type = entityTypes::FLYING_ENEMY;
 
+	debug_tex = nullptr;
+	falling = false;
+	set_path = true;
+	set_timer = false;
+	starting_flying = false;
+
+	path_num = 0;
+	tick1 = 0, tick2 = 0;
+
 	float speed = 0.55f;
-	
 	//FLY
 	fly.PushBack({ 24,0,35,39 },speed);
 	fly.PushBack({ 63,0,35,39 }, speed);

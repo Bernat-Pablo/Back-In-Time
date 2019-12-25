@@ -22,15 +22,15 @@ public:
 	void check_path_toMove();
 	void BlitEverything();
 private:
-	bool falling = false;
-	bool set_path = true;
-	bool set_timer = false;
-	bool starting_flying = false;
+	bool falling;
+	bool set_path;
+	bool set_timer;
+	bool starting_flying;
 
-	SDL_Texture* debug_tex = nullptr;
+	SDL_Texture* debug_tex;
 
-	int path_num = 0;
-	int tick1 = 0, tick2 = 0;
+	int path_num;
+	int tick1, tick2;
 };
 
 #endif // !_FLYINGENEMY_

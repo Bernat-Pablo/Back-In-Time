@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="100" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="50">
+<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="100" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="54">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="4816" columns="86">
   <image source="Basic_Tiles_Only.png" width="1376" height="896"/>
  </tileset>
@@ -13560,37 +13560,40 @@
   </data>
  </layer>
  <objectgroup id="3" name="Colliders">
-  <object id="3" name="2" x="192" y="224" width="1120" height="16"/>
-  <object id="6" name="1" x="224" y="192" width="32" height="16"/>
-  <object id="7" name="1" x="288" y="208" width="32" height="16"/>
-  <object id="8" name="1" x="352" y="192" width="32" height="16"/>
-  <object id="9" name="1" x="400" y="176" width="32" height="16"/>
-  <object id="10" name="1" x="464" y="160" width="32" height="16"/>
-  <object id="11" name="1" x="784" y="192" width="48" height="16"/>
-  <object id="12" name="1" x="656" y="192" width="96" height="16"/>
-  <object id="14" name="1" x="848" y="176" width="16" height="16"/>
-  <object id="15" name="1" x="896" y="160" width="16" height="16"/>
-  <object id="16" name="1" x="928" y="144" width="16" height="16"/>
-  <object id="17" name="1" x="976" y="128" width="16" height="16"/>
-  <object id="18" name="1" x="624" y="160" width="16" height="16"/>
-  <object id="19" name="1" x="576" y="128" width="16" height="16"/>
-  <object id="20" name="1" x="528" y="144" width="16" height="16"/>
-  <object id="21" name="1" x="1024" y="112" width="16" height="16"/>
-  <object id="22" name="1" x="1072" y="96" width="16" height="16"/>
-  <object id="23" name="1" x="1120" y="80" width="32" height="16"/>
-  <object id="24" name="1" x="1184" y="64" width="32" height="16"/>
-  <object id="25" name="1" x="1264" y="176" width="32" height="16"/>
-  <object id="26" name="1" x="1088" y="128" width="128" height="16"/>
-  <object id="27" name="1" x="1312" y="208" width="288" height="32"/>
-  <object id="28" name="1" x="0" y="208" width="192" height="32"/>
-  <object id="29" name="1" x="112" y="192" width="80" height="16"/>
-  <object id="30" name="1" x="160" y="176" width="32" height="16"/>
-  <object id="31" name="5" x="1568" y="160" width="16" height="48"/>
-  <object id="32" name="1" x="0" y="0" width="16" height="208"/>
+  <object id="3" name="death" x="192" y="224" width="1120" height="16"/>
+  <object id="6" name="terrain" x="224" y="192" width="32" height="16"/>
+  <object id="7" name="terrain" x="288" y="208" width="32" height="16"/>
+  <object id="8" name="terrain" x="352" y="192" width="32" height="16"/>
+  <object id="9" name="terrain" x="400" y="176" width="32" height="16"/>
+  <object id="10" name="terrain" x="464" y="160" width="32" height="16"/>
+  <object id="11" name="terrain" x="784" y="192" width="48" height="16"/>
+  <object id="12" name="terrain" x="656" y="192" width="96" height="16"/>
+  <object id="14" name="terrain" x="848" y="176" width="16" height="16"/>
+  <object id="15" name="terrain" x="896" y="160" width="16" height="16"/>
+  <object id="16" name="terrain" x="928" y="144" width="16" height="16"/>
+  <object id="17" name="terrain" x="976" y="128" width="16" height="16"/>
+  <object id="18" name="terrain" x="624" y="160" width="16" height="16"/>
+  <object id="19" name="terrain" x="576" y="128" width="16" height="16"/>
+  <object id="20" name="terrain" x="528" y="144" width="16" height="16"/>
+  <object id="21" name="terrain" x="1024" y="112" width="16" height="16"/>
+  <object id="22" name="terrain" x="1072" y="96" width="16" height="16"/>
+  <object id="23" name="terrain" x="1120" y="80" width="32" height="16"/>
+  <object id="24" name="terrain" x="1184" y="64" width="32" height="16"/>
+  <object id="25" name="terrain" x="1264" y="176" width="32" height="16"/>
+  <object id="26" name="terrain" x="1088" y="128" width="128" height="16"/>
+  <object id="27" name="terrain" x="1312" y="208" width="288" height="32"/>
+  <object id="28" name="terrain" x="0" y="208" width="192" height="32"/>
+  <object id="29" name="terrain" x="112" y="192" width="80" height="16"/>
+  <object id="30" name="terrain" x="160" y="176" width="32" height="16"/>
+  <object id="31" name="door1" x="1568" y="160" width="16" height="48"/>
+  <object id="32" name="terrain" x="0" y="0" width="16" height="208"/>
   <object id="33" name="1" x="1584" y="48" width="16" height="160"/>
-  <object id="39" name="9" x="160" y="96" width="16" height="16"/>
-  <object id="41" name="7" x="1280" y="0" width="16" height="16"/>
-  <object id="44" name="7" x="848" y="32" width="16" height="16"/>
-  <object id="45" name="8" x="1472" y="128" width="16" height="16"/>
+  <object id="39" name="player" x="160" y="96" width="16" height="16"/>
+  <object id="41" name="flyingEnemy" x="1280" y="0" width="16" height="16"/>
+  <object id="44" name="flyingEnemy" x="848" y="32" width="16" height="16"/>
+  <object id="45" name="rino" x="1472" y="128" width="16" height="16"/>
+  <object id="50" name="Coin" x="128" y="160" width="16" height="16"/>
+  <object id="52" name="Coin" x="736" y="144" width="16" height="16"/>
+  <object id="53" name="Coin" x="1216" y="32" width="16" height="16"/>
  </objectgroup>
 </map>

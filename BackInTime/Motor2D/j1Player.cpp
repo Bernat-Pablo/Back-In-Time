@@ -17,6 +17,36 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 {
 	name.create("player");
 	
+	spritesheet_rock = nullptr;
+	spritesheet_casper = nullptr;
+	spritesheet_bars = nullptr;
+	spritesheet_source = nullptr;
+
+	in_air = false;
+	looking_right = true;
+
+	godMode = false;
+	walking = false; //is he walking?
+
+	ability_able = false;
+
+	rock_timer = 0;
+	rock_fall_velocity = 0;
+
+	tick1 = 0, tick2 = 0;
+	tick3 = 0, tick4 = 0;
+
+	camera_toRight = nullptr;
+	camera_toLeft = nullptr;
+	camera_toUp = nullptr;
+	camera_toDown = nullptr;
+
+	collider_rock = nullptr;
+
+	livesUpdated = false;
+
+	collected_coins = 0;
+
 	float speed = 0.1f;
 	//IDLE
 	idle.PushBack({ 0,0,17,27 }, speed);
@@ -146,8 +176,7 @@ bool j1Player::Start(){
 	bar_4 = { 268,89,62,12 };
 
 	initial_pos = position.x; //look to camera_toright. Position.x is the initial position at this moment
-
-
+	
 	bar_pos.x = 10;
 	bar_pos.y = -130;
 
@@ -156,6 +185,7 @@ bool j1Player::Start(){
 
 bool j1Player::PreUpdate() 
 {
+	LOG("coins: %i", collected_coins);
 	//God Mode
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{
@@ -333,8 +363,6 @@ bool j1Player::PreUpdate()
 	if (player_input.pressing_F) {
 		throwRock();
 	}
-
-	LOG("lives: %i", lives);
 
 	//Change player collider position
 	collider_entity->SetPos(position.x, position.y);
@@ -1005,4 +1033,9 @@ void j1Player::BlitEverything()
 		App->render->Blit(spritesheet_entity, position.x, position.y, &r); //looking at right			
 
 	App->render->Blit(spritesheet_rock, rockPosition.x, rockPosition.y, &throw_rock.GetCurrentFrame());
+}
+
+void j1Player::CollectCoin()
+{
+	collected_coins++;
 }
