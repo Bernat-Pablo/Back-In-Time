@@ -6,7 +6,7 @@
 
 class UI_Elements;
 
-enum class UI_Type{
+enum class UI_Types {
 	TEXT,
 };
 
@@ -15,9 +15,8 @@ public:
 	j1Gui();
 	~j1Gui() {};
 
-	UI_Elements* CreateEntity(UI_Type type, int position_x, int position_y);
-
-
+	//UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y);
+	
 private:
 	
 };

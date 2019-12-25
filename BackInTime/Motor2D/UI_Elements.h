@@ -3,17 +3,14 @@
 
 #include "j1Gui.h"
 
-
 class UI_Elements : public j1Gui {
 public:
-	UI_Elements();
-	~UI_Elements() {};
+	UI_Elements(UI_Types type);
+	virtual ~UI_Elements() {};
 
 private:
 
-	char* text;
-
+	char* text = nullptr;
 };
-
 
 #endif // !_UI_ELEMENTS_

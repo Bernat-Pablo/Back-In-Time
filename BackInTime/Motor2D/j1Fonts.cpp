@@ -12,7 +12,7 @@
 #include<string.h>
 
 // Constructor
-j1Fonts::j1Fonts() : UI_Elements()
+j1Fonts::j1Fonts() : UI_Elements(UI_Types::TEXT)
 {}
 
 

@@ -47,17 +47,6 @@ bool j1Scene::Start()
 		App->pathfinding->SetMap(w, h, data);
 	debug_tex = App->tex->Load("maps/pathRect.png");
 
-
-
-	//TODO Add entities to scene	
-	//j1Entity* flyingEnemy1 = App->entityManager->CreateEntity(entityTypes::FLYING_ENEMY,80,150);
-	//App->AddModule(flyingEnemy1);
-
-	//flyingEnemy1->Awake(App->GetConfig().child(App->entityManager->name.GetString()));
-	//flyingEnemy1->Start(50,100);
-
-	
-
 	App->audio->PlayMusic("audio/music/music.ogg");
 	
 	//UI_Element* text = App->gui->CreateUI_Element(UI_TypeElement::TEXT, 50, 50);
