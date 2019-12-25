@@ -72,6 +72,9 @@
     <ClCompile Include="UI_Elements.cpp">
       <Filter>UI Elements</Filter>
     </ClCompile>
+    <ClCompile Include="j1Console.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="UI_Elements.h">
       <Filter>UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Console.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
