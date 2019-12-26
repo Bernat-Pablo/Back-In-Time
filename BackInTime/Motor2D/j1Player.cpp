@@ -670,6 +670,7 @@ bool j1Player::Save(pugi::xml_node& data) const {
 
 	//Extra data
 	data.append_child("lives").append_attribute("value") = lives;
+	data.append_child("collected_coins").append_attribute("value") = collected_coins;
 
 	return true;
 }
@@ -702,7 +703,8 @@ bool j1Player::Load(pugi::xml_node& data)
 
 	//Load extra data
 	lives = data.child("lives").attribute("value").as_int();
-	
+	collected_coins = data.child("collected_coins").attribute("value").as_int();
+
 	return true;
 }
 
