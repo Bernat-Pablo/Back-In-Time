@@ -8,6 +8,12 @@ public:
 	UI_Elements(UI_Types type);
 	virtual ~UI_Elements() {};
 	
+	virtual bool Awake(pugi::xml_node& config) { return true; };
+	virtual bool Start() { return true; };
+	virtual bool PreUpdate() { return true; };
+	virtual bool Update(float dt) { return true; };
+	virtual bool PostUpdate() { return true; };
+	virtual bool CleanUp() { return true; };
 private:
 	char* text = nullptr;
 	

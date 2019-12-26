@@ -15,10 +15,17 @@ public:
 	j1Gui();
 	~j1Gui() {};
 
+	bool Awake(pugi::xml_node& config);
+	bool Start();
+	bool PreUpdate();
+	bool Update(float dt);
+	bool PostUpdate();
+	bool CleanUp();
+
 	UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y);
 	
 private:
-	
+	p2List<UI_Elements*> ui_elementsList;
 };
 
 #endif // !_GUI_
