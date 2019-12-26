@@ -225,12 +225,21 @@ bool j1FlyingEnemy::Update(float dt)
 
 bool j1FlyingEnemy::CleanUp()
 {
+	LOG("Unloading Bird\n");
+
+	current_animation = nullptr;
+
+	//Unload textures
 	App->tex->UnLoad(spritesheet_entity);
 	App->tex->UnLoad(debug_tex);
-	collider_entity->to_delete = true;
-	collider_entity = nullptr;
+	
+	//Unload spritesheets
 	spritesheet_entity = nullptr;
-	current_animation = nullptr;
+	
+	//Unload colliders
+	collider_entity->to_delete = true;
+	collider_entity = nullptr;	
+	
 	return true;
 }
 

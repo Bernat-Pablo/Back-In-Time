@@ -541,21 +541,35 @@ bool j1Player::Update(float dt)
 
 bool j1Player::CleanUp() {
 	LOG("Unloading player\n");
-	collider_entity = nullptr;
-	spritesheet_entity = nullptr;
-	spritesheet_casper = nullptr;
-	spritesheet_bars = nullptr;
+	
 	current_animation = nullptr;
+	//Unload spritesheets
+	{
+		spritesheet_entity = nullptr;
+		spritesheet_casper = nullptr;
+		spritesheet_bars = nullptr;		
+		spritesheet_rock = nullptr;
+	}
 
-	//Unload rock
-	spritesheet_rock = nullptr;
-	collider_rock = nullptr;
-
-	//Unload colliders for the camera
-	camera_toRight = nullptr;
-	camera_toLeft = nullptr;
-	camera_toUp = nullptr;
-	camera_toDown = nullptr;
+	//Unload colliders
+	{//Player
+		collider_entity->to_delete = true;
+		collider_entity = nullptr;
+	}//Camera
+	{
+		camera_toRight->to_delete = true;
+		camera_toRight = nullptr;
+		camera_toLeft->to_delete = true;
+		camera_toLeft = nullptr;
+		camera_toUp->to_delete = true;
+		camera_toUp = nullptr;
+		camera_toDown->to_delete = true;
+		camera_toDown = nullptr;
+	}
+	{//Rock
+		collider_rock->to_delete = true;
+		collider_rock = nullptr;
+	}
 
 	//Unload audio	
 	App->audio->unLoadFx("audio/fx/jump.wav");

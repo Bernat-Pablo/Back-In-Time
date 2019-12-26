@@ -174,14 +174,20 @@ bool j1GroundEnemy::Update(float dt)
 
 bool j1GroundEnemy::CleanUp()
 {
+	LOG("Unloading Rino\n");
+
+	current_animation = nullptr;
+
+	//Unload textures
 	App->tex->UnLoad(spritesheet_entity);
 	App->tex->UnLoad(debug_tex);
 
+	//Unload spritesheets
+	spritesheet_entity = nullptr;
+
+	//Unload colliders
 	collider_entity->to_delete = true;
 	collider_entity = nullptr;
-
-	spritesheet_entity = nullptr;
-	current_animation = nullptr;
 	
 	return true;
 }
