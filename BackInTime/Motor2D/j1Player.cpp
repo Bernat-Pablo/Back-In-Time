@@ -368,7 +368,6 @@ bool j1Player::PreUpdate()
 
 bool j1Player::Update(float dt)
 {
-	//TODO delete deltaTime variable
 	deltaTime = dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update

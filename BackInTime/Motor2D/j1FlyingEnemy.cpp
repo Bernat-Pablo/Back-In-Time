@@ -97,40 +97,29 @@ bool j1FlyingEnemy::PreUpdate()
 	switch (state)
 	{
 	case entityStates::FLY:
-		if (moving_right == true) {
-			state = entityStates::FLY_FORWARD;
-		}
-		else if (moving_left == true) {
-			state = entityStates::FLY_BACKWARD;
-		}
-		else if (falling == true) {
-			state = entityStates::FALL;
-		}
+		if (moving_right)state = entityStates::FLY_FORWARD;		
+		else if (moving_left)state = entityStates::FLY_BACKWARD;		
+		else if (falling)state = entityStates::FALL;
+		
 		break;
 	case entityStates::FLY_FORWARD:
-		if (moving_right == false) {
-			state = entityStates::FLY;
-		}
+		if (moving_right == false)state = entityStates::FLY;
+		
 		break;
 	case entityStates::FLY_BACKWARD:
-		if (moving_left == false) {
-			state = entityStates::FLY;
-		}
+		if (moving_left == false)state = entityStates::FLY;
+		
 		break;
 	case entityStates::FALL:
-		if (falling == false) {
-			state = entityStates::IN_GROUND;
-		}
+		if (falling == false)state = entityStates::IN_GROUND;
+		
 		break;
 	case entityStates::IN_GROUND:
-		if (starting_flying == true) {
-			state = entityStates::FLY_UP;
-		}
+		if (starting_flying == true)state = entityStates::FLY_UP;
+		
 		break;
-
 	case entityStates::HIT:
-		if (!being_hit)
-			state = entityStates::FLY;
+		if (!being_hit)state = entityStates::FLY;
 
 		break;
 	}
@@ -198,9 +187,7 @@ bool j1FlyingEnemy::Update(float dt)
 			set_timer = false;
 			starting_flying = true;
 		}
-
 		break;
-
 	case entityStates::FLY_UP:
 		if (!set_timer) {
 			set_timer = true;
@@ -255,9 +242,7 @@ void j1FlyingEnemy::calculate_path()
 	p = App->map->WorldToMap(position.x, position.y);
 	if (App->player->position.x - position.x >= -160 && position.x - App->player->position.x >= -160) {
 		App->pathfinding->CreatePath(origin, p);
-		if (set_path == true) {
-			check_path_toMove();
-		}
+		if (set_path == true)check_path_toMove();		
 	}
 }
 
@@ -268,8 +253,7 @@ void j1FlyingEnemy::blit_path()
 	for (uint i = 0; i < path->Count(); ++i)
 	{
 		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		if(debug_tex != nullptr)
-			App->render->Blit(debug_tex, pos.x, pos.y);
+		if(debug_tex != nullptr)App->render->Blit(debug_tex, pos.x, pos.y);
 	}
 }
 
@@ -278,15 +262,9 @@ void j1FlyingEnemy::check_path_toMove()
 	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 	iPoint pos = App->map->MapToWorld(path->At(1)->x, path->At(1)->y);
 
-	if (pos.x < position.x) {
-		state = entityStates::FLY_BACKWARD;
-	}
-	if (pos.x > position.x) {
-		state = entityStates::FLY_FORWARD;
-	}
-	if (pos.x >= position.x-5 && pos.x <= position.x + 5) {
-		state = entityStates::FALL;
-	}
+	if (pos.x < position.x)state = entityStates::FLY_BACKWARD;	
+	if (pos.x > position.x)state = entityStates::FLY_FORWARD;	
+	if (pos.x >= position.x-5 && pos.x <= position.x + 5)state = entityStates::FALL;	
 }
 
 void j1FlyingEnemy::OnCollision(Collider* c1, Collider* c2) {
