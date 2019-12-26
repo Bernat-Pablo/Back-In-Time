@@ -99,34 +99,24 @@ bool j1GroundEnemy::PreUpdate()
 	switch (state)
 	{
 	case entityStates::IDLE:
-		if (moving_left)
-			state = entityStates::RUN_BACKWARD;
-		if (moving_right)
-			state = entityStates::RUN_FORWARD;
+		if (moving_left)state = entityStates::RUN_BACKWARD;
+		if (moving_right)state = entityStates::RUN_FORWARD;
 		break;
 	case entityStates::RUN_FORWARD:
-		if(stun)
-			state = entityStates::STUNNED;
-		if (moving_left)
-			state = entityStates::RUN_BACKWARD;
+		if(stun)state = entityStates::STUNNED;
+		if (moving_left)state = entityStates::RUN_BACKWARD;
 		break;
 	case entityStates::RUN_BACKWARD:
-		if (stun)
-			state = entityStates::STUNNED;
-		if (moving_right)
-			state = entityStates::RUN_FORWARD;
+		if (stun)state = entityStates::STUNNED;
+		if (moving_right)state = entityStates::RUN_FORWARD;
 		break;
 	case entityStates::STUNNED:
-		if (!stun) {
-			state = entityStates::IDLE;
-		}	
+		if (!stun)state = entityStates::IDLE;		
 		break;
 	case entityStates::HIT:
-		if(!being_hit)
-			state = entityStates::IDLE;
+		if(!being_hit)state = entityStates::IDLE;
 		break;
 	}
-
 	BROFILER_CATEGORY("Rino_PreUpdate", Profiler::Color::HotPink);
 
 	return true;
@@ -172,11 +162,9 @@ bool j1GroundEnemy::Update(float dt)
 		break;
 	}
 
-	if (checkInAir())
-		position.y += (int)ceil(90 * dt);	
+	if (checkInAir() == true)position.y += (int)ceil(90 * dt);	
 	
 	calculate_path();
-
 	BlitEverything();
 
 	BROFILER_CATEGORY("Rino_Update", Profiler::Color::FloralWhite);
