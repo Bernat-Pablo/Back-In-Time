@@ -119,6 +119,7 @@
     <ClInclude Include="j1Gui.h" />
     <ClInclude Include="j1Image.h" />
     <ClInclude Include="j1Map.h" />
+    <ClInclude Include="j1Menu.h" />
     <ClInclude Include="j1PathFinding.h" />
     <ClInclude Include="j1PerfTimer.h" />
     <ClInclude Include="j1Player.h" />

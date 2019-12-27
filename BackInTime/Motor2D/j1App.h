@@ -24,6 +24,7 @@ class j1FlyingEnemy;
 class j1GroundEnemy;
 class j1Coin;
 class j1Gui;
+class j1Menu;
 
 class j1App
 {
@@ -76,6 +77,7 @@ public:
 	j1Fade* fade;
 	j1PathFinding* pathfinding;
 	j1Gui* gui;
+	j1Menu* menu;
 
 private:
 

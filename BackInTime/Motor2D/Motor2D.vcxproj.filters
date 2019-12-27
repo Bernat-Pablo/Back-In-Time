@@ -170,6 +170,9 @@
     <ClInclude Include="j1Image.h">
       <Filter>UI Elements</Filter>
     </ClInclude>
+    <ClInclude Include="j1Menu.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">
