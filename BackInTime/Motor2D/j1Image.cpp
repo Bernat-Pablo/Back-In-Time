@@ -7,7 +7,6 @@
 
 j1Image::j1Image() : UI_Elements()
 {	
-	//texture = App->gui->GetUISpritesheet();
 }
 
 bool j1Image::Start()

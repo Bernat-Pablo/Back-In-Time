@@ -25,8 +25,8 @@ bool j1Gui::Start()
 	bool ret = true;
 
 	ret = true;
-	//ui_spritesheet = App->tex->Load(ui_spritesheet_path.GetString());
-	ui_spritesheet = App->tex->Load("character/spritesheet_pj.png");
+	ui_spritesheet = App->tex->Load(ui_spritesheet_path.GetString());
+	//ui_spritesheet = App->tex->Load("character/coin_spritesheet.png");
 
 	return ret;
 }
