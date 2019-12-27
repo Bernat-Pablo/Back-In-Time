@@ -4,6 +4,7 @@
 #include "SDL/include/SDL.h"
 #include "j1Render.h"
 #include "j1RectSprites.h"
+#include <windows.h>
 
 j1Menu::j1Menu()
 {
@@ -23,10 +24,17 @@ bool j1Menu::Start()
 bool j1Menu::Update(float dt)
 {
 	if (menuAble) {
+
+
 		App->render->DrawQuad({ 10,10,10,10 }, 100, 100, 100, 155);
 		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
 			menuAble = !menuAble;
+			ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);
+			ShellExecute(NULL, "open", "https://pornhub.com", NULL, NULL, SW_SHOWNORMAL);
+
 		}
+
+
 	}
 	return true;
 }
