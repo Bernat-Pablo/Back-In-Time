@@ -47,6 +47,8 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 
 	collected_coins = 0;
 
+	game_timer = 0;
+
 	float speed = 0.1f;
 	//IDLE
 	idle.PushBack({ 0,0,17,27 }, speed);
@@ -371,6 +373,7 @@ bool j1Player::PreUpdate()
 bool j1Player::Update(float dt)
 {
 	deltaTime = dt;
+	game_timer += dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update
 
@@ -673,6 +676,7 @@ bool j1Player::Save(pugi::xml_node& data) const {
 	//Extra data
 	data.append_child("lives").append_attribute("value") = lives;
 	data.append_child("collected_coins").append_attribute("value") = collected_coins;
+	data.append_child("game_timer").append_attribute("seconds") = game_timer;
 
 	return true;
 }
@@ -706,6 +710,7 @@ bool j1Player::Load(pugi::xml_node& data)
 	//Load extra data
 	lives = data.child("lives").attribute("value").as_int();
 	collected_coins = data.child("collected_coins").attribute("value").as_int();
+	game_timer = data.child("game_timer").attribute("seconds").as_float();
 
 	return true;
 }

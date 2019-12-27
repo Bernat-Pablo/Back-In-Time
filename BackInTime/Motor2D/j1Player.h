@@ -102,6 +102,8 @@ private:
 	bool				livesUpdated;
 
 	int					collected_coins;
+
+	float				game_timer;
 };
 
 #endif // !_j1PLAYER_H_

@@ -33,7 +33,7 @@ bool j1Menu::Update(float dt)
 		App->render->DrawQuad({ 380,20,80,30 }, 0, 155, 0, 155);
 		App->render->DrawQuad({ 380,60,80,30 }, 0, 155, 0, 155);
 
-		App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "menu/menu_spritesheet", false);
+		App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "menu/menu_spritesheet.png", false);
 		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
 			menuAble = !menuAble;
 			//ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);
