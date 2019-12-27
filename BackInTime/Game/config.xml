@@ -58,11 +58,13 @@
       <die_timer value ="1"/>
     </groundEnemy>
 
-    <coin>
-      
+    <coin>      
     </coin>
   </entityManager>
-  
+
+  <gui>
+    <texture path = "character/coin_spritesheet.png"/>
+  </gui>
 
   <window>
     <resolution width="1024" height="768" scale="2"/>

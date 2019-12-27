@@ -11,6 +11,7 @@ public:
 	j1Image();
 	~j1Image() {};
 
+	bool Start();
 	bool Update(float dt);
 	bool CleanUp();
 	void Draw();

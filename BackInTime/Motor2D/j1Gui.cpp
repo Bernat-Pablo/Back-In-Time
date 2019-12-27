@@ -3,14 +3,19 @@
 #include "j1App.h"
 #include "j1Fonts.h"
 #include "j1Image.h"
+#include "j1Textures.h"
 
 j1Gui::j1Gui()
 {
+	name.create("gui");
 }
 
 bool j1Gui::Awake(pugi::xml_node& config)
 {
 	bool ret = true;
+
+	ui_spritesheet_path = config.child("texture").attribute("path").as_string("");
+	ui_spritesheet = App->tex->Load(ui_spritesheet_path.GetString());
 
 	return ret;
 }
@@ -18,6 +23,8 @@ bool j1Gui::Awake(pugi::xml_node& config)
 bool j1Gui::Start()
 {
 	bool ret = true;
+
+	//ui_spritesheet = App->tex->Load(ui_spritesheet_path.GetString());
 
 	return ret;
 }
@@ -68,12 +75,15 @@ bool j1Gui::CleanUp()
 {
 	bool ret = true;
 
+	ui_spritesheet = nullptr;
+
 	return ret;
 }
 
 UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_y)
 {
 	UI_Elements* ret = nullptr;
+
 	switch (type)
 	{
 	case UI_Types::TEXT:
@@ -84,5 +94,13 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 	default:
 		break;
 	}
+
+	ui_elementsList.add(ret);
+
 	return ret;
+}
+
+SDL_Texture* j1Gui::GetUISpritesheet()
+{
+	return ui_spritesheet;
 }

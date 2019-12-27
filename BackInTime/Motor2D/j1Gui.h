@@ -3,6 +3,7 @@
 
 #include "j1Module.h"
 #include "p2List.h"
+#include "j1Textures.h"
 
 class UI_Elements;
 
@@ -25,8 +26,11 @@ public:
 
 	UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y);
 	
+	SDL_Texture* GetUISpritesheet();
 private:
 	p2List<UI_Elements*> ui_elementsList;
+	SDL_Texture* ui_spritesheet;
+	p2SString ui_spritesheet_path;
 };
 
 #endif // !_GUI_

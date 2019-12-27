@@ -13,7 +13,8 @@
 #include "j1PathFinding.h"
 #include "j1EntityManager.h"
 #include "j1Entity.h"
-
+#include "j1Gui.h"
+#include "UI_Elements.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -50,7 +51,7 @@ bool j1Scene::Start()
 	App->audio->PlayMusic("audio/music/music.ogg");
 	
 	//UI_Element* text = App->gui->CreateUI_Element(UI_TypeElement::TEXT, 50, 50);
-
+	UI_Elements* image = App->gui->CreateUIElement(UI_Types::IMAGE, 100, 200);
 
 	return true;
 }
