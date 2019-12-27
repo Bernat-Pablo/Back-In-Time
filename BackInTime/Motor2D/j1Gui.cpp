@@ -1,7 +1,8 @@
 #include "j1Gui.h"
-#include "j1Fonts.h"
 #include "UI_Elements.h"
 #include "j1App.h"
+#include "j1Fonts.h"
+#include "j1Image.h"
 
 j1Gui::j1Gui()
 {
@@ -42,7 +43,7 @@ bool j1Gui::Update(float dt)
 	p2List_item<UI_Elements*>* element = ui_elementsList.start;
 	while (element != nullptr)
 	{
-		//element->data->Update(float dt);
+		element->data->Update(dt);
 		element = element->next;
 	}
 
@@ -78,6 +79,8 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 	case UI_Types::TEXT:
 		ret = new j1Fonts();		
 		break;
+	case UI_Types::IMAGE:
+		ret = new j1Image();
 	default:
 		break;
 	}
