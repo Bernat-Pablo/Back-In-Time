@@ -24,7 +24,7 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y);
+	UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y, char* texture = "0", bool follow_pj = true);
 	
 	SDL_Texture* GetUISpritesheet();
 private:

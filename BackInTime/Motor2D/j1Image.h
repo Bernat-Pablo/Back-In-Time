@@ -18,6 +18,7 @@ public:
 
 private:
 	SDL_Texture* texture;
+	iPoint position;
 };
 
 #endif // !_J1_IMAGE_H

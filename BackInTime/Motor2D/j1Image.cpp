@@ -13,7 +13,8 @@ bool j1Image::Start()
 {
 	bool ret = true;
 
-	texture = App->gui->GetUISpritesheet();
+	texture = this->texture;
+	position = this->pos;
 
 	return ret;
 }
@@ -22,8 +23,14 @@ bool j1Image::Update(float dt)
 {
 	bool ret = true;
 
-	rect.x = App->player->position.x;
-	rect.y = App->player->position.y;
+	if (this->following_pj) {
+		position.x = App->player->position.x;
+		position.y = App->player->position.y;
+	}
+	else {
+		position = this->pos;
+	}
+
 	Draw();
 
 	return ret;
@@ -40,5 +47,5 @@ bool j1Image::CleanUp()
 
 void j1Image::Draw()
 {
-	App->render->Blit(texture, rect.x + 20, rect.y - 20);
+	App->render->Blit(texture, position.x + 20, position.y - 20);
 }

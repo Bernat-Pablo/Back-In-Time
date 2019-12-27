@@ -20,6 +20,9 @@ public:
 public:
 	char* text = nullptr;
 	SDL_Rect rect;
+	char* texture_path;
+	iPoint pos;
+	bool following_pj;
 };
 
 #endif // !_UI_ELEMENTS_
