@@ -6,20 +6,20 @@ j1Menu::j1Menu()
 
 bool j1Menu::Awake(pugi::xml_node& conf)
 {
-	return false;
+	return true;
 }
 
 bool j1Menu::Start()
 {
-	return false;
+	return true;
 }
 
 bool j1Menu::Update(float dt)
 {
-	return false;
+	return true;
 }
 
 bool j1Menu::CleanUp()
 {
-	return false;
+	return true;
 }

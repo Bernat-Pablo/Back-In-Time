@@ -34,7 +34,6 @@ bool j1Map::Awake(pugi::xml_node& config)
 		LOG("Could not load map xml file %s. pugi error: %s", result, result.description());
 		ret = false;
 	}
-
 	return ret;
 }
 

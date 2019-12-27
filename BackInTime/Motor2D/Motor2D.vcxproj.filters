@@ -78,6 +78,9 @@
     <ClCompile Include="j1Image.cpp">
       <Filter>UI Elements</Filter>
     </ClCompile>
+    <ClCompile Include="j1Menu.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
