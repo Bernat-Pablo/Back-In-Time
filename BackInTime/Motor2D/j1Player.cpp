@@ -185,7 +185,6 @@ bool j1Player::Start() {
 
 bool j1Player::PreUpdate()
 {
-	LOG("coins: %i", collected_coins);
 	//God Mode
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 	{

@@ -29,12 +29,8 @@ bool j1Menu::Update(float dt)
 		App->render->DrawQuad({ 10,10,10,10 }, 100, 100, 100, 155);
 		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
 			menuAble = !menuAble;
-			ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);
-			ShellExecute(NULL, "open", "https://pornhub.com", NULL, NULL, SW_SHOWNORMAL);
-
+			//ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);
 		}
-
-
 	}
 	return true;
 }

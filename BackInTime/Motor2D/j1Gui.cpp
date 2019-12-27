@@ -15,7 +15,7 @@ bool j1Gui::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	ui_spritesheet_path = config.child("texture").attribute("path").as_string("");
-	ui_spritesheet = App->tex->Load(ui_spritesheet_path.GetString());
+	//ui_spritesheet = App->tex->Load("character/spritesheet_pj.png");
 
 	return ret;
 }
@@ -24,7 +24,9 @@ bool j1Gui::Start()
 {
 	bool ret = true;
 
+	ret = true;
 	//ui_spritesheet = App->tex->Load(ui_spritesheet_path.GetString());
+	ui_spritesheet = App->tex->Load("character/spritesheet_pj.png");
 
 	return ret;
 }
@@ -91,6 +93,7 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 		break;
 	case UI_Types::IMAGE:
 		ret = new j1Image();
+		ret->Start();
 	default:
 		break;
 	}

@@ -63,7 +63,7 @@
   </entityManager>
 
   <gui>
-    <texture path = "character/coin_spritesheet.png"/>
+    <texture path = "character/spritesheet_pj.png"/>
   </gui>
 
   <window>

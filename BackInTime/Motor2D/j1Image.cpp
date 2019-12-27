@@ -7,7 +7,7 @@
 
 j1Image::j1Image() : UI_Elements()
 {	
-	texture = App->gui->GetUISpritesheet();
+	//texture = App->gui->GetUISpritesheet();
 }
 
 bool j1Image::Start()
@@ -41,5 +41,5 @@ bool j1Image::CleanUp()
 
 void j1Image::Draw()
 {
-	App->render->Blit(texture, rect.x, rect.y);
+	App->render->Blit(texture, rect.x + 20, rect.y - 20);
 }

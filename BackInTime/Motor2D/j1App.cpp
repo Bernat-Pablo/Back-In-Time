@@ -52,13 +52,13 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
+	AddModule(gui);
 	AddModule(scene);
 	AddModule(entityManager);
 	AddModule(player);
 	AddModule(collision);
 	AddModule(fade);
-	AddModule(pathfinding);
-	AddModule(gui);
+	AddModule(pathfinding);	
 	AddModule(menu);
 
 	// render last to swap buffer
