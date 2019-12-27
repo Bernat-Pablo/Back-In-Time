@@ -27,6 +27,11 @@ bool j1Menu::Update(float dt)
 {
 	if (menuAble) {
 
+		App->render->DrawQuad({ 380,-100,80,30 }, 0, 155, 0, 155);
+		App->render->DrawQuad({ 380,-60,80,30 }, 0, 155, 0, 155);
+		App->render->DrawQuad({ 380,-20,80,30 }, 0, 155, 0, 155);
+		App->render->DrawQuad({ 380,20,80,30 }, 0, 155, 0, 155);
+		App->render->DrawQuad({ 380,60,80,30 }, 0, 155, 0, 155);
 
 		App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "menu/menu_spritesheet", false);
 		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
