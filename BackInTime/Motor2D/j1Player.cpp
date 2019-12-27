@@ -347,14 +347,17 @@ bool j1Player::PreUpdate()
 		{
 			lives--;
 			livesUpdated = true;
+
+			//TODO: Go back to menu 
+			if (lives <= 0)
+				LOG("Player has died");
 		}
 
 		state = entityStates::IDLE;
 		break;
 	}
-	if (player_input.pressing_F) {
-		throwRock();
-	}
+	if (player_input.pressing_F) throwRock();
+	
 
 	//Change player collider position
 	collider_entity->SetPos(position.x, position.y);
