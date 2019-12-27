@@ -17,9 +17,11 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
+	bool menuAble = true;
+	bool transition = false;
+
 private:
 	SDL_Texture* background;
-	bool menuAble = true;
 
 };
 

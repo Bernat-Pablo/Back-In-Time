@@ -15,6 +15,7 @@
 #include "j1Entity.h"
 #include "j1Gui.h"
 #include "UI_Elements.h"
+#include "j1Menu.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -108,6 +109,10 @@ bool j1Scene::Update(float dt)
 	//if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 
 	App->map->Draw();
+
+	if (App->input->GetKey(SDL_SCANCODE_O)==KEY_DOWN) {
+		App->menu->menuAble = true;
+	}
 
 	return true;
 }

@@ -274,7 +274,9 @@ bool j1App::DoUpdate()
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
 		pModule = item->data;
-
+		if (pModule->name != "menu" && App->menu->menuAble) {
+			continue;
+		}
 		if(pModule->active == false) {
 			continue;
 		}
