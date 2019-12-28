@@ -13,6 +13,7 @@ bool Button::Start()
 {
 	text = this->text_font;
 	r = this->rect;
+
 	return true;
 }
 
@@ -25,7 +26,7 @@ bool Button::Update(float dt)
 	text = this->text_font;
 
 	App->render->DrawQuad(r, 0, 255, 0, 255);
-	App->fonts->BlitText(r.x, r.y, 1, text);
+	App->fonts->BlitText(r.x + this->margeButton.x, r.y + this->margeButton.y, 1, text);
 
 	return true;
 }

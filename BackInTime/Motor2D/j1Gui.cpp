@@ -112,6 +112,9 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 		break;
 	case UI_Types::BUTTON:
 		ret = new Button();
+		ret->margeButton.y = 11;
+		ret->numberLetters = strlen(t);
+		ret->margeButton.x = -ret->numberLetters*4+40;
 		ret->rect = { position_x ,position_y, 80,30 };
 		ret->text_font = t;
 		ret->Start();

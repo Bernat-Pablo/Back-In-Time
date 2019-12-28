@@ -23,6 +23,11 @@ public:
 	char* texture_path;
 	iPoint pos;
 	bool following_pj;
+
+
+	int numberLetters;
+	iPoint margeButton;
+
 };
 
 #endif // !_UI_ELEMENTS_

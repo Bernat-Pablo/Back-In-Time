@@ -19,6 +19,7 @@ private:
 
 	char* text;
 	SDL_Rect r;
+	iPoint text_marge;
 
 };
 
