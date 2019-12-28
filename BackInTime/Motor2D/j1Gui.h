@@ -10,6 +10,7 @@ class UI_Elements;
 enum class UI_Types {
 	TEXT,
 	IMAGE,
+	BUTTON,
 };
 
 class j1Gui : public j1Module {

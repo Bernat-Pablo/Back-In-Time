@@ -5,6 +5,7 @@
 #include "j1Image.h"
 #include "j1Textures.h"
 #include "j1FontUI.h"
+#include "j1Button.h"
 
 j1Gui::j1Gui()
 {
@@ -108,6 +109,13 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 		ret->pos.x = position_x;
 		ret->pos.y = position_y;
 		ret->Start();
+		break;
+	case UI_Types::BUTTON:
+		ret = new Button();
+		ret->rect = { position_x ,position_y, 80,30 };
+		ret->text_font = t;
+		ret->Start();
+		break;
 	default:
 		break;
 	}
