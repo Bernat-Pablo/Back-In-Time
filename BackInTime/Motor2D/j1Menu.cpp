@@ -22,6 +22,7 @@ bool j1Menu::Start()
 {
 	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "menu/menu_spritesheet.png", false);
 	App->gui->CreateUIElement(UI_Types::TEXT, 100, 0, "0", false, "hola");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 300, 0, "0", false, "hola");
 
 	return true;
 }
