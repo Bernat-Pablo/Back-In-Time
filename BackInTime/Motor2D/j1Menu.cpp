@@ -22,24 +22,18 @@ bool j1Menu::Start()
 {
 	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "menu/menu_spritesheet.png", false);
 	App->gui->CreateUIElement(UI_Types::TEXT, 100, 0, "0", false, "hola");
-	App->gui->CreateUIElement(UI_Types::BUTTON, 300, 0, "0", false, "hola");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, -100, "0", false, "hola");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, -60, "0", false, "hola");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, -20, "0", false, "hola");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 20, "0", false, "hola");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 60, "0", false, "hola");
 
 	return true;
 }
 
 bool j1Menu::Update(float dt)
 {
-	if (menuAble) {
-
-		
-		App->render->DrawQuad({ 380,-100,80,30 }, 0, 155, 0, 155);
-		App->render->DrawQuad({ 380,-60,80,30 }, 0, 155, 0, 155);
-		App->render->DrawQuad({ 380,-20,80,30 }, 0, 155, 0, 155);
-		App->render->DrawQuad({ 380,20,80,30 }, 0, 155, 0, 155);
-		App->render->DrawQuad({ 380,60,80,30 }, 0, 155, 0, 155);
-
-
-		
+	if (menuAble) {		
 
 		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
 			ChangeMenuStatus();
