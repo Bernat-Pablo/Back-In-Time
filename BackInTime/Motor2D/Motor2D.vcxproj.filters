@@ -84,6 +84,7 @@
     <ClCompile Include="j1FontUI.cpp">
       <Filter>UI Elements</Filter>
     </ClCompile>
+    <ClCompile Include="j1Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="p2DynArray.h" />
@@ -180,6 +181,9 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="j1FontUI.h">
+      <Filter>UI Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Button.h">
       <Filter>UI Elements</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,11 +13,12 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 	void Draw();
+	void onClick();
 
 private:
 
-	iPoint position;
 	char* text;
+	SDL_Rect r;
 
 };
 
