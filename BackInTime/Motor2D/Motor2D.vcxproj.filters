@@ -60,9 +60,6 @@
     <ClCompile Include="j1GroundEnemy.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="j1Fonts.cpp">
-      <Filter>UI Elements</Filter>
-    </ClCompile>
     <ClCompile Include="j1Gui.cpp">
       <Filter>UI Elements</Filter>
     </ClCompile>
@@ -80,6 +77,12 @@
     </ClCompile>
     <ClCompile Include="j1Menu.cpp">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Fonts.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1FontUI.cpp">
+      <Filter>UI Elements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,9 +158,6 @@
     <ClInclude Include="j1GroundEnemy.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="j1Fonts.h">
-      <Filter>UI Elements</Filter>
-    </ClInclude>
     <ClInclude Include="j1Gui.h">
       <Filter>UI Elements</Filter>
     </ClInclude>
@@ -175,6 +175,12 @@
     </ClInclude>
     <ClInclude Include="j1Menu.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Fonts.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="j1FontUI.h">
+      <Filter>UI Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

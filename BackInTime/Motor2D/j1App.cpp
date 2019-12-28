@@ -22,6 +22,7 @@
 #include "j1Coin.h"
 #include "j1Gui.h"
 #include "j1Menu.h"
+#include "j1Fonts.h"
 
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
@@ -44,6 +45,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	pathfinding = new j1PathFinding();
 	gui = new j1Gui();
 	menu = new j1Menu();
+	fonts = new j1Fonts();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -60,6 +62,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fade);
 	AddModule(pathfinding);	
 	AddModule(menu);
+	AddModule(fonts);
 
 	// render last to swap buffer
 	AddModule(render);

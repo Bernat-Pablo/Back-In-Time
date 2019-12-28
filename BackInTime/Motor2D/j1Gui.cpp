@@ -4,6 +4,7 @@
 #include "j1Fonts.h"
 #include "j1Image.h"
 #include "j1Textures.h"
+#include "j1FontUI.h"
 
 j1Gui::j1Gui()
 {
@@ -26,6 +27,7 @@ bool j1Gui::Start()
 
 	ret = true;
 	ui_spritesheet = App->tex->Load(ui_spritesheet_path.GetString());
+	App->fonts->Load("fonts/small_white_font.png", "abcdefghiklmnoprstuwy'.0123456789", 1, 264, 8, 8);
 	//ui_spritesheet = App->tex->Load("character/coin_spritesheet.png");
 
 	return ret;
@@ -89,7 +91,12 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 	switch (type)
 	{
 	case UI_Types::TEXT:
-		ret = new j1Fonts();		
+		ret = new Font_UI();
+		if (texture != "0")
+			ret->texture_path = texture;
+		if (follow_pj)
+			ret->following_pj = follow_pj;
+		ret->Start();
 		break;
 	case UI_Types::IMAGE:
 		ret = new j1Image();

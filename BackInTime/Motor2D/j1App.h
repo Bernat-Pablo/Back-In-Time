@@ -25,6 +25,7 @@ class j1GroundEnemy;
 class j1Coin;
 class j1Gui;
 class j1Menu;
+class j1Fonts;
 
 class j1App
 {
@@ -78,6 +79,7 @@ public:
 	j1PathFinding* pathfinding;
 	j1Gui* gui;
 	j1Menu* menu;
+	j1Fonts* fonts;
 
 private:
 

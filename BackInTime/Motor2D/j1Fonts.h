@@ -18,7 +18,7 @@ struct Font
 	uint rows, len, char_w, char_h, row_chars;
 };
 
-class j1Fonts : public UI_Elements
+class j1Fonts : public j1Module
 {
 public:
 	Font	 fonts[MAX_FONTS];

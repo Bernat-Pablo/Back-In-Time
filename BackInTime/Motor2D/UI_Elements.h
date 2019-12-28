@@ -18,7 +18,7 @@ public:
 	virtual bool PostUpdate() { return true; };
 	virtual bool CleanUp() { return true; };
 public:
-	char* text = nullptr;
+	char* text_font;
 	SDL_Rect rect;
 	char* texture_path;
 	iPoint pos;
