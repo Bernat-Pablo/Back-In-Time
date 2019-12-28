@@ -35,7 +35,7 @@ bool j1Menu::Update(float dt)
 
 		App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "menu/menu_spritesheet.png", false);
 		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
-			menuAble = !menuAble;
+			ChangeMenuStatus();
 			//ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);
 		}
 	}
@@ -45,4 +45,9 @@ bool j1Menu::Update(float dt)
 bool j1Menu::CleanUp()
 {
 	return true;
+}
+
+void j1Menu::ChangeMenuStatus()
+{
+	menuAble = !menuAble;
 }
