@@ -84,7 +84,7 @@ bool j1Gui::CleanUp()
 	return ret;
 }
 
-UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_y, char* texture, bool follow_pj)
+UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_y, char* texture, bool follow_pj, char* t)
 {
 	UI_Elements* ret = nullptr;
 
@@ -96,6 +96,7 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 			ret->texture_path = texture;
 		if (follow_pj)
 			ret->following_pj = follow_pj;
+		ret->text_font = t;
 		ret->Start();
 		break;
 	case UI_Types::IMAGE:
