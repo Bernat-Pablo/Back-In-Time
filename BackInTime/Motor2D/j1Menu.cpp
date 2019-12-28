@@ -21,7 +21,7 @@ bool j1Menu::Awake(pugi::xml_node& conf)
 bool j1Menu::Start()
 {
 	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "menu/menu_spritesheet.png", false);
-	App->gui->CreateUIElement(UI_Types::TEXT, 0, 0, "0", false, "hola");
+	App->gui->CreateUIElement(UI_Types::TEXT, 100, 0, "0", false, "hola");
 
 	return true;
 }

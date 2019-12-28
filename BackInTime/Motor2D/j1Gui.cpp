@@ -27,7 +27,7 @@ bool j1Gui::Start()
 
 	ret = true;
 	ui_spritesheet = App->tex->Load(ui_spritesheet_path.GetString());
-	App->fonts->Load("fonts/small_white_font.png", "abcdefghiklmnoprstuwy'.0123456789", 1, 272,8, 1);
+	App->fonts->Load("fonts/small_white_font.png", "abcdefghiklmnoprstuwy'.0123456789", 1, 8,8,33);
 	//ui_spritesheet = App->tex->Load("character/coin_spritesheet.png");
 
 	return ret;
