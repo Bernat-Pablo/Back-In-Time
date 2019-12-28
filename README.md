@@ -8,13 +8,14 @@ The player can go a few seconds back to the past.
 
 ## Controls 
 ### Gameplay
-* W: Go up (Godmode only)
 * A: Go left
-* S: Go down (Godmode only)
 * D: Go right
 * F: Shoot a rock
 * Spacebar: Jump
 * Enter: Special Ability | Go back in time
+* Godmode
+  * W: Go up
+  * S: Go down
 ### Debug
 * F1/F2: Change level
 * F3: Start from the beginning of the current level
