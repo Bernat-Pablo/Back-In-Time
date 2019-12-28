@@ -12,8 +12,8 @@ j1Image::j1Image() : UI_Elements()
 bool j1Image::Start()
 {
 	bool ret = true;
-
-	texture = this->texture;
+	
+	texture = App->tex->Load(this->texture_path);
 	position = this->pos;
 
 	return ret;
