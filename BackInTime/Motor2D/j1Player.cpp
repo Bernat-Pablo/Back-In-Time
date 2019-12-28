@@ -12,6 +12,7 @@
 #include "j1Scene.h"
 #include "j1Fade.h"
 #include "Brofiler/Brofiler.h"
+#include "j1Menu.h"
 
 j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 {
@@ -347,19 +348,15 @@ bool j1Player::PreUpdate()
 	case entityStates::DIE:
 		if (!livesUpdated)
 		{
-			lives--;
+			if (lives <= 0)	App->menu->ChangeMenuStatus();
+			else lives--;
+
 			livesUpdated = true;
-
-			//TODO: Go back to menu 
-			if (lives <= 0)
-				LOG("Player has died");
 		}
-
 		state = entityStates::IDLE;
 		break;
 	}
 	if (player_input.pressing_F) throwRock();
-	
 
 	//Change player collider position
 	collider_entity->SetPos(position.x, position.y);

@@ -20,6 +20,7 @@ public:
 	bool menuAble = true;
 	bool transition = false;
 
+	void ChangeMenuStatus();
 private:
 	SDL_Texture* background;
 
