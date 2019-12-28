@@ -27,7 +27,7 @@ bool j1Gui::Start()
 
 	ret = true;
 	ui_spritesheet = App->tex->Load(ui_spritesheet_path.GetString());
-	App->fonts->Load("fonts/small_white_font.png", "abcdefghiklmnoprstuwy'.0123456789", 1, 264, 8, 8);
+	App->fonts->Load("fonts/small_white_font.png", "abcdefghiklmnoprstuwy'.0123456789", 1, 272,8, 1);
 	//ui_spritesheet = App->tex->Load("character/coin_spritesheet.png");
 
 	return ret;
@@ -92,11 +92,11 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 	{
 	case UI_Types::TEXT:
 		ret = new Font_UI();
-		if (texture != "0")
-			ret->texture_path = texture;
 		if (follow_pj)
 			ret->following_pj = follow_pj;
 		ret->text_font = t;
+		ret->pos.x = position_x;
+		ret->pos.y = position_y;
 		ret->Start();
 		break;
 	case UI_Types::IMAGE:
@@ -105,6 +105,8 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 			ret->texture_path = texture;
 		if (follow_pj)
 			ret->following_pj = follow_pj;
+		ret->pos.x = position_x;
+		ret->pos.y = position_y;
 		ret->Start();
 	default:
 		break;
