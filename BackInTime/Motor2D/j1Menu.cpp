@@ -22,11 +22,12 @@ bool j1Menu::Start()
 {
 	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "menu/menu_spritesheet.png", false);
 	App->gui->CreateUIElement(UI_Types::TEXT, 100, 0, "0", false, "hola");
-	App->gui->CreateUIElement(UI_Types::BUTTON, 380, -100, "0", false, "hola");
-	App->gui->CreateUIElement(UI_Types::BUTTON, 380, -60, "0", false, "hola");
-	App->gui->CreateUIElement(UI_Types::BUTTON, 380, -20, "0", false, "hola");
-	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 20, "0", false, "hola");
-	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 60, "0", false, "hola");
+
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, -100, "0", false, "play");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, -60, "0", false, "continue");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, -20, "0", false, "setting");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 20, "0", false, "credits");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 60, "0", false, "exit");
 
 	return true;
 }
