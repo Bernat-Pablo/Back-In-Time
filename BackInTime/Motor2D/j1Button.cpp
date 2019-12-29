@@ -53,6 +53,7 @@ bool Button::PostUpdate() {
 		if (this->name == "play") {
 			App->fade->FadeToBlack(App->gui, App->scene);
 			App->menu->ChangeMenuStatus("deactivate");
+			App->gui->changing = true;
 		}
 		if(this->name == "continue")
 		{
