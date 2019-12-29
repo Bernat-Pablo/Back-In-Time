@@ -22,8 +22,7 @@ bool j1Gui::Awake(pugi::xml_node& config)
 	bool ret = true;
 
 	ui_spritesheet_path = config.child("texture").attribute("path").as_string("");
-	//ui_spritesheet = App->tex->Load("character/spritesheet_pj.png");
-
+	
 	return ret;
 }
 
@@ -34,8 +33,7 @@ bool j1Gui::Start()
 	ret = true;
 	ui_spritesheet = App->tex->Load(ui_spritesheet_path.GetString());
 	App->fonts->Load("fonts/small_white_font.png", " abcdefghiklmnoprstuwy'.0123456789", 1, 8,8,34);
-	//ui_spritesheet = App->tex->Load("character/coin_spritesheet.png");
-
+	
 	return ret;
 }
 
@@ -151,9 +149,9 @@ void j1Gui::DestroyUIElement(char* name)
 	p2List_item<UI_Elements*>* element = ui_elementsList.start;
 	while (element != nullptr)
 	{
-		if (element->data->name == name) {			
+		if (element->data->name == name) 		
 			ui_elementsList.del(element);
-		}
+		
 		element = element->next;
 	}
 }
