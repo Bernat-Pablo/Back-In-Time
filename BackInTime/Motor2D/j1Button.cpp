@@ -50,6 +50,9 @@ bool Button::PostUpdate() {
 			ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);
 
 		}
+		else if (this->name == "out") {
+			return false;
+		}
 	}
 	return true;
 }
