@@ -23,26 +23,34 @@ bool j1Menu::Start()
 {
 	App->render->camera = { 0,0 };
 	CreateAllUIElements();
-
+	ui_elements_created = true;
 	return true;
 }
 
 bool j1Menu::Update(float dt)
 {
-
+	if (menuAble) 
+	{
+		if (ui_elements_created == false)
+		{
+			CreateAllUIElements();
+			ui_elements_created = true;
+		}
+	}							
+	else 
+	{
+		DestroyAllUIElements();
+		ui_elements_created = false;
+	}
+	
 	return true;
 }
 
 bool j1Menu::CleanUp()
 {
-	App->gui->DestroyUIElement("background");
-	App->gui->DestroyUIElement("play");
-	App->gui->DestroyUIElement("continue");
-	App->gui->DestroyUIElement("settings");
-	App->gui->DestroyUIElement("credits");
-	App->gui->DestroyUIElement("out");
-	App->gui->DestroyUIElement("test");
 
+	DestroyAllUIElements();
+	
 	return true;
 }
 
@@ -65,4 +73,14 @@ void j1Menu::CreateAllUIElements()
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 180, "credits", "0", false, "credits");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 220, "out", "0", false, "out");
 	App->gui->CreateUIElement(UI_Types::SLIDER, 100, 10, "test");
+}
+
+void j1Menu::DestroyAllUIElements()
+{
+	App->gui->DestroyUIElement("background");
+	App->gui->DestroyUIElement("play");
+	App->gui->DestroyUIElement("continue");
+	App->gui->DestroyUIElement("settings");
+	App->gui->DestroyUIElement("credits");
+	App->gui->DestroyUIElement("out");
 }
