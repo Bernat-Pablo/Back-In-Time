@@ -47,18 +47,16 @@ bool j1Menu::Update(float dt)
 		break;
 	case INGAME_MENU:
 		if (ingame_menu_created == false)CreateInGameMenu();
-		LOG("INGAME_MENU");
 		break;
 	case INGAME_UI:
 		//if (ingame_UI_created == false)
 		CreateInGameUI();
 		break;
-	//case NONE:
-		//LOG("NONE");
-		//DestroyMenu();
-		//DestroyInGameMenu();
-		//DestroyInGameUI();
-		//break;
+	case NONE:
+		DestroyMenu();
+		DestroyInGameMenu();
+		DestroyInGameUI();
+		break;
 	default:
 		break;
 	}
@@ -107,13 +105,31 @@ void j1Menu::DestroyMenu()
 
 void j1Menu::CreateInGameMenu()
 {
+	int pos_x = App->player->position.x; 
+	int pos_y = App->player->position.y;
+	App->gui->CreateUIElement(UI_Types::IMAGE, pos_x + 20, pos_y -300, "background_in", "menu/ingame_menu_spritesheet.png", false);
+	App->gui->CreateUIElement(UI_Types::BUTTON, pos_x + 100, pos_y -200, "resume", "0", false, "resume");
+	App->gui->CreateUIElement(UI_Types::BUTTON, pos_x + 100, pos_y -150, "settings", "0", false, "setting");
+	App->gui->CreateUIElement(UI_Types::BUTTON, pos_x + 100, pos_y -100, "main menu", "0", false, "main menu");
+
+	//App->gui->CreateUIElement(UI_Types::SLIDER, pos_x + 20, pos_y -180, "music");
+	//App->gui->CreateUIElement(UI_Types::SLIDER, pos_x + 120, pos_y -150, "fx");
+	//App->gui->CreateUIElement(UI_Types::TEXT, pos_x + 0, pos_y + 90, "music_text", "0", false, "music");
+	//App->gui->CreateUIElement(UI_Types::TEXT, pos_x + 92, pos_y + 90, "fx_text", "0", false, "effects");
 
 	ingame_menu_created = true;
 }
 
 void j1Menu::DestroyInGameMenu()
 {
-
+	App->gui->DestroyUIElement("background_in");
+	App->gui->DestroyUIElement("resume");
+	App->gui->DestroyUIElement("settings");
+	App->gui->DestroyUIElement("main menu");
+	//App->gui->DestroyUIElement("music");
+	//App->gui->DestroyUIElement("fx");
+	//App->gui->DestroyUIElement("music_text");
+	//App->gui->DestroyUIElement("fx_text");
 	ingame_menu_created = false;
 }
 

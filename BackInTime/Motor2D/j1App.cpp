@@ -30,6 +30,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	PERF_START(ptimer);
 	frames = 0;
 	want_to_save = want_to_load = false;
+	is_paused = false;
 
 	input = new j1Input();
 	win = new j1Window();
@@ -53,15 +54,15 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);	
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(map);
-	AddModule(gui);
-	AddModule(menu);
+	AddModule(map);	
 	AddModule(scene);
 	AddModule(entityManager);
 	AddModule(player);
 	AddModule(collision);
 	AddModule(fade);
 	AddModule(pathfinding);	
+	AddModule(gui);
+	AddModule(menu);
 	AddModule(fonts);
 
 	// render last to swap buffer
@@ -277,10 +278,15 @@ bool j1App::DoUpdate()
 	for(item = modules.start; item != NULL && ret == true && item->data->IsEnabled(); item = item->next)
 	{
 		pModule = item->data;
+		
 		if (App->menu->menuState == MAIN_MENU)
-			if (pModule->name == "menu" || pModule->name == "gui")
-				LOG("");
-			else continue;
+		{
+			bool cont = true;
+			if (pModule->name == "menu")cont = false;
+			if (pModule->name == "gui")cont = false;
+
+			if (cont == true)continue;
+		}
 		if(pModule->active == false) {
 			continue;
 		}
