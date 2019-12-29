@@ -105,7 +105,7 @@ void j1Menu::DestroyMenu()
 
 void j1Menu::CreateInGameMenu()
 {
-	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "background_in", "menu/menu_spritesheet.png", false);
+	App->gui->CreateUIElement(UI_Types::IMAGE, 100, -120, "background_in", "menu/ingame_menu_spritesheet.png", false);
 
 	ingame_menu_created = true;
 }
