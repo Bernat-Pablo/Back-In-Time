@@ -41,7 +41,7 @@ bool j1Gui::PreUpdate()
 	p2List_item<UI_Elements*>* element = ui_elementsList.start;
 	while (element != nullptr)
 	{		
-		element->data->PreUpdate();
+		if (element->data->PreUpdate() == false) ret = false;
 		element = element->next;
 	}
 
@@ -55,7 +55,7 @@ bool j1Gui::Update(float dt)
 	p2List_item<UI_Elements*>* element = ui_elementsList.start;
 	while (element != nullptr)
 	{
-		element->data->Update(dt);
+		if (element->data->Update(dt) == false) ret = false;
 		element = element->next;
 	}
 
@@ -69,7 +69,7 @@ bool j1Gui::PostUpdate()
 	p2List_item<UI_Elements*>* element = ui_elementsList.start;
 	while (element != nullptr)
 	{
-		element->data->PostUpdate();
+		if (element->data->PostUpdate() == false) ret = false;
 		element = element->next;
 	}
 
