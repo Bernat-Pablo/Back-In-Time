@@ -3,6 +3,7 @@
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Fonts.h"
+#include "j1Console.h"
 
 bool InputText::Start()
 {
@@ -36,8 +37,7 @@ bool InputText::Update(float dt)
 		text = App->input->text_frominput.GetString();
 		App->fonts->BlitText(ppos.x,line.y,1,text);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_RETURN))
-		App->input->text_frominput.Clear();
+
 	
 	return true;
 }

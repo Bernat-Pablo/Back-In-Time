@@ -107,9 +107,6 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 
-	if (App->input->GetKey(SDL_SCANCODE_O)==KEY_DOWN) {
-		App->menu->menuState = MAIN_MENU;
-	}
 
 	return true;
 }

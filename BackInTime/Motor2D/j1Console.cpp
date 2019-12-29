@@ -5,7 +5,12 @@
 #include "p2SString.h"
 #include "j1Gui.h"
 #include "j1App.h"
+#include "j1Scene.h"
+#include "j1App.h"
 #include "j1Render.h"
+#include "j1Map.h"
+#include "j1Player.h"
+#include "j1Fade.h"
 
 
 j1Console::j1Console()
@@ -36,7 +41,7 @@ bool j1Console::PreUpdate(float dt)
 
 bool j1Console::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+	if (App->input->GetKey(SDL_SCANCODE_GRAVE) == KEY_DOWN) {
 		open = !open;
 	}
 	if (open) {
@@ -47,6 +52,36 @@ bool j1Console::Update(float dt)
 	else {
 		App->gui->DestroyUIElement("console");
 		App->is_paused = false;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_RETURN)){
+		text = App->input->text_frominput;
+		const char* string = text.GetString();
+		if (text == "godmode on") {
+			App->player->godMode = true;
+			App->player->collider_at_left = false;
+			App->player->collider_at_right = false;
+		}
+		else if (text == "godmode off") {
+			App->player->godMode = false;
+		}
+		else if (text == "fps60") {
+			App->cap_framerate = false;
+		}
+		else if (text == "fps30") {
+			App->cap_framerate = true;
+		}
+		else if (text == "map1") {
+			App->scene->choose_lv = 1;
+			App->fade->FadeToBlack(App->map, App->map);
+		}
+		else if (text == "map2") {
+			App->scene->choose_lv = 2;
+			App->fade->FadeToBlack(App->map, App->map);
+		}
+		else if (text == "quit") {
+			return false;
+		}
+		App->input->text_frominput.Clear();
 	}
 
 	return true;

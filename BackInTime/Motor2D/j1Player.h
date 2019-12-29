@@ -48,6 +48,9 @@ public:
 	iPoint position;	
 
 	void CollectCoin();
+	Collider*			camera_toRight;
+	Collider*			camera_toLeft;
+	bool 				godMode;
 
 public:
 	bool				continue_button;
@@ -76,7 +79,6 @@ private:
 	bool 				in_air;
 	bool 				looking_right;	
 
-	bool 				godMode;
 	bool 				walking; //is he walking?
 
 	bool 				ability_able;
@@ -93,8 +95,6 @@ private:
 	int 				tick1, tick2;
 	int 				tick3, tick4;
 
-	Collider*			camera_toRight;
-	Collider*			camera_toLeft;
 	Collider*			camera_toUp;
 	Collider*			camera_toDown;
 
