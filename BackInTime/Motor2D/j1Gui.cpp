@@ -133,6 +133,7 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 		ret->pos.y = position_y;
 		ret->following_pj = follow_pj;
 		ret->name = name;
+		ret->Start();
 		break;
 	default:
 		break;

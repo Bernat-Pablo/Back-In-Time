@@ -8,11 +8,11 @@ bool Slider::Start()
 	base.x = this->pos.x;
 	base.y = this->pos.y;
 	base.w = 3;
-	base.h = 300;
+	base.h = 200;
 
 	quad.w = 20;
 	quad.h = 20;
-	quad.y = base.y + 140;
+	quad.y = base.y + 90;
 	quad.x = base.x - 9;
 
 	return true;
@@ -21,7 +21,7 @@ bool Slider::Start()
 bool Slider::Update(float dt)
 {
 	App->render->DrawQuad(base, 255, 0, 0, 255);
-	App->render->DrawQuad(base, 0, 0, 255, 255);
+	App->render->DrawQuad(quad, 0, 0, 255, 255);
 
 	return true;
 }
