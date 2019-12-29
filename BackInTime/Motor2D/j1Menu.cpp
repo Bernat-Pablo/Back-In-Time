@@ -53,9 +53,7 @@ bool j1Menu::Update(float dt)
 		CreateInGameUI();
 		break;
 	case NONE:
-		DestroyMenu();
-		DestroyInGameMenu();
-		DestroyInGameUI();
+		DestroyAllUI();
 		break;
 	default:
 		break;
@@ -66,9 +64,7 @@ bool j1Menu::Update(float dt)
 
 bool j1Menu::CleanUp()
 {
-	DestroyMenu();
-	DestroyInGameMenu();
-	DestroyInGameUI();
+	DestroyAllUI();
 	
 	return true;
 }
@@ -159,4 +155,11 @@ void j1Menu::DestroyInGameUI()
 {
 
 	//ingame_UI_created = false;
+}
+
+void j1Menu::DestroyAllUI()
+{
+	DestroyInGameMenu();
+	DestroyInGameUI();
+	DestroyMenu();
 }
