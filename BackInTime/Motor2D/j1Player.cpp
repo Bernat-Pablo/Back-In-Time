@@ -225,157 +225,161 @@ bool j1Player::PreUpdate()
 	player_input.pressing_space = App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT;
 	player_input.pressing_lshift = App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT;
 
-	//states machine
-	switch (state)
+	if(App->is_paused == false)
 	{
-	case entityStates::IDLE:
-		moving_right = false;
-		moving_left = false;
-		if (player_input.pressing_space && in_air == false) //fix
+		//states machine
+		switch (state)
 		{
-			restart_variables(-1, 1);
-			state = entityStates::JUMP;
-		}
-		else if (player_input.pressing_D)
-			state = entityStates::WALK_FORWARD;
-		else if (player_input.pressing_A)
-			state = entityStates::WALK_BACKWARD;
-
-		break;
-	case entityStates::WALK_FORWARD:
-		restart_variables(-1, 1);
-
-		if (!player_input.pressing_D)		
-			if(moving_right) state = entityStates::DASH_FORWARD;
-			else state = entityStates::IDLE;
-			
-		if (player_input.pressing_space && in_air == false)
-			state = entityStates::JUMP_FORWARD;
-
-		if (player_input.pressing_lshift)
-			state = entityStates::RUN_FORWARD;
-
-		looking_right = true;
-
-		break;
-	case entityStates::WALK_BACKWARD:
-		restart_variables(-1, 1);
-
-		if (!player_input.pressing_A)		
-			if(moving_left)	state = entityStates::DASH_BACKWARD;
-			else state = entityStates::IDLE;
-		
-		if (player_input.pressing_space && in_air == false)
-			state = entityStates::JUMP_BACKWARD;
-
-		if (player_input.pressing_lshift)
-			state = entityStates::RUN_BACKWARD;
-
-		looking_right = false;
-
-		break;
-	case entityStates::RUN_FORWARD:
-		restart_variables(-1, 1);
-		if (!player_input.pressing_lshift)
-		{
-			if (player_input.pressing_D)
+		case entityStates::IDLE:
+			moving_right = false;
+			moving_left = false;
+			if (player_input.pressing_space && in_air == false) //fix
+			{
+				restart_variables(-1, 1);
+				state = entityStates::JUMP;
+			}
+			else if (player_input.pressing_D)
 				state = entityStates::WALK_FORWARD;
-			else
-				state = entityStates::DASH_FORWARD;
-		}
-		else if (!player_input.pressing_D)
-			state = entityStates::IDLE;
-
-		if (player_input.pressing_space)
-			state = entityStates::JUMP_FORWARD;
-
-		looking_right = true;
-
-		break;
-	case entityStates::RUN_BACKWARD:
-		restart_variables(-1, 1);
-		if (!player_input.pressing_lshift)
-		{
-			if (player_input.pressing_A)
+			else if (player_input.pressing_A)
 				state = entityStates::WALK_BACKWARD;
-			else
-				state = entityStates::DASH_BACKWARD;
-		}
-		else if (!player_input.pressing_A)
+
+			break;
+		case entityStates::WALK_FORWARD:
+			restart_variables(-1, 1);
+
+			if (!player_input.pressing_D)
+				if (moving_right) state = entityStates::DASH_FORWARD;
+				else state = entityStates::IDLE;
+
+			if (player_input.pressing_space && in_air == false)
+				state = entityStates::JUMP_FORWARD;
+
+			if (player_input.pressing_lshift)
+				state = entityStates::RUN_FORWARD;
+
+			looking_right = true;
+
+			break;
+		case entityStates::WALK_BACKWARD:
+			restart_variables(-1, 1);
+
+			if (!player_input.pressing_A)
+				if (moving_left)	state = entityStates::DASH_BACKWARD;
+				else state = entityStates::IDLE;
+
+			if (player_input.pressing_space && in_air == false)
+				state = entityStates::JUMP_BACKWARD;
+
+			if (player_input.pressing_lshift)
+				state = entityStates::RUN_BACKWARD;
+
+			looking_right = false;
+
+			break;
+		case entityStates::RUN_FORWARD:
+			restart_variables(-1, 1);
+			if (!player_input.pressing_lshift)
+			{
+				if (player_input.pressing_D)
+					state = entityStates::WALK_FORWARD;
+				else
+					state = entityStates::DASH_FORWARD;
+			}
+			else if (!player_input.pressing_D)
+				state = entityStates::IDLE;
+
+			if (player_input.pressing_space)
+				state = entityStates::JUMP_FORWARD;
+
+			looking_right = true;
+
+			break;
+		case entityStates::RUN_BACKWARD:
+			restart_variables(-1, 1);
+			if (!player_input.pressing_lshift)
+			{
+				if (player_input.pressing_A)
+					state = entityStates::WALK_BACKWARD;
+				else
+					state = entityStates::DASH_BACKWARD;
+			}
+			else if (!player_input.pressing_A)
+				state = entityStates::IDLE;
+
+			if (player_input.pressing_space)
+				state = entityStates::JUMP_BACKWARD;
+
+			looking_right = false;
+
+			break;
+		case entityStates::JUMP:
+			if (player_input.pressing_D)state = entityStates::JUMP_FORWARD;
+			if (player_input.pressing_A)state = entityStates::JUMP_BACKWARD;
+
+			break;
+		case entityStates::JUMP_FORWARD:
+			moving_right = true;
+			moving_left = false;
+
+			if (!player_input.pressing_D)state = entityStates::JUMP;
+			break;
+		case entityStates::JUMP_BACKWARD:
+			moving_right = false;
+			moving_left = true;
+			if (!player_input.pressing_A)state = entityStates::JUMP;
+
+			looking_right = false;
+
+			break;
+		case entityStates::DASH_FORWARD:
+			moving_right = false;
+			moving_left = false;
+			if (player_input.pressing_A) {
+				state = entityStates::WALK_BACKWARD;
+				restart_variables(1, -1);
+				if (player_input.pressing_lshift)state = entityStates::RUN_BACKWARD;
+			}
+			else if (!player_input.pressing_A)
+			{
+				restart_variables(1, -1);
+				state = entityStates::IDLE;
+			}
+
+			break;
+		case entityStates::DASH_BACKWARD:
+			moving_right = false;
+			moving_left = true;
+			if (player_input.pressing_D) {
+				state = entityStates::WALK_FORWARD;
+				restart_variables(1, -1);
+				if (player_input.pressing_lshift)state = entityStates::RUN_FORWARD;
+			}
+			else if (!player_input.pressing_D)
+			{
+				restart_variables(1, -1);
+				state = entityStates::IDLE;
+			}
+			break;
+		case entityStates::DIE:
+			if (!livesUpdated)
+			{
+				score -= 33.3333f;
+				if (lives <= 0)	App->menu->menuState = MAIN_MENU;
+				else lives--;
+
+				livesUpdated = true;
+			}
 			state = entityStates::IDLE;
-
-		if (player_input.pressing_space)
-			state = entityStates::JUMP_BACKWARD;
-
-		looking_right = false;
-
-		break;
-	case entityStates::JUMP:
-		if (player_input.pressing_D)state = entityStates::JUMP_FORWARD;
-		if (player_input.pressing_A)state = entityStates::JUMP_BACKWARD;
-
-		break;
-	case entityStates::JUMP_FORWARD:
-		moving_right = true;
-		moving_left = false;
-
-		if (!player_input.pressing_D)state = entityStates::JUMP;
-		break;
-	case entityStates::JUMP_BACKWARD:
-		moving_right = false;
-		moving_left = true;
-		if (!player_input.pressing_A)state = entityStates::JUMP;
-
-		looking_right = false;
-
-		break;
-	case entityStates::DASH_FORWARD:
-		moving_right = false;
-		moving_left = false;
-		if (player_input.pressing_A) {
-			state = entityStates::WALK_BACKWARD;
-			restart_variables(1, -1);
-			if (player_input.pressing_lshift)state = entityStates::RUN_BACKWARD;
+			break;
 		}
-		else if (!player_input.pressing_A)
-		{
-			restart_variables(1, -1);
-			state = entityStates::IDLE;
-		}
+		if (player_input.pressing_F) throwRock();
 
-		break;
-	case entityStates::DASH_BACKWARD:
-		moving_right = false;
-		moving_left = true;
-		if (player_input.pressing_D) {
-			state = entityStates::WALK_FORWARD;
-			restart_variables(1, -1);
-			if (player_input.pressing_lshift)state = entityStates::RUN_FORWARD;
-		}
-		else if (!player_input.pressing_D)
-		{
-			restart_variables(1, -1);
-			state = entityStates::IDLE;
-		}
-		break;
-	case entityStates::DIE:
-		if (!livesUpdated)
-		{
-			score -= 33.3333f;
-			if (lives <= 0)	App->menu->menuState = MAIN_MENU;
-			else lives--;
-
-			livesUpdated = true;
-		}
-		state = entityStates::IDLE;
-		break;
+		//Change player collider position
+		collider_entity->SetPos(position.x, position.y);
+		//Change rock collider position
+		collider_rock->SetPos(rockPosition.x, rockPosition.y);
 	}
-	if (player_input.pressing_F) throwRock();
-
-	//Change player collider position
-	collider_entity->SetPos(position.x, position.y);
-	//Change rock collider position
-	collider_rock->SetPos(rockPosition.x, rockPosition.y);
+	
 	BROFILER_CATEGORY("Player_PreUpdate", Profiler::Color::Aquamarine);
 
 	return true;
@@ -386,172 +390,177 @@ bool j1Player::Update(float dt)
 	deltaTime = dt;
 	game_timer += dt;
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update
-
-	checkAbility();//can we do the main ability?
-
-	//State machine
-	switch (state)
+	if(App->is_paused == false)
 	{
-	case entityStates::IDLE:
-		current_animation = &idle;
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && in_air == false)	App->audio->PlayFx(1, 0); //sound of jumping before update
 
-		break;
-	case entityStates::WALK_FORWARD:
-		current_animation = &walk;
+		checkAbility();//can we do the main ability?
 
-		if (collider_at_right == false)
+		//State machine
+		switch (state)
 		{
-			position.x += (int)ceil(velocity * dt);
-			moving_right = true;
-		}
-		else
-			moving_right = false;
+		case entityStates::IDLE:
+			current_animation = &idle;
 
-		break;
-	case entityStates::WALK_BACKWARD:
-		current_animation = &walk;
+			break;
+		case entityStates::WALK_FORWARD:
+			current_animation = &walk;
 
-		if (collider_at_left == false || collider_at_right == true)
-		{
-			position.x -= (int)ceil(velocity * dt);
-			moving_left = true;
-		}
-		else
-			moving_left = false;
-
-		break;
-	case entityStates::RUN_FORWARD:
-		current_animation = &run;
-		if (collider_at_right == false)
-		{
-			moving_right = true;
-			moving_left = false;
-			position.x += (int)ceil(run_velocity * dt);
-		}else if (collider_at_right == true)
-		{
-			moving_left = false;
-			moving_right = false;
-		}
-		break;
-	case entityStates::RUN_BACKWARD:
-		current_animation = &run;
-		if (collider_at_left == false)
-		{
-			moving_left = true;
-			moving_right = false;
-			position.x -= (int)ceil(run_velocity * dt);
-		}else if (collider_at_left == true)
-		{
-			moving_left = false;
-			moving_right = false;
-		}
-		break;
-	case entityStates::JUMP:
-		if (jump_vel > 0) {
-			in_air = true;
-			current_animation = &jump_up;
-			jump_vel -= fall_velocity;
-			position.y -= jump_vel;
-		}
-		else {
-			current_animation = &jump_down;
-			if (in_air == false) state = entityStates::IDLE;			
-		}
-		break;
-	case entityStates::JUMP_FORWARD:
-		if (jump_vel >= 0) {
-			current_animation = &jump_up;
-			in_air = true;
-			jump_vel -= fall_velocity;
-			position.y -= jump_vel;
-		}
-		else {
-			current_animation = &jump_down;
-			if (in_air == false) {
-				state = entityStates::WALK_FORWARD;
+			if (collider_at_right == false)
+			{
+				position.x += (int)ceil(velocity * dt);
 				moving_right = true;
 			}
-		}
-		if (collider_at_right == false)
-			position.x += (int)ceil(velocity * dt);
+			else
+				moving_right = false;
 
-		break;
-	case entityStates::JUMP_BACKWARD:
-		if (jump_vel >= 0) {
-			current_animation = &jump_up;
-			in_air = true;
-			jump_vel -= fall_velocity;
-			position.y -= jump_vel;
-		}
-		else {
-			current_animation = &jump_down;
-			if (in_air == false) {
-				state = entityStates::WALK_BACKWARD;
+			break;
+		case entityStates::WALK_BACKWARD:
+			current_animation = &walk;
+
+			if (collider_at_left == false || collider_at_right == true)
+			{
+				position.x -= (int)ceil(velocity * dt);
 				moving_left = true;
 			}
+			else
+				moving_left = false;
+
+			break;
+		case entityStates::RUN_FORWARD:
+			current_animation = &run;
+			if (collider_at_right == false)
+			{
+				moving_right = true;
+				moving_left = false;
+				position.x += (int)ceil(run_velocity * dt);
+			}
+			else if (collider_at_right == true)
+			{
+				moving_left = false;
+				moving_right = false;
+			}
+			break;
+		case entityStates::RUN_BACKWARD:
+			current_animation = &run;
+			if (collider_at_left == false)
+			{
+				moving_left = true;
+				moving_right = false;
+				position.x -= (int)ceil(run_velocity * dt);
+			}
+			else if (collider_at_left == true)
+			{
+				moving_left = false;
+				moving_right = false;
+			}
+			break;
+		case entityStates::JUMP:
+			if (jump_vel > 0) {
+				in_air = true;
+				current_animation = &jump_up;
+				jump_vel -= fall_velocity;
+				position.y -= jump_vel;
+			}
+			else {
+				current_animation = &jump_down;
+				if (in_air == false) state = entityStates::IDLE;
+			}
+			break;
+		case entityStates::JUMP_FORWARD:
+			if (jump_vel >= 0) {
+				current_animation = &jump_up;
+				in_air = true;
+				jump_vel -= fall_velocity;
+				position.y -= jump_vel;
+			}
+			else {
+				current_animation = &jump_down;
+				if (in_air == false) {
+					state = entityStates::WALK_FORWARD;
+					moving_right = true;
+				}
+			}
+			if (collider_at_right == false)
+				position.x += (int)ceil(velocity * dt);
+
+			break;
+		case entityStates::JUMP_BACKWARD:
+			if (jump_vel >= 0) {
+				current_animation = &jump_up;
+				in_air = true;
+				jump_vel -= fall_velocity;
+				position.y -= jump_vel;
+			}
+			else {
+				current_animation = &jump_down;
+				if (in_air == false) {
+					state = entityStates::WALK_BACKWARD;
+					moving_left = true;
+				}
+			}
+			if (collider_at_left == false)
+				position.x -= (int)ceil(velocity * dt);
+			break;
+		case entityStates::DASH_FORWARD:
+			current_animation = &walk;
+
+			velocity -= (int)ceil(decrease_vel * dt);
+
+			if (collider_at_right == false)
+				position.x += (int)(velocity * dt);
+
+			if (velocity <= 0) {
+				moving_right = false;
+				velocity = 2.0f;
+				state = entityStates::IDLE;
+			}
+			break;
+		case entityStates::DASH_BACKWARD:
+			current_animation = &walk;
+
+			velocity -= (int)ceil(decrease_vel * dt);
+
+			if (collider_at_left == false)
+				position.x -= (int)(velocity * dt);
+
+			if (velocity <= 0)
+			{
+				moving_left = false;
+				velocity = 2.0f;
+				state = entityStates::IDLE;
+			}
+			break;
+		case entityStates::DIE:
+			ability_able = false;
+			iterator = 0;
+			App->fade->FadeToBlack(App->scene, App->scene);
+			App->audio->PlayFx(2);
+			break;
 		}
-		if (collider_at_left == false)
-			position.x -= (int)ceil(velocity * dt);
-		break;
-	case entityStates::DASH_FORWARD:
-		current_animation = &walk;
 
-		velocity -= (int)ceil(decrease_vel * dt);
+		bar_pos.x = position.x - 20;
+		bar_pos.y = position.y - 40;
 
-		if (collider_at_right == false)
-			position.x += (int)(velocity * dt);
+		ApplyForces(dt);//Gravity and godmode
+		rockMovement(dt);
 
-		if (velocity <= 0) {
-			moving_right = false;
-			velocity = 2.0f;
-			state = entityStates::IDLE;
-		}
-		break;
-	case entityStates::DASH_BACKWARD:
-		current_animation = &walk;
+		BlitEverything();
 
-		velocity -= (int)ceil(decrease_vel * dt);
+		if (player_input.pressing_A == true || player_input.pressing_D == true) //watching if the pj is walking
+			walking = true;
+		else walking = false;
 
-		if (collider_at_left == false)
-			position.x -= (int)(velocity * dt);
+		//if (walking == true)	App->audio->PlayFx(2, 1); //sound of walking active
 
-		if (velocity <= 0)
-		{
-			moving_left = false;
-			velocity = 2.0f;
-			state = entityStates::IDLE;
-		}
-		break;
-	case entityStates::DIE:
-		ability_able = false;
-		iterator = 0;
-		App->fade->FadeToBlack(App->scene, App->scene);
-		App->audio->PlayFx(2);
-		break;
-	}
-
-	bar_pos.x = position.x - 20;
-	bar_pos.y = position.y - 40;
-
-	ApplyForces(dt);//Gravity and godmode
-	rockMovement(dt);
-
-	BlitEverything();
-
-	if (player_input.pressing_A == true || player_input.pressing_D == true) //watching if the pj is walking
-		walking = true;
-	else walking = false;
-
-	//if (walking == true)	App->audio->PlayFx(2, 1); //sound of walking active
-
-	//do ability
-	if (ability_able == true)
-		if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-		{
-			useAbility();
-			tick4 = SDL_GetTicks();
-		}
+		//do ability
+		if (ability_able == true)
+			if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+			{
+				useAbility();
+				tick4 = SDL_GetTicks();
+			}
+	}	
 
 	BROFILER_CATEGORY("Player_Update", Profiler::Color::Beige);
 

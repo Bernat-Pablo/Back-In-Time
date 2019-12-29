@@ -30,6 +30,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	PERF_START(ptimer);
 	frames = 0;
 	want_to_save = want_to_load = false;
+	is_paused = false;
 
 	input = new j1Input();
 	win = new j1Window();

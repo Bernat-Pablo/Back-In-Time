@@ -82,6 +82,8 @@ public:
 	j1Menu* menu;
 	j1Fonts* fonts;
 
+public:
+	bool is_paused;
 private:
 
 	// Load config file

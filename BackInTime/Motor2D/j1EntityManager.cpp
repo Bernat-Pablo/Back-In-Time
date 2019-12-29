@@ -50,6 +50,7 @@ bool j1EntityManager::PreUpdate()
 	p2List_item<j1Entity*>* entity = entitiesList.start;
 	while (entity != nullptr)
 	{
+		if (App->is_paused == true)break;
 		if (entity->data->isDead == false)
 			entity->data->PreUpdate();
 		entity = entity->next;
@@ -69,6 +70,7 @@ bool j1EntityManager::Update(float dt)
 	p2List_item<j1Entity*>* entity = entitiesList.start;
 	while (entity != nullptr)
 	{
+		if (App->is_paused == true)	break;
 		if(entity->data->isDead == false)
 			entity->data->Update(dt);
 		entity = entity->next;
