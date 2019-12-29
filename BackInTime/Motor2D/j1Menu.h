@@ -34,6 +34,9 @@ public:
 
 	void CreateSettings();
 	void DestroySettings();
+
+	void CreateInGameMenu();
+	void DestroyInGameMenu();
 public:
 	MenuStates menuState;
 private:

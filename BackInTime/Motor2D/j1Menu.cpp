@@ -43,7 +43,7 @@ bool j1Menu::Update(float dt)
 		if (settings_created == false)CreateSettings();
 		break;
 	case INGAME:
-		//if (ingame_created == false)CreateInGameMenu();
+		if (ingame_created == false)CreateInGameMenu();
 		break;
 	case NONE:
 		DestroyMenu();
@@ -107,4 +107,16 @@ void j1Menu::DestroySettings()
 {
 
 	settings_created = false;
+}
+
+void j1Menu::CreateInGameMenu()
+{
+
+	ingame_created = true;
+}
+
+void j1Menu::DestroyInGameMenu()
+{
+
+	ingame_created = false;
 }
