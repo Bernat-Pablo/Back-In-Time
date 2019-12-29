@@ -35,6 +35,8 @@ bool Button::Update(float dt)
 	if(On())App->render->DrawQuad(r, 0, 155, 0, 255);
 	else App->render->DrawQuad(r, 0, 255, 0, 255);
 
+	tick1 = SDL_GetTicks();
+
 	if(OnClick())
 		App->render->DrawQuad(r, 0, 55, 0, 255);
 
@@ -51,7 +53,7 @@ bool Button::Update(float dt)
 	return true;
 }
 bool Button::PostUpdate() {
-	if (OnClick()) {
+	if (OnClick() && tick1-tick2>=500) {
 		if (this->name == "play") {
 			App->fade->FadeToBlack(App->gui, App->scene);
 			App->menu->ChangeMenuStatus("deactivate");
@@ -68,7 +70,14 @@ bool Button::PostUpdate() {
 		}
 		if(this->name == "settings")
 		{
-			//TODO
+			if (App->menu->config) {
+				App->gui->DestroyUIElement("music");
+				App->menu->config = false;
+			}
+			else {
+				App->gui->CreateUIElement(UI_Types::SLIDER, 100, 100, "music");
+				App->menu->config = true;
+			}
 		}
 		else if (this->name == "credits")
 		{
@@ -78,8 +87,10 @@ bool Button::PostUpdate() {
 				credits_opened = true;
 			}
 		}
-		else if (this->name == "out") return false;		
+		else if (this->name == "out") return false;	
+		tick2 = SDL_GetTicks();
 	}
+
 	return true;
 }
 
@@ -106,8 +117,9 @@ bool Button::OnClick()
 	App->input->GetMousePosition(mouse.x, mouse.y);
 	if (mouse.x<r.x + r.w && mouse.x>r.x) {
 		if (mouse.y<r.y + r.h && mouse.y>r.y) {
-			if(App->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT)) {
 				return true;
+			}
 		}
 	}
 	return false;

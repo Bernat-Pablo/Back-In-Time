@@ -26,6 +26,8 @@ private:
 
 	bool credits_opened;
 	float credits_timer;
+
+	int tick1 = 0, tick2 = 0;
 };
 
 #endif // !_BUTTON_
