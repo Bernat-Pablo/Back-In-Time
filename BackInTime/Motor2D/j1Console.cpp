@@ -7,6 +7,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 
+
 j1Console::j1Console()
 {
 	name.create("console");
@@ -41,6 +42,11 @@ bool j1Console::Update(float dt)
 	if (open) {
 		App->render->DrawQuad({ 200,0,200,200 }, 0, 0, 255, 255);
 		App->gui->CreateUIElement(UI_Types::INPUTTEXT, 200, 180, "console", "0", false, "0", 200);
+		App->is_paused = true;
+	}
+	else {
+		App->gui->DestroyUIElement("console");
+		App->is_paused = false;
 	}
 
 	return true;

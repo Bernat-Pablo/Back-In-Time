@@ -67,11 +67,12 @@ bool j1Fade::Update(float dt)
 			App->scene->CleanUp(); //Clean up map			
 			App->audio->CleanUp();
 			App->tex->CleanUp();
-			App->entityManager->CleanUp(); //Destroy all entities		
+			App->entityManager->CleanUp(); //Destroy all entities	
 
 			//We load new map	
 			App->tex->Awake(App->GetConfig());
 			App->audio->Awake(App->GetConfig());
+			App->gui->Start();
 			App->scene->Awake();
 			App->scene->Start();
 			App->player->Start(); 
