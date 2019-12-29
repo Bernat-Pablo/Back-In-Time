@@ -9,7 +9,7 @@
 
 enum MenuStates
 {
-	MENU,
+	MAIN_MENU,
 	SETTINGS,
 	INGAME,
 	NONE,
@@ -28,7 +28,6 @@ public:
 	bool menuAble = true;
 	bool transition = false;
 
-	void ChangeMenuStatus(p2SString mode);
 	void CreateMenu();
 	void DestroyMenu();
 

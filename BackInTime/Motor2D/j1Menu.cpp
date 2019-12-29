@@ -11,7 +11,7 @@
 j1Menu::j1Menu()
 {
 	name.create("menu");
-	menuState = MENU;
+	menuState = MAIN_MENU;
 	menu_created = false;
 	settings_created = false;
 	ingame_created = false;
@@ -34,7 +34,7 @@ bool j1Menu::Update(float dt)
 {
 	switch(menuState)
 	{
-	case MENU:
+	case MAIN_MENU:
 		if (menu_created == false)CreateMenu();
 		
 		break;
@@ -62,14 +62,6 @@ bool j1Menu::CleanUp()
 	DestroySettings();
 	
 	return true;
-}
-
-void j1Menu::ChangeMenuStatus(p2SString mode)
-{
-	if (mode == "activate")	menuState = MENU;
-	else if (mode == "deactivate")menuState = NONE;
-	else if (mode == "settings")menuState = SETTINGS;
-	else if (mode == "ingame")menuState = SETTINGS;
 }
 
 void j1Menu::CreateMenu()

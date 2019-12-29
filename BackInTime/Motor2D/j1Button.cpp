@@ -56,23 +56,20 @@ bool Button::PostUpdate() {
 	if (OnClick()) {
 		if (this->name == "play") {
 			App->fade->FadeToBlack(App->gui, App->scene);
-			App->menu->ChangeMenuStatus("deactivate");
+			App->menu->menuState = NONE;
 			App->gui->changing = true;
 			App->menu->CleanUp();
 		}
 		if (this->name == "continue")
 		{
 			App->player->continue_button = true;
-			App->menu->ChangeMenuStatus("deactivate");
+			App->menu->menuState = NONE;
 			App->gui->changing = true;
 			App->LoadGame();
 			App->menu->CleanUp();
 		}
 		if(this->name == "settings")
-		{
-			//App->menu->DestroyMenu();
-			App->menu->CreateSettings();
-		}
+			App->menu->menuState = SETTINGS;		
 		else if (this->name == "credits")
 		{
 			if (credits_opened == false)
