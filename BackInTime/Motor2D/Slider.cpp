@@ -41,6 +41,7 @@ bool Slider::Update(float dt)
 
 bool Slider::PostUpdate()
 {
+	//here it goes linking name to what u want to do
 	return true;
 }
 
