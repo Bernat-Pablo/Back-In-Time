@@ -160,6 +160,7 @@ bool j1Player::Start() {
 		}
 	}else
 	{
+		//If we pushed "continue" button, we want to load saved position
 		App->LoadGame();
 		continue_button = false;
 	}

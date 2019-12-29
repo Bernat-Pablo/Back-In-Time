@@ -61,6 +61,10 @@ bool Button::PostUpdate() {
 			App->menu->ChangeMenuStatus("deactivate");
 			App->LoadGame();
 		}
+		if(this->name == "settings")
+		{
+			//TODO
+		}
 		else if (this->name == "credits")
 		{
 			if (credits_opened == false)
