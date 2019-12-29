@@ -8,11 +8,11 @@ bool Slider::Start()
 	base.x = this->pos.x;
 	base.y = this->pos.y;
 	base.w = 3;
-	base.h = 200;
+	base.h = 100;
 
 	quad.w = 20;
 	quad.h = 20;
-	quad.y = base.y + 90;
+	quad.y = base.y + 40;
 	quad.x = base.x - 9;
 
 	return true;
@@ -30,10 +30,11 @@ bool Slider::Update(float dt)
 		int mouse_pos;
 		App->input->GetMousePosition(nothing, mouse_pos);
 		if(mouse_pos<base.y + base.h && mouse_pos>base.y)
-		quad.y = mouse_pos-10;
+			quad.y = mouse_pos-10;
 		App->render->DrawQuad(quad, 0, 0, 55, 255);
 	}
 
+	puntuation = quad.y + 10 - base.y;
 
 	return true;
 }

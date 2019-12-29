@@ -18,6 +18,8 @@ private:
 	SDL_Rect quad;
 
 	iPoint mouse;
+
+	int puntuation;
 };
 
 
