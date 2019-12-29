@@ -196,6 +196,8 @@ bool j1Player::Start() {
 	bar_pos.x = 10;
 	bar_pos.y = -130;
 
+	App->is_paused = false;
+
 	return true;
 }
 
