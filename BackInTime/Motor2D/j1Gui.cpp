@@ -9,6 +9,7 @@
 #include "j1Render.h"
 #include "Brofiler/Brofiler.h"
 #include "Slider.h"
+#include "InputText.h"
 
 j1Gui::j1Gui()
 {
@@ -131,6 +132,14 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 		break;
 	case UI_Types::SLIDER:
 		ret = new Slider();
+		ret->pos.x = position_x;
+		ret->pos.y = position_y;
+		ret->following_pj = follow_pj;
+		ret->name = name;
+		ret->Start();
+		break;
+	case UI_Types::INPUTTEXT:
+		ret = new InputText();
 		ret->pos.x = position_x;
 		ret->pos.y = position_y;
 		ret->following_pj = follow_pj;
