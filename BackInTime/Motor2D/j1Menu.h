@@ -24,7 +24,6 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 
-	bool menuAble = true;
 	bool transition = false;
 
 	void ChangeMenuStatus(p2SString mode);

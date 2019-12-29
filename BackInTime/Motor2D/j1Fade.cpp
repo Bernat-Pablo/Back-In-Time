@@ -94,7 +94,7 @@ bool j1Fade::Update(float dt)
 			IsFading = false;
 			current_step = fade_step::none;
 		}
-		if (!App->menu->menuAble) {
+		if (App->menu->menuState = NONE) {
 			App->gui->changing = false;
 		}
 	} break;
