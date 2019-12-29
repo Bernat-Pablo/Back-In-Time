@@ -64,9 +64,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fade);
 	AddModule(pathfinding);
 	AddModule(console);
-	AddModule(gui);
 	AddModule(menu);
 	AddModule(fonts);
+	AddModule(gui);
 
 	// render last to swap buffer
 	AddModule(render);

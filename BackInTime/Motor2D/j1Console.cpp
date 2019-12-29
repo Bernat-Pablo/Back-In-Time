@@ -1,7 +1,15 @@
 #include "j1Console.h"
+#include "j1Gui.h"
+#include "UI_Elements.h"
+#include "j1Input.h"
+#include "p2SString.h"
+#include "j1Gui.h"
+#include "j1App.h"
+#include "j1Render.h"
 
 j1Console::j1Console()
 {
+	name.create("console");
 	god = "god_mode";
 	quit = "quit";
 	fps = "fps";
@@ -21,11 +29,20 @@ bool j1Console::Start()
 
 bool j1Console::PreUpdate(float dt)
 {
+	
 	return true;
 }
 
 bool j1Console::Update(float dt)
 {
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		open = !open;
+	}
+	if (open) {
+		App->render->DrawQuad({ 200,0,200,200 }, 0, 0, 255, 255);
+		App->gui->CreateUIElement(UI_Types::INPUTTEXT, 200, 180, "console", "0", false, "0", 200);
+	}
+
 	return true;
 }
 

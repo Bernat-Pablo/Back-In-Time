@@ -24,7 +24,7 @@ private:
 	int tick1 = 0, tick2 = 0;
 	int tick3 = 0, tick4 = 0;
 
-	bool clicked = false;
+	bool clicked = true;
 
 	iPoint mouse;
 	iPoint ppos;

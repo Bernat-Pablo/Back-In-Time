@@ -31,9 +31,6 @@ bool InputText::Update(float dt)
 		tick2 = SDL_GetTicks();
 	}
 	
-	if (OnClick()) {
-		clicked = true;
-	}
 	tick3 = SDL_GetTicks();
 	if (clicked) {
 		text = App->input->text_frominput.GetString();
