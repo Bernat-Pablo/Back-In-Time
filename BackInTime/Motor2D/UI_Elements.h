@@ -29,4 +29,9 @@ public:
 	iPoint margeButton;
 };
 
+enum Color {
+	Black,
+	White,
+};
+
 #endif // !_UI_ELEMENTS_
