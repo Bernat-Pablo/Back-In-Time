@@ -107,6 +107,10 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 
+	if (App->input->GetKey(SDL_SCANCODE_O)==KEY_DOWN) {
+		App->menu->menuState = MAIN_MENU;
+		App->render->camera = { 0,0 };
+	}
 
 	return true;
 }
@@ -117,11 +121,10 @@ bool j1Scene::PostUpdate()
 	bool ret = true;
 		
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	{		
+	{	
 		if (App->menu->menuState == INGAME_MENU) 
 		{ 
-			App->menu->menuState = NONE; 
-			//App->menu->menuState = INGAME_UI; 
+			App->menu->menuState = INGAME_UI; 
 			App->is_paused = false;
 		}
 		else 

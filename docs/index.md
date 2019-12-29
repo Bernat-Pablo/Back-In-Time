@@ -13,8 +13,12 @@ TODO - Add embedded (not just linked) one minute gameplay video
 * [Pablo Galve](https://github.com/pablogalve)
   * Collider Implementation
   * Entities System
+  * Save/Load
+  * UI Basics
 * [Bernat Casañas](https://github.com/bernatCasanas)
   * Enemies Pathfinding
+  * Console 
+  * UI System
 
 <img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/Assets/team_photo.jpeg" data-canonical-src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/Assets/team_photo.jpeg" width="300" height="400" />
 
