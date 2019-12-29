@@ -29,21 +29,11 @@ bool j1Menu::Start()
 
 bool j1Menu::Update(float dt)
 {
-	if (menuAble) {		
-		if(ui_elements_created == false)
-		{
-			CreateAllUIElements();
-		}
-	}
-	else {
-		App->gui->DestroyUIElement("background");
-		App->gui->DestroyUIElement("play");
-		App->gui->DestroyUIElement("continue");
-		App->gui->DestroyUIElement("settings");
-		App->gui->DestroyUIElement("credits");
-		App->gui->DestroyUIElement("out");
-
-	}
+	if (menuAble) 		
+		if(ui_elements_created == false)		
+			CreateAllUIElements();			
+	else DestroyAllUIElements();
+	
 	return true;
 }
 
@@ -70,4 +60,14 @@ void j1Menu::CreateAllUIElements()
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 140, "settings", "0", false, "setting");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 180, "credits", "0", false, "credits");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 220, "out", "0", false, "out");
+}
+
+void j1Menu::DestroyAllUIElements()
+{
+	App->gui->DestroyUIElement("background");
+	App->gui->DestroyUIElement("play");
+	App->gui->DestroyUIElement("continue");
+	App->gui->DestroyUIElement("settings");
+	App->gui->DestroyUIElement("credits");
+	App->gui->DestroyUIElement("out");
 }

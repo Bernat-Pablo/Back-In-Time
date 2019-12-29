@@ -22,6 +22,7 @@ public:
 
 	void ChangeMenuStatus(p2SString mode);
 	void CreateAllUIElements();
+	void DestroyAllUIElements();
 private:
 	SDL_Texture* background;
 	bool ui_elements_created;
