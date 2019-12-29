@@ -30,6 +30,8 @@ bool Button::Update(float dt)
 	if(On())
 		App->render->DrawQuad(r, 0, 155, 0, 255);
 	else App->render->DrawQuad(r, 0, 255, 0, 255);
+	if(OnClick())
+		App->render->DrawQuad(r, 0, 55, 0, 255);
 
 	App->fonts->BlitText(r.x + this->margeButton.x, r.y + this->margeButton.y, 1, text);
 	return true;
@@ -46,7 +48,6 @@ bool Button::On()
 	App->input->GetMousePosition(mouse.x, mouse.y);
 	if (mouse.x<r.x + r.w && mouse.x>r.x) {
 		if (mouse.y<r.y + r.h && mouse.y>r.y) {
-			LOG("BUTTON", "s");
 			return true;
 		}
 	}
@@ -55,5 +56,12 @@ bool Button::On()
 
 bool Button::OnClick()
 {
+	App->input->GetMousePosition(mouse.x, mouse.y);
+	if (mouse.x<r.x + r.w && mouse.x>r.x) {
+		if (mouse.y<r.y + r.h && mouse.y>r.y) {
+			if(App->input->GetMouseButtonDown(SDL_BUTTON_LEFT))
+				return true;
+		}
+	}
 	return false;
 }
