@@ -5,6 +5,14 @@
 #include "p2Point.h"
 
 class Slider : public UI_Elements {
+public:
+	bool Start();
+	bool Update(float dt);
+	bool PostUpdate();
+	bool CleanUp();
+
+private:
+
 
 };
 
