@@ -56,7 +56,7 @@ bool Button::PostUpdate() {
 		}
 		if (this->name == "continue")
 		{
-			App->fade->FadeToBlack(App->gui, App->scene);
+			//App->fade->FadeToBlack(App->gui, App->scene);
 			App->menu->ChangeMenuStatus("deactivate");
 			App->LoadGame();
 		}

@@ -387,7 +387,8 @@ bool j1App::LoadGameNow()
 
 	pugi::xml_document data;
 	pugi::xml_node root;
-	
+
+	if (save_game == "")save_game = "save_game.xml";
 	pugi::xml_parse_result result = data.load_file(save_game.GetString());
 	
 
