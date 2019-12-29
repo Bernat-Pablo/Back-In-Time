@@ -37,8 +37,6 @@ bool j1Menu::Update(float dt)
 	if (menuAble) {		
 
 		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
-			ChangeMenuStatus();
-			//ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);
 		}
 	}
 	return true;

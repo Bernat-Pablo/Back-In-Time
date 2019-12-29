@@ -252,7 +252,7 @@ bool j1App::PreUpdate()
 	item = modules.start;
 	j1Module* pModule = NULL;
 
-	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	for(item = modules.start; item != NULL && ret == true && item->data->IsEnabled(); item = item->next)
 	{
 		pModule = item->data;
 
@@ -274,7 +274,7 @@ bool j1App::DoUpdate()
 	item = modules.start;
 	j1Module* pModule = NULL;
 
-	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	for(item = modules.start; item != NULL && ret == true && item->data->IsEnabled(); item = item->next)
 	{
 		pModule = item->data;
 		if (App->menu->menuAble)
@@ -299,7 +299,7 @@ bool j1App::PostUpdate()
 	p2List_item<j1Module*>* item;
 	j1Module* pModule = NULL;
 
-	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	for(item = modules.start; item != NULL && ret == true && item->data->IsEnabled(); item = item->next)
 	{
 		pModule = item->data;
 

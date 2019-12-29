@@ -27,7 +27,6 @@ public:
 
 	int numberLetters;
 	iPoint margeButton;
-	char* name;
 };
 
 #endif // !_UI_ELEMENTS_
