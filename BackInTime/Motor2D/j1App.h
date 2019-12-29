@@ -84,6 +84,10 @@ public:
 	j1Fonts* fonts;
 	j1Console* console;
 
+
+	bool				cap_framerate = true;
+
+
 public:
 	bool is_paused;
 private:
@@ -139,7 +143,6 @@ private:
 
 	uint			    framerate_cap;
 	float				deltaTime;
-	bool				cap_framerate = true;
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S

@@ -4,6 +4,7 @@
 #include "j1Input.h"
 #include "j1Fonts.h"
 #include "Brofiler/Brofiler.h"
+#include "j1Console.h"
 
 bool InputText::Start()
 {
@@ -37,8 +38,7 @@ bool InputText::Update(float dt)
 		text = App->input->text_frominput.GetString();
 		App->fonts->BlitText(ppos.x,line.y,1,text);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_RETURN))
-		App->input->text_frominput.Clear();
+
 	
 	BROFILER_CATEGORY("InputText_Update", Profiler::Color::Aquamarine);
 	return true;

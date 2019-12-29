@@ -28,6 +28,7 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+	p2SString text;
 
 private:
 	bool open = false;
