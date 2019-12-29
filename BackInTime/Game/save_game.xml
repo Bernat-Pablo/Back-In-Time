@@ -8,36 +8,42 @@
 	<gui />
 	<scene />
 	<entityManager>
+		<groundEnemy>
+			<position x="1122" y="1583" />
+		</groundEnemy>
 		<flyingEnemy>
-			<position x="1280" y="0" />
-		</flyingEnemy>
-		<flyingEnemy>
-			<position x="848" y="32" />
+			<position x="1632" y="64" />
 		</flyingEnemy>
 		<groundEnemy>
-			<position x="1472" y="468" />
+			<position x="546" y="1647" />
+		</groundEnemy>
+		<groundEnemy>
+			<position x="-478" y="847" />
+		</groundEnemy>
+		<flyingEnemy>
+			<position x="492" y="30" />
+		</flyingEnemy>
+		<groundEnemy>
+			<position x="2208" y="1599" />
 		</groundEnemy>
 		<entityManager>
-			<position x="128" y="160" />
+			<position x="912" y="176" />
 		</entityManager>
 		<entityManager>
-			<position x="736" y="144" />
-		</entityManager>
-		<entityManager>
-			<position x="1216" y="32" />
+			<position x="2048" y="128" />
 		</entityManager>
 	</entityManager>
 	<player>
-		<position x="80" y="189" />
-		<level value="1" />
-		<camera_toRight x="150" y="96" />
-		<camera_toLeft x="30" y="96" />
-		<camera_toUp x="30" y="96" />
-		<camera_toDown x="30" y="216" />
-		<camera x="0" y="293" />
+		<position x="1197" y="58" />
+		<level value="2" />
+		<camera_toRight x="1216" y="-33" />
+		<camera_toLeft x="1096" y="-33" />
+		<camera_toUp x="1096" y="-33" />
+		<camera_toDown x="1096" y="85" />
+		<camera x="-2132" y="306" />
 		<lives value="3" />
-		<collected_coins value="0" />
-		<game_timer seconds="4.46699762" />
+		<collected_coins value="1" />
+		<game_timer seconds="19.4981174" />
 	</player>
 	<:anonymous />
 	<:anonymous />
@@ -45,6 +51,6 @@
 	<:anonymous />
 	<menu />
 	<renderer>
-		<camera x="0" y="293" />
+		<camera x="-2132" y="306" />
 	</renderer>
 </game_state>
