@@ -14,8 +14,13 @@ public:
 	bool OnClick();
 		
 private:
+	iPoint position;
+	SDL_Rect r;
+	SDL_Rect line;
+	int number_letters;
+	int spacing;
 
-
+	int tick1 = 0, tick2 = 0;
 };
 
 

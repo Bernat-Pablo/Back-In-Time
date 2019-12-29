@@ -27,7 +27,7 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y, char* name, char* texture = "0", bool follow_pj = true, char* t = "0");
+	UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y, char* name, char* texture = "0", bool follow_pj = true, char* t = "0", int w=0, int h=0);
 	void DestroyUIElement(char* name);
 
 	SDL_Texture* GetUISpritesheet();

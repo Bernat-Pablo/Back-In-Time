@@ -92,7 +92,7 @@ bool j1Gui::CleanUp()
 	return ret;
 }
 
-UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_y,char* name, char* texture, bool follow_pj, char* t)
+UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_y,char* name, char* texture, bool follow_pj, char* t, int w, int h)
 {
 	UI_Elements* ret = nullptr;
 
@@ -142,6 +142,7 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 		ret->pos.y = position_y;
 		ret->following_pj = follow_pj;
 		ret->name = name;
+		ret->rect = { position_x,position_y,w,20 };
 		ret->Start();
 		break;
 	default:

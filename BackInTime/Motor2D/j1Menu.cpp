@@ -75,6 +75,10 @@ void j1Menu::CreateMenu()
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 180, "credits", "0", false, "credits");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 220, "out", "0", false, "out");
 
+	//just testing
+	App->gui->CreateUIElement(UI_Types::INPUTTEXT, 100, 200, "input", "0", false, "0", 100, 20);
+
+
 	menu_created = true;
 }
 
@@ -86,6 +90,8 @@ void j1Menu::DestroyMenu()
 	App->gui->DestroyUIElement("settings");
 	App->gui->DestroyUIElement("credits");
 	App->gui->DestroyUIElement("out");
+
+	App->gui->DestroyUIElement("input");
 
 	menu_created = false;
 }
