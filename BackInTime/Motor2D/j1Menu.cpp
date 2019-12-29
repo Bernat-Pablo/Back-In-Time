@@ -36,8 +36,15 @@ bool j1Menu::Update(float dt)
 {
 	if (menuAble) {		
 
-		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) {
-		}
+	}
+	else {
+		App->gui->DestroyUIElement("background");
+		App->gui->DestroyUIElement("play");
+		App->gui->DestroyUIElement("continue");
+		App->gui->DestroyUIElement("settings");
+		App->gui->DestroyUIElement("credits");
+		App->gui->DestroyUIElement("out");
+
 	}
 	return true;
 }
