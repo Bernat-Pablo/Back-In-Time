@@ -29,6 +29,7 @@ bool j1Menu::Start()
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 180, "credits","0", false, "credits");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 220, "out","0", false, "out");
 
+	App->gui->DestroyUIElement("continue");
 	return true;
 }
 

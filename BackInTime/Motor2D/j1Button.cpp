@@ -56,6 +56,7 @@ bool Button::PostUpdate() {
 
 bool Button::CleanUp()
 {
+
 	return true;
 }
 

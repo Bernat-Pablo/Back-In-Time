@@ -131,6 +131,18 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 	return ret;
 }
 
+void j1Gui::DestroyUIElement(char* name)
+{
+	p2List_item<UI_Elements*>* element = ui_elementsList.start;
+	while (element != nullptr)
+	{
+		if (element->data->name == name) {			
+			ui_elementsList.del(element);
+		}
+		element = element->next;
+	}
+}
+
 SDL_Texture* j1Gui::GetUISpritesheet()
 {
 	return ui_spritesheet;

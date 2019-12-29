@@ -26,7 +26,8 @@ public:
 	bool CleanUp();
 
 	UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y, char* name, char* texture = "0", bool follow_pj = true, char* t = "0");
-	
+	void DestroyUIElement(char* name);
+
 	SDL_Texture* GetUISpritesheet();
 private:
 	p2List<UI_Elements*> ui_elementsList;
