@@ -47,14 +47,12 @@ bool j1Menu::Update(float dt)
 		break;
 	case INGAME_MENU:
 		if (ingame_menu_created == false)CreateInGameMenu();
-		LOG("INGAME_MENU");
 		break;
 	case INGAME_UI:
 		//if (ingame_UI_created == false)
 		CreateInGameUI();
 		break;
 	case NONE:
-		LOG("NONE");
 		DestroyMenu();
 		DestroyInGameMenu();
 		DestroyInGameUI();

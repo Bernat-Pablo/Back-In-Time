@@ -277,10 +277,15 @@ bool j1App::DoUpdate()
 	for(item = modules.start; item != NULL && ret == true && item->data->IsEnabled(); item = item->next)
 	{
 		pModule = item->data;
+		
 		if (App->menu->menuState == MAIN_MENU)
-			if (pModule->name == "menu" || pModule->name == "gui")
-				LOG("");
-			else continue;
+		{
+			bool cont = true;
+			if (pModule->name == "menu")cont = false;
+			if (pModule->name == "gui")cont = false;
+
+			if (cont == true)continue;
+		}
 		if(pModule->active == false) {
 			continue;
 		}
