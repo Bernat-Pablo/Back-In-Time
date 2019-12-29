@@ -21,7 +21,13 @@ bool Slider::Start()
 bool Slider::Update(float dt)
 {
 	App->render->DrawQuad(base, 255, 0, 0, 255);
-	App->render->DrawQuad(quad, 0, 0, 255, 255);
+	if(On())
+		App->render->DrawQuad(quad, 0, 0, 155, 255);
+	else App->render->DrawQuad(quad, 0, 0, 255, 255);
+
+	if(OnClick())
+		App->render->DrawQuad(quad, 0, 0, 55, 255);
+
 
 	return true;
 }
