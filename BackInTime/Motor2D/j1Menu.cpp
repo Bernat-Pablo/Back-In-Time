@@ -105,7 +105,17 @@ void j1Menu::DestroyMenu()
 
 void j1Menu::CreateInGameMenu()
 {
-	App->gui->CreateUIElement(UI_Types::IMAGE, 100, -120, "background_in", "menu/ingame_menu_spritesheet.png", false);
+	int pos_x = App->player->position.x; 
+	int pos_y = App->player->position.y;
+	App->gui->CreateUIElement(UI_Types::IMAGE, pos_x + 20, pos_y -300, "background_in", "menu/ingame_menu_spritesheet.png", false);
+	App->gui->CreateUIElement(UI_Types::BUTTON, pos_x + 100, pos_y -200, "resume", "0", false, "resume");
+	App->gui->CreateUIElement(UI_Types::BUTTON, pos_x + 100, pos_y -150, "settings", "0", false, "setting");
+	App->gui->CreateUIElement(UI_Types::BUTTON, pos_x + 100, pos_y -100, "backtomainmenu", "0", false, "backtomainmenu");
+
+	App->gui->CreateUIElement(UI_Types::SLIDER, pos_x + 20, pos_y -180, "music");
+	App->gui->CreateUIElement(UI_Types::SLIDER, pos_x + 120, pos_y -150, "fx");
+	App->gui->CreateUIElement(UI_Types::TEXT, pos_x + 0, pos_y + 90, "music_text", "0", false, "music");
+	App->gui->CreateUIElement(UI_Types::TEXT, pos_x + 92, pos_y + 90, "fx_text", "0", false, "effects");
 
 	ingame_menu_created = true;
 }
