@@ -53,12 +53,12 @@ bool j1Menu::Update(float dt)
 		//if (ingame_UI_created == false)
 		CreateInGameUI();
 		break;
-	//case NONE:
-		//LOG("NONE");
-		//DestroyMenu();
-		//DestroyInGameMenu();
-		//DestroyInGameUI();
-		//break;
+	case NONE:
+		LOG("NONE");
+		DestroyMenu();
+		DestroyInGameMenu();
+		DestroyInGameUI();
+		break;
 	default:
 		break;
 	}
@@ -107,13 +107,14 @@ void j1Menu::DestroyMenu()
 
 void j1Menu::CreateInGameMenu()
 {
+	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "background_in", "menu/menu_spritesheet.png", false);
 
 	ingame_menu_created = true;
 }
 
 void j1Menu::DestroyInGameMenu()
 {
-
+	App->gui->DestroyUIElement("background_in");
 	ingame_menu_created = false;
 }
 

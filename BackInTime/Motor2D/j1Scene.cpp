@@ -121,10 +121,8 @@ bool j1Scene::PostUpdate()
 		
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{		
-		App->menu->menuState=MAIN_MENU;
-		App->render->camera.x = 0;
-		App->render->camera.y = 0;
-		
+		if (App->menu->menuState == INGAME_MENU)App->menu->menuState = NONE;
+		else App->menu->menuState=INGAME_MENU;
 	}		
 
 	return ret;
