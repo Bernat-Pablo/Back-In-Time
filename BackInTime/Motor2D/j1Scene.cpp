@@ -123,7 +123,10 @@ bool j1Scene::PostUpdate()
 	bool ret = true;
 		
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		//App->fade->FadeToBlack(App->scene, App->gui);
 		App->menu->ChangeMenuStatus("activate");
+	}		
 
 	return ret;
 }

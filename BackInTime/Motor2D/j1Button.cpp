@@ -30,9 +30,9 @@ bool Button::Update(float dt)
 	}
 	text = this->text_font;
 
-	if(On())
-		App->render->DrawQuad(r, 0, 155, 0, 255);
+	if(On())App->render->DrawQuad(r, 0, 155, 0, 255);
 	else App->render->DrawQuad(r, 0, 255, 0, 255);
+
 	if(OnClick())
 		App->render->DrawQuad(r, 0, 55, 0, 255);
 
@@ -43,16 +43,10 @@ bool Button::PostUpdate() {
 	if (OnClick()) {
 		if (this->name == "play") {
 			App->fade->FadeToBlack(App->gui, App->scene);
-			App->menu->ChangeMenuStatus("");
-
+			App->menu->ChangeMenuStatus("deactivate");
 		}
-		else if (this->name == "credits") {
-			ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);
-
-		}
-		else if (this->name == "out") {
-			return false;
-		}
+		else if (this->name == "credits") ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);				
+		else if (this->name == "out") return false;		
 	}
 	return true;
 }
