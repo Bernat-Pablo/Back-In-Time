@@ -27,7 +27,7 @@ private:
 	bool clicked = false;
 
 	iPoint mouse;
-	int ppos;
+	iPoint ppos;
 
 };
 

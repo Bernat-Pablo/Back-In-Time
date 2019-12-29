@@ -14,7 +14,8 @@ bool InputText::Start()
 	line.w = 1;
 	line.h = 16;
 	number_letters = 0;
-	ppos = line.x-8;
+	ppos.x = line.x-8;
+	ppos.y = line.y + 3;
 	return true;
 }
 
@@ -36,8 +37,10 @@ bool InputText::Update(float dt)
 	tick3 = SDL_GetTicks();
 	if (clicked) {
 		text = App->input->text_frominput.GetString();
-		App->fonts->BlitText(ppos,line.y,1,text);
+		App->fonts->BlitText(ppos.x,line.y,1,text);
 	}
+	if (App->input->GetKey(SDL_SCANCODE_RETURN))
+		App->input->text_frominput.Clear();
 	
 	return true;
 }
