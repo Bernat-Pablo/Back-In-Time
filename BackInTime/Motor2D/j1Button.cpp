@@ -75,11 +75,15 @@ bool Button::PostUpdate() {
 			if (App->menu->config) {
 				App->gui->DestroyUIElement("music");
 				App->gui->DestroyUIElement("fx");
+				App->gui->DestroyUIElement("music_text");
+				App->gui->DestroyUIElement("fx_text");
 				App->menu->config = false;
 			}
 			else {
 				App->gui->CreateUIElement(UI_Types::SLIDER, 100, 250, "music");
 				App->gui->CreateUIElement(UI_Types::SLIDER, 200, 250, "fx");
+				App->gui->CreateUIElement(UI_Types::TEXT, 80, 240, "music_text","0",false,"music");
+				App->gui->CreateUIElement(UI_Types::TEXT, 172, 240, "fx_text", "0", false, "effects");
 				App->menu->config = true;
 			}
 		}
