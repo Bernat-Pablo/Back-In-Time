@@ -81,7 +81,6 @@ bool Button::PostUpdate() {
 				App->menu->config = true;
 			}
 		}
-			App->menu->menuState = SETTINGS;		
 		else if (this->name == "credits")
 		{
 			if (credits_opened == false)
