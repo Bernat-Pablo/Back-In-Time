@@ -21,13 +21,13 @@ bool j1Menu::Awake(pugi::xml_node& conf)
 bool j1Menu::Start()
 {
 	App->render->camera = { 0,0 };
-	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "menu/menu_spritesheet.png", false);
+	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "background","menu/menu_spritesheet.png", false);
 
-	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 60, "0", false, "play");
-	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 100, "0", false, "continue");
-	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 140, "0", false, "setting");
-	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 180, "0", false, "credits");
-	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 220, "0", false, "out");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 60, "play", "0", false, "play");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 100,"continue", "0", false, "continue");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 140, "settings","0", false, "setting");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 180, "credits","0", false, "credits");
+	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 220, "out","0", false, "out");
 
 	return true;
 }
