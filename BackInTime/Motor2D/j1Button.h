@@ -12,8 +12,8 @@ public:
 	bool Start();
 	bool Update(float dt);
 	bool CleanUp();
-	void Draw();
-	void onClick();
+	bool On();
+	bool OnClick();
 
 private:
 
@@ -21,6 +21,7 @@ private:
 	SDL_Rect r;
 	iPoint text_marge;
 
+	iPoint mouse;
 };
 
 #endif // !_BUTTON_
