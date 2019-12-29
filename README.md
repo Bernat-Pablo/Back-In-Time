@@ -29,8 +29,11 @@ The player can go a few seconds back to the past.
 * Pablo Galve: https://github.com/pablogalve
   * Website
   * UI System
+  * Coins, lives and timer
 * Bernat Casañas: https://github.com/BernatCasanas
   * Console
+  * UI System
+  
 ## Credits
 * Assets_1: https://oddpotatogift.itch.io/16x16-fantasy-pack
 * Assets_2: https://pixel-frog.itch.io/pixel-adventure-2
