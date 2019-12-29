@@ -11,6 +11,7 @@ Font_UI::Font_UI()
 bool Font_UI::Start()
 {
 	text = this->text_font;
+	position = this->pos;
 	return true;
 }
 
