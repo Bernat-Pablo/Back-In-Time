@@ -6,15 +6,13 @@ Platformed game created by two students from Terrassa, Barcelona to our Game Dev
 ## Innovative Feature
 Player can go a few seconds back in time
 
-## Gameplay video
-TODO - Add embedded (not just linked) one minute gameplay video
-
 ## Team:
 * [Pablo Galve](https://github.com/pablogalve)
   * Collider Implementation
-  * Entities System
+  * Entities System    
   * Save/Load
   * UI Basics
+  * Debug features
 * [Bernat Casañas](https://github.com/bernatCasanas)
   * Enemies Pathfinding
   * Console 
