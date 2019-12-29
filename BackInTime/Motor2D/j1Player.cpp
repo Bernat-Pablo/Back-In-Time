@@ -348,7 +348,7 @@ bool j1Player::PreUpdate()
 	case entityStates::DIE:
 		if (!livesUpdated)
 		{
-			if (lives <= 0)	App->menu->ChangeMenuStatus();
+			if (lives <= 0)	App->menu->ChangeMenuStatus("activate");
 			else lives--;
 
 			livesUpdated = true;

@@ -20,7 +20,7 @@ public:
 	bool menuAble = true;
 	bool transition = false;
 
-	void ChangeMenuStatus();
+	void ChangeMenuStatus(p2SString mode);
 private:
 	SDL_Texture* background;
 

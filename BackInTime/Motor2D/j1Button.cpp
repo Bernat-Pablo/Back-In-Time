@@ -43,7 +43,7 @@ bool Button::PostUpdate() {
 	if (OnClick()) {
 		if (this->name == "play") {
 			App->fade->FadeToBlack(App->gui, App->scene);
-			App->menu->ChangeMenuStatus();
+			App->menu->ChangeMenuStatus("");
 
 		}
 		else if (this->name == "credits") {

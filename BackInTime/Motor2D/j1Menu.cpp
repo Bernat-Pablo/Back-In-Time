@@ -47,7 +47,12 @@ bool j1Menu::CleanUp()
 	return true;
 }
 
-void j1Menu::ChangeMenuStatus()
+void j1Menu::ChangeMenuStatus(p2SString mode)
 {
-	menuAble = !menuAble;
+	if (mode == "activate")
+		menuAble = true;
+	else if (mode == "deactivate")
+		menuAble = false;
+	else
+		menuAble = !menuAble;
 }

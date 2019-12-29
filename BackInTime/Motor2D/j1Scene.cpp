@@ -121,10 +121,9 @@ bool j1Scene::Update(float dt)
 bool j1Scene::PostUpdate()
 {
 	bool ret = true;
-
-	//TODO: 
+		
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;	
+		App->menu->ChangeMenuStatus("activate");
 
 	return ret;
 }
