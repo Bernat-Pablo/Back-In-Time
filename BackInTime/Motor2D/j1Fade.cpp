@@ -72,7 +72,7 @@ bool j1Fade::Update(float dt)
 			App->audio->Awake(App->GetConfig());
 			App->scene->Awake();
 			App->scene->Start();
-			App->player->Start(); //Set initial player position
+			App->player->Start(); 
 			App->entityManager->Start();
 			App->collision->Awake(App->GetConfig());	
 			App->render->cameraSetInitialPosition(App->GetConfig()); //Set initial camera position					

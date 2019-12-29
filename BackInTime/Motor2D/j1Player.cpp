@@ -47,7 +47,7 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 	livesUpdated = false;
 
 	collected_coins = 0;
-
+	continue_button = false;
 	game_timer = 0;
 
 	float speed = 0.1f;
@@ -145,16 +145,25 @@ bool j1Player::Start() {
 
 	config_local = config_local.child("entityManager").child("player");
 	fall_velocity = 0;
-	if (App->scene->choose_lv == 1) //We are on map1
+	
+	if (continue_button == false) 
 	{
-		position.x = config_local.child("initialPosition").child("map1").attribute("x").as_int();
-		position.y = config_local.child("initialPosition").child("map1").attribute("y").as_int();
-	}
-	else if (App->scene->choose_lv == 2) //We are on map2
+		if (App->scene->choose_lv == 1) //We are on map1
+		{
+			position.x = config_local.child("initialPosition").child("map1").attribute("x").as_int();
+			position.y = config_local.child("initialPosition").child("map1").attribute("y").as_int();
+		}
+		else if (App->scene->choose_lv == 2) //We are on map2
+		{
+			position.x = config_local.child("initialPosition").child("map2").attribute("x").as_int();
+			position.y = config_local.child("initialPosition").child("map2").attribute("y").as_int();
+		}
+	}else
 	{
-		position.x = config_local.child("initialPosition").child("map2").attribute("x").as_int();
-		position.y = config_local.child("initialPosition").child("map2").attribute("y").as_int();
+		App->LoadGame();
+		continue_button = false;
 	}
+	
 	//initial state
 	current_animation = &idle;
 

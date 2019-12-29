@@ -48,6 +48,8 @@ public:
 	iPoint position;	
 
 	void CollectCoin();
+
+	bool continue_button;
 private:
 	
 	SDL_Rect bar_0, bar_1, bar_2, bar_3, bar_4;

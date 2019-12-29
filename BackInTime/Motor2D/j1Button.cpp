@@ -56,6 +56,7 @@ bool Button::PostUpdate() {
 		}
 		if (this->name == "continue")
 		{
+			App->player->continue_button = true;
 			App->menu->ChangeMenuStatus("deactivate");
 			App->LoadGame();
 		}
