@@ -34,23 +34,18 @@ bool j1Menu::Start()
 
 bool j1Menu::Update(float dt)
 {
-	if (menuAble) {		
 
-	}
-	else {
-		App->gui->DestroyUIElement("background");
-		App->gui->DestroyUIElement("play");
-		App->gui->DestroyUIElement("continue");
-		App->gui->DestroyUIElement("settings");
-		App->gui->DestroyUIElement("credits");
-		App->gui->DestroyUIElement("out");
-
-	}
 	return true;
 }
 
 bool j1Menu::CleanUp()
 {
+	App->gui->DestroyUIElement("background");
+	App->gui->DestroyUIElement("play");
+	App->gui->DestroyUIElement("continue");
+	App->gui->DestroyUIElement("settings");
+	App->gui->DestroyUIElement("credits");
+	App->gui->DestroyUIElement("out");
 	return true;
 }
 
