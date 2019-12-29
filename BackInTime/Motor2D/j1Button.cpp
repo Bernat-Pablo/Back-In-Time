@@ -70,7 +70,7 @@ bool Button::PostUpdate() {
 			App->LoadGame();
 			App->menu->CleanUp();
 		}
-		if(this->name == "settings")
+		if (this->name == "settings")
 		{
 			if (App->menu->config) {
 				App->gui->DestroyUIElement("music");
@@ -82,9 +82,9 @@ bool Button::PostUpdate() {
 			else {
 				App->gui->CreateUIElement(UI_Types::SLIDER, 100, 250, "music");
 				App->gui->CreateUIElement(UI_Types::SLIDER, 200, 250, "fx");
-				App->gui->CreateUIElement(UI_Types::TEXT, 80, 220, "music_text","0",false,"music");
+				App->gui->CreateUIElement(UI_Types::TEXT, 80, 220, "music_text", "0", false, "music");
 				App->gui->CreateUIElement(UI_Types::TEXT, 172, 220, "fx_text", "0", false, "effects");
-				
+
 				App->menu->config = true;
 			}
 		}
@@ -96,7 +96,14 @@ bool Button::PostUpdate() {
 				credits_opened = true;
 			}
 		}
-		else if (this->name == "out") return false;	
+		else if (this->name == "out") return false;
+		else if (this->name == "main menu")App->menu->menuState = MAIN_MENU;
+		else if (this->name == "resume")
+		{
+			App->menu->menuState = NONE;
+			App->is_paused = false;
+		}
+
 		tick2 = SDL_GetTicks();
 	}
 
