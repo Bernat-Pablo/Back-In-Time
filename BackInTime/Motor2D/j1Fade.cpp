@@ -17,6 +17,8 @@
 #include "Brofiler/Brofiler.h"
 #include "j1FlyingEnemy.h"
 #include "j1GroundEnemy.h"
+#include "j1Menu.h"
+#include "j1Gui.h"
 
 bool j1Fade::Awake(pugi::xml_node& c){
 	doc.load_file("config.xml");
@@ -91,6 +93,9 @@ bool j1Fade::Update(float dt)
 		{
 			IsFading = false;
 			current_step = fade_step::none;
+		}
+		if (!App->menu->menuAble) {
+			App->gui->changing = false;
 		}
 	} break;
 	}

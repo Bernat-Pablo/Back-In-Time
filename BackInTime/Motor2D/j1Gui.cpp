@@ -73,7 +73,9 @@ bool j1Gui::PostUpdate()
 		if (element->data->PostUpdate() == false) ret = false;
 		element = element->next;
 	}
-
+	if (changing) {
+		App->render->DrawQuad({ -200,-200,1000,1000 }, 0, 0, 0, 255);
+	}
 
 	return ret;
 }
