@@ -10,7 +10,8 @@
 enum MenuStates
 {
 	MAIN_MENU,
-	INGAME,
+	INGAME_MENU,
+	INGAME_UI,
 	NONE,
 };
 
@@ -26,26 +27,24 @@ public:
 
 	bool transition = false;
 
-	void ChangeMenuStatus(p2SString mode);
-	void CreateAllUIElements();
-	void DestroyAllUIElements();
 	bool config = false;
 
 	void CreateMenu();
 	void DestroyMenu();
 
-	void CreateSettings();
-	void DestroySettings();
-
 	void CreateInGameMenu();
 	void DestroyInGameMenu();
+
+	void CreateInGameUI();
+	void DestroyInGameUI();
 public:
 	MenuStates menuState;
 private:
 	SDL_Texture* background;
 	bool menu_created;
 	bool settings_created;
-	bool ingame_created;
+	bool ingame_menu_created;
+	bool ingame_UI_created;
 };
 
 #endif // !_MENU_

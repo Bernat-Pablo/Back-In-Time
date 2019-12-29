@@ -14,7 +14,8 @@ j1Menu::j1Menu()
 	menuState = MAIN_MENU;
 	menu_created = false;
 	settings_created = false;
-	ingame_created = false;
+	ingame_menu_created = false;
+	ingame_UI_created = false;
 	background = nullptr;
 }
 
@@ -38,12 +39,16 @@ bool j1Menu::Update(float dt)
 		if (menu_created == false)CreateMenu();
 		
 		break;
-	case INGAME:
-		if (ingame_created == false)CreateInGameMenu();
+	case INGAME_MENU:
+		if (ingame_menu_created == false)CreateInGameMenu();
+		break;
+	case INGAME_UI:
+		if (ingame_UI_created == false)CreateInGameUI();
 		break;
 	case NONE:
 		DestroyMenu();
-
+		DestroyInGameMenu();
+		DestroyInGameUI();
 		break;
 	default:
 		break;
@@ -55,6 +60,8 @@ bool j1Menu::Update(float dt)
 bool j1Menu::CleanUp()
 {
 	DestroyMenu();
+	DestroyInGameMenu();
+	DestroyInGameUI();
 	
 	return true;
 }
@@ -86,11 +93,23 @@ void j1Menu::DestroyMenu()
 void j1Menu::CreateInGameMenu()
 {
 
-	ingame_created = true;
+	ingame_menu_created = true;
 }
 
 void j1Menu::DestroyInGameMenu()
 {
 
-	ingame_created = false;
+	ingame_menu_created = false;
+}
+
+void j1Menu::CreateInGameUI()
+{
+
+	ingame_UI_created = true;
+}
+
+void j1Menu::DestroyInGameUI()
+{
+
+	ingame_UI_created = false;
 }

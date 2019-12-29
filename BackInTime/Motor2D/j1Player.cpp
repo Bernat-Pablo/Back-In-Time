@@ -531,6 +531,9 @@ bool j1Player::Update(float dt)
 		break;
 	}
 
+	bar_pos.x = position.x - 20;
+	bar_pos.y = position.y - 40;
+
 	ApplyForces(dt);//Gravity and godmode
 	rockMovement(dt);
 
