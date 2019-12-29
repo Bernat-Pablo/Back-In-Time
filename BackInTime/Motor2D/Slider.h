@@ -10,12 +10,15 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 	bool CleanUp();
+	bool On();
+	bool OnClick();
 
 private:
 	SDL_Rect base;
 	SDL_Rect quad;
-	int position;
+	int quad_position;
 
+	iPoint mouse;
 };
 
 
