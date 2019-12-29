@@ -20,8 +20,7 @@ Player can go a few seconds back in time
 
 <img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/Assets/team_photo.jpeg" data-canonical-src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/Assets/team_photo.jpeg" width="300" height="400" />
 
-### Download our game  [Back In Time](https://github.com/Bernat-Pablo/Back-In-Time/releases)
-TODO - Add link to Release of Assignment 3
+### [Download](https://github.com/Bernat-Pablo/Back-In-Time/releases/tag/3.0) our game
 
 ### Take a look at our [repository](https://github.com/Bernat-Pablo/Back-In-Time)
 
@@ -72,7 +71,7 @@ TODO - Add link to Release of Assignment 3
     * Menu
     * In-game pause menu
     * In-game UI
-  * Coins
+  * Coins, lives and timer
   * Console for devs
 
 # License
