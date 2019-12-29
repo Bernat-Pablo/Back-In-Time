@@ -50,5 +50,5 @@ bool j1Image::CleanUp()
 
 void j1Image::Draw()
 {
-	App->render->Blit(texture, position.x + 20, position.y - 20);
+	App->render->Blit(texture, position.x, position.y);
 }
