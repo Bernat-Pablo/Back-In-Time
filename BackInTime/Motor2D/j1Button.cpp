@@ -60,7 +60,7 @@ bool Button::PostUpdate() {
 			App->fade->FadeToBlack(App->gui, App->scene);
 			App->menu->menuState = INGAME_UI;
 			App->gui->changing = true;
-			App->menu->CleanUp();
+			//App->menu->CleanUp();
 		}
 		if (this->name == "continue")
 		{
@@ -68,7 +68,7 @@ bool Button::PostUpdate() {
 			App->menu->menuState = INGAME_UI;
 			App->gui->changing = true;
 			App->LoadGame();
-			App->menu->CleanUp();
+			//App->menu->CleanUp();
 		}
 		if (this->name == "settings")
 		{
@@ -97,7 +97,13 @@ bool Button::PostUpdate() {
 			}
 		}
 		else if (this->name == "out") return false;
-		else if (this->name == "main menu")App->menu->menuState = MAIN_MENU;
+		else if (this->name == "main menu") 
+		{ 
+			App->menu->menuState = MAIN_MENU;
+			App->fade->FadeToBlack(App->gui, App->scene);
+			App->render->camera = { 0,0 };
+			
+		}
 		else if (this->name == "resume")
 		{
 			App->menu->menuState = NONE;

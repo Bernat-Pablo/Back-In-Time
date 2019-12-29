@@ -39,6 +39,8 @@ public:
 
 	void CreateInGameUI();
 	void DestroyInGameUI();
+
+	void DestroyAllUI();
 public:
 	MenuStates menuState;
 private:
