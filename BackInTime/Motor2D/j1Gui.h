@@ -12,6 +12,7 @@ enum class UI_Types {
 	IMAGE,
 	BUTTON,
 	SLIDER,
+	INPUTTEXT,
 };
 
 class j1Gui : public j1Module {

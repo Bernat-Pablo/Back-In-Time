@@ -84,6 +84,7 @@ bool Button::PostUpdate() {
 				App->gui->CreateUIElement(UI_Types::SLIDER, 200, 250, "fx");
 				App->gui->CreateUIElement(UI_Types::TEXT, 80, 220, "music_text","0",false,"music");
 				App->gui->CreateUIElement(UI_Types::TEXT, 172, 220, "fx_text", "0", false, "effects");
+				
 				App->menu->config = true;
 			}
 		}
