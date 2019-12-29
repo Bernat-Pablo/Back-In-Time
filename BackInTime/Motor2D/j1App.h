@@ -63,6 +63,7 @@ public:
 	void GetSaveGames(p2List<p2SString>& list_to_fill) const;
 
 	pugi::xml_node GetConfig();
+	bool saved_game_existing();
 
 	// Modules
 	j1Window* win;
@@ -103,8 +104,7 @@ private:
 
 	// Load / Save
 	bool LoadGameNow();
-	bool SavegameNow() const;
-
+	bool SavegameNow() const;	
 
 	p2List<j1Module*>	modules;
 	uint				frames;

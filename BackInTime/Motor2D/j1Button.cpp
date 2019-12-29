@@ -54,6 +54,14 @@ bool Button::PostUpdate() {
 			App->fade->FadeToBlack(App->gui, App->scene);
 			App->menu->ChangeMenuStatus("deactivate");
 		}
+		if(this->name == "continue")
+		{
+			//If saved_game != null -> Load game
+			//else LOG("Error: You are trying to continue a previous game, but there are not any saved games.=
+			
+			if (App->saved_game_existing() == true)	App->LoadGame("save_game.xml");
+			else LOG("Error: You are trying to continue a previous game, but there are not any saved games.");
+		}
 		else if (this->name == "credits")
 		{
 			if (credits_opened == false)

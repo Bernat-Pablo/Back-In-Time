@@ -50,9 +50,6 @@ bool j1Scene::Start()
 	debug_tex = App->tex->Load("maps/pathRect.png");
 
 	App->audio->PlayMusic("audio/music/music.ogg");
-	
-	//UI_Element* text = App->gui->CreateUI_Element(UI_TypeElement::TEXT, 50, 50);
-	//UI_Elements* image = App->gui->CreateUIElement(UI_Types::IMAGE, 100, 200);
 
 	return true;
 }

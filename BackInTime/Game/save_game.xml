@@ -5,6 +5,7 @@
 	<textures />
 	<audio />
 	<map />
+	<gui />
 	<scene />
 	<entityManager>
 		<flyingEnemy>
@@ -14,25 +15,36 @@
 			<position x="848" y="32" />
 		</flyingEnemy>
 		<groundEnemy>
-			<position x="1472" y="748" />
+			<position x="1472" y="468" />
 		</groundEnemy>
+		<entityManager>
+			<position x="128" y="160" />
+		</entityManager>
+		<entityManager>
+			<position x="736" y="144" />
+		</entityManager>
+		<entityManager>
+			<position x="1216" y="32" />
+		</entityManager>
 	</entityManager>
 	<player>
-		<position x="44" y="184" />
+		<position x="80" y="189" />
 		<level value="1" />
-		<camera_toRight x="147" y="92" />
-		<camera_toLeft x="27" y="92" />
-		<camera_toUp x="27" y="92" />
-		<camera_toDown x="27" y="212" />
-		<camera x="0" y="300" />
+		<camera_toRight x="150" y="96" />
+		<camera_toLeft x="30" y="96" />
+		<camera_toUp x="30" y="96" />
+		<camera_toDown x="30" y="216" />
+		<camera x="0" y="293" />
 		<lives value="3" />
-		<collected_coins value="1" />
+		<collected_coins value="0" />
+		<game_timer seconds="4.46699762" />
 	</player>
 	<:anonymous />
 	<:anonymous />
 	<pathfinding />
 	<:anonymous />
+	<menu />
 	<renderer>
-		<camera x="0" y="300" />
+		<camera x="0" y="293" />
 	</renderer>
 </game_state>

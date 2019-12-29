@@ -441,6 +441,7 @@ bool j1App::SavegameNow() const
 	if(ret == true)
 	{
 		data.save_file(save_game.GetString());
+		//pugi::xml_node l_config = GetConfig();
 		LOG("... finished saving", );
 	}
 	else
@@ -451,8 +452,25 @@ bool j1App::SavegameNow() const
 	return ret;
 }
 
+bool j1App::saved_game_existing()
+{
+	/*pugi::xml_document data;
+	pugi::xml_parse_result result = data.load_file(save_game.GetString());
+
+	
+	if ()return true;
+	else return false;*/
+
+	//------------------
+
+	/*pugi::xml_document	l_config_file;
+	pugi::xml_node l_config;
+	l_config = LoadConfig(l_config_file);*/
+	bool exist = GetConfig().child("app").child("game_saved").attribute("value").as_bool();
+	return false;
+}
+
 pugi::xml_node j1App::GetConfig()
 {
-	//return config_file;
 	return config;
 }
