@@ -47,6 +47,7 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 
 	livesUpdated = false;
 	lives = 3;
+	score = 0;
 
 	collected_coins = 0;
 	continue_button = false;
@@ -360,6 +361,7 @@ bool j1Player::PreUpdate()
 	case entityStates::DIE:
 		if (!livesUpdated)
 		{
+			score -= 33.3333f;
 			if (lives <= 0)	App->menu->ChangeMenuStatus("activate");
 			else lives--;
 
@@ -1021,4 +1023,5 @@ void j1Player::BlitEverything()
 void j1Player::CollectCoin()
 {
 	collected_coins++;
+	score += 16.6666f;
 }
