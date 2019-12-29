@@ -14,6 +14,8 @@
 Button::Button()
 {
 	credits_timer = 0;
+	credits_opened = false;
+	text = nullptr;
 }
 
 bool Button::Start()

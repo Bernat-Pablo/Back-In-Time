@@ -12,6 +12,7 @@ j1Menu::j1Menu()
 {
 	name.create("menu");
 	ui_elements_created = false;
+	background = nullptr;
 }
 
 bool j1Menu::Awake(pugi::xml_node& conf)

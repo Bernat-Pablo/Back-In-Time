@@ -12,6 +12,8 @@
 j1Gui::j1Gui()
 {
 	name.create("gui");
+	ui_spritesheet = nullptr;
+	changing = false;
 }
 
 bool j1Gui::Awake(pugi::xml_node& config)

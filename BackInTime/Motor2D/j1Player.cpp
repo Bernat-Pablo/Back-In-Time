@@ -33,6 +33,7 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 
 	rock_timer = 0;
 	rock_fall_velocity = 0;
+	rock_cooldown = 0;
 
 	tick1 = 0, tick2 = 0;
 	tick3 = 0, tick4 = 0;
@@ -45,6 +46,7 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 	collider_rock = nullptr;
 
 	livesUpdated = false;
+	lives = 3;
 
 	collected_coins = 0;
 	continue_button = false;
