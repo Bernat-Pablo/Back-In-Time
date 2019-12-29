@@ -55,7 +55,7 @@ bool Button::Update(float dt)
 	return true;
 }
 bool Button::PostUpdate() {
-	if (OnClick() && tick1-tick2>=500) {
+	if (OnClick() && tick1 - tick2 >= 500) {
 		if (this->name == "play") {
 			App->fade->FadeToBlack(App->gui, App->scene);
 			App->menu->menuState = NONE;

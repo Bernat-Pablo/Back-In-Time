@@ -83,7 +83,6 @@ bool j1Audio::CleanUp()
 bool j1Audio::PlayMusic(const char* path, float fade_time)
 {
 	bool ret = true;
-
 	if(!active)
 		return false;
 

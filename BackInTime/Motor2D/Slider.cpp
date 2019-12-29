@@ -2,6 +2,8 @@
 #include "j1Input.h"
 #include "j1App.h"
 #include "j1Render.h"
+#include "SDL_mixer\include\SDL_mixer.h"
+#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
 bool Slider::Start()
 {
@@ -42,10 +44,10 @@ bool Slider::Update(float dt)
 bool Slider::PostUpdate()
 {
 	//here it goes linking name to what u want to do
-	if(name == "vol_music")
+	if(name == "music")
 	{
-		
-	}else if(name == "vol_fx")
+		Mix_VolumeMusic(-1);
+	}else if(name == "fx")
 	{
 	
 	}
