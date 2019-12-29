@@ -1,6 +1,8 @@
 #include "InputText.h"
 #include "j1App.h"
 #include "j1Render.h"
+#include "j1Input.h"
+#include "j1Fonts.h"
 
 bool InputText::Start()
 {
@@ -11,16 +13,30 @@ bool InputText::Start()
 	line.y = position.y + spacing;
 	line.w = 1;
 	line.h = 16;
+	number_letters = 0;
+	ppos = line.x-8;
 	return true;
 }
 
 bool InputText::Update(float dt)
 {
 	App->render->DrawQuad(rect, 50, 0, 0, 100);
+	
 	tick1 = SDL_GetTicks();
+	line.x = position.x + spacing + 8 * number_letters;
+
 	if (tick1 - tick2 >= 1000) {
 		App->render->DrawQuad(line, 0, 0, 0, 255);
 		tick2 = SDL_GetTicks();
+	}
+	
+	if (OnClick()) {
+		clicked = true;
+	}
+	tick3 = SDL_GetTicks();
+	if (clicked) {
+		text = App->input->text_frominput.GetString();
+		App->fonts->BlitText(ppos,line.y,1,text);
 	}
 	
 	return true;
@@ -38,5 +54,13 @@ bool InputText::CleanUp()
 
 bool InputText::OnClick()
 {
-	return true;
+	App->input->GetMousePosition(mouse.x, mouse.y);
+	if (mouse.x<r.x + r.w && mouse.x>r.x) {
+		if (mouse.y<r.y + r.h && mouse.y>r.y) {
+			if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT)) {
+				return true;
+			}
+		}
+	}
+	return false;
 }

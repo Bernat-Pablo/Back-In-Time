@@ -79,7 +79,7 @@ bool j1Input::PreUpdate()
 		if(mouse_buttons[i] == KEY_UP)
 			mouse_buttons[i] = KEY_IDLE;
 	}
-
+	SDL_StartTextInput();
 	while(SDL_PollEvent(&event) != 0)
 	{
 		switch(event.type)
@@ -118,17 +118,23 @@ bool j1Input::PreUpdate()
 				//LOG("Mouse button %d up", event.button.button-1);
 			break;
 
+			case SDL_TEXTINPUT:
+				text_frominput += event.text.text;
+			break;
+
 			case SDL_MOUSEMOTION:
 				int scale = App->win->GetScale();
 				mouse_motion_x = event.motion.xrel / scale;
 				mouse_motion_y = event.motion.yrel / scale;
 				mouse_x = event.motion.x / scale;
 				mouse_y = event.motion.y / scale;
-				//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
 			break;
+
+			
+
 		}
 	}
-
+	SDL_StopTextInput();
 	BROFILER_CATEGORY("Input_PreUpdate", Profiler::Color::Blue);
 
 	return true;
@@ -161,3 +167,4 @@ void j1Input::GetMouseMotion(int& x, int& y)
 	x = mouse_motion_x;
 	y = mouse_motion_y;
 }
+
