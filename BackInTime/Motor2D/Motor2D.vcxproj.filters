@@ -75,6 +75,9 @@
     <ClCompile Include="j1Image.cpp">
       <Filter>UI Elements</Filter>
     </ClCompile>
+    <ClCompile Include="j1Menu.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
     <ClCompile Include="j1Fonts.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -87,8 +90,8 @@
     <ClCompile Include="Slider.cpp">
       <Filter>UI Elements</Filter>
     </ClCompile>
-    <ClCompile Include="j1Menu.cpp">
-      <Filter>Scenes</Filter>
+    <ClCompile Include="InputText.cpp">
+      <Filter>UI Elements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +182,9 @@
     <ClInclude Include="j1Image.h">
       <Filter>UI Elements</Filter>
     </ClInclude>
+    <ClInclude Include="j1Menu.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
     <ClInclude Include="j1Fonts.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -191,8 +197,8 @@
     <ClInclude Include="Slider.h">
       <Filter>UI Elements</Filter>
     </ClInclude>
-    <ClInclude Include="j1Menu.h">
-      <Filter>Scenes</Filter>
+    <ClInclude Include="InputText.h">
+      <Filter>UI Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
