@@ -38,10 +38,6 @@ bool j1Menu::Update(float dt)
 		if (menu_created == false)CreateMenu();
 		
 		break;
-	case SETTINGS:
-		DestroyMenu();
-		if (settings_created == false)CreateSettings();
-		break;
 	case INGAME:
 		if (ingame_created == false)CreateInGameMenu();
 		break;
@@ -59,7 +55,6 @@ bool j1Menu::Update(float dt)
 bool j1Menu::CleanUp()
 {
 	DestroyMenu();
-	DestroySettings();
 	
 	return true;
 }
@@ -72,8 +67,6 @@ void j1Menu::CreateMenu()
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 140, "settings", "0", false, "setting");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 180, "credits", "0", false, "credits");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 220, "out", "0", false, "out");
-
-	App->gui->CreateUIElement(UI_Types::SLIDER, 100, 10, "test");
 
 	menu_created = true;
 }
@@ -88,18 +81,6 @@ void j1Menu::DestroyMenu()
 	App->gui->DestroyUIElement("out");
 
 	menu_created = false;
-}
-
-void j1Menu::CreateSettings()
-{
-
-	settings_created = true;
-}
-
-void j1Menu::DestroySettings()
-{
-
-	settings_created = false;
 }
 
 void j1Menu::CreateInGameMenu()
