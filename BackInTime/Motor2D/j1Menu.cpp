@@ -68,8 +68,6 @@ void j1Menu::CreateMenu()
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 180, "credits", "0", false, "credits");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 220, "out", "0", false, "out");
 
-	App->gui->CreateUIElement(UI_Types::SLIDER, 100, 10, "test");
-
 	menu_created = true;
 }
 
