@@ -12,6 +12,7 @@
 
 Button::Button()
 {
+	credits_timer = 0;
 }
 
 bool Button::Start()
@@ -37,6 +38,14 @@ bool Button::Update(float dt)
 		App->render->DrawQuad(r, 0, 55, 0, 255);
 
 	App->fonts->BlitText(r.x + this->margeButton.x, r.y + this->margeButton.y, 1, text);
+
+	if(credits_opened)credits_timer += dt;
+	if (credits_timer >= 5) 
+	{
+		credits_opened = false; 
+		credits_timer = 0;
+	}
+
 	return true;
 }
 bool Button::PostUpdate() {
@@ -45,7 +54,14 @@ bool Button::PostUpdate() {
 			App->fade->FadeToBlack(App->gui, App->scene);
 			App->menu->ChangeMenuStatus("deactivate");
 		}
-		else if (this->name == "credits") ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);				
+		else if (this->name == "credits")
+		{
+			if (credits_opened == false)
+			{
+				ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);
+				credits_opened = true;
+			}
+		}
 		else if (this->name == "out") return false;		
 	}
 	return true;

@@ -23,6 +23,9 @@ private:
 	iPoint text_marge;
 
 	iPoint mouse;
+
+	bool credits_opened;
+	float credits_timer;
 };
 
 #endif // !_BUTTON_
