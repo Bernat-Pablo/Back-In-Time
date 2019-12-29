@@ -33,19 +33,10 @@ The player can go a few seconds back to the past.
   * UI System Structure
   * Coins, lives and timer
 * Bernat Casañas: https://github.com/BernatCasanas
-  * Building the Engine with Modules
   * Console
   * UI System Structure
   * UI Elements (Scroll, Input Text, Button, Image, Font)
   * Menu
-  * PathFinding
-  * Player Movement and Mechanics
-  * Both Enemies (Rino and Bird)
-  * Profiling
-  * Maps and Level Design
-  * Music and Fx
-  * Special Ability Turn Back In Time
-  * Animations
   
 ## Credits
 * Assets_1: https://oddpotatogift.itch.io/16x16-fantasy-pack
