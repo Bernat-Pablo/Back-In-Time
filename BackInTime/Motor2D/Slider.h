@@ -16,7 +16,6 @@ public:
 private:
 	SDL_Rect base;
 	SDL_Rect quad;
-	int quad_position;
 
 	iPoint mouse;
 };

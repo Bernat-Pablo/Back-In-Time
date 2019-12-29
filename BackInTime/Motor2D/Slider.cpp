@@ -25,8 +25,13 @@ bool Slider::Update(float dt)
 		App->render->DrawQuad(quad, 0, 0, 155, 255);
 	else App->render->DrawQuad(quad, 0, 0, 255, 255);
 
-	if(OnClick())
+	if (OnClick()) {
+		int nothing;
+		int mouse_pos;
+		App->input->GetMousePosition(nothing, mouse_pos);
+		quad.y = mouse_pos-10;
 		App->render->DrawQuad(quad, 0, 0, 55, 255);
+	}
 
 
 	return true;
