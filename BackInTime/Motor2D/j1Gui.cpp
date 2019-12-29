@@ -7,6 +7,7 @@
 #include "j1FontUI.h"
 #include "j1Button.h"
 #include "j1Render.h"
+#include "Brofiler/Brofiler.h"
 
 j1Gui::j1Gui()
 {
@@ -45,7 +46,7 @@ bool j1Gui::PreUpdate()
 		if (element->data->PreUpdate() == false) ret = false;
 		element = element->next;
 	}
-
+	BROFILER_CATEGORY("GUI_PreUpdate", Profiler::Color::Aquamarine);
 	return ret;
 }
 
@@ -59,7 +60,7 @@ bool j1Gui::Update(float dt)
 		if (element->data->Update(dt) == false) ret = false;
 		element = element->next;
 	}
-
+	BROFILER_CATEGORY("GUI_Update", Profiler::Color::Aquamarine);
 	return ret;
 }
 
@@ -76,7 +77,7 @@ bool j1Gui::PostUpdate()
 	if (changing) {
 		App->render->DrawQuad({ -200,-200,1000,1000 }, 0, 0, 0, 0);
 	}
-
+	BROFILER_CATEGORY("GUI_PostUpdate", Profiler::Color::Aquamarine);
 	return ret;
 }
 

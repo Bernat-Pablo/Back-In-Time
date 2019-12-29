@@ -1,6 +1,7 @@
 #include "j1FontUI.h"
 #include "j1Player.h"
 #include "j1Fonts.h"
+#include "Brofiler/Brofiler.h"
 
 Font_UI::Font_UI()
 {
@@ -23,6 +24,8 @@ bool Font_UI::Update(float dt)
 	}
 
 	App->fonts->BlitText(position.x, position.y, 1, text);
+
+	BROFILER_CATEGORY("FontUI_Update", Profiler::Color::Aquamarine);
 	return true;
 }
 

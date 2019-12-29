@@ -9,6 +9,7 @@
 #include "j1Scene.h"
 #include "p2Log.h"
 #include "j1Fade.h"
+#include "Brofiler/Brofiler.h"
 
 Button::Button()
 {
@@ -46,6 +47,7 @@ bool Button::Update(float dt)
 		credits_timer = 0;
 	}
 
+	BROFILER_CATEGORY("Button_PreUpdate", Profiler::Color::Aquamarine);
 	return true;
 }
 bool Button::PostUpdate() {

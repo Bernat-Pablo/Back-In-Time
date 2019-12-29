@@ -4,6 +4,7 @@
 #include "j1Textures.h"
 #include "UI_Elements.h"
 #include "j1Player.h"
+#include "Brofiler/Brofiler.h"
 
 j1Image::j1Image() : UI_Elements()
 {	
@@ -33,6 +34,7 @@ bool j1Image::Update(float dt)
 
 	Draw();
 
+	BROFILER_CATEGORY("Image_Update", Profiler::Color::Aquamarine);
 	return ret;
 }
 
