@@ -85,7 +85,7 @@ bool j1Gui::CleanUp()
 	return ret;
 }
 
-UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_y, char* texture, bool follow_pj, char* t)
+UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_y,char* name, char* texture, bool follow_pj, char* t)
 {
 	UI_Elements* ret = nullptr;
 
@@ -98,6 +98,7 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 		ret->text_font = t;
 		ret->pos.x = position_x;
 		ret->pos.y = position_y;
+		ret->name = name;
 		ret->Start();
 		break;
 	case UI_Types::IMAGE:
@@ -108,6 +109,7 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 			ret->following_pj = follow_pj;
 		ret->pos.x = position_x;
 		ret->pos.y = position_y;
+		ret->name = name;
 		ret->Start();
 		break;
 	case UI_Types::BUTTON:
@@ -117,6 +119,7 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 		ret->margeButton.x = -ret->numberLetters*4+40;
 		ret->rect = { position_x ,position_y, 80,30 };
 		ret->text_font = t;
+		ret->name = name;
 		ret->Start();
 		break;
 	default:
