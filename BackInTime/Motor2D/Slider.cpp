@@ -2,6 +2,7 @@
 #include "j1Input.h"
 #include "j1App.h"
 #include "j1Render.h"
+#include "j1Audio.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
@@ -49,7 +50,11 @@ bool Slider::PostUpdate()
 		Mix_VolumeMusic((int)slider*1.28);
 	}else if(name == "fx")
 	{
-	
+		p2List_item<Mix_Chunk*>* item = App->audio->fx.start;
+		while (item != nullptr) {
+			Mix_VolumeChunk(item->data, (int)slider * 1.28);
+			item = item->next;
+		}
 	}
 	return true;
 }
