@@ -16,6 +16,7 @@
 #include "j1Gui.h"
 #include "UI_Elements.h"
 #include "j1Menu.h"
+#include "Brofiler/Brofiler.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -68,7 +69,7 @@ bool j1Scene::PreUpdate()
 		choose_lv = 2;
 		App->fade->FadeToBlack(App->scene, App->scene);
 	}
-
+	BROFILER_CATEGORY("Scene_PreUpdate", Profiler::Color::Aquamarine);
 	return true;
 }
 
@@ -111,7 +112,7 @@ bool j1Scene::Update(float dt)
 		App->menu->menuState = MAIN_MENU;
 		App->render->camera = { 0,0 };
 	}
-
+	BROFILER_CATEGORY("Scene_Update", Profiler::Color::Aquamarine);
 	return true;
 }
 
@@ -132,9 +133,8 @@ bool j1Scene::PostUpdate()
 			App->menu->menuState = INGAME_MENU; 
 			App->is_paused = true;
 		}
-
 	}		
-
+	BROFILER_CATEGORY("Scene_PostUpdate", Profiler::Color::Aquamarine);
 	return ret;
 }
 

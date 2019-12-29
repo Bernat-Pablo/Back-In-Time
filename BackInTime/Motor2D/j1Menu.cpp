@@ -7,6 +7,7 @@
 #include "j1Gui.h"
 #include "j1Player.h"
 #include <windows.h>
+#include "Brofiler/Brofiler.h"
 
 j1Menu::j1Menu()
 {
@@ -59,7 +60,7 @@ bool j1Menu::Update(float dt)
 	default:
 		break;
 	}
-	
+	BROFILER_CATEGORY("Menu_Update", Profiler::Color::Aquamarine);
 	return true;
 }
 

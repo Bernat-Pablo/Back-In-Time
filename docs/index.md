@@ -6,15 +6,13 @@ Platformed game created by two students from Terrassa, Barcelona to our Game Dev
 ## Innovative Feature
 Player can go a few seconds back in time
 
-## Gameplay video
-TODO - Add embedded (not just linked) one minute gameplay video
-
 ## Team:
 * [Pablo Galve](https://github.com/pablogalve)
   * Collider Implementation
-  * Entities System
+  * Entities System    
   * Save/Load
   * UI Basics
+  * Debug features
 * [Bernat Casañas](https://github.com/bernatCasanas)
   * Enemies Pathfinding
   * Console 
@@ -22,8 +20,7 @@ TODO - Add embedded (not just linked) one minute gameplay video
 
 <img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/Assets/team_photo.jpeg" data-canonical-src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/Assets/team_photo.jpeg" width="300" height="400" />
 
-### Download our game  [Back In Time](https://github.com/Bernat-Pablo/Back-In-Time/releases)
-TODO - Add link to Release of Assignment 3
+### [Download](https://github.com/Bernat-Pablo/Back-In-Time/releases/tag/3.0) our game
 
 ### Take a look at our [repository](https://github.com/Bernat-Pablo/Back-In-Time)
 
@@ -74,7 +71,7 @@ TODO - Add link to Release of Assignment 3
     * Menu
     * In-game pause menu
     * In-game UI
-  * Coins
+  * Coins, lives and timer
   * Console for devs
 
 # License

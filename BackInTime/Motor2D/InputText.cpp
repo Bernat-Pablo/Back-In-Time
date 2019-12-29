@@ -3,6 +3,7 @@
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Fonts.h"
+#include "Brofiler/Brofiler.h"
 #include "j1Console.h"
 
 bool InputText::Start()
@@ -39,11 +40,13 @@ bool InputText::Update(float dt)
 	}
 
 	
+	BROFILER_CATEGORY("InputText_Update", Profiler::Color::Aquamarine);
 	return true;
 }
 
 bool InputText::PostUpdate()
 {
+	BROFILER_CATEGORY("InputText_PostUpdate", Profiler::Color::Aquamarine);
 	return true;
 }
 

@@ -8,6 +8,7 @@
 #include "j1Scene.h"
 #include "j1App.h"
 #include "j1Render.h"
+#include "Brofiler/Brofiler.h"
 #include "j1Map.h"
 #include "j1Player.h"
 #include "j1Fade.h"
@@ -35,7 +36,7 @@ bool j1Console::Start()
 
 bool j1Console::PreUpdate(float dt)
 {
-	
+	BROFILER_CATEGORY("Console_PreUpdate", Profiler::Color::Aquamarine);
 	return true;
 }
 
@@ -53,6 +54,7 @@ bool j1Console::Update(float dt)
 		App->gui->DestroyUIElement("console");
 		App->is_paused = false;
 	}
+	
 	if (App->input->GetKey(SDL_SCANCODE_RETURN)){
 		text = App->input->text_frominput;
 		const char* string = text.GetString();
@@ -83,12 +85,13 @@ bool j1Console::Update(float dt)
 		}
 		App->input->text_frominput.Clear();
 	}
-
+	BROFILER_CATEGORY("Console_Update", Profiler::Color::Aquamarine);
 	return true;
 }
 
 bool j1Console::PostUpdate(float dt)
 {
+	BROFILER_CATEGORY("Console_PostUpdate", Profiler::Color::Aquamarine);
 	return true;
 }
 
