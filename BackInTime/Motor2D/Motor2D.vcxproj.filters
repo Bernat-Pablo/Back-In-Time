@@ -188,6 +188,9 @@
     <ClInclude Include="j1Button.h">
       <Filter>UI Elements</Filter>
     </ClInclude>
+    <ClInclude Include="Slider.h">
+      <Filter>UI Elements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">
