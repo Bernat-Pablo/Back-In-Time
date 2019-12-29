@@ -34,7 +34,7 @@ bool Slider::Update(float dt)
 		App->render->DrawQuad(quad, 0, 0, 55, 255);
 	}
 
-	puntuation = quad.y + 10 - base.y;
+	slider = quad.y + 10 - base.y;
 
 	return true;
 }
@@ -42,6 +42,13 @@ bool Slider::Update(float dt)
 bool Slider::PostUpdate()
 {
 	//here it goes linking name to what u want to do
+	if(name == "vol_music")
+	{
+		
+	}else if(name == "vol_fx")
+	{
+	
+	}
 	return true;
 }
 

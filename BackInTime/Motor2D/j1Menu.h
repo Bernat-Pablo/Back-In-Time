@@ -21,8 +21,11 @@ public:
 	bool transition = false;
 
 	void ChangeMenuStatus(p2SString mode);
-	void CreateAllUIElements();
-	void DestroyAllUIElements();
+	void CreateMenu();
+	void DestroyMenu();
+
+	void CreateSettings();
+	void DestroySettings();
 private:
 	SDL_Texture* background;
 	bool ui_elements_created;

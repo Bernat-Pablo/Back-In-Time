@@ -23,7 +23,7 @@ bool j1Menu::Awake(pugi::xml_node& conf)
 bool j1Menu::Start()
 {
 	App->render->camera = { 0,0 };
-	CreateAllUIElements();
+	CreateMenu();
 	ui_elements_created = true;
 	return true;
 }
@@ -34,13 +34,13 @@ bool j1Menu::Update(float dt)
 	{
 		if (ui_elements_created == false)
 		{
-			CreateAllUIElements();
+			CreateMenu();
 			ui_elements_created = true;
 		}
 	}							
 	else 
 	{
-		DestroyAllUIElements();
+		DestroyMenu();
 		ui_elements_created = false;
 	}
 	
@@ -49,8 +49,7 @@ bool j1Menu::Update(float dt)
 
 bool j1Menu::CleanUp()
 {
-
-	DestroyAllUIElements();
+	DestroyMenu();
 	
 	return true;
 }
@@ -65,7 +64,7 @@ void j1Menu::ChangeMenuStatus(p2SString mode)
 		menuAble = !menuAble;
 }
 
-void j1Menu::CreateAllUIElements()
+void j1Menu::CreateMenu()
 {
 	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "background", "menu/menu_spritesheet.png", false);
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 60, "play", "0", false, "play");
@@ -76,7 +75,7 @@ void j1Menu::CreateAllUIElements()
 	App->gui->CreateUIElement(UI_Types::SLIDER, 100, 10, "test");
 }
 
-void j1Menu::DestroyAllUIElements()
+void j1Menu::DestroyMenu()
 {
 	App->gui->DestroyUIElement("background");
 	App->gui->DestroyUIElement("play");
@@ -84,4 +83,14 @@ void j1Menu::DestroyAllUIElements()
 	App->gui->DestroyUIElement("settings");
 	App->gui->DestroyUIElement("credits");
 	App->gui->DestroyUIElement("out");
+}
+
+void j1Menu::CreateSettings()
+{
+
+}
+
+void j1Menu::DestroySettings()
+{
+
 }

@@ -70,7 +70,8 @@ bool Button::PostUpdate() {
 		}
 		if(this->name == "settings")
 		{
-			//TODO
+			App->menu->DestroyMenu();
+			App->menu->CreateSettings();
 		}
 		else if (this->name == "credits")
 		{
