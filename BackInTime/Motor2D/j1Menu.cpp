@@ -11,7 +11,10 @@
 j1Menu::j1Menu()
 {
 	name.create("menu");
-	ui_elements_created = false;
+	menuState = MENU;
+	menu_created = false;
+	settings_created = false;
+	ingame_created = false;
 	background = nullptr;
 }
 
@@ -24,24 +27,30 @@ bool j1Menu::Start()
 {
 	App->render->camera = { 0,0 };
 	CreateMenu();
-	ui_elements_created = true;
 	return true;
 }
 
 bool j1Menu::Update(float dt)
 {
-	if (menuAble) 
+	switch(menuState)
 	{
-		if (ui_elements_created == false)
-		{
-			CreateMenu();
-			ui_elements_created = true;
-		}
-	}							
-	else 
-	{
+	case MENU:
+		if (menu_created == false)CreateMenu();
+		
+		break;
+	case SETTINGS:
 		DestroyMenu();
-		ui_elements_created = false;
+		if (settings_created == false)CreateSettings();
+		break;
+	case INGAME:
+		//if (ingame_created == false)CreateInGameMenu();
+		break;
+	case NONE:
+		DestroyMenu();
+
+		break;
+	default:
+		break;
 	}
 	
 	return true;
@@ -50,18 +59,17 @@ bool j1Menu::Update(float dt)
 bool j1Menu::CleanUp()
 {
 	DestroyMenu();
+	DestroySettings();
 	
 	return true;
 }
 
 void j1Menu::ChangeMenuStatus(p2SString mode)
 {
-	if (mode == "activate")
-		menuAble = true;
-	else if (mode == "deactivate")
-		menuAble = false;
-	else
-		menuAble = !menuAble;
+	if (mode == "activate")	menuState = MENU;
+	else if (mode == "deactivate")menuState = NONE;
+	else if (mode == "settings")menuState = SETTINGS;
+	else if (mode == "ingame")menuState = SETTINGS;
 }
 
 void j1Menu::CreateMenu()
@@ -73,6 +81,8 @@ void j1Menu::CreateMenu()
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 180, "credits", "0", false, "credits");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 220, "out", "0", false, "out");
 	App->gui->CreateUIElement(UI_Types::SLIDER, 100, 10, "test");
+
+	menu_created = true;
 }
 
 void j1Menu::DestroyMenu()
@@ -83,14 +93,18 @@ void j1Menu::DestroyMenu()
 	App->gui->DestroyUIElement("settings");
 	App->gui->DestroyUIElement("credits");
 	App->gui->DestroyUIElement("out");
+
+	menu_created = false;
 }
 
 void j1Menu::CreateSettings()
 {
 
+	settings_created = true;
 }
 
 void j1Menu::DestroySettings()
 {
 
+	settings_created = false;
 }
