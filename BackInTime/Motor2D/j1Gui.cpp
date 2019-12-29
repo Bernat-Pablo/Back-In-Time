@@ -8,6 +8,7 @@
 #include "j1Button.h"
 #include "j1Render.h"
 #include "Brofiler/Brofiler.h"
+#include "Slider.h"
 
 j1Gui::j1Gui()
 {
@@ -100,8 +101,7 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 	{
 	case UI_Types::TEXT:
 		ret = new Font_UI();
-		if (follow_pj)
-			ret->following_pj = follow_pj;
+		ret->following_pj = follow_pj;
 		ret->text_font = t;
 		ret->pos.x = position_x;
 		ret->pos.y = position_y;
@@ -112,8 +112,7 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 		ret = new j1Image();
 		if (texture != "0")
 			ret->texture_path = texture;
-		if (follow_pj)
-			ret->following_pj = follow_pj;
+		ret->following_pj = follow_pj;
 		ret->pos.x = position_x;
 		ret->pos.y = position_y;
 		ret->name = name;
@@ -123,9 +122,18 @@ UI_Elements* j1Gui::CreateUIElement(UI_Types type, int position_x, int position_
 		ret = new Button();
 		ret->margeButton.y = 11;
 		ret->numberLetters = strlen(t);
+		ret->following_pj = follow_pj;
 		ret->margeButton.x = -ret->numberLetters*4+40;
 		ret->rect = { position_x ,position_y, 80,30 };
 		ret->text_font = t;
+		ret->name = name;
+		ret->Start();
+		break;
+	case UI_Types::SLIDER:
+		ret = new Slider();
+		ret->pos.x = position_x;
+		ret->pos.y = position_y;
+		ret->following_pj = follow_pj;
 		ret->name = name;
 		ret->Start();
 		break;

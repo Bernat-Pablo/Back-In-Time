@@ -49,7 +49,9 @@ bool j1Menu::Update(float dt)
 
 bool j1Menu::CleanUp()
 {
+
 	DestroyAllUIElements();
+	
 	return true;
 }
 
@@ -71,6 +73,7 @@ void j1Menu::CreateAllUIElements()
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 140, "settings", "0", false, "setting");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 180, "credits", "0", false, "credits");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 220, "out", "0", false, "out");
+	App->gui->CreateUIElement(UI_Types::SLIDER, 100, 10, "test");
 }
 
 void j1Menu::DestroyAllUIElements()
