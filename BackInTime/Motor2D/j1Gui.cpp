@@ -6,6 +6,7 @@
 #include "j1Textures.h"
 #include "j1FontUI.h"
 #include "j1Button.h"
+#include "j1Render.h"
 
 j1Gui::j1Gui()
 {
@@ -71,6 +72,9 @@ bool j1Gui::PostUpdate()
 	{
 		if (element->data->PostUpdate() == false) ret = false;
 		element = element->next;
+	}
+	if (changing) {
+		App->render->DrawQuad({ -200,-200,1000,1000 }, 0, 0, 0, 0);
 	}
 
 	return ret;

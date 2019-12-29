@@ -29,6 +29,7 @@ public:
 	void DestroyUIElement(char* name);
 
 	SDL_Texture* GetUISpritesheet();
+	bool changing;
 private:
 	p2List<UI_Elements*> ui_elementsList;
 	SDL_Texture* ui_spritesheet;
