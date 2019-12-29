@@ -11,6 +11,7 @@ public:
 
 	bool Start();
 	bool Update(float dt);
+	bool PostUpdate();
 	bool CleanUp();
 	bool On();
 	bool OnClick();

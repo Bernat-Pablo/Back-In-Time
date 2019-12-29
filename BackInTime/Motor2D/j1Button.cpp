@@ -5,7 +5,10 @@
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Fonts.h"
+#include "j1Menu.h"
+#include "j1Scene.h"
 #include "p2Log.h"
+#include "j1Fade.h"
 
 Button::Button()
 {
@@ -34,6 +37,20 @@ bool Button::Update(float dt)
 		App->render->DrawQuad(r, 0, 55, 0, 255);
 
 	App->fonts->BlitText(r.x + this->margeButton.x, r.y + this->margeButton.y, 1, text);
+	return true;
+}
+bool Button::PostUpdate() {
+	if (OnClick()) {
+		if (this->name == "play") {
+			App->fade->FadeToBlack(App->gui, App->scene);
+			App->menu->ChangeMenuStatus();
+
+		}
+		else if (this->name == "credits") {
+			ShellExecute(NULL, "open", "https://bernat-pablo.github.io/Back-In-Time/", NULL, NULL, SW_SHOWNORMAL);
+
+		}
+	}
 	return true;
 }
 
