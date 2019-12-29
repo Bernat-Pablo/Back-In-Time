@@ -3,6 +3,7 @@
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Fonts.h"
+#include "Brofiler/Brofiler.h"
 
 bool InputText::Start()
 {
@@ -39,11 +40,13 @@ bool InputText::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_RETURN))
 		App->input->text_frominput.Clear();
 	
+	BROFILER_CATEGORY("InputText_Update", Profiler::Color::Aquamarine);
 	return true;
 }
 
 bool InputText::PostUpdate()
 {
+	BROFILER_CATEGORY("InputText_PostUpdate", Profiler::Color::Aquamarine);
 	return true;
 }
 

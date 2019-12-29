@@ -6,7 +6,7 @@
 #include "j1Gui.h"
 #include "j1App.h"
 #include "j1Render.h"
-
+#include "Brofiler/Brofiler.h"
 
 j1Console::j1Console()
 {
@@ -30,7 +30,7 @@ bool j1Console::Start()
 
 bool j1Console::PreUpdate(float dt)
 {
-	
+	BROFILER_CATEGORY("Console_PreUpdate", Profiler::Color::Aquamarine);
 	return true;
 }
 
@@ -48,12 +48,13 @@ bool j1Console::Update(float dt)
 		App->gui->DestroyUIElement("console");
 		App->is_paused = false;
 	}
-
+	BROFILER_CATEGORY("Console_Update", Profiler::Color::Aquamarine);
 	return true;
 }
 
 bool j1Console::PostUpdate(float dt)
 {
+	BROFILER_CATEGORY("Console_PostUpdate", Profiler::Color::Aquamarine);
 	return true;
 }
 

@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Audio.h"
+#include "Brofiler/Brofiler.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
@@ -38,7 +39,7 @@ bool Slider::Update(float dt)
 	}
 
 	slider = quad.y + 10 - base.y;
-
+	BROFILER_CATEGORY("Slider_Update", Profiler::Color::Aquamarine);
 	return true;
 }
 
@@ -56,6 +57,7 @@ bool Slider::PostUpdate()
 			item = item->next;
 		}
 	}
+	BROFILER_CATEGORY("Slider_PostUpdate", Profiler::Color::Aquamarine);
 	return true;
 }
 

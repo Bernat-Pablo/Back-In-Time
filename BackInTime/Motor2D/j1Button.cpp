@@ -112,7 +112,7 @@ bool Button::PostUpdate() {
 
 		tick2 = SDL_GetTicks();
 	}
-
+	BROFILER_CATEGORY("Button_PostUpdate", Profiler::Color::Aquamarine);
 	return true;
 }
 
