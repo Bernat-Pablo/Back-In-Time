@@ -45,6 +45,9 @@ private:
 	bool settings_created;
 	bool ingame_menu_created;
 	bool ingame_UI_created;
+
+	SDL_Texture* heart;
+	//SDL_Rect heart_rect;
 };
 
 #endif // !_MENU_

@@ -58,14 +58,14 @@ bool Button::PostUpdate() {
 	if (OnClick() && tick1 - tick2 >= 500) {
 		if (this->name == "play") {
 			App->fade->FadeToBlack(App->gui, App->scene);
-			App->menu->menuState = NONE;
+			App->menu->menuState = INGAME_UI;
 			App->gui->changing = true;
 			App->menu->CleanUp();
 		}
 		if (this->name == "continue")
 		{
 			App->player->continue_button = true;
-			App->menu->menuState = NONE;
+			App->menu->menuState = INGAME_UI;
 			App->gui->changing = true;
 			App->LoadGame();
 			App->menu->CleanUp();

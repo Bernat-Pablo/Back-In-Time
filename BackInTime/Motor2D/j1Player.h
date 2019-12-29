@@ -49,18 +49,21 @@ public:
 
 	void CollectCoin();
 
-	bool continue_button;
+public:
+	bool				continue_button;
+	int					collected_coins;
+	int					lives;
 private:
 	
-	SDL_Rect bar_0, bar_1, bar_2, bar_3, bar_4;
-	iPoint bar_pos;
+	SDL_Rect			bar_0, bar_1, bar_2, bar_3, bar_4;
+	iPoint				bar_pos;
 
-	SDL_Texture* spritesheet_rock;
-	SDL_Texture* spritesheet_casper;
-	SDL_Texture* spritesheet_bars;
-	const char* spritesheet_source;
+	SDL_Texture*		spritesheet_rock;
+	SDL_Texture*		spritesheet_casper;
+	SDL_Texture*		spritesheet_bars;
+	const char*			spritesheet_source;
 
-	Player_Input player_input; //Input introduced by the player	
+	Player_Input		player_input; //Input introduced by the player	
 
 	p2SString			folder;
 	
@@ -99,11 +102,8 @@ private:
 
 	pugi::xml_document	doc;
 	
-	//Lives
-	int					lives;
-	bool				livesUpdated;
+	bool				livesUpdated;	
 
-	int					collected_coins;
 	float				score;
 
 	float				game_timer;
