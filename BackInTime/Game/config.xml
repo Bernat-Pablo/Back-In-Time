@@ -4,7 +4,6 @@
   <app framerate_cap="30">
     <title>Back In Time</title>
     <organization>Bernat and Pablo</organization>
-    <game_saved value="false"/>
   </app>
 
   <render>

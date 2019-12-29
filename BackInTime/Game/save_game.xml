@@ -15,11 +15,8 @@
 			<position x="848" y="32" />
 		</flyingEnemy>
 		<groundEnemy>
-			<position x="1472" y="468" />
+			<position x="1472" y="1083" />
 		</groundEnemy>
-		<entityManager>
-			<position x="128" y="160" />
-		</entityManager>
 		<entityManager>
 			<position x="736" y="144" />
 		</entityManager>
@@ -28,16 +25,16 @@
 		</entityManager>
 	</entityManager>
 	<player>
-		<position x="80" y="189" />
+		<position x="461" y="137" />
 		<level value="1" />
-		<camera_toRight x="150" y="96" />
-		<camera_toLeft x="30" y="96" />
-		<camera_toUp x="30" y="96" />
-		<camera_toDown x="30" y="216" />
-		<camera x="0" y="293" />
+		<camera_toRight x="480" y="82" />
+		<camera_toLeft x="360" y="82" />
+		<camera_toUp x="360" y="82" />
+		<camera_toDown x="360" y="202" />
+		<camera x="-660" y="321" />
 		<lives value="3" />
-		<collected_coins value="0" />
-		<game_timer seconds="4.46699762" />
+		<collected_coins value="1" />
+		<game_timer seconds="10.2360048" />
 	</player>
 	<:anonymous />
 	<:anonymous />
@@ -45,6 +42,6 @@
 	<:anonymous />
 	<menu />
 	<renderer>
-		<camera x="0" y="293" />
+		<camera x="-660" y="321" />
 	</renderer>
 </game_state>

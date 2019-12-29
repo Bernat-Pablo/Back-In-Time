@@ -358,7 +358,7 @@ const char* j1App::GetOrganization() const
 }
 
 // Load / Save
-void j1App::LoadGame(const char* file)
+void j1App::LoadGame()
 {
 	// we should be checking if that file actually exist
 	// from the "GetSaveGames" list
@@ -387,8 +387,9 @@ bool j1App::LoadGameNow()
 
 	pugi::xml_document data;
 	pugi::xml_node root;
-
+	
 	pugi::xml_parse_result result = data.load_file(save_game.GetString());
+	
 
 	if(result != NULL)
 	{
@@ -441,7 +442,6 @@ bool j1App::SavegameNow() const
 	if(ret == true)
 	{
 		data.save_file(save_game.GetString());
-		//pugi::xml_node l_config = GetConfig();
 		LOG("... finished saving", );
 	}
 	else
@@ -454,20 +454,10 @@ bool j1App::SavegameNow() const
 
 bool j1App::saved_game_existing()
 {
-	/*pugi::xml_document data;
-	pugi::xml_parse_result result = data.load_file(save_game.GetString());
-
-	
-	if ()return true;
-	else return false;*/
-
-	//------------------
-
-	/*pugi::xml_document	l_config_file;
-	pugi::xml_node l_config;
-	l_config = LoadConfig(l_config_file);*/
+	//Returns true if there is a saved game in "savegame.xml"
 	bool exist = GetConfig().child("app").child("game_saved").attribute("value").as_bool();
-	return false;
+
+	return exist;
 }
 
 pugi::xml_node j1App::GetConfig()
