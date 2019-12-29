@@ -6,6 +6,8 @@
 #include "p2Point.h"
 #include "j1Module.h"
 #include "j1Textures.h"
+#include "j1Render.h"
+#include "j1Animation.h"
 
 enum MenuStates
 {
@@ -45,6 +47,10 @@ private:
 	bool settings_created;
 	bool ingame_menu_created;
 	bool ingame_UI_created;
+
+	SDL_Texture* heart;
+	Animation heart_anim;
+	Animation* current_heart;
 };
 
 #endif // !_MENU_

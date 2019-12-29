@@ -2,10 +2,10 @@
 #include "j1Input.h"
 #include "j1App.h"
 #include "SDL/include/SDL.h"
-#include "j1Render.h"
 #include "j1RectSprites.h"
 #include "j1App.h"
 #include "j1Gui.h"
+#include "j1Player.h"
 #include <windows.h>
 
 j1Menu::j1Menu()
@@ -17,16 +17,22 @@ j1Menu::j1Menu()
 	ingame_menu_created = false;
 	ingame_UI_created = false;
 	background = nullptr;
+	heart = nullptr;
+
+	heart_anim.PushBack({ 0, 0, 26, 26 },1.0f);
+	heart_anim.PushBack({ 2, 5, 26, 26 },1.0f);
 }
 
 bool j1Menu::Awake(pugi::xml_node& conf)
 {
+	current_heart = &heart_anim;
 	return true;
 }
 
 bool j1Menu::Start()
 {
 	App->render->camera = { 0,0 };
+	heart = App->tex->Load("ui/heart.png");
 	CreateMenu();
 	return true;
 }
@@ -41,15 +47,18 @@ bool j1Menu::Update(float dt)
 		break;
 	case INGAME_MENU:
 		if (ingame_menu_created == false)CreateInGameMenu();
+		LOG("INGAME_MENU");
 		break;
 	case INGAME_UI:
-		if (ingame_UI_created == false)CreateInGameUI();
+		//if (ingame_UI_created == false)
+		CreateInGameUI();
 		break;
-	case NONE:
-		DestroyMenu();
-		DestroyInGameMenu();
-		DestroyInGameUI();
-		break;
+	//case NONE:
+		//LOG("NONE");
+		//DestroyMenu();
+		//DestroyInGameMenu();
+		//DestroyInGameUI();
+		//break;
 	default:
 		break;
 	}
@@ -109,13 +118,30 @@ void j1Menu::DestroyInGameMenu()
 }
 
 void j1Menu::CreateInGameUI()
-{
-
-	ingame_UI_created = true;
+{	
+	{//Blit hearts
+		switch(App->player->lives)
+		{			
+		case 3:
+			App->render->Blit(heart, 50, 50, &current_heart->GetCurrentFrame());
+			break;
+		case 2:
+			App->render->Blit(heart, 50, 50, &current_heart->GetCurrentFrame());
+			break;
+		case 1:
+			App->render->Blit(heart, 50, 50, &current_heart->GetCurrentFrame());
+			break;
+		case 0:
+			break;
+		default:
+			break;
+		}	
+	}
+	//ingame_UI_created = true;
 }
 
 void j1Menu::DestroyInGameUI()
 {
 
-	ingame_UI_created = false;
+	//ingame_UI_created = false;
 }
