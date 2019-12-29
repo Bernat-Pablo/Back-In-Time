@@ -23,28 +23,32 @@ bool j1Menu::Start()
 {
 	App->render->camera = { 0,0 };
 	CreateAllUIElements();
-
+	ui_elements_created = true;
 	return true;
 }
 
 bool j1Menu::Update(float dt)
 {
-	if (menuAble) 		
-		if(ui_elements_created == false)		
-			CreateAllUIElements();			
-	else DestroyAllUIElements();
+	if (menuAble) 
+	{
+		if (ui_elements_created == false)
+		{
+			CreateAllUIElements();
+			ui_elements_created = true;
+		}
+	}							
+	else 
+	{
+		DestroyAllUIElements();
+		ui_elements_created = false;
+	}
 	
 	return true;
 }
 
 bool j1Menu::CleanUp()
 {
-	App->gui->DestroyUIElement("background");
-	App->gui->DestroyUIElement("play");
-	App->gui->DestroyUIElement("continue");
-	App->gui->DestroyUIElement("settings");
-	App->gui->DestroyUIElement("credits");
-	App->gui->DestroyUIElement("out");
+	DestroyAllUIElements();
 	return true;
 }
 
