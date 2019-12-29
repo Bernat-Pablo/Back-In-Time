@@ -12,8 +12,11 @@ public:
 	bool CleanUp();
 
 private:
-
+	SDL_Rect base;
+	SDL_Rect quad;
+	int position;
 
 };
+
 
 #endif // !_SLIDER_
