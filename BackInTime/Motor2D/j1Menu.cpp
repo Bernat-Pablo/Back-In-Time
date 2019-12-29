@@ -38,10 +38,6 @@ bool j1Menu::Update(float dt)
 		if (menu_created == false)CreateMenu();
 		
 		break;
-	case SETTINGS:
-		DestroyMenu();
-		if (settings_created == false)CreateSettings();
-		break;
 	case INGAME:
 		if (ingame_created == false)CreateInGameMenu();
 		break;
@@ -59,7 +55,6 @@ bool j1Menu::Update(float dt)
 bool j1Menu::CleanUp()
 {
 	DestroyMenu();
-	DestroySettings();
 	
 	return true;
 }
@@ -88,18 +83,6 @@ void j1Menu::DestroyMenu()
 	App->gui->DestroyUIElement("out");
 
 	menu_created = false;
-}
-
-void j1Menu::CreateSettings()
-{
-
-	settings_created = true;
-}
-
-void j1Menu::DestroySettings()
-{
-
-	settings_created = false;
 }
 
 void j1Menu::CreateInGameMenu()

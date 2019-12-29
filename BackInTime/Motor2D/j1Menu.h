@@ -10,7 +10,6 @@
 enum MenuStates
 {
 	MAIN_MENU,
-	SETTINGS,
 	INGAME,
 	NONE,
 };
