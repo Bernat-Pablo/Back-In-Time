@@ -88,6 +88,7 @@ void j1Coin::OnCollision(Collider* c1, Collider* c2)
 	switch (c2->type)
 	{
 	case COLLIDER_PLAYER:
+		
 		App->player->CollectCoin();
 		App->entityManager->DestroyEntity(this);
 		break;

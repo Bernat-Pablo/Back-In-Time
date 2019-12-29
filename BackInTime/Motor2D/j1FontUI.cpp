@@ -5,6 +5,7 @@
 
 Font_UI::Font_UI()
 {
+	text = nullptr;
 }
 
 bool Font_UI::Start()

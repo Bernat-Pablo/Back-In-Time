@@ -7,6 +7,14 @@
 #include "j1Module.h"
 #include "j1Textures.h"
 
+enum MenuStates
+{
+	MAIN_MENU,
+	SETTINGS,
+	INGAME,
+	NONE,
+};
+
 class j1Menu : public j1Module {
 public:
 	j1Menu();
@@ -25,9 +33,21 @@ public:
 	void DestroyAllUIElements();
 	bool config = false;
 
+	void CreateMenu();
+	void DestroyMenu();
+
+	void CreateSettings();
+	void DestroySettings();
+
+	void CreateInGameMenu();
+	void DestroyInGameMenu();
+public:
+	MenuStates menuState;
 private:
 	SDL_Texture* background;
-	bool ui_elements_created;
+	bool menu_created;
+	bool settings_created;
+	bool ingame_created;
 };
 
 #endif // !_MENU_

@@ -104,6 +104,7 @@ private:
 	bool				livesUpdated;
 
 	int					collected_coins;
+	float				score;
 
 	float				game_timer;
 };

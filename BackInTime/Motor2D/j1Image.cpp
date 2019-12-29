@@ -8,6 +8,7 @@
 
 j1Image::j1Image() : UI_Elements()
 {	
+	texture = nullptr;
 }
 
 bool j1Image::Start()

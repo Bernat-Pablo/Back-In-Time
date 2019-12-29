@@ -33,6 +33,7 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 
 	rock_timer = 0;
 	rock_fall_velocity = 0;
+	rock_cooldown = 0;
 
 	tick1 = 0, tick2 = 0;
 	tick3 = 0, tick4 = 0;
@@ -45,6 +46,8 @@ j1Player::j1Player() : j1Entity(entityTypes::PLAYER)
 	collider_rock = nullptr;
 
 	livesUpdated = false;
+	lives = 3;
+	score = 0;
 
 	collected_coins = 0;
 	continue_button = false;
@@ -358,7 +361,8 @@ bool j1Player::PreUpdate()
 	case entityStates::DIE:
 		if (!livesUpdated)
 		{
-			if (lives <= 0)	App->menu->ChangeMenuStatus("activate");
+			score -= 33.3333f;
+			if (lives <= 0)	App->menu->menuState = MAIN_MENU;
 			else lives--;
 
 			livesUpdated = true;
@@ -1019,4 +1023,5 @@ void j1Player::BlitEverything()
 void j1Player::CollectCoin()
 {
 	collected_coins++;
+	score += 16.6666f;
 }

@@ -19,7 +19,7 @@ private:
 
 	iPoint mouse;
 
-	int puntuation;
+	int slider;
 };
 
 

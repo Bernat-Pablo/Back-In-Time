@@ -14,6 +14,8 @@
 Button::Button()
 {
 	credits_timer = 0;
+	credits_opened = false;
+	text = nullptr;
 }
 
 bool Button::Start()
@@ -56,14 +58,14 @@ bool Button::PostUpdate() {
 	if (OnClick() && tick1-tick2>=500) {
 		if (this->name == "play") {
 			App->fade->FadeToBlack(App->gui, App->scene);
-			App->menu->ChangeMenuStatus("deactivate");
+			App->menu->menuState = NONE;
 			App->gui->changing = true;
 			App->menu->CleanUp();
 		}
 		if (this->name == "continue")
 		{
 			App->player->continue_button = true;
-			App->menu->ChangeMenuStatus("deactivate");
+			App->menu->menuState = NONE;
 			App->gui->changing = true;
 			App->LoadGame();
 			App->menu->CleanUp();
@@ -79,6 +81,7 @@ bool Button::PostUpdate() {
 				App->menu->config = true;
 			}
 		}
+			App->menu->menuState = SETTINGS;		
 		else if (this->name == "credits")
 		{
 			if (credits_opened == false)
