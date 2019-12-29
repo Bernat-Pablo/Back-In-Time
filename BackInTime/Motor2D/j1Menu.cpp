@@ -21,18 +21,20 @@ j1Menu::j1Menu()
 
 	heart_anim.PushBack({ 0, 0, 26, 26 },1.0f);
 	heart_anim.PushBack({ 2, 5, 26, 26 },1.0f);
+	heart_anim.loop = true;
 }
 
 bool j1Menu::Awake(pugi::xml_node& conf)
 {
-	current_heart = &heart_anim;
+	
 	return true;
 }
 
 bool j1Menu::Start()
 {
+	current_heart = &heart_anim;
 	App->render->camera = { 0,0 };
-	heart = App->tex->Load("ui/heart.png");
+	heart = App->tex->Load("character/spritesheet_pj.png");
 	CreateMenu();
 	return true;
 }
@@ -43,14 +45,13 @@ bool j1Menu::Update(float dt)
 	{
 	case MAIN_MENU:
 		if (menu_created == false)CreateMenu();
-		
 		break;
 	case INGAME_MENU:
 		if (ingame_menu_created == false)CreateInGameMenu();
 		break;
 	case INGAME_UI:
-		//if (ingame_UI_created == false)
-		CreateInGameUI();
+		//if (ingame_UI_created == false)CreateInGameUI();
+		App->render->Blit(heart, 50, 50, &current_heart->GetCurrentFrame());
 		break;
 	case NONE:
 		DestroyAllUI();
@@ -130,8 +131,9 @@ void j1Menu::DestroyInGameMenu()
 
 void j1Menu::CreateInGameUI()
 {	
+	
 	{//Blit hearts
-		switch(App->player->lives)
+		/*switch(App->player->lives)
 		{			
 		case 3:
 			App->render->Blit(heart, 50, 50, &current_heart->GetCurrentFrame());
@@ -146,15 +148,15 @@ void j1Menu::CreateInGameUI()
 			break;
 		default:
 			break;
-		}	
+		}	*/
 	}
-	//ingame_UI_created = true;
+	ingame_UI_created = true;
 }
 
 void j1Menu::DestroyInGameUI()
 {
 
-	//ingame_UI_created = false;
+	ingame_UI_created = false;
 }
 
 void j1Menu::DestroyAllUI()

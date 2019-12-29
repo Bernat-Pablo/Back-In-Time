@@ -59,8 +59,6 @@ bool j1Fade::Update(float dt)
 			//Fades music for 1 sec
 			Mix_FadeOutMusic(1000);
 			
-			//ugly but working
-			
 			//We call to Cleanups
 			App->collision->CleanUp(); //Delete previous colliders
 			App->player->CleanUp();
@@ -68,6 +66,7 @@ bool j1Fade::Update(float dt)
 			App->audio->CleanUp();
 			App->tex->CleanUp();
 			App->entityManager->CleanUp(); //Destroy all entities		
+			App->gui->CleanUp();
 
 			//We load new map	
 			App->tex->Awake(App->GetConfig());
@@ -77,7 +76,9 @@ bool j1Fade::Update(float dt)
 			App->player->Start(); 
 			App->entityManager->Start();
 			App->collision->Awake(App->GetConfig());	
-			App->render->cameraSetInitialPosition(App->GetConfig()); //Set initial camera position					
+			App->render->cameraSetInitialPosition(App->GetConfig()); //Set initial camera position		
+			App->gui->Awake(App->GetConfig());
+			App->gui->Start();
 
 			total_time += total_time;
 			start_time = SDL_GetTicks();
