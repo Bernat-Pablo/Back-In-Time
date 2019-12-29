@@ -46,7 +46,7 @@ bool Slider::PostUpdate()
 	//here it goes linking name to what u want to do
 	if(name == "music")
 	{
-		Mix_VolumeMusic(-1);
+		Mix_VolumeMusic((int)slider*1.28);
 	}else if(name == "fx")
 	{
 	
