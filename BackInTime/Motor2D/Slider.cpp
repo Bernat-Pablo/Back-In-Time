@@ -29,6 +29,7 @@ bool Slider::Update(float dt)
 		int nothing;
 		int mouse_pos;
 		App->input->GetMousePosition(nothing, mouse_pos);
+		if(mouse_pos<base.y + base.h && mouse_pos>base.y)
 		quad.y = mouse_pos-10;
 		App->render->DrawQuad(quad, 0, 0, 55, 255);
 	}
