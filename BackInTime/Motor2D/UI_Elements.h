@@ -24,7 +24,6 @@ public:
 	iPoint pos;
 	bool following_pj;
 
-
 	int numberLetters;
 	iPoint margeButton;
 };

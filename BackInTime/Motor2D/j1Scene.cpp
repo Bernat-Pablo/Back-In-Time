@@ -41,7 +41,7 @@ bool j1Scene::Start()
 {
 	int w, h;
 	uchar* data = NULL;
-	if(choose_lv==1)
+	if (choose_lv == 1)
 		App->map->Load("maps/map_1.tmx");
 	else if (choose_lv==2)
 		App->map->Load("maps/map_2.tmx");
@@ -62,6 +62,9 @@ bool j1Scene::PreUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		choose_lv = 1;
 		App->fade->FadeToBlack(App->scene, App->scene);
+	}
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) {
+		CreateUI();
 	}
 
 	//Change to Lv2
@@ -168,4 +171,16 @@ void j1Scene::startfromBeginning()
 		App->render->camera.x = config.child("render").child("camera_initialPosition").child("map2").attribute("x").as_int();
 		App->render->camera.y = config.child("render").child("camera_initialPosition").child("map2").attribute("y").as_int();
 	}
+}
+
+void j1Scene::CreateUI()
+{
+	iPoint heartPos[3] = {
+		{0, -250}, //heart 1
+		{0, -300}, //heart 2
+		{0, -400} //heart 3
+	};
+	j1Image* heart1 = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, heartPos[0].x, heartPos[0].y, "heart", "ui/heart_resized.png", true);
+	j1Image* heart2 = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, heartPos[1].x, heartPos[1].y, "heart", "ui/heart_resized.png", true);
+	j1Image* heart3 = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, heartPos[2].x, heartPos[2].y, "heart", "ui/heart_resized.png", true);
 }

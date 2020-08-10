@@ -34,6 +34,9 @@ public:
 
 	void startfromBeginning();
 
+	void CreateUI();
+
+public:
 	float fade_time;
 
 	int choose_lv = 1;

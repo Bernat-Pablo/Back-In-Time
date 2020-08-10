@@ -73,7 +73,7 @@ bool j1Menu::CleanUp()
 
 void j1Menu::CreateMenu()
 {
-	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "background", "menu/menu_spritesheet.png", false);
+	App->gui->CreateUIElement(UI_Types::IMAGE, 0, 0, "background", "menu/cover_resized.png", false);
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 60, "play", "0", false, "play");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 100, "continue", "0", false, "continue");
 	App->gui->CreateUIElement(UI_Types::BUTTON, 380, 140, "settings", "0", false, "setting");

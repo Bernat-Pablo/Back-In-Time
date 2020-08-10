@@ -166,7 +166,7 @@ void j1Gui::DestroyUIElement(char* name)
 	}
 }
 
-SDL_Texture* j1Gui::GetUISpritesheet()
+SDL_Texture* j1Gui::GetAtlas() const
 {
 	return ui_spritesheet;
 }

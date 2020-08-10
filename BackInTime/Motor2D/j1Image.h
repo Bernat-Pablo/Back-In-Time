@@ -15,10 +15,11 @@ public:
 	bool Update(float dt);
 	bool CleanUp();
 	void Draw();
-
 private:
 	SDL_Texture* texture;
 	iPoint position;
+	iPoint local_position;
+	iPoint screen_position;
 };
 
 #endif // !_J1_IMAGE_H

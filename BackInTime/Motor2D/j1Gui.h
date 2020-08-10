@@ -6,6 +6,7 @@
 #include "j1Textures.h"
 
 class UI_Elements;
+class j1Image;
 
 enum class UI_Types {
 	TEXT,
@@ -30,7 +31,7 @@ public:
 	UI_Elements* CreateUIElement(UI_Types type, int position_x, int position_y, char* name, char* texture = "0", bool follow_pj = true, char* t = "0", int w=0, int h=0);
 	void DestroyUIElement(char* name);
 
-	SDL_Texture* GetUISpritesheet();
+	SDL_Texture* GetAtlas() const;
 	bool changing;
 private:
 	p2List<UI_Elements*> ui_elementsList;
