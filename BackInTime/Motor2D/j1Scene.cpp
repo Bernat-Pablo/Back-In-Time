@@ -52,6 +52,8 @@ bool j1Scene::Start()
 
 	App->audio->PlayMusic("audio/music/music.ogg");
 
+	CreateUI();
+
 	return true;
 }
 
@@ -62,9 +64,6 @@ bool j1Scene::PreUpdate()
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		choose_lv = 1;
 		App->fade->FadeToBlack(App->scene, App->scene);
-	}
-	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN) {
-		CreateUI();
 	}
 
 	//Change to Lv2
@@ -176,11 +175,13 @@ void j1Scene::startfromBeginning()
 void j1Scene::CreateUI()
 {
 	iPoint heartPos[3] = {
-		{0, -250}, //heart 1
-		{0, -300}, //heart 2
-		{0, -400} //heart 3
+		{10, 0}, //heart 1
+		{50, 0}, //heart 2
+		{90, 0} //heart 3
 	};
-	j1Image* heart1 = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, heartPos[0].x, heartPos[0].y, "heart", "ui/heart_resized.png", true);
-	j1Image* heart2 = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, heartPos[1].x, heartPos[1].y, "heart", "ui/heart_resized.png", true);
-	j1Image* heart3 = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, heartPos[2].x, heartPos[2].y, "heart", "ui/heart_resized.png", true);
+	
+	for (size_t i = 0; i < App->player->lives; i++)
+	{
+		j1Image* heart = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, heartPos[i].x, heartPos[i].y, "heart", "ui/heart_resized.png", true);
+	}	
 }

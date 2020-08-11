@@ -363,7 +363,7 @@ bool j1Player::PreUpdate()
 			if (!livesUpdated)
 			{
 				score -= 33.3333f;
-				if (lives <= 0)	App->menu->menuState = MAIN_MENU;
+				if (lives <= 1)	App->menu->menuState = MAIN_MENU;
 				else lives--;
 
 				livesUpdated = true;

@@ -26,15 +26,10 @@ bool j1Image::Update(float dt)
 	bool ret = true;
 
 	if (this->following_pj) {
-		//position.x = App->player->position.x;
-		//position.y = App->player->position.y;
-		
-		position.x = -App->render->camera.x + local_position.x;
-		position.y = App->render->camera.y + local_position.y;
-		LOG("camera x: %i", App->render->camera.x);
-		LOG("camera y: %i", App->render->camera.y);
-		LOG("local x: %i", local_position.x);
-		LOG("local y: %i", local_position.y);
+		// We multiply by 0.5x to neutralize the camera that moves at 2x speed
+		position.x = -(0.5*App->render->camera.x) + local_position.x;
+		position.y = -(0.5*App->render->camera.y) + local_position.y;
+		LOG("lives: %i", App->player->lives);
 	}
 	else {
 		position = this->pos;
