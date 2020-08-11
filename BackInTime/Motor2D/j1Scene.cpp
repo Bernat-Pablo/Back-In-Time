@@ -174,6 +174,7 @@ void j1Scene::startfromBeginning()
 
 void j1Scene::CreateUI()
 {
+	//Lives
 	iPoint heartPos[3] = {
 		{10, 0}, //heart 1
 		{50, 0}, //heart 2
@@ -183,5 +184,32 @@ void j1Scene::CreateUI()
 	for (size_t i = 0; i < App->player->lives; i++)
 	{
 		j1Image* heart = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, heartPos[i].x, heartPos[i].y, "heart", "ui/heart_resized.png", true);
+		screen_ui.add(heart);
 	}	
+
+	//Coins
+	iPoint coinPos = { 200, 20 };
+	
+	for (size_t i = 0; i < App->player->collected_coins; i++)
+	{
+		j1Image* coin = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, coinPos.x + (20*i), coinPos.y, "coin", "ui/coin.png", true);
+		screen_ui.add(coin);
+	}
+
+	//Timer
+}
+
+void j1Scene::UpdateUI()
+{
+	p2List_item<j1Image*>* image = nullptr;	
+
+	App->gui->DestroyUIElement("coin");
+	App->gui->DestroyUIElement("heart");
+
+	for (image; image != nullptr; image = image->next)
+	{
+		
+	}
+
+	CreateUI();
 }

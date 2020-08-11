@@ -4,6 +4,8 @@
 #include "j1Module.h"
 
 struct SDL_Texture;
+class UI_Elements;
+class j1Image;
 
 class j1Scene : public j1Module
 {
@@ -35,12 +37,14 @@ public:
 	void startfromBeginning();
 
 	void CreateUI();
+	void UpdateUI();
 
 public:
 	float fade_time;
 
 	int choose_lv = 1;
 
+	p2List<j1Image*> screen_ui;
 private:
 	SDL_Texture* debug_tex;
 };

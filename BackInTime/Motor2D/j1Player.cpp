@@ -1035,4 +1035,5 @@ void j1Player::CollectCoin()
 {
 	collected_coins++;
 	score += 16.6666f;
+	App->scene->UpdateUI();
 }
