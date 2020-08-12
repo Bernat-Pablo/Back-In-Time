@@ -51,7 +51,7 @@ bool j1Menu::Update(float dt)
 		if (ingame_menu_created == false)CreateInGameMenu();
 		break;
 	case INGAME_UI:
-		//if (ingame_UI_created == false)CreateInGameUI();
+		if (ingame_UI_created == false)CreateInGameUI();
 		App->render->Blit(heart, 50, 50, &current_heart->GetCurrentFrame());
 		break;
 	case NONE:
@@ -132,25 +132,37 @@ void j1Menu::DestroyInGameMenu()
 
 void j1Menu::CreateInGameUI()
 {	
-	
-	{//Blit hearts
-		/*switch(App->player->lives)
-		{			
-		case 3:
-			App->render->Blit(heart, 50, 50, &current_heart->GetCurrentFrame());
-			break;
-		case 2:
-			App->render->Blit(heart, 50, 50, &current_heart->GetCurrentFrame());
-			break;
-		case 1:
-			App->render->Blit(heart, 50, 50, &current_heart->GetCurrentFrame());
-			break;
-		case 0:
-			break;
-		default:
-			break;
-		}	*/
+	//Lives
+	iPoint heartPos[3] = {
+		{10, 0}, //heart 1
+		{50, 0}, //heart 2
+		{90, 0} //heart 3
+	};
+
+	for (size_t i = 0; i < App->player->lives; i++)
+	{
+		j1Image* heart = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, heartPos[i].x, heartPos[i].y, "heart", "ui/heart_resized.png", true);
+		screen_ui.add(heart);
 	}
+
+	//Coins
+	iPoint coinPos = { 200, 20 };
+
+	for (size_t i = 0; i < App->player->collected_coins; i++)
+	{
+		j1Image* coin = (j1Image*)App->gui->CreateUIElement(UI_Types::IMAGE, coinPos.x + (20 * i), coinPos.y, "coin", "ui/coin.png", true);
+		screen_ui.add(coin);
+	}
+
+	//Timer
+	iPoint timerPos = { 200, 20 };
+	j1Fonts* timer = (j1Fonts*)App->gui->CreateUIElement(UI_Types::TEXT, timerPos.x, timerPos.y, "timer", "0", true, "music");
+
+	App->gui->CreateUIElement(UI_Types::TEXT, App->player->position.x, App->player->position.y, "music_text", "0", false, "music");
+	App->gui->CreateUIElement(UI_Types::TEXT, 80, 220, "music_text", "0", false, "music");
+	App->gui->CreateUIElement(UI_Types::TEXT, 172, 220, "fx_text", "0", false, "effects");
+
+
 	ingame_UI_created = true;
 }
 
@@ -158,6 +170,21 @@ void j1Menu::DestroyInGameUI()
 {
 
 	ingame_UI_created = false;
+}
+
+void j1Menu::UpdateInGameUI()
+{
+	p2List_item<j1Image*>* image = nullptr;
+
+	App->gui->DestroyUIElement("coin");
+	App->gui->DestroyUIElement("heart");
+
+	for (image; image != nullptr; image = image->next)
+	{
+
+	}
+
+	CreateInGameUI();
 }
 
 void j1Menu::DestroyAllUI()

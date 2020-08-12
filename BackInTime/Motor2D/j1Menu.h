@@ -9,6 +9,9 @@
 #include "j1Render.h"
 #include "j1Animation.h"
 
+class UI_Elements;
+class j1Image;
+
 enum MenuStates
 {
 	MAIN_MENU,
@@ -39,6 +42,7 @@ public:
 
 	void CreateInGameUI();
 	void DestroyInGameUI();
+	void UpdateInGameUI();
 
 	void DestroyAllUI();
 public:
@@ -53,6 +57,8 @@ private:
 	SDL_Texture* heart;
 	Animation heart_anim;
 	Animation* current_heart;
+
+	p2List<j1Image*> screen_ui;
 };
 
 #endif // !_MENU_
