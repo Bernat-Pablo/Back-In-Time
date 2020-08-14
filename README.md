@@ -29,9 +29,16 @@ The player can go a few seconds back to the past.
 
 ## Team
 * Pablo Galve: https://github.com/pablogalve
-  * Website
-  * UI System Structure
+  * User Interface
   * Coins, lives and timer
+  * Entities System
+  * Shoot rocks to kill enemies
+  * Debug Features
+  * Save/Load
+  * Load data from XML
+  * Collider implementation
+  * 30/60 FPS
+  * Website
 * Bernat Casañas: https://github.com/BernatCasanas
   * Building the Engine with Modules
   * Console

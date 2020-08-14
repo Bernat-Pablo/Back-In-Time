@@ -1,24 +1,16 @@
 ## Introduction
 
 ## About the game
-Platformed game created by two students from Terrassa, Barcelona to our Game Development subject at university.
+Platformer game created by two students from Terrassa, Barcelona for our Game Development subject at university.
 
 ## Innovative Feature
-Player can go a few seconds back in time
+Player can go a few seconds back in time by pressing 'space'. This feature has a cooldown.
 
-## Team:
-* [Pablo Galve](https://github.com/pablogalve)
-  * Collider Implementation
-  * Entities System    
-  * Save/Load
-  * UI Basics
-  * Debug features
-* [Bernat Casañas](https://github.com/bernatCasanas)
-  * Enemies Pathfinding
-  * Console 
-  * UI System
-
-<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/Assets/team_photo.jpeg" data-canonical-src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/Assets/team_photo.jpeg" width="300" height="400" />
+## Team
+Pablo Galve | Bernat Casañas
+------------ | -------------
+<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/pablogalve.png" data-canonical-src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/pablogalve.png" width="300" height="400" /> | <img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/bernatcasanas.png" data-canonical-src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/bernatcasanas.png" width="300" height="400" />
+Collider Implementation <br> Entities System <br> User Interface <br> Save/Load <br> Debug Features <br> 30/60 FPS Implementation <br> Load data from XML <br> Shoot rocks to kill enemies | Enemies Pathfinding <br> Console <br> User Interface <br> Music and Fx <br> Special Ability Turn Back In Time <br> Animations <br> Rino and Bird Enemies <br> Profiling
 
 ### [Download](https://github.com/Bernat-Pablo/Back-In-Time/releases/tag/3.0) our game
 
