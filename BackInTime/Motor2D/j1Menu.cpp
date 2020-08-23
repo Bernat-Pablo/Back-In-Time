@@ -52,7 +52,6 @@ bool j1Menu::Update(float dt)
 		break;
 	case INGAME_UI:
 		if (ingame_UI_created == false)CreateInGameUI();
-		App->render->Blit(heart, 50, 50, &current_heart->GetCurrentFrame());
 		break;
 	case NONE:
 		DestroyAllUI();
@@ -156,12 +155,11 @@ void j1Menu::CreateInGameUI()
 
 	//Timer
 	iPoint timerPos = { 200, 20 };
-	j1Fonts* timer = (j1Fonts*)App->gui->CreateUIElement(UI_Types::TEXT, timerPos.x, timerPos.y, "timer", "0", true, "music");
-
-	App->gui->CreateUIElement(UI_Types::TEXT, App->player->position.x, App->player->position.y, "music_text", "0", false, "music");
-	App->gui->CreateUIElement(UI_Types::TEXT, 80, 220, "music_text", "0", false, "music");
-	App->gui->CreateUIElement(UI_Types::TEXT, 172, 220, "fx_text", "0", false, "effects");
-
+	Font_UI* timer = (Font_UI*)App->gui->CreateUIElement(UI_Types::TEXT, timerPos.x, timerPos.y, "timer", "0", true, "eins1");
+	
+	App->gui->CreateUIElement(UI_Types::TEXT, App->player->position.x, App->player->position.y, "music_text", "0", false, "zwei2");
+	App->gui->CreateUIElement(UI_Types::TEXT, 80, 220, "music_text", "0", false, "drei3");
+	App->gui->CreateUIElement(UI_Types::TEXT, 172, 220, "fx_text", "0", false, "vier4");
 
 	ingame_UI_created = true;
 }

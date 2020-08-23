@@ -11,6 +11,8 @@
 
 class UI_Elements;
 class j1Image;
+class Font_UI;
+class Button;
 
 enum MenuStates
 {

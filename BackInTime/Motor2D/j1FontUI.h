@@ -15,6 +15,7 @@ public:
 
 private:
 	iPoint position;
+	iPoint local_position;
 	char* text;
 };
 

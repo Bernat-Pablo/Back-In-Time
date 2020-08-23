@@ -61,6 +61,7 @@ bool Button::PostUpdate() {
 			App->menu->menuState = INGAME_UI;
 			App->gui->changing = true;
 			//App->menu->CleanUp();
+			//App->menu->CreateInGameUI();
 		}
 		if (this->name == "continue")
 		{
@@ -69,6 +70,7 @@ bool Button::PostUpdate() {
 			App->gui->changing = true;
 			App->LoadGame();
 			//App->menu->CleanUp();
+			//App->menu->CreateInGameUI();
 		}
 		if (this->name == "settings")
 		{

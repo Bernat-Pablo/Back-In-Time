@@ -50,9 +50,9 @@ bool j1Scene::Start()
 		App->pathfinding->SetMap(w, h, data);
 	debug_tex = App->tex->Load("maps/pathRect.png");
 
-	App->audio->PlayMusic("audio/music/music.ogg");
+	App->audio->PlayMusic("audio/music/music.ogg");	
 
-	App->menu->CreateInGameUI();
+	//App->menu->CreateInGameUI();
 
 	return true;
 }
