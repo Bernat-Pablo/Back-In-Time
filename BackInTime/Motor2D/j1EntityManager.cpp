@@ -10,6 +10,7 @@
 #include "PugiXml/src/pugixml.hpp"
 #include "j1Textures.h"
 #include "Brofiler/Brofiler.h"
+#include "j1Menu.h"
 
 j1EntityManager::j1EntityManager()
 {
@@ -152,6 +153,11 @@ j1Entity* j1EntityManager::CreateEntity(entityTypes type, int position_x, int po
 
 	if (ret)
 		entitiesList.add(ret);
+
+	if (App->menu->want_ingame_ui == true) {
+		App->menu->CreateInGameUI();
+		App->menu->want_ingame_ui = false;
+	}	
 
 	return ret;
 }

@@ -19,6 +19,7 @@ j1Menu::j1Menu()
 	ingame_UI_created = false;
 	background = nullptr;
 	heart = nullptr;
+	want_ingame_ui = false;
 
 	heart_anim.PushBack({ 0, 0, 26, 26 },1.0f);
 	heart_anim.PushBack({ 2, 5, 26, 26 },1.0f);
@@ -51,6 +52,7 @@ bool j1Menu::Update(float dt)
 		if (ingame_menu_created == false)CreateInGameMenu();
 		break;
 	case INGAME_UI:
+		want_ingame_ui = true;
 		if (ingame_UI_created == false)CreateInGameUI();
 		break;
 	case NONE:

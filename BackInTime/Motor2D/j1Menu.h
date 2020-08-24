@@ -49,6 +49,8 @@ public:
 	void DestroyAllUI();
 public:
 	MenuStates menuState;
+
+	bool want_ingame_ui;
 private:
 	SDL_Texture* background;
 	bool menu_created;
@@ -60,7 +62,7 @@ private:
 	Animation heart_anim;
 	Animation* current_heart;
 
-	p2List<j1Image*> screen_ui;
+	p2List<j1Image*> screen_ui;	
 };
 
 #endif // !_MENU_
