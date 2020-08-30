@@ -9,7 +9,7 @@ Player can go a few seconds back in time by pressing 'enter'. This feature has a
 ## Team
 |[Pablo Galve](https://github.com/pablogalve)|[Bernat Casañas](https://github.com/bernatcasanas)|
 |:---:|:---:|
-|<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/pablogalve.png" width="300" height="300"/>|<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/bernatcasanas.png" width="300" height="300"/>|
+|<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/pablogalve.png?raw=true" width="300" height="300"/>|<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/bernatcasanas.png?raw=true" width="300" height="300"/>|
 |Collider Implementation <br> Entities System <br> User Interface <br> Save/Load <br> Debug Features <br> 30/60 FPS Implementation <br> Load data from XML <br> Shoot rocks to kill enemies|Enemies Pathfinding <br> Console <br> User Interface <br> Music and Fx <br> Special Ability Turn Back In Time <br> Animations <br> Rino and Bird Enemies <br> Profiling|
 
 ### [Download](https://github.com/Bernat-Pablo/Back-In-Time/releases/tag/3.0) our game
