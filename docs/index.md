@@ -12,7 +12,7 @@ Player can go a few seconds back in time by pressing 'enter'. This feature has a
 |<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/pablogalve.png?raw=true" width="300" height="300"/>|<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/bernatcasanas.png?raw=true" width="300" height="300"/>|
 |Collider Implementation <br> Entities System <br> User Interface <br> Save/Load <br> Debug Features <br> 30/60 FPS Implementation <br> Load data from XML <br> Shoot rocks to kill enemies|Enemies Pathfinding <br> Console <br> User Interface <br> Music and Fx <br> Special Ability Turn Back In Time <br> Animations <br> Rino and Bird Enemies <br> Profiling|
 
-|<img src="https://github.com/pablogalve/Random-Map-Generation/blob/master/docs/Assets/procedural_island_01.gif?raw=true" alt="Height Formula" width="400" height="200">|<img src="https://github.com/pablogalve/Random-Map-Generation/blob/master/docs/Assets/procedural_island_02.gif?raw=true" alt="Height Formula" width="400" height="200">|
+|<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/pablogalve.png?raw=true" alt="Pablo Galve" width="300" height="300">|<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/bernatcasanas.png?raw=true" alt="Bernat Casañas" width="400" height="200">|
 |:---:|:---:|
 |Procedural Island|Procedural Island|
 
