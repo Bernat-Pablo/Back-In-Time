@@ -48,11 +48,10 @@ bool j1Scene::Start()
 	//pathfinding
 	if (App->map->CreateWalkabilityMap(w, h, &data))
 		App->pathfinding->SetMap(w, h, data);
+
 	debug_tex = App->tex->Load("maps/pathRect.png");
 
 	App->audio->PlayMusic("audio/music/music.ogg");	
-
-	//App->menu->CreateInGameUI();
 
 	return true;
 }
@@ -71,6 +70,11 @@ bool j1Scene::PreUpdate()
 		choose_lv = 2;
 		App->fade->FadeToBlack(App->scene, App->scene);
 	}
+
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+		App->menu->CreateInGameUI();
+	}
+
 	BROFILER_CATEGORY("Scene_PreUpdate", Profiler::Color::Aquamarine);
 	return true;
 }

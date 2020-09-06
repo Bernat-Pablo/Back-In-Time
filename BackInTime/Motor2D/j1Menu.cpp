@@ -8,6 +8,8 @@
 #include "j1Player.h"
 #include <windows.h>
 #include "Brofiler/Brofiler.h"
+#include "j1Fonts.h"
+#include "j1FontUI.h"
 
 j1Menu::j1Menu()
 {
@@ -60,7 +62,8 @@ bool j1Menu::Update(float dt)
 		break;
 	default:
 		break;
-	}
+	}	
+
 	BROFILER_CATEGORY("Menu_Update", Profiler::Color::Aquamarine);
 	return true;
 }
@@ -176,13 +179,8 @@ void j1Menu::UpdateInGameUI()
 {
 	p2List_item<j1Image*>* image = nullptr;
 
-	App->gui->DestroyUIElement("coin");
-	App->gui->DestroyUIElement("heart");
-
-	for (image; image != nullptr; image = image->next)
-	{
-
-	}
+	//App->gui->DestroyUIElement("coin");
+	//App->gui->DestroyUIElement("heart");
 
 	CreateInGameUI();
 }

@@ -23,7 +23,7 @@ Player can go a few seconds back in time by pressing 'enter'. This feature has a
 * D: Go right
 * F: Shoot a rock
 * Spacebar: Jump
-* Enter: Special Ability | Go back in time
+* Enter: Special Ability -> Go back in time
 * Godmode
   * W: Go up
   * S: Go down

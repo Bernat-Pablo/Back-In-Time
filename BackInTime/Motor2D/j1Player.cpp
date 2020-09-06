@@ -756,7 +756,6 @@ void j1Player::checkAbility() {
 	}
 	tick1 = SDL_GetTicks();
 
-
 	//blit bar
 	if (tick3 - tick4 >= 1000) {
 		if (tick3 - tick4 >= 2000) {
@@ -956,7 +955,6 @@ void j1Player::throwRock()
 			if (rockVelocity.x > 0)
 				rockVelocity.x *= -1;
 		}
-
 	}
 }
 
