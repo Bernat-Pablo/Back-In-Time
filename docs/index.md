@@ -6,6 +6,9 @@ Platformer game created by two students from Terrassa, Barcelona for our Game De
 ## Innovative Feature
 Player can go a few seconds back in time by pressing 'enter'. This feature has a cooldown.
 
+## Trailer
+<iframe width="560" height="315" src="https://www.youtube.com/embed/93c9NoCRnbE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Team
 
 |<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/pablogalve.png?raw=true" alt="Pablo Galve" width="300" height="300">|<img src="https://github.com/Bernat-Pablo/Back-In-Time/raw/master/docs/bernatcasanas.png?raw=true" alt="Bernat Casañas" width="300" height="300">|
