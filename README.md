@@ -1,7 +1,8 @@
 # Back In Time
 
 ## Introduction
-Platformed game created by two students from Terrassa
+Platformer game created by two students from Terrassa.  
+The player can go back 3s in time by pressing ENTER.
 
 <p>
   <img src="Assets/screenshots/main_menu.png" width="49%" title="Main Menu">
@@ -14,19 +15,15 @@ Platformed game created by two students from Terrassa
 
 ## Table of Contents  
 [Introduction](#introduction)  
-[Website](#website)  
-[Innovative Feature](#innovative-feature)  
+[Website](#website)
 [Controls](#controls)  
 [Team](#team)  
-[Credits](#team)  
+[Credits](#credits)  
 [Github Link](#github-link)  
 [License](#license)
 
 ## Website
 https://bernat-pablo.github.io/Back-In-Time/
-
-## Innovative feature
-The player can go a few seconds back to the past.
 
 ## Controls 
 ### Gameplay
