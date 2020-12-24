@@ -3,6 +3,28 @@
 ## Introduction
 Platformed game created by two students from Terrassa
 
+<p>
+  <img src="Assets/screenshots/main_menu.png" width="49%" title="Main Menu">
+  <img src="Assets/screenshots/gameplay_04.png" width="49%" title="Gameplay">
+</p>
+<p>
+  <img src="Assets/screenshots/gameplay_02.png" width="49%" title="Gameplay">
+  <img src="Assets/screenshots/gameplay_05.png" width="49%" title="Gameplay">
+</p>
+
+## Table of Contents  
+[Introduction](#introduction)  
+[Website](#website)  
+[Innovative Feature](#innovative-feature)  
+[Controls](#controls)  
+[Team](#team)  
+[Credits](#team)  
+[Github Link](#github-link)  
+[License](#license)
+
+## Website
+https://bernat-pablo.github.io/Back-In-Time/
+
 ## Innovative feature
 The player can go a few seconds back to the past.
 
@@ -60,13 +82,10 @@ The player can go a few seconds back to the past.
 * Music: https://www.fesliyanstudios.com/royalty-free-music/download/too-crazy/307
 * Sounds: https://freesound.org/
 
-# Website
-https://bernat-pablo.github.io/Back-In-Time/
-
-# GitHub Link
+## GitHub Link
 * https://github.com/Bernat-Pablo/Back-In-Time
  
-# License
+## License
 MIT License
 
 Copyright (c) 2019 Bernat-Pablo
