@@ -1,7 +1,7 @@
 # Back In Time
 
 ## Introduction
-Platformer game created by two students from Terrassa.  
+Platformer game created by two students from CITM (UPC) university using c++ and SDL.  
 The player can go back 3s in time by pressing ENTER.
 
 <p>
